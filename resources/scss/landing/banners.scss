@@ -1,0 +1,51 @@
+.banners {
+  padding-top: 15px;
+  .swiper-wrapper {
+    height: 270px;
+  }
+  .swiper-slide {
+    width: auto;
+  }
+  .swiper-slide img {
+    height: 230px;
+    max-width: 550px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .swiper-button-next {
+    right: 0;
+    top: auto;
+    bottom: -10px;
+  }
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3csvg%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3ccircle%20cx='10'%20cy='10'%20r='9.5'%20transform='matrix(-1%200%200%201%2020%200)'%20stroke='%23B2B3BE'/%3e%3cpath%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M9.81641%2013.8409L12.8599%2010.3841C13.0467%2010.172%2013.0467%209.82804%2012.8599%209.61591L9.81641%206.1591C9.62965%205.94697%209.32684%205.94697%209.14007%206.1591C8.95331%206.37122%208.95331%206.71515%209.14007%206.92728L11.8454%2010L9.14007%2013.0727C8.95331%2013.2849%208.95331%2013.6288%209.14007%2013.8409C9.32684%2014.053%209.62965%2014.053%209.81641%2013.8409Z'%20fill='%23B2B3BE'/%3e%3c/svg%3e");
+  }
+  .swiper-button-prev {
+    right: 25px;
+    left: auto;
+    top: auto;
+    bottom: -10px;
+    transform: rotate(180deg);
+  }
+  .swiper-scrollbar {
+    height: 4px;
+    background: #e8eaf3;
+    margin-bottom: 5px;
+  }
+  .swiper-scrollbar-drag {
+    background-color: #de002b;
+  }
+  .swiper-horizontal > .swiper-scrollbar,
+  .swiper-scrollbar.swiper-scrollbar-horizontal {
+    width: calc(100% - 62px);
+    left: 0;
+  }
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: auto;
+  }
+}

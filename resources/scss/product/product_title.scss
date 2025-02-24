@@ -1,0 +1,28 @@
+.product_title {
+  margin-top: 10px;
+  .app__title_text span{
+    font-size: 16px;
+    margin-right: 5px;
+  }
+  &__statistics {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    div {
+      font-size: 16px;
+      font-weight: 400;
+      color: #8e95a6;
+      display: flex;
+      align-items: center;
+    }
+    svg {
+      fill: #8e95a6;
+      margin-right: 6px;
+      &.red {
+        fill: #de002b;
+      }
+    }
+  }
+}

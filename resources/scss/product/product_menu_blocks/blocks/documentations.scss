@@ -1,0 +1,37 @@
+.product_menu_block__documentations{
+    &_content{
+        display: flex
+        ;
+            gap: 30px;
+            flex-wrap: wrap;
+    }
+    &_list{
+        
+        h3{
+            font-size: 18px;
+            font-weight: 600;
+            color: #16161F;
+        }
+        a{
+            font-size: 18px;
+            font-weight: 400;
+            transition: all 0.4s;
+            color: #8E95A6;
+            display: flex
+            ;
+                align-items: center;
+                gap: 5px;
+                margin-top: 10px;
+            svg{
+                fill: #8E95A6;
+                transition: all 0.4s;
+            }
+            &:hover{
+                color: #DE002B;
+                svg{
+                    fill: #DE002B;
+                }
+            }
+        }
+    }
+}

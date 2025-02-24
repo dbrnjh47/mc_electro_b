@@ -1,0 +1,32 @@
+.agreement{
+    padding: 13px 20px 20px 20px;
+    border: 1px solid #DFE3EE;
+    border-radius: 12px;
+    margin-top: 20px;
+    &__container{
+        margin-bottom: 80px;
+    }
+    &__content{
+        &>div{
+            margin-bottom: 10px;
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+    &__items{
+        display: grid
+        ;
+            gap: 15px;
+    }
+    &__title{
+        font-size: 18px;
+        font-weight: 700;
+        color: #16161F;
+    }
+    &__item{
+        font-size: 18px;
+        font-weight: 400;
+        color: #8E95A6;
+    }
+}

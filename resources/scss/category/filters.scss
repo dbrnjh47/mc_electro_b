@@ -1,0 +1,129 @@
+.filter {
+  border: 1px solid #dfe3ee;
+  padding: 20px;
+  border-radius: 10px;
+  background: #ffffff;
+  &__wrapper{
+    max-width: 255px;
+    min-width: 255px;
+    @media (max-width: 650px) {
+      display: none;
+    }
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    h4 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #16161f;
+    }
+    svg {
+      display: none;
+      fill: #1e1e1e;
+      @media (max-width: 650px) {
+        display: block;
+      }
+    }
+  }
+
+  & > input {
+  }
+
+  &__item {
+    &.open .filter__header img {
+      transform: rotate(0deg);
+    }
+    &.open .filter__body {
+      display: block;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.4s;
+    &:hover {
+      opacity: 0.7;
+    }
+    p {
+      font-size: 18px;
+      color: #16161f;
+      font-weight: 400;
+    }
+    img {
+      transform: rotate(180deg);
+      transition: all 0.4s;
+    }
+  }
+
+  &__clear {
+    color: #de002b;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.4s;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__body {
+    margin-top: 10px;
+    display: none;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 7px;
+    flex-direction: column;
+    margin-top: 20px;
+    button {
+      width: 100%;
+    }
+    &_btn_clear {
+      background: #9398ae;
+      &:hover {
+        color: #9398ae;
+        border-color: #9398ae;
+      }
+    }
+  }
+
+  // __range
+
+  &__range {
+    &_inputs {
+      display: flex;
+      align-items: center;
+      input {
+        width: 100%;
+      }
+      span {
+        color: #8e95a6;
+        margin: 0 4px;
+      }
+    }
+  }
+
+  // __checkbox
+  &__checkbox {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  // __radio
+  &__radio {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

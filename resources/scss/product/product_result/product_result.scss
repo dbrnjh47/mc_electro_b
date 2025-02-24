@@ -1,0 +1,66 @@
+.product_result {
+  border: 1px solid #dfe3ee;
+  padding: 30px;
+  border-radius: 12px;
+  &__price {
+    font-size: 28px;
+    font-weight: 700;
+    color: #16161f;
+    span {
+      font-size: 18px;
+      color: #8e95a6;
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        bottom: 50%;
+        left: 0;
+        transform: rotate(-20deg);
+        background-color: rgb(222, 0, 43);
+      }
+    }
+    &_wrapper {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  &__top_actions {
+    display: flex;
+    gap: 5px;
+    button.btn {
+      background: #e8eaf3;
+      border-color: transparent;
+      color: #9096a7;
+      font-size: 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      &:hover {
+        box-shadow: 0px 1px 4px #de002b63;
+      }
+      &.activ {
+        color: #ffffff;
+        background: #de002b;
+        svg {
+          fill: #ffffff;
+        }
+      }
+      svg {
+        transition: all 0.3s;
+        fill: #9096a7;
+      }
+    }
+  }
+
+  //
+  .company_card{
+    padding: 0;
+    border: none;
+    margin-top: 20px;
+  }
+}

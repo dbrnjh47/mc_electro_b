@@ -1,0 +1,25 @@
+@use "/resources/scss/components/breadcrumb.scss";
+@use "/resources/scss/components/pagination.scss";
+@use "/resources/js/custom/select2/select2_sample_nude.scss";
+@use "company_info.scss";
+@use "/resources/scss/components/product/product_cart.scss";
+@use "/resources/scss/category/products_list.scss";
+.company{
+    border: 1px solid #DFE3EE;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 25px;
+    margin-bottom: 50px;
+    .app__title{
+        margin-top: 20px;
+        &_text{
+            font-size: 18px;
+        }
+    }
+
+    .products_list {
+        @media (min-width: 1120px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+}

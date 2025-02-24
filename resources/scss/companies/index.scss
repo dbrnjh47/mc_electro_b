@@ -1,0 +1,19 @@
+@use "/resources/scss/components/breadcrumb.scss";
+@use "/resources/scss/components/pagination.scss";
+@use "company_card.scss";
+
+.companies{
+    &__list{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 25px;
+        @media (max-width: 850px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
+
+.pagination{
+    margin-bottom: 50px;
+}

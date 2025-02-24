@@ -1,0 +1,15 @@
+.product_similar_slider{
+    .swiper-slide{
+        min-width: 250px;
+        max-width: 250px;
+    }
+    .app__title{
+        margin-bottom: 15px;
+    }
+    .swiper-button-next, .swiper-button-prev{
+        background: #DE002B;
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+    }
+}

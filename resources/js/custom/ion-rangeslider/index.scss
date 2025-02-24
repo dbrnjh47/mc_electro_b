@@ -1,0 +1,27 @@
+.irs--flat .irs-line, .irs--flat .irs-bar{
+    height: 3px;
+}
+
+.irs--flat .irs-handle{
+    width: 9px;
+    height: 9px;
+}
+
+.irs--flat .irs-handle>i:first-child{
+    width: 100%;
+    border-radius: 100%;
+    background-color: #DE002B;
+    left: calc(50% - 3.5px);
+}
+
+.irs--flat .irs-bar{
+    background-color: #DE002B;
+}
+
+.irs--flat .irs-line{
+    background-color: #E8EAF3;
+}
+
+.irs-grid{
+    bottom: 10px;
+}

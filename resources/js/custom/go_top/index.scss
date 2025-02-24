@@ -1,0 +1,38 @@
+.go_top{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: relative;
+    background: conic-gradient(#DE002B 0%, #DE002B var(--progress, 0%), #D3D1D1 var(--progress, 0%), #D3D1D1 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 30px;
+    left: calc((100vw - 1160px) / 2 + 10px);
+    z-index: 10;
+    cursor: pointer;
+    transition: all 0.4s;
+    &:hover{
+        opacity: 0.5;
+    }
+    @media (max-width: 1200px) {
+        left: 30px;
+        bottom: 85px;
+    }
+    &__inner{
+        background-color: #FFFFFF;
+        width: 53px;
+        height: 53px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img{
+
+        }
+    }
+    &__hidden {
+        display: none;
+    }
+}

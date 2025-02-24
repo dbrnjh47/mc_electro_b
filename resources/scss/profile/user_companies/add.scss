@@ -1,0 +1,36 @@
+.user_companies_add {
+  border: 1px solid #dfe3ee;
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 15px;
+  h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #16161f;
+  }
+  &__form {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    @media (max-width: 850px) {
+        grid-template-columns: 1fr;
+      }
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      color: #16161f;
+      margin-bottom: 8px;
+    }
+
+    input {
+    }
+  }
+  &__actions {
+    display: flex;
+    margin-top: 20px;
+    gap: 10px;
+    button {
+    }
+  }
+}

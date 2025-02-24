@@ -1,0 +1,34 @@
+.user_companies_not_found {
+  border: 1px solid #dfe3ee;
+  border-radius: 12px;
+  padding: 30px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  h3 {
+    font-size: 20px;
+    margin-top: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  p {
+    font-size: 16px;
+    font-weight: 400;
+    color: #16161f;
+  }
+  button {
+    margin-top: 30px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    svg {
+      fill: #fff;
+      transition: all 0.4s;
+    }
+    &:hover svg {
+      fill: #de002b;
+    }
+  }
+}

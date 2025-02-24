@@ -1,0 +1,75 @@
+.repeating {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 10px;
+    height: auto;
+    min-height: calc(100dvh - 70px - 81px);
+    background-image: url(/temple/images/repeating/bg.svg), url(/temple/images/repeating/line/top.svg), url(/temple/images/repeating/line/bot.svg);
+    background-position: center, top right, bottom left;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-size: auto, contain, contain;
+    position: relative;
+    &.full_page{
+        min-height: 100vh;
+    }
+    &__code {
+        font-weight: 600;
+        font-size: 60px;
+        line-height: 72px;
+        margin-bottom: -15px;
+
+        @media screen and (min-width: 768px) {
+            font-size: 128px;
+            line-height: 154px;
+        }
+    }
+
+    &__wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+    
+    &__title {
+        font-weight: 700;
+        text-align: center;
+        font-size: 30px;
+        line-height: 34px;
+        font-family: system-ui;
+        @media screen and (min-width: 768px) {
+            font-size: 64px;
+            line-height: 78px;
+        }
+    }
+
+    &__text {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 20px;
+        text-align: center;
+        max-width: 652px;
+        margin: auto;
+
+        @media screen and (min-width: 768px) {
+            font-size: 22px;
+            line-height: 27px;
+        }
+
+        &_underline {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        &_red {
+            color: #DE002B;
+        }
+    }
+
+    .btn{
+        padding: 17px 50px;
+        margin-top: 10px;
+    }
+}

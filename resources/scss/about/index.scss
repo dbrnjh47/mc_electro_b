@@ -1,0 +1,30 @@
+@use "cards.scss";
+@use "descr.scss";
+@use "top.scss";
+@use "slider.scss";
+@use "companies.scss";
+@use "/resources/scss/components/breadcrumb.scss";
+
+.about {
+  overflow: hidden;
+  position: relative;
+
+  &__container {
+    position: relative;
+    z-index: 5;
+  }
+
+  &__title_red {
+    color: #de002b;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+
+    &__bottom_background {
+      bottom: -200px;
+    }
+  }
+}
+

@@ -1,0 +1,33 @@
+@use "categories.scss";
+@use "news.scss";
+@use "products.scss";
+
+.bg_flicker {
+  &_element, &_element2{
+    animation: flicker_animate 3s infinite alternate;
+  }
+  .bg_flicker_element{
+    &:first-child{
+        animation-duration: 6.5s;
+    }
+    &:nth-child(2){
+        animation-duration: 2.6s;
+    }
+
+    &:nth-child(3){
+        animation-duration: 4.7s;
+    }
+  }
+}
+
+@keyframes flicker_animate {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

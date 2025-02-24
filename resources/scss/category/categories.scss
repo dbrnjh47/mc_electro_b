@@ -1,0 +1,12 @@
+.categories{
+    &__lists{
+        overflow: hidden;
+        max-height: 215px;
+        transition: all 0.4s;
+    }
+    &__btn{
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+    }
+}

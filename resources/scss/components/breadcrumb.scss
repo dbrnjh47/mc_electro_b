@@ -1,0 +1,27 @@
+.breadcrumb {
+  margin-top: 15px;
+  position: relative;
+  &__lists {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    *{
+      display: contents;
+    }
+  }
+  &__link {
+    font-size: 18px;
+    font-weight: 400;
+   
+    color: #8E95A6;
+    transition: all 0.3s linear;
+    &.active,
+    &:hover {
+      color: #c92222;
+    }
+
+    &.start{
+      color: #16161F;
+    }
+  }
+}

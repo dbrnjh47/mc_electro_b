@@ -1,0 +1,1 @@
+import '/resources/scss/profile/user_companies/index.scss';

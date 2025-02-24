@@ -1,0 +1,30 @@
+.user_companies_lists {
+  gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 15px;
+  @media (max-width: 850px) {
+    grid-template-columns: 1fr;
+  }
+  &__item {
+    border: 1px solid #dfe3ee;
+    padding: 20px;
+    border-radius: 12px;
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #16161f;
+      word-break: break-all;
+    }
+    p {
+      color: #8e95a6;
+      font-size: 16px;
+      font-weight: 400;
+      margin-top: 10px;
+      word-break: break-all;
+    }
+    button {
+        margin-top: 20px;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+@use "/resources/scss/profile/orders/index.scss";
+@use "/resources/scss/components/breadcrumb.scss";
+@use "order_info.scss";
+@use "statuses.scss";
+.order {
+  .app__title {
+    margin-top: 20px;
+  }
+  &__container{
+    margin-bottom: 20px;
+  }
+  &__between {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    @media (max-width: 520px) {
+        align-items: flex-start;
+        flex-direction: column-reverse;
+      }
+    button {
+    }
+    &_back {
+      color: #de002b;
+      font-size: 18px;
+    }
+    &_actions{
+        display: flex;
+        gap: 10px;
+    }
+  }
+  &__blocks{
+    
+  }
+
+  .profile_orders__list tbody tr:last-child td{
+    border-bottom-width: 1px;
+  }
+}

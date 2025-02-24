@@ -1,0 +1,28 @@
+@use "product_menu_block.scss";
+.product_menu_blocks {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid #e2e5f2;
+  overflow: auto;
+  div {
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    border-bottom: 1px solid transparent;
+    color: #16161f;
+    cursor: pointer;
+    transition: all 0.4s;
+    &:hover {
+      color: #de002b;
+      border-color: #de002b;
+    }
+    &.activ {
+      color: #16161f;
+      border-color: #de002b;
+    }
+    span {
+      color: #de002b;
+    }
+  }
+}

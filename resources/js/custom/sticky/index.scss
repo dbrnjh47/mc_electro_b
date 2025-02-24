@@ -1,0 +1,11 @@
+.sticky {
+  position: fixed;
+  z-index: 1;
+}
+.sticky_stop {
+  position: relative;
+  z-index: 1;
+}
+#sticky_aside1{
+  height: fit-content;
+}

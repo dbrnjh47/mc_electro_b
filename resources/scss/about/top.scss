@@ -1,0 +1,31 @@
+.top {
+  max-width: 470px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px 0;
+  position: relative;
+  line-height: normal;
+  z-index: 5;
+
+  &_text {
+    color: #8e95a6;
+    font-size: 18px;
+  }
+
+  &_background {
+    position: absolute;
+    left: -347px;
+    top: -63px;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .top {
+    gap: 10px 0;
+
+    &_text {
+      font-size: 16px;
+    }
+  }
+}

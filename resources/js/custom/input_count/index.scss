@@ -1,0 +1,37 @@
+.input_count{
+    display: flex
+;
+    height: 40px;
+    &__btn{
+        background: #DE002B;
+        padding: 0 10px;
+        border-radius: 6px 0 0 6px;
+        height: 100%;
+        transition: all 0.3s;
+        cursor: pointer;
+        display: flex
+    ;
+        align-items: center;
+        &.revers{
+            border-radius: 0 6px 6px 0;
+            img{
+                transform: rotate(180deg);
+            }
+        }
+        &:hover{
+            opacity: 0.7;
+        }
+        img{
+
+        }
+    }
+    &__input{
+        background: #E8EAF3;
+        border: none;
+        outline: none;
+        height: 100%;
+        max-width: 50px;
+        text-align: center;
+        padding: 0 5px;
+    }
+}

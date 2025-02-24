@@ -1,0 +1,1 @@
+import "/resources/scss/product/product_menu_blocks/blocks/faq.scss";

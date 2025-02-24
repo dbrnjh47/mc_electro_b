@@ -1,0 +1,33 @@
+
+.select2_sample_more{
+    .select2-container--default .select2-selection--single{
+        padding-right: 30px;
+    }
+    .select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow{
+        transform: rotate(0deg);
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow{
+        background: url("/resources/js/custom/select2/imgs/str.svg") center center no-repeat;
+        margin-right: 5px;
+        transform: rotate(180deg);
+        width: 12px;
+        height: 6px;
+        transition: all 0.4s;
+        top: calc(50% - 3px);
+        right: 4px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b{
+        display: none;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__placeholder,
+    .select2-container--default .select2-selection--single .select2-selection__rendered{
+        color:#16161F;
+    }
+    .select2-container--default.select2-container--open.select2-container--below .select2-selection--single, 
+    .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple, 
+    .select2-container--default .select2-selection--single{
+        background: #E8EAF3;
+        border: none;
+        border-radius: 6px;
+    }
+}

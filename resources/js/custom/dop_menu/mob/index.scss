@@ -1,0 +1,42 @@
+.dop_menu_mob{
+    width: 100%;
+    display: grid;
+    min-height: 40px;
+    background: #de002b;
+    grid-template-columns: auto 165px;
+    &.fixed{
+        position: fixed;
+        left: 0;
+        top: 81px;
+        z-index: 9;
+        width: calc(100% - 5px);
+    }
+    @media (min-width: 650px) {
+        display: none;
+    }
+    &__button{
+        color: #fff;
+        font-size: 14px;
+        font-weight: 400;
+        display: flex;
+        line-height: normal;
+        align-items: center;
+        img{
+            margin-right: 6px;
+        }
+    }
+
+    &__sort{
+        .select2-container .select2-selection--single .select2-selection__rendered{
+            text-align: right;
+        }
+        .select2_sample_nude .select2-container--default .select2-selection--single {
+            padding-right: 19px;
+        }
+        .select2_sample_nude .select2-container--default .select2-selection--single .select2-selection__placeholder, .select2_sample_nude .select2-container--default .select2-selection--single .select2-selection__rendered{
+            color: #fff;
+            font-size: 14px;
+            font-weight: 400;
+        }
+    }
+}

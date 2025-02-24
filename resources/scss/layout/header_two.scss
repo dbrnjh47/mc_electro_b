@@ -1,0 +1,135 @@
+.header_two {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 15px;
+  width: 100%;
+  border-bottom: 1px solid rgb(226, 229, 242);
+  padding-bottom: 10px;
+  @media (max-width: 1050px) {
+    display: none;
+  }
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    &_link {
+      font-size: 16px;
+      font-weight: 500;
+      text-align: center;
+      color: #16161f;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      &:hover {
+        color: #cc222e;
+      }
+    }
+  }
+  &__sub_menu {
+    position: relative;
+    display: inline-block;
+
+    &:hover {
+      .header_two__sub_menu_wrapper {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      svg {
+        transform: rotate(180deg);
+        fill: #de002b;
+      }
+    }
+    &_title {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      svg {
+        fill: #16161f;
+        transition: all 0.4s;
+      }
+    }
+  }
+
+  &__sub_menu_wrapper {
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: #f6f8fd;
+    box-shadow: 0px 2px 12.6px 0px #0000002e;
+    border-radius: 10px;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 100;
+    &_link {
+      font-size: 16px;
+      font-weight: 500;
+      text-align: left;
+      display: block;
+      padding: 10px 15px;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s;
+      border-radius: 8px;
+      white-space: nowrap;
+      &:hover {
+        background: #de002b;
+        color: #fff;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__contacts_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &__contacts {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 10px;
+  }
+
+  &__phones {
+    line-height: 19.09px;
+    a {
+      font-size: 16px;
+      font-weight: 500;
+      color: #cc222e;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+
+  #city_select{
+    position: relative;
+  }
+  #city_select .select2 {
+    &-selection__arrow {
+      display: none;
+    }
+    &-selection--single {
+      padding-left: 33px;
+      &::after {
+        content: "";
+        background: url("/temple/images/layout/icon/point.svg");
+        display: block;
+        width: 15px;
+        height: 20px;
+        position: absolute;
+        left: 10px;
+        top: 11px;
+      }
+    }
+    &-dropdown--below{
+      min-width: 210px;
+    }
+  }
+}

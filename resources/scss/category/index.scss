@@ -1,0 +1,26 @@
+@use "/resources/scss/components/breadcrumb.scss";
+@use "/resources/scss/components/pagination.scss";
+@use "/resources/scss/components/product/product_cart.scss";
+@use "/resources/scss/components/product/form_cart.scss";
+@use "categories.scss";
+@use "products.scss";
+@use "products_list.scss";
+@use "/resources/js/custom/select2/select2_sample_nude.scss";
+
+
+.category {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  .pagination__container {
+    padding: 0;
+  }
+
+  @media (max-width: 650px) {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+}

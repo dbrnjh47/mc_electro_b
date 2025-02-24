@@ -1,0 +1,16 @@
+.auth{
+    background: url(/temple/images/auth/bg.svg) no-repeat;
+    background-position: center;
+    max-height: 690px;
+    min-height: calc(100vh - 81px - 66px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 40px;
+    @media (min-height: 700px) {
+        min-height: 700px;
+    }
+    .modal{
+        display: block;
+    }
+}

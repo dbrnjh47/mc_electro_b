@@ -1,0 +1,1 @@
+import "/resources/scss/layout/location.scss";

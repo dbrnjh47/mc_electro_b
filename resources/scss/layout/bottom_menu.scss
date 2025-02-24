@@ -1,0 +1,39 @@
+.bottom_menu{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid rgb(226, 229, 242);
+    display: flex;
+    gap: 10px;
+    justify-content: space-evenly;
+    z-index: 9;
+    @media (min-width: 1050px) {
+        display: none;
+      }
+    &__item{
+        padding-bottom: 15px;
+        padding-top: 15px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        color: #16161f;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        background-color: transparent;
+        cursor: pointer;
+        transition: all 0.4s;
+        justify-content: space-between;
+        &:hover, .activ {
+            color: #cc222e;
+            border-top: 1px solid #cc222e;
+            opacity: 1;
+            svg {
+                fill: #cc222e;
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+.slide_menu{
+    display: flex
+;
+    gap: 20px;
+    border-bottom: 1px solid #E2E5F2;
+    button{
+        font-size: 15px;
+        font-weight: 600;
+        color: #16161F;
+        cursor: pointer;
+        transition: all 0.4s;
+        padding-bottom: 10px;
+        position: relative;
+        &.activ, &:hover{
+            &::after{
+                opacity: 1;
+            }
+        }
+        &:hover{
+            opacity: 0.8;
+        }
+        &::after{
+            content: "";
+            opacity: 0;
+            width: 100%;
+            display: block;
+            position: absolute;
+            bottom: -1px;
+            height: 1px;
+            background: #DE002B;
+            transition: all 0.4s;
+        }
+        span{
+            color: #DE002B;
+        }
+    }
+}

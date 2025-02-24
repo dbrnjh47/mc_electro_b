@@ -1,0 +1,12 @@
+.companies{
+    padding-bottom: 40px;
+    .app__title{
+        margin-bottom: 20px;
+    }
+    &__bottom_bg {
+        position: absolute !important;
+        bottom: -153px;
+        right: -237px;
+        z-index: -1 !important;
+      }
+}
