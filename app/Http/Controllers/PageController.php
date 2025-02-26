@@ -8,6 +8,6 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
-        return view('pages.index');
+        return view('sample.main.pages.index');
     }
 }

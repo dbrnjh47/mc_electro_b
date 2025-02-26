@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->default("IMPYREX");
-            $table->string('email')->default("Info@oneclickdrive.com");
-            $table->string('phone')->default("+954637592634");
+            $table->string('name')->default("");
+            $table->string('abbreviation')->default("");
+            $table->string('email')->comment("temple@mail.com");
+            $table->string('phone')->comment("+954637592634");
 
-            // $table->string('tg')->default("https://web.telegram.org/")->nullable();
-            // $table->string('in')->default("https://instagram.com/")->nullable();
-            // $table->string('tv')->default("https://twitter.com/")->nullable();
-            // $table->string('fb')->default("https://facebook.com/")->nullable();
-            // $table->string('wt')->default("971568463945")->nullable();
-            // $table->string('ti')->default("https://tiktok.com/")->nullable();
+            $table->string('in')->comment("https://instagram.com/")->nullable();
+            $table->string('vk')->comment("https://vk.com/")->nullable();
+            $table->string('yt')->comment("https://www.youtube.com/")->nullable();
+            $table->string('tg')->comment("https://t.me/")->nullable();
 
             $table->string('address')->nullable();
 

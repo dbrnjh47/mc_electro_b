@@ -17,14 +17,14 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::factory(1)->create([
-            // "tg" => "https://t.me/impyrex",
-            // "in" => "https://www.instagram.com/impyrexrent?igsh=azc5bjhlaDgydGg1&utm_source=qr",
-            // "tv" => null,
-            // "fb" => null,
-            // "wt" => "971568463945",
-            // "ti" => "https://www.tiktok.com/@impyrexrent?_t=8kEYQYutybO&_r=1",
-            "email" => "manager@impyrex.com",
-            "phone" => '+971568463945',
+            "in" => "https://instagram.com/",
+            "vk" => "https://vk.com/",
+            "yt" => "https://www.youtube.com/",
+            "tg" => "https://t.me/",
+            "name" => "IMPYREX",
+            "abbreviation" => "IM",
+            "email" => "temple@mail.com",
+            "phone" => "+954637592634",
             "address" => null,
         ]);
     }
