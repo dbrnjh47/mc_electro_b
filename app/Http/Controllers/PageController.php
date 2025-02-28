@@ -10,4 +10,9 @@ class PageController extends Controller
     {
         return view('sample.main.pages.index');
     }
+
+    public function feedback(Request $request)
+    {
+        return view('sample.main.pages.feedback');
+    }
 }
