@@ -2,18 +2,20 @@
 
 namespace App\View\Components\Sample\Main\Layout;
 
+use App\Http\Controllers\Controller;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Header extends Component
 {
+    public $start;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($start = 0)
     {
-        //
+        $this->start = $start;
     }
 
     /**
@@ -21,6 +23,10 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
+        if($this->start)
+        {
+            (new Controller)->__construct();
+        }
         return view('sample.main.layouts.components.header.index');
     }
 }

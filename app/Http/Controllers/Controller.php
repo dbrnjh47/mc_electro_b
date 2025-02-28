@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Auth;
 use App\Models\Setting;
 
-abstract class Controller extends BaseController
+class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
