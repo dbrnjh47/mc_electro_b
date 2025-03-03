@@ -13,6 +13,6 @@ class PageController extends Controller
 
     public function feedback(Request $request)
     {
-        return view('sample.main.pages.feedback');
+        return view('sample.main.pages.feedback.index');
     }
 }

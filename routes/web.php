@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\IndexController as AuthIndexController;
+use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,11 +19,11 @@ Route::prefix('auth')->group(function () {
         Route::prefix('signup')->group(function () {
             // Route::group(['middleware' => 'throttle:5,5'], function () {
                 // Route::get('/', 'Auth\RegistrationController@show')->name('signup');
-                Route::post('/', 'Auth\RegistrationController@registration')->name('registration');
+                Route::post('/', [RegistrationController::class, 'registration'])->name('registration');
             // });
 
             Route::group(['middleware' => 'throttle:5,5'], function () {
-                Route::post('/repeat/email/send', 'Auth\RegistrationController@repeatEmailSend')->name('registration.repeat.email.send');
+                // Route::post('/repeat/email/send', 'Auth\RegistrationController@repeatEmailSend')->name('registration.repeat.email.send');
                 Route::get('/confirmation/{user_id}/{token}', 'Auth\ConfirmController@registration')->name('signup.confirmation');
             });
         });

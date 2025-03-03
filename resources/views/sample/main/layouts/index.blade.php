@@ -14,6 +14,8 @@
     <div class="main_wrapper">
         @yield('header')
 
+        <section id="feedback_modal"></section>
+
         @guest
             @include('sample.main.pages.auth.modals.login')
             @include('sample.main.pages.auth.modals.signup')

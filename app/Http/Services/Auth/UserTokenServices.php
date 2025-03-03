@@ -2,38 +2,29 @@
 
 namespace App\Http\Services\Auth;
 
-use App\Models\UserToken;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cache;
 
 class UserTokenServices
 {
+    public $prefix = "user_auth_";
     public function create($user_id)
     {
-        $code = Str::random(15);
+        $token = Str::random(15);
 
-        $this->distroy($user_id);
+        Cache::put($this->prefix.$token, $user_id, 600); // 600 - 10 мин
 
-        $user_token = UserToken::create([
-            'user_id' => $user_id,
-            'code' => $code,
-        ]);
-
-        return $user_token;
+        return $token;
     }
 
-    public function distroy($user_id)
+    public function distroy($token)
     {
-        UserToken::where("user_id", $user_id)->delete();
+        Cache::forget($this->prefix.$token);
         return;
     }
 
-    public function first($user_id, $token)
+    public function first($token)
     {
-        return UserToken::with("user")->where("user_id", $user_id)->where("code", $token)->firstOrFail();
-    }
-
-    public function find($id)
-    {
-        return UserToken::with("user")->findOrFail($id);
+        return Cache::get($this->prefix.$token);
     }
 }

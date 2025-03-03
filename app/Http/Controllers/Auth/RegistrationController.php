@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\Auth\RegistrationRequest;
 use Illuminate\Http\Request;
 use App\Http\Services\Auth\RegistrationServices;
 
 class RegistrationController extends IndexController
 {
-    public function show() {return view('auth.registration');}
+    // public function show() {return view('auth.registration');}
 
-    public function registration(Request $request)
+    public function registration(RegistrationRequest $request)
     {
-        return (new RegistrationServices)->registration($request);
+        $user_token_id = (new RegistrationServices)->registration($request);
+        return view('sample.main.pages.feedback.modal', ['title' => "Осталось совсем чуть-чуть!", 'message' => "Благодарим вас за регистрацию! Вам отправили письмо для активации аккаунта."]);
     }
 
-    public function repeatEmailSend(Request $request)
-    {
-        return (new RegistrationServices)->repeatEmailSend($request);
-    }
+    // public function repeatEmailSend(Request $request)
+    // {
+    //     return (new RegistrationServices)->repeatEmailSend($request);
+    // }
 }
