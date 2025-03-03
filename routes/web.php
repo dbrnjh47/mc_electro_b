@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -11,7 +13,7 @@ Route::get('/feedback', [PageController::class, 'feedback'])->name('feedback');
 Route::prefix('auth')->group(function () {
     Route::middleware(['guest'])->group(function () {
         // Route::get('/login', 'Auth\AuthController@show')->name('login');
-        // Route::post('/auth', 'Auth\AuthController@auth')->name('auth');
+        Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 
         Route::prefix('signup')->group(function () {
             // Route::group(['middleware' => 'throttle:5,5'], function () {
@@ -47,6 +49,6 @@ Route::prefix('auth')->group(function () {
     });
 
     Route::middleware(['auth'])->group(function () {
-        // Route::get('/logout', 'Auth\IndexController@logout')->name('logout');
+        Route::get('/logout', [AuthIndexController::class, 'logout'])->name('logout');
     });
 });

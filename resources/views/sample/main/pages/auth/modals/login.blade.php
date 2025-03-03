@@ -6,12 +6,12 @@
         </div>
         <div class="modal__body">
             <form>
-                <div class="modal__input_wrapper">
+                <div class="modal__input_wrapper invalid_feedback_wrapper">
                     <label for="modal_login_email">Электронная почта</label>
                     <input name="email" type="email" placeholder="Введите почту" class="modal__input"
                         id="modal_login_email">
                 </div>
-                <div class="modal__input_wrapper">
+                <div class="modal__input_wrapper invalid_feedback_wrapper">
                     <label for="modal_login_password">Пароль</label>
                     <input name="password" type="password" placeholder="Введите пароль" class="modal__input"
                         id="modal_login_password">

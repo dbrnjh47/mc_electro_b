@@ -17,6 +17,7 @@
 <meta property="og:locale" content="{{ Illuminate\Support\Facades\App::currentLocale() }}">
 <meta name="author" content="{{ $settings->name }}, {{ $settings->email }}">
 <meta name="og:email" content="{{ $settings->email }}" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <meta name="keywords" content="">
 @if(env('APP_TEST'))

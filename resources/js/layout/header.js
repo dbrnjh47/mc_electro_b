@@ -1,6 +1,15 @@
 
 
-// 
+//
+
+$("body").scroll(function () {
+    var header = $(".header");
+    if ($("body").scrollTop() >= $(".header_two").height()) {
+        header.addClass("header__fix");
+    } else {
+        header.removeClass("header__fix");
+    }
+});
 
 $(".header__world_dropdown svg").click(function () {
     hederCloseMenus();

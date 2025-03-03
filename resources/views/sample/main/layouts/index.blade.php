@@ -20,7 +20,7 @@
             <script>
                 window.routes["profile"] = "";
                 window.routes["registration"] = "{{ route('registration') }}";
-                window.routes["profile"] = "";
+                window.routes["auth"] = "{{ route('auth') }}";
             </script>
             @vite('resources/js/auth/login.js')
             @vite('resources/js/auth/signup.js')
