@@ -1,4 +1,4 @@
-import '/resources/js/_jquery';
+// import '/resources/js/_jquery';
 
 import '/resources/js/custom/bpopup/index.js';
 

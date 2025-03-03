@@ -79,7 +79,7 @@
 
                 Корзина
             </a>
-            <a class="header__action header__action_hover">
+            <a class="header__action header__action_hover" onclick="modal('#modal_login');">
                 <!-- public\temple\images\layout\icon\user.svg -->
                 <svg width="17" height="21" viewBox="0 0 17 21" xmlns="http://www.w3.org/2000/svg">
                     <path

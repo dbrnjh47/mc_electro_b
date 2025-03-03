@@ -14,6 +14,18 @@
     <div class="main_wrapper">
         @yield('header')
 
+        @guest
+            @include('sample.main.pages.auth.modals.login')
+            @include('sample.main.pages.auth.modals.signup')
+            <script>
+                window.routes["profile"] = "";
+                window.routes["registration"] = "{{ route('registration') }}";
+                window.routes["profile"] = "";
+            </script>
+            @vite('resources/js/auth/login.js')
+            @vite('resources/js/auth/signup.js')
+        @endguest
+
         <main class="main">
             @yield('content')
         </main>

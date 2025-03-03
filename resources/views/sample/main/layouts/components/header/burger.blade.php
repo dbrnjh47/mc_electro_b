@@ -21,10 +21,10 @@
                 </svg>
 
                 <div class="burger_menu__main__buttons">
-                    <a class="button" itemprop="url" href="">
+                    <a class="button" onclick="modal('#modal_login');">
                         Login
                     </a>
-                    <a class="button button_two" itemprop="url" href="">
+                    <a class="button button_two" onclick="modal('#modal_signup');">
                         Register
                     </a>
                 </div>

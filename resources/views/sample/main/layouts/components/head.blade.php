@@ -54,5 +54,8 @@
 
 <!--  -->
 @vite('resources/js/_jquery.js')
+<script>
+    window.routes = {};
+</script>
 @vite('resources/js/layout/layout.js')
 @vite('resources/js/layout/location.js')
