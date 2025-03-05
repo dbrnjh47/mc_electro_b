@@ -7,7 +7,7 @@ use App\Http\Services\Auth\RestoreServices;
 
 class RestoreController extends IndexController
 {
-    public function show() {return view('auth.reset.index');}
+    public function show() {return view('sample.main.pages.auth.reset.index');}
 
     public function reset(Request $request)
     {

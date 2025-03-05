@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ConfirmController;
 use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,8 +31,8 @@ Route::prefix('auth')->group(function () {
         });
 
         Route::prefix('restore')->group(function () {
-            Route::get('/', 'Auth\RestoreController@show')->name('restore');
-            Route::post('/', 'Auth\RestoreController@reset')->name('reset.password');
+            Route::get('/', [RestoreController::class, 'show'])->name('restore');
+            Route::post('/', [RestoreController::class, 'reset'])->name('restore.reset');
 
             //
 

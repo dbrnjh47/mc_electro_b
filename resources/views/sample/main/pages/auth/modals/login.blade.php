@@ -18,7 +18,7 @@
                 </div>
             </form>
             <div class="modal_auth__actions">
-                <a class="modal_auth__action" href="#">Забыли пароль?</a>
+                <a class="modal_auth__action" href="{{route('restore')}}">Забыли пароль?</a>
                 <a class="modal_auth__action modal_auth__action_dop" onclick="modal('#modal_signup');">Еще нет учетной записи?</a>
             </div>
             <button class="modal__btn disable" id="modal_login_btn">Войти</button>
