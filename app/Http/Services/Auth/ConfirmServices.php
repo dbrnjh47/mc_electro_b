@@ -2,14 +2,23 @@
 
 namespace App\Http\Services\Auth;
 
-use App\Http\Services\Validation\Controller as Validation;
-use App\Http\Validations\Auth\ConfirmeValidations;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
-class ConfirmServices extends Validation
+class ConfirmServices
 {
-    public function __construct()
+    public function confirm($request)
     {
-        $this->validation = new ConfirmeValidations();
-    }
+        // получаю юзера
+        $user = User::find($request->user_id);
 
+        $user->email_verified_at = now();
+        $user->save();
+
+        Auth::login($user, true);
+
+        return redirect()->route('home');
+    }
 }

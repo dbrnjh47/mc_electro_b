@@ -31,20 +31,6 @@ class RegistrationServices
         return $token;
     }
 
-    // public function confirm($request)
-    // {
-    //     $user_token = (new UserTokenServices)->first($request->user_id, $request->token);
-
-    //     $user_token->user->email_verified_at = now();
-    //     $user_token->user->save();
-
-    //     Auth::login($user_token->user, true);
-
-    //     $user_token->delete();
-
-    //     return redirect()->route('profile');
-    // }
-
     // public function repeatEmailSend($request)
     // {
     //     $validData = $this->validation(__FUNCTION__, $request->all());

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\ConfirmController;
 use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\PageController;
@@ -22,10 +23,10 @@ Route::prefix('auth')->group(function () {
                 Route::post('/', [RegistrationController::class, 'registration'])->name('registration');
             // });
 
-            Route::group(['middleware' => 'throttle:5,5'], function () {
+            // Route::group(['middleware' => 'throttle:5,5'], function () {
                 // Route::post('/repeat/email/send', 'Auth\RegistrationController@repeatEmailSend')->name('registration.repeat.email.send');
-                Route::get('/confirmation/{user_id}/{token}', 'Auth\ConfirmController@registration')->name('signup.confirmation');
-            });
+                Route::get('/confirmation/{user_id}/{token}', [ConfirmController::class, 'index'])->name('signup.confirmation');
+            // });
         });
 
         Route::prefix('restore')->group(function () {

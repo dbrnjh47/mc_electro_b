@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Services\Auth\RegistrationServices;
+use App\Http\Requests\Auth\ConfirmRequest;
+use App\Http\Services\Auth\ConfirmServices;
 use Illuminate\Http\Request;
 
 class ConfirmController extends IndexController
 {
-    public function registration(Request $request)
+    public function index(ConfirmRequest $request)
     {
-        return (new RegistrationServices)->confirm($request);
+        return (new ConfirmServices)->confirm($request);
     }
 }

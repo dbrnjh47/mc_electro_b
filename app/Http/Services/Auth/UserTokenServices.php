@@ -12,7 +12,7 @@ class UserTokenServices
     {
         $token = Str::random(15);
 
-        Cache::put($this->prefix.$token, $user_id, 600); // 600 - 10 мин
+        Cache::put($this->prefix.$token, $user_id, 3600); // 3600 - 1 час
 
         return $token;
     }

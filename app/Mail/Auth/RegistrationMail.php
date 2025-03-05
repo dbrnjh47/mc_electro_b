@@ -14,6 +14,7 @@ class RegistrationMail extends Mailable
     use Queueable, SerializesModels;
 
     public $user, $user_password, $token, $settings;
+    public $title;
     /**
      * Create a new message instance.
      */
@@ -23,6 +24,7 @@ class RegistrationMail extends Mailable
         $this->user_password = $user_password;
         $this->token = $token;
         $this->settings = $settings;
+        $this->title = "Регистрация на сайте {$settings->fullName()}";
     }
 
     /**
@@ -31,7 +33,7 @@ class RegistrationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Registration',
+            subject: $this->title,
         );
     }
 
@@ -41,7 +43,7 @@ class RegistrationMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'auth.mail.registration',
+            markdown: 'sample.main.pages.auth.mail.registration',
         );
     }
 

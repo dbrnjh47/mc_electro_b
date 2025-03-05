@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Setting extends Model
 {
     use HasFactory;
+
+    public function fullName()
+    {
+        return "{$this->abbreviation} {$this->name}";
+    }
 }
