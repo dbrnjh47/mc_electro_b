@@ -8,16 +8,16 @@ use App\Http\Services\Auth\UserTokenServices;
 
 class UpdatePasswordController extends IndexController
 {
-    public function show($user_id, $token)
-    {
-        $userToken = (new UserTokenServices)->first($user_id, $token);
+    // public function show($user_id, $token)
+    // {
+    //     $userToken = (new UserTokenServices)->first($user_id, $token);
 
-        return view('auth.reset.new_password', compact("userToken"));
-    }
+    //     return view('auth.reset.new_password', compact("userToken"));
+    // }
 
-    public function update(Request $request)
-    {
-        (new RestoreServices)->update($request);
-        return;
-    }
+    // public function update(Request $request)
+    // {
+    //     (new RestoreServices)->update($request);
+    //     return;
+    // }
 }

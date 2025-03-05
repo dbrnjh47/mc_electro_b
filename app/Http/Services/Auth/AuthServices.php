@@ -8,7 +8,6 @@ use Illuminate\Validation\ValidationException;
 
 class AuthServices
 {
-
     public function login($request)
     {
         if (Auth::attempt([
