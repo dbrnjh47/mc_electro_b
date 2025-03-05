@@ -260,12 +260,18 @@ li {
     transition: all 0.4s;
   }
   &.is_invalid {
-    input {
+    input, textarea {
       color: #ff6060;
       background: #ff606014;
+      animation: error-auto 2s linear infinite;
       &::placeholder {
         color: #ff6060;
       }
+    }
+
+    .checkbox input + label::before{
+        background: #ff606014;
+        animation: error-auto 2s linear infinite;
     }
   }
   .invalid_feedback {
@@ -273,6 +279,18 @@ li {
     font-size: 14px;
     font-weight: 400;
     margin-top: 10px;
+  }
+}
+
+@keyframes error-auto {
+  0% {
+      box-shadow: 0px 0px 5px transparent;
+  }
+  50% {
+      box-shadow: 0px 0px 5px #c8828f80;
+  }
+  100% {
+      box-shadow: 0px 0px 5px transparent;
   }
 }
 
@@ -317,7 +335,7 @@ li {
     align-items: center;
     margin-left: 0;
     left: 0;
-    top: 3px;
+    top: 2px;
     text-align: center;
     background-color: #de002b;
     font-size: 10px;
