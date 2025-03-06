@@ -1,5 +1,5 @@
 var wrapper = $("#modal_reset"),
-    button = $("#modal_reset_btnt");
+    button = $("#modal_reset_btn");
 
 button.click(function (e) {
     let data = getInfo(wrapper);

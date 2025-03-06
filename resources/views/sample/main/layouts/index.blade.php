@@ -20,7 +20,7 @@
             @include('sample.main.pages.auth.modals.login')
             @include('sample.main.pages.auth.modals.signup')
             <script>
-                window.routes["profile"] = "";
+                window.routes["profile"] = "{{ route('profile') }}";
                 window.routes["registration"] = "{{ route('registration') }}";
                 window.routes["auth"] = "{{ route('auth') }}";
             </script>

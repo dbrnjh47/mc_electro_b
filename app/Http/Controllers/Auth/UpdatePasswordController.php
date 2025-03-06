@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Requests\Auth\ShowUpdatePasswordRequest;
+use App\Http\Requests\Auth\UpdatePassword\ShowRequest;
 use Illuminate\Http\Request;
 use App\Http\Services\Auth\RestoreServices;
 use App\Http\Services\Auth\UserTokenServices;
 
 class UpdatePasswordController extends IndexController
 {
-    public function show(ShowUpdatePasswordRequest $request)
+    public function show(ShowRequest $request)
     {
         $token = $request->token;
         $user_id = $request->user_id;

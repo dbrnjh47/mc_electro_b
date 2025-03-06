@@ -22,7 +22,7 @@
                         </div>
                     </form>
 
-                    <button class="modal__btn" id="modal_reset_btnt">Сбросить</button>
+                    <button class="modal__btn" id="modal_reset_btn">Сбросить</button>
                 </div>
             </div>
         </div>

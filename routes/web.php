@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/', [PageController::class, 'index'])->name('profile');
 Route::get('/feedback', [PageController::class, 'feedback'])->name('feedback');
 
 //
@@ -39,7 +40,7 @@ Route::prefix('auth')->group(function () {
 
             Route::prefix('password')->group(function () {
                 Route::get('/{user_id}&{token}', [UpdatePasswordController::class, 'show'])->name('restore.new.password');
-                // Route::post('/', 'Auth\UpdatePasswordController@update')->name('restore.update.password');
+                Route::post('/', 'Auth\UpdatePasswordController@update')->name('restore.update.password');
             });
         });
 
