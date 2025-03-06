@@ -3,3 +3,4 @@
         <img src="{{ Vite::asset('resources/js/custom/go_top/img/str.svg') }}" alt="button up">
     </span>
 </button>
+@vite('resources/js/custom/go_top/index.js')

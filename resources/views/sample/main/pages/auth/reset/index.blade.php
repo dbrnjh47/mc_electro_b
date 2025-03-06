@@ -26,8 +26,6 @@
                 </div>
             </div>
         </div>
-
-        <script type="module" src="/resources/js/auth/reset/index.js"></script>
     </div>
 @endsection
 
@@ -37,7 +35,7 @@
     </script>
     {{-- <x-sample.main.layout.footer></x-sample.main.layout.footer> --}}
     <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
-    <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
+    {{-- <x-sample.main.layout.go-top></x-sample.main.layout.go-top> --}}
     <x-sample.main.support></x-sample.main.support>
     @vite('resources/js/auth/reset/index.js')
     @vite('resources/js/ajax/auth/reset.js')
