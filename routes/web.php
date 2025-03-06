@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ConfirmController;
 use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
+use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,8 +38,8 @@ Route::prefix('auth')->group(function () {
             //
 
             Route::prefix('password')->group(function () {
-                Route::get('/{user_id}&{token}', 'Auth\UpdatePasswordController@show')->name('restore.new.password');
-                Route::post('/', 'Auth\UpdatePasswordController@update')->name('restore.update.password');
+                Route::get('/{user_id}&{token}', [UpdatePasswordController::class, 'show'])->name('restore.new.password');
+                // Route::post('/', 'Auth\UpdatePasswordController@update')->name('restore.update.password');
             });
         });
 

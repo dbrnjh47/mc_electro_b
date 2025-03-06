@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Cache;
 
 class UserTokenServices
 {
-    public $prefix = "user_auth_";
+    public $prefix;
+    public function __construct($prefix = "user_auth_")
+    {
+        $this->prefix = $prefix;
+    }
+
     public function create($user_id)
     {
         $token = Str::random(15);
