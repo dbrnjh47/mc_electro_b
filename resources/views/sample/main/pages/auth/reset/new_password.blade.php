@@ -16,13 +16,15 @@
                 </div>
                 <div class="modal__body">
                     <form>
+                        <input type="hidden" name="token" value="{{$token}}">
+                        <input type="hidden" name="user_id" value="{{$user_id}}">
                         <div class="modal__input_wrapper">
                             <label>Новый пароль</label>
-                            <input type="text" placeholder="Придумайте пароль" class="modal__input">
+                            <input type="text" name="password" placeholder="Придумайте пароль" class="modal__input">
                         </div>
                         <div class="modal__input_wrapper">
                             <label>Повторите пароль</label>
-                            <input type="text" placeholder="Повторите пароль" class="modal__input">
+                            <input type="text" name="repeat_password" placeholder="Повторите пароль" class="modal__input">
                         </div>
                     </form>
 
