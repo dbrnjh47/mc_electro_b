@@ -12,7 +12,8 @@ class RestoreController extends IndexController
 
     public function reset(RestoreRequest $request)
     {
-        return (new RestoreServices)->reset($request->user);
+        (new RestoreServices)->reset($request->user);
+        return view('sample.main.pages.feedback.modal', ['title' => "Отправлено письмо!", 'message' => "Вам отправили письмо с ссылкой для сброса пароля."]);
     }
 
     // public function confirmation($user_id, $remember_token)

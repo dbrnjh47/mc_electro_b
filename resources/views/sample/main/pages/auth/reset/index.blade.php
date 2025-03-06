@@ -17,8 +17,8 @@
                 <div class="modal__body">
                     <form>
                         <div class="modal__input_wrapper invalid_feedback_wrapper">
-                            <label>Электронная почта</label>
-                            <input type="text" name="email" placeholder="Введите почту" class="modal__input">
+                            <label for="modal_reset_email">Электронная почта</label>
+                            <input type="text" name="email" id="modal_reset_email" placeholder="Введите почту" class="modal__input">
                         </div>
                     </form>
 
@@ -37,7 +37,7 @@
     </script>
     {{-- <x-sample.main.layout.footer></x-sample.main.layout.footer> --}}
     <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
-    {{-- <x-sample.main.layout.go-top></x-sample.main.layout.go-top> --}}
+    <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
     @vite('resources/js/auth/reset/index.js')
     @vite('resources/js/ajax/auth/reset.js')

@@ -9,7 +9,7 @@ button.click(function (e) {
         url: window.routes["restore.reset"],
         type: "POST",
         data: data,
-        success: function () {
+        success: function (html) {
             $("#feedback_modal").html(html);
             modal('#feedback_modal .modal');
         },

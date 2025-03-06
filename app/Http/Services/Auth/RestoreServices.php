@@ -5,6 +5,9 @@ namespace App\Http\Services\Auth;
 use Illuminate\Validation\ValidationException;
 use App\Http\Services\Auth\UserTokenServices;
 use App\Jobs\Auth\ResetUserJob;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class RestoreServices
 {
@@ -20,23 +23,18 @@ class RestoreServices
         return;
     }
 
-    // public function update($request)
-    // {
-    //     $validData = $this->validation(__FUNCTION__, $request->all());
+    public function update($request)
+    {
+        $user = User::find($request->user_id);
+        $user->password = Hash::make($request->password);
+        if(!$user->email_verified_at)
+        {
+            $user->email_verified_at = now();
+        }
+        $user->save();
 
-    //     $userToken = (new UserTokenServices)->first($request->user_id, $request->code);
+        Auth::login($user, true);
 
-    //     $userToken->user->password = Hash::make($request->password);
-    //     if(!$userToken->user->email_verified_at)
-    //     {
-    //         $userToken->user->email_verified_at = now();
-    //     }
-    //     $userToken->user->save();
-
-    //     Auth::login($userToken->user, true);
-
-    //     $userToken->delete();
-
-    //     return;
-    // }
+        return;
+    }
 }
