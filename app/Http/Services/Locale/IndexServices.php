@@ -11,7 +11,7 @@ class IndexServices
 {
     public function get()
     {
-        return Cookie::get('locale') ?? App::getLocale();;
+        return Cookie::get('locale_set') ?? App::getLocale();
         // $locale = Cookie::get('locale');
     }
 
@@ -32,10 +32,14 @@ class IndexServices
 
     public function create($locale)
     {
-        App::setLocale($locale);
+        if(preg_match('/^[a-zA-Z]{2}$/', $locale))
+        {
+            App::setLocale($locale);
 
-        setcookie("locale", $locale, time()+(525600*60));
-        Cookie::queue('locale', $locale, 525600);
+            setcookie("locale_set", $locale, time()+(525600*60), "/", $_SERVER['HTTP_HOST']);
+            // Cookie::queue('locale_set', $locale, 525600, "/", $_SERVER['HTTP_HOST']);
+        }
+
         return $locale;
     }
 }

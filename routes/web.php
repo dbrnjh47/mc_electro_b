@@ -10,7 +10,7 @@ use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::group(['prefix' => '{locale?}', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
+// Route::group(['prefix' => '{locale?}', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
     Route::get('/', [PageController::class, 'index'])->name('home');
     Route::get('/?', [PageController::class, 'index'])->name('profile');
     Route::get('/feedback', [PageController::class, 'feedback'])->name('feedback');
@@ -58,4 +58,4 @@ Route::group(['prefix' => '{locale?}', 'where' => ['locale' => '[a-zA-Z]{2}']], 
             Route::get('/logout', [AuthIndexController::class, 'logout'])->name('logout');
         });
     });
-});
+// });

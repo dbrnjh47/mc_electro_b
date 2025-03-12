@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\Locale\IndexServices as LocaleServices;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 
 use Auth;
 use App\Models\Setting;
+use Illuminate\Support\Facades\App;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    protected $user, $settings, $locale;
+    protected $user, $settings;
 
     public function __construct()
     {
@@ -24,9 +24,8 @@ class Controller extends BaseController
         view()->share('settings', $this->settings);
 
         $this->middleware(function ($request, $next) {
-            $this->locale = (new LocaleServices)->set($request->locale, 1);
             $this->user = Auth::user();
-
+            echo "end ". App::getLocale();
             if (Auth::check()) {
                 // $this->user = User::where("id", $this->user->id)->firstOrFail();
                 view()->share('u', $this->user);
@@ -41,7 +40,6 @@ class Controller extends BaseController
                 // abort(404);
                 return response()->view('errors.404');
             }
-            dd($this->locale);
             return $next($request);
         });
     }
