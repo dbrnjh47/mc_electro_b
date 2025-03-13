@@ -10,4 +10,9 @@ class LocaleModalServices
     {
         return Locale::where("slug", $slug)->where("is_configured", 1)->first();
     }
+
+    public function get()
+    {
+        return Locale::where("is_configured", 1)->get();
+    }
 }

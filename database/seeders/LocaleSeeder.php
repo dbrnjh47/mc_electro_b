@@ -14,7 +14,7 @@ class LocaleSeeder extends Seeder
             "slug" => "ru",
             "text" => "Русский",
             "is_configured" => true,
-            "icon" => "russian-federation.svg",
+            "icon" => "ru.svg",
             "hreflang" => "ru-ae"
         ],
         // [
@@ -39,7 +39,7 @@ class LocaleSeeder extends Seeder
             "slug" => "en",
             "text" => "English",
             "is_configured" => true,
-            "icon" => "united-kingdom.svg",
+            "icon" => "en.svg",
             "hreflang" => "en-ae"
         ],
         // [

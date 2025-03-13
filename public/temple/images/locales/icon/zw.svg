@@ -1,0 +1,27 @@
+<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_537_242)">
+<rect width="16" height="12" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V12H16V0H0Z" fill="#F7FCFF"/>
+<mask id="mask0_537_242" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="12">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V12H16V0H0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_537_242)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 1V11H16V1H0Z" fill="#FECA00"/>
+<path d="M0 4.125H-0.875V5V7V7.875H0H16H16.875V7V5V4.125H16H0Z" fill="#272727" stroke="#E31D1C" stroke-width="1.75"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 2V0H16V2H0ZM0 12V10H16V12H0Z" fill="#5EAA22"/>
+</g>
+<path d="M0.298481 -0.401135L-0.5 -0.995277V0V12V12.9805L0.293611 12.4047L8.45926 6.48069L9.01008 6.08108L8.46413 5.67484L0.298481 -0.401135Z" fill="#F7FCFF" stroke="#272727"/>
+<mask id="mask1_537_242" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-1" y="-2" width="11" height="16">
+<path d="M0.298481 -0.401135L-0.5 -0.995277V0V12V12.9805L0.293611 12.4047L8.45926 6.48069L9.01008 6.08108L8.46413 5.67484L0.298481 -0.401135Z" fill="white" stroke="white"/>
+</mask>
+<g mask="url(#mask1_537_242)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.73953 7.13914L1.85006 8.66436L2.71675 6.62606L1.22754 5.19195H2.98534L3.70663 3.46252L4.47273 5.19195H6.22754L4.65966 6.62606L5.44434 8.66436L3.73953 7.13914Z" fill="#E31D1C"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M2.50886 4.21075C2.50886 4.21075 2.48143 4.14463 2.64334 4.08616C2.80525 4.02769 2.85464 3.90379 2.98156 3.99497C3.10848 4.08616 3.18789 3.90284 3.2243 4.16577C3.26072 4.4287 3.36109 4.84331 3.36109 4.84331L5.00488 6.07864H4.69604C4.69604 6.07864 4.21512 6.78523 4.29452 7.40521C4.29452 7.40521 3.9627 7.35473 3.51295 7.35473C3.06319 7.35473 2.76861 7.46252 2.76861 7.46252L2.50886 6.50068C2.50886 6.50068 2.60291 6.3391 2.64334 6.20887C2.68377 6.07864 2.85118 6.0546 2.85118 5.951C2.85118 5.84741 2.68605 5.76056 2.76861 5.49239C2.85118 5.22422 2.85118 4.42203 2.85118 4.42203C2.85118 4.42203 2.59024 4.30728 2.64334 4.30728C2.69644 4.30728 2.81748 4.21075 2.73041 4.21075C2.64334 4.21075 2.50886 4.21075 2.50886 4.21075Z" fill="#FECA00"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_537_242">
+<rect width="16" height="12" fill="white"/>
+</clipPath>
+</defs>
+</svg>

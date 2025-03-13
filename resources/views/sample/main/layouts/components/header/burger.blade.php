@@ -123,8 +123,13 @@
 
                     <div class="setting_items_wrapper">
                         <div class="setting_item_select">
-                            <img src="/temple/languages/united-kingdom.svg" alt="en">
-                            English
+                            @foreach ($locales as $locale)
+                                @if ($set_local == $locale->slug)
+                                    <img src="{{$locale->icon}}" alt="{{$locale->slug}}" loading="lazy" decoding="async">
+                                    {{$locale->text}}
+                                    @break
+                                @endif
+                            @endforeach
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="6"
                                 viewBox="0 0 9 6" fill="none">
                                 <path
@@ -134,14 +139,12 @@
                         </div>
 
                         <div class="setting_items">
-                            <a class="setting_item " href="">
-                                <img src="/temple/languages/russian-federation.svg" alt="ru">
-                                Русский
+                            @foreach ($locales as $locale)
+                            <a href="{{$locale->getUrl()}}" class="setting_item @if($set_local == $locale->slug) activ @endif">
+                                <img src="{{$locale->icon}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
+                                {{$locale->text}}
                             </a>
-                            <a class="setting_item  activ " href="">
-                                <img src="/temple/languages/united-kingdom.svg" alt="en">
-                                English
-                            </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>

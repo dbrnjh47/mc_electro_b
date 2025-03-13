@@ -138,6 +138,9 @@
           background: #504b45;
           img {
             margin-right: 10px;
+            width: 16px;
+            height: 12px;
+            border-radius: 2px;
           }
           svg {
             margin: auto;
@@ -160,6 +163,9 @@
           transition: all 0.3s;
           img {
             margin-right: 10px;
+            width: 16px;
+            height: 12px;
+            border-radius: 2px;
           }
           &:hover,
           &.activ {

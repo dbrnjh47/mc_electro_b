@@ -1,0 +1,22 @@
+<svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_537_334)">
+<rect width="16" height="12" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V12H16V0H0Z" fill="#C51918"/>
+<mask id="mask0_537_334" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="16" height="12">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V12H16V0H0Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_537_334)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 0V7H8V0H0Z" fill="#2E42A5"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1.78313 3.88601L1.2531 4.20598L1.374 3.58158L0.932617 3.11428L1.53027 3.08902L1.78313 2.50598L2.03598 3.08902H2.63262L2.19225 3.58158L2.32483 4.20598L1.78313 3.88601Z" fill="#FEFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.78313 3.88601L5.2531 4.20598L5.374 3.58158L4.93262 3.11428L5.53027 3.08902L5.78313 2.50598L6.03598 3.08902H6.63262L6.19225 3.58158L6.32483 4.20598L5.78313 3.88601Z" fill="#FEFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.7331 2.06899L3.23425 2.37014L3.34803 1.78247L2.93262 1.34266L3.49511 1.31888L3.7331 0.770142L3.97108 1.31888H4.53262L4.11816 1.78247L4.24293 2.37014L3.7331 2.06899Z" fill="#FEFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M4.27276 4.2126L3.96098 4.40082L4.0321 4.03352L3.77246 3.75864L4.12402 3.74378L4.27276 3.40082L4.4215 3.74378H4.77246L4.51342 4.03352L4.59141 4.40082L4.27276 4.2126Z" fill="#FEFFFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M3.70462 6.41415L2.95636 6.86588L3.12703 5.98438L2.50391 5.32466L3.34765 5.28899L3.70462 4.46588L4.0616 5.28899H4.90391L4.28222 5.98438L4.46938 6.86588L3.70462 6.41415Z" fill="#FEFFFF"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_537_334">
+<rect width="16" height="12" fill="white"/>
+</clipPath>
+</defs>
+</svg>

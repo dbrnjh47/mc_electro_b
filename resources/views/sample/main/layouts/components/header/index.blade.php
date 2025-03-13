@@ -133,12 +133,12 @@
                 <div class="header__world_dropdown__menu">
                     <div class="header__world_dropdown__menu_items_wrapper">
                         <div class="header__world_dropdown__menu_items">
-                            <div class="header__world_dropdown__menu_item active">Русский</div>
-                            <div class="header__world_dropdown__menu_item">English</div>
-                            <div class="header__world_dropdown__menu_item">English</div>
-                            <div class="header__world_dropdown__menu_item">English</div>
-                            <div class="header__world_dropdown__menu_item">English</div>
-                            <div class="header__world_dropdown__menu_item">English</div>
+                            @foreach ($locales as $locale)
+                            <a href="{{$locale->getUrl()}}" class="header__world_dropdown__menu_item @if($set_local == $locale->slug) active @endif">
+                                <img src="{{$locale->icon}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
+                                {{$locale->text}}
+                            </a>
+                            @endforeach
                         </div>
                         <div class="header__world_dropdown__menu_items">
                             <div class="header__world_dropdown__menu_item">₽</div>

@@ -25,7 +25,6 @@ class Controller extends BaseController
 
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
-            echo "end ". App::getLocale();
             if (Auth::check()) {
                 // $this->user = User::where("id", $this->user->id)->firstOrFail();
                 view()->share('u', $this->user);
@@ -42,5 +41,10 @@ class Controller extends BaseController
             }
             return $next($request);
         });
+    }
+
+    public static function photoAccessor($value, $path)
+    {
+        return $path . $value;
     }
 }
