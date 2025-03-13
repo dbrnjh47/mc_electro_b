@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(SettingSeeder::class);
         $this->call(LocaleSeeder::class);
+        $this->call(CurrencySeeder::class);
+        $this->call(BannerSeeder::class);
     }
 }

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('locales', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id();
 
-            $table->string('slug', 2)->unique();
-            $table->string('hreflang', 24)->nullable();
-            $table->string('text', 126);
-            $table->boolean('is_configured')->default(false);
-
-            $table->string('icon', 24)->nullable();
+            $table->string('currency')->unique();
+            $table->string('icon', 3)->nullable();
+            $table->string('img')->nullable();
+            $table->decimal('to', 8, 4)->unsigned()->default(1);
 
             $table->timestamps();
         });
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('locales');
+        Schema::dropIfExists('currencies');
     }
 };
