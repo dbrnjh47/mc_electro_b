@@ -79,6 +79,29 @@
 
                 Корзина
             </a>
+
+            @auth
+            <div class="header__user_wrapper">
+                <div class="header__user">
+                    <p>12,000₽</p>
+                    <div class="header__user_avatar">
+                        <img src="/assets/user/avatar/defult.svg" alt="user" loading="lazy" decoding="async">
+                    </div>
+                </div>
+                <div class="header__user_drop_menu">
+                    <div class="header__user_drop_menu_role">
+                        <a href="#" class="activ">Физ. лицо</a>
+                        <a href="#">Юр. лицо</a>
+                    </div>
+                    <ul>
+                        <li><a href="#">Профиль</a></li>
+                        <li><a href="#">Список заказов</a></li>
+                        <li><a href="#">Пополнить баланс</a></li>
+                        <li><a href="#">Выйти</a></li>
+                    </ul>
+                </div>
+            </div>
+            @else
             <a class="header__action header__action_hover" onclick="modal('#modal_login');">
                 <!-- public\temple\images\layout\icon\user.svg -->
                 <svg width="17" height="21" viewBox="0 0 17 21" xmlns="http://www.w3.org/2000/svg">
@@ -90,6 +113,8 @@
 
                 Войти
             </a>
+            @endauth
+
 
             <div class="header__world_dropdown header__action_hover">
 
@@ -149,7 +174,6 @@
                             <div class="header__world_dropdown__menu_item">$</div>
                         </div>
                     </div>
-
                 </div>
 
             </div>
