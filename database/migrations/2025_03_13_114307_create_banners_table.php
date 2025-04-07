@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('banners', function (Blueprint $table) {
             $table->id();
 
-            $table->string('href')->nullable()->comment("/");
+            $table->string('key')->nullable()->comment("home");
             $table->string('img');
             $table->boolean('is_on')->default(1);
             $table->unsignedBigInteger('locale_id')->nullable();

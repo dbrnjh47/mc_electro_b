@@ -11,7 +11,7 @@ class IndexServices
 {
     public function get()
     {
-        return Cookie::get('locale_set') ?? App::getLocale();
+        return (new LocaleModelServices)->firstBySlug((Cookie::get('locale_set') ?? App::getLocale()));
         // $locale = Cookie::get('locale');
     }
 
@@ -20,7 +20,7 @@ class IndexServices
         if(!$locale)
         {
             if(!$off_not_found) throw new NotFoundHttpException('');
-            return $this->create($this->get());
+            return $this->create($this->get()->slug);
         }
         if(!(new LocaleModelServices)->firstBySlug($locale))
         {

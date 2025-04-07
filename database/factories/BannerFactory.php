@@ -20,7 +20,7 @@ class BannerFactory extends Factory
         return [
             "is_on" => rand(0,1),
             "locale_id" => Locale::inRandomOrder()->first()->id,
-            "href" => "/",
+            "key" => "home",
             "img" => "test.png"
         ];
     }

@@ -16,23 +16,30 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    protected $user, $settings, $user_currency, $user_local;
+    protected $user;
 
     public function __construct()
     {
         date_default_timezone_set('Europe/Moscow');
 
-        $this->settings = Setting::first();
-        view()->share('settings', $this->settings);
+        $settings = Setting::first();
+        view()->share('settings', $settings);
+        app()->singleton('settings', function ($app) use ($settings) {
+            return $settings;
+        });
 
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
+
             if (Auth::check()) {
                 // $this->user = User::where("id", $this->user->id)->firstOrFail();
                 view()->share('u', $this->user);
+                app()->singleton('user', function ($app) {
+                    return $this->user;
+                });
             }
 
-            if ($this->settings->teh_works && !$this->user || $this->settings->teh_works && $this->user && $this->user->role != "admin") {
+            if (app('settings')->teh_works && !$this->user || app('settings')->teh_works && $this->user && $this->user->role != "admin") {
                 // abort(404);
                 return response()->view('errors.404');
             }
@@ -42,15 +49,21 @@ class Controller extends BaseController
                 return response()->view('errors.404');
             }
 
-            $this->user_currency = (new CurrencyServices)->get();
-            view()->share('user_currency', $this->user_currency);
-
-            //
-
-            $this->user_local = (new LocaleServices)->get();
-            view()->share('user_local', $this->user_local);
-
             return $next($request);
+        });
+
+        $user_currency = (new CurrencyServices)->get();
+        view()->share('user_currency', $user_currency);
+        app()->singleton('user_currency', function ($app) use ($user_currency) {
+            return $user_currency;
+        });
+
+        //
+
+        $user_local = (new LocaleServices)->get();
+        view()->share('user_local', $user_local);
+        app()->singleton('user_local', function ($app) use ($user_local) {
+            return $user_local;
         });
     }
 

@@ -21,4 +21,9 @@ class Banner extends Model
             // set: fn ($value) => $this->setPhotoAccessor($value),
         );
     }
+
+    public function locale()
+    {
+        return $this->hasOne(Locale::class, 'id', 'locale_id');
+    }
 }

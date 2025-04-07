@@ -26,9 +26,10 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-
+        if($this->start)
+        {
             (new Controller)->__construct();
-
+        }
 
         $locales = (new LocaleModelServices)->get();
         //

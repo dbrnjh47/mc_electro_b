@@ -39,8 +39,8 @@ class CurrencyServices
 
     public function set($id)
     {
-        Cookie::queue('user_currency', $id, (60 * 24 * 7));
-        // setcookie("user_currency", $id, time()+(525600*60), "/", $_SERVER['HTTP_HOST']);
+        // Cookie::queue('user_currency', $id, (60 * 24 * 7));
+        setcookie("user_currency", $id, time()+(525600*60), "/", $_SERVER['HTTP_HOST']);
         return;
     }
 

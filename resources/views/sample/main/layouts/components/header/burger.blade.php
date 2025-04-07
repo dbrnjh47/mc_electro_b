@@ -124,7 +124,7 @@
                     <div class="setting_items_wrapper">
                         <div class="setting_item_select">
                             @foreach ($locales as $locale)
-                                @if ($user_local == $locale->slug)
+                                @if ($user_local->id == $locale->id)
                                     <img src="{{$locale->icon}}" alt="{{$locale->slug}}" loading="lazy" decoding="async">
                                     {{$locale->text}}
                                     @break
@@ -140,7 +140,7 @@
 
                         <div class="setting_items">
                             @foreach ($locales as $locale)
-                            <a href="{{$locale->getUrl()}}" class="setting_item @if($user_local == $locale->slug) activ @endif">
+                            <a href="{{$locale->getUrl()}}" class="setting_item @if($user_local->id == $locale->id) activ @endif">
                                 <img src="{{$locale->icon}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
                                 {{$locale->text}}
                             </a>
