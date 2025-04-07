@@ -2,10 +2,10 @@
 
 namespace App\Http\Services\Currency;
 
-use App\Models\Currency;
+use App\Http\API\ExchangerateApi;
 use Illuminate\Support\Facades\Cookie;
 
-use App\Http\Services\API\ExchangerateApi;
+use App\Http\Services\Models\CurrencyModelServices;
 
 class CurrencyServices
 {
@@ -23,44 +23,34 @@ class CurrencyServices
     //     return $sum;
     // }
 
-    // public function all()
-    // {
-    //     return CurrencyServices::get();
-    // }
+    public function get()
+    {
+        $currency_id = Cookie::get('user_currency');
+        $currency = (new CurrencyModelServices)->find($currency_id);
 
-    // public function find($id)
-    // {
-    //     return CurrencyServices::find($id);
-    // }
+        if(!$currency)
+        {
+            $currency = (new CurrencyModelServices)->defult();
+            $this->set($currency->id);
+        }
 
-    // public function get()
-    // {
-    //     $currencie = Cookie::get('currencie');
-    //     $currencie = $this->find($currencie);
-
-    //     if(!$currencie)
-    //     {
-    //         $currencie = Currencie::first();
-    //         $this->set($currencie->id);
-    //     }
-    //     return $currencie;
-    // }
+        return $currency;
+    }
 
     public function set($id)
     {
-        cookie()->queue('currency', $id, 8400600);
+        Cookie::queue('user_currency', $id, (60 * 24 * 7));
+        // setcookie("user_currency", $id, time()+(525600*60), "/", $_SERVER['HTTP_HOST']);
         return;
     }
 
     public function update()
     {
-        return 1;
-        $currencies = $this->all();
+        $currencies = (new CurrencyModelServices)->all();
         $allInfoCurrencies = (new ExchangerateApi)->getCurrencies();
-
         foreach($currencies as $currency)
         {
-            $currency->to_usd = $allInfoCurrencies["conversion_rates"][$currency->currency];
+            $currency->to = $allInfoCurrencies["conversion_rates"][$currency->abbreviation];
             $currency->save();
         }
 

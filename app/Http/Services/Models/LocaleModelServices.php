@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Services\Modals;
+namespace App\Http\Services\Models;
 
 use App\Models\Locale;
 
-class LocaleModalServices
+class LocaleModelServices
 {
     public function firstBySlug($slug)
     {

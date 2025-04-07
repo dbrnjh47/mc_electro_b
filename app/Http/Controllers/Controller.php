@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\Currency\CurrencyServices;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use App\Http\Services\Locale\IndexServices as LocaleServices;
 
 use Auth;
 use App\Models\Setting;
@@ -14,7 +16,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
-    protected $user, $settings;
+    protected $user, $settings, $user_currency, $user_local;
 
     public function __construct()
     {
@@ -39,6 +41,15 @@ class Controller extends BaseController
                 // abort(404);
                 return response()->view('errors.404');
             }
+
+            $this->user_currency = (new CurrencyServices)->get();
+            view()->share('user_currency', $this->user_currency);
+
+            //
+
+            $this->user_local = (new LocaleServices)->get();
+            view()->share('user_local', $this->user_local);
+
             return $next($request);
         });
     }

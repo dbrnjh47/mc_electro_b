@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
     Route::get('/?', [PageController::class, 'index'])->name('profile');
     Route::get('/feedback', [PageController::class, 'feedback'])->name('feedback');
 
+    Route::get('/currency/set/{id}', [CurrencyController::class, 'set'])->name('currency.set');
     //
     Route::prefix('auth')->group(function () {
         Route::middleware(['guest'])->group(function () {

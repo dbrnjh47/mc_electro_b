@@ -124,7 +124,7 @@
                     <div class="setting_items_wrapper">
                         <div class="setting_item_select">
                             @foreach ($locales as $locale)
-                                @if ($set_local == $locale->slug)
+                                @if ($user_local == $locale->slug)
                                     <img src="{{$locale->icon}}" alt="{{$locale->slug}}" loading="lazy" decoding="async">
                                     {{$locale->text}}
                                     @break
@@ -140,7 +140,7 @@
 
                         <div class="setting_items">
                             @foreach ($locales as $locale)
-                            <a href="{{$locale->getUrl()}}" class="setting_item @if($set_local == $locale->slug) activ @endif">
+                            <a href="{{$locale->getUrl()}}" class="setting_item @if($user_local == $locale->slug) activ @endif">
                                 <img src="{{$locale->icon}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
                                 {{$locale->text}}
                             </a>
@@ -154,8 +154,7 @@
 
                     <div class="setting_items_wrapper">
                         <div class="setting_item_select">
-                            <img src="/temple/currencies/aed_10x12.svg" alt="AED">
-                            AED
+                            {{$user_currency->icon}}
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="6"
                                 viewBox="0 0 9 6" fill="none">
                                 <path
@@ -165,22 +164,16 @@
                         </div>
 
                         <div class="setting_items">
-                            <a class="setting_item  activ " onclick="setCurrencie(1)">
+                            @foreach ($currencies as $currency)
+                                <a href="{{ route("currency.set", ["id" => $currency->id]) }}" class="setting_item @if($user_currency->id == $currency->id) activ @endif">
+                                    {{$currency->icon}}
+                                </a>
+                            @endforeach
+                            {{-- <a class="setting_item  activ " onclick="setCurrencie(1)">
                                 <img src="/temple/currencies/aed_10x12.svg" alt="AED">
                                 AED
-                            </a>
-                            <a class="setting_item " onclick="setCurrencie(2)">
-                                <img src="/temple/currencies/rub_10x12.svg" alt="RUB">
-                                RUB
-                            </a>
-                            <a class="setting_item " onclick="setCurrencie(3)">
-                                <img src="/temple/currencies/usd_10x12.svg" alt="USD">
-                                USD
-                            </a>
-                            <a class="setting_item " onclick="setCurrencie(4)">
-                                <img src="/temple/currencies/eur_10x12.svg" alt="EUR">
-                                EUR
-                            </a>
+                            </a> --}}
+
                         </div>
                     </div>
                 </div>
