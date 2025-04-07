@@ -14,12 +14,9 @@ class Banner extends Model
 
     const PATH = "/assets/banners/";
 
-    protected function img(): Attribute
+    public function getHref()
     {
-        return Attribute::make(
-            get: fn ($value) => ($value ? Controller::photoAccessor($value, self::PATH) : null),
-            // set: fn ($value) => $this->setPhotoAccessor($value),
-        );
+        return ($this->img ? Controller::photoAccessor($this->img, self::PATH) : null);
     }
 
     public function locale()

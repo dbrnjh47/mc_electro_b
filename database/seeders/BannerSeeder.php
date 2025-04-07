@@ -18,20 +18,23 @@ class BannerSeeder extends Seeder
         [
             "img" => '1.webp',
             "key" => 'home',
+            "href" => "/",
         ],
         [
             "img" => '2.webp',
             "key" => 'home',
+            "href" => "/",
         ],
         [
             "img" => '3.webp',
             "key" => 'home',
-            "is_on" => 1
+            "is_on" => 1,
         ],
         [
             "img" => '3.webp',
             "key" => 'home',
-            "is_on" => 0
+            "is_on" => 0,
+            "href" => "/",
         ],
     ];
     /**

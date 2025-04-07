@@ -11,7 +11,7 @@ class PageController extends Controller
     {
         $banners = (new BannerModelServices)->getByKey("home");
 
-        return view('sample.main.pages.index');
+        return view('sample.main.pages.index', compact("banners"));
     }
 
     public function feedback(Request $request)

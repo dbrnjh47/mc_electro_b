@@ -9,24 +9,21 @@
 
 @section('content')
 
+@if(!empty($banners))
 <section class="banners">
     <div class="banners__container">
         <div class="banner-block">
 
             <div class="swiper" id="main_banners">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <img src="/assets/banners/1.webp" alt="1.webp" loading="lazy"
-                            decoding="async" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/assets/banners/2.webp" alt="2.webp" loading="lazy"
-                            decoding="async" />
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/assets/banners/3.webp" alt="3.webp" loading="lazy"
-                            decoding="async" />
-                    </div>
+                    @foreach ($banners as $banner)
+                        <div class="swiper-slide">
+                            <a @if($banner->href) href="{{$banner->href}}" @endif>
+                                <img src="{{$banner->getHref()}}" alt="{{$banner->img}}" loading="lazy"
+                                decoding="async" />
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
@@ -35,7 +32,7 @@
         </div>
     </div>
 </section>
-
+@endif
 <section class="categories categories_one_line">
     <div class="categories__container">
 
