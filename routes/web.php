@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\Category\IndexController as CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
@@ -63,6 +64,14 @@ Route::prefix('companies')->group(function () {
 });
 Route::prefix('company')->group(function () {
     Route::get('/{id}', [CompanyController::class, 'show'])->name('company');
+});
+
+//
+
+//
+Route::get('/categories', [CategoryController::class, 'all'])->name('categories');
+Route::prefix('category')->group(function () {
+    Route::get('/{id}', [CategoryController::class, 'show'])->name('category');
 });
 
 //
