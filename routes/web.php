@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\ConfirmController;
 use App\Http\Controllers\Auth\IndexController as AuthIndexController;
@@ -16,13 +17,14 @@ use Illuminate\Support\Facades\Route;
     Route::get('/', [PageController::class, 'index'])->name('home');
     Route::get('/?', [PageController::class, 'index'])->name('profile');
     Route::get('/feedback', [PageController::class, 'feedback'])->name('feedback');
+    Route::get('/about', [AboutController::class, 'show'])->name('about');
 
     Route::get('/currency/set/{id}', [CurrencyController::class, 'set'])->name('currency.set');
     //
     Route::prefix('promotions')->group(function () {
         Route::get('/', [PromotionController::class, 'all'])->name('promotions');
         //
-        Route::get('/{id}', [PromotionController::class, 'one'])->name('promotion');
+        Route::get('/{id}', [PromotionController::class, 'show'])->name('promotion');
     });
     //
     Route::prefix('auth')->group(function () {

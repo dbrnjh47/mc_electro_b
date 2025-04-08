@@ -13,7 +13,7 @@ class PromotionController extends Controller
         return view('sample.main.pages.promotions.index', ['title' => "Акции", 'description' => ""]);
     }
 
-    public function one()
+    public function show()
     {
         return view('sample.main.pages.promotions.one', ['title' => "Акция", 'description' => ""]);
     }
