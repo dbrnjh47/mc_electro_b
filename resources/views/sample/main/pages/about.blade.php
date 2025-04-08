@@ -42,7 +42,7 @@
                     На сегодняшний день мы работаем по всей России и в странах СНГ
                 </p>
                 <div class="top_background">
-                    <img class="top_background_img" src="/temple/images/about/background.png" />
+                    <img class="top_background_img" src="/temple/images/about/background.png" loading="lazy" decoding="async" />
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 <div class="card">
                     <h5 class="card_title">Lorem ipsum</h5>
                     <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" />
+                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
                     <div class="card_bottom">
                         <div class="card_item">
                             <span>Цена</span>
@@ -66,7 +66,7 @@
                 <div class="card">
                     <h5 class="card_title">Lorem ipsum</h5>
                     <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" />
+                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
                     <div class="card_bottom">
                         <div class="card_item">
                             <span>Цена</span>
@@ -83,7 +83,7 @@
                 <div class="card">
                     <h5 class="card_title">Lorem ipsum</h5>
                     <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" />
+                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
                     <div class="card_bottom">
                         <div class="card_item">
                             <span>Цена</span>
@@ -98,7 +98,7 @@
                 <div class="card">
                     <h5 class="card_title">Lorem ipsum</h5>
                     <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" />
+                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
                     <div class="card_bottom">
                         <div class="card_item">
                             <span>Цена</span>
@@ -113,7 +113,7 @@
                 <div class="card">
                     <h5 class="card_title">Lorem ipsum</h5>
                     <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" />
+                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
                     <div class="card_bottom">
                         <div class="card_item">
                             <span>Цена</span>
@@ -128,7 +128,7 @@
                 <div class="card">
                     <h5 class="card_title">Lorem ipsum</h5>
                     <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" />
+                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
                     <div class="card_bottom">
                         <div class="card_item">
                             <span>Цена</span>
@@ -152,7 +152,7 @@
                                 Различных товаров в нашем ассортименте
                             </p>
                             <div class="slider__item_icon">
-                                <img class="slider__item_img" src="/temple/images/about/icon/assortment.svg" />
+                                <img class="slider__item_img" src="/temple/images/about/icon/assortment.svg" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -163,7 +163,7 @@
                                 Довольных клиентов которые заказали у нас
                             </p>
                             <div class="slider__item_icon">
-                                <img class="slider__item_img" src="/temple/images/about/icon/person.svg" />
+                                <img class="slider__item_img" src="/temple/images/about/icon/person.svg" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                                 Компаний с нами сотрудничают
                             </p>
                             <div class="slider__item_icon">
-                                <img class="slider__item_img" src="/temple/images/about/icon/document.svg" />
+                                <img class="slider__item_img" src="/temple/images/about/icon/document.svg" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -183,7 +183,7 @@
                             <p class="slider__item_top">400</p>
                             <p class="slider__item_text">Заказов каждый день</p>
                             <div class="slider__item_icon">
-                                <img class="slider__item_img" src="/temple/images/about/icon/basket.svg" />
+                                <img class="slider__item_img" src="/temple/images/about/icon/basket.svg" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                                 Доставок по всей России за неделю
                             </p>
                             <div class="slider__item_icon">
-                                <img class="slider__item_img" src="/temple/images/about/icon/bus.svg" />
+                                <img class="slider__item_img" src="/temple/images/about/icon/bus.svg" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -203,7 +203,7 @@
                             <p class="slider__item_top">20</p>
                             <p class="slider__item_text">Мы находимся в 20 адресах</p>
                             <div class="slider__item_icon">
-                                <img class="slider__item_img" src="/temple/images/about/icon/home.svg" />
+                                <img class="slider__item_img" src="/temple/images/about/icon/home.svg" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -216,7 +216,7 @@
                     <ul class="descr__left_list">
                         <li class="descr__left_item">
                             <div class="descr__left_icon">
-                                <img class="descr__left_img" src="/temple/images/about/icon/people.svg" />
+                                <img class="descr__left_img" src="/temple/images/about/icon/people.svg" loading="lazy" decoding="async" />
                             </div>
                             <p class="descr__left_text">
                                 Наши клиенты – в центре <br />
@@ -225,7 +225,7 @@
                         </li>
                         <li class="descr__left_item">
                             <div class="descr__left_icon">
-                                <img class="descr__left_img" src="/temple/images/about/icon/trust.svg" />
+                                <img class="descr__left_img" src="/temple/images/about/icon/trust.svg" loading="lazy" decoding="async" />
                             </div>
                             <p class="descr__left_text">
                                 Доверие - главное. Мы строим <br />
@@ -234,7 +234,7 @@
                         </li>
                         <li class="descr__left_item">
                             <div class="descr__left_icon">
-                                <img class="descr__left_img" src="/temple/images/about/icon/dimond.svg" />
+                                <img class="descr__left_img" src="/temple/images/about/icon/dimond.svg" loading="lazy" decoding="async" />
                             </div>
                             <p class="descr__left_text">
                                 Во всём, чем занимаемся, <br />
@@ -243,7 +243,7 @@
                         </li>
                         <li class="descr__left_item">
                             <div class="descr__left_icon">
-                                <img class="descr__left_img" src="/temple/images/about/icon/suitcase.svg" />
+                                <img class="descr__left_img" src="/temple/images/about/icon/suitcase.svg" loading="lazy" decoding="async" />
                             </div>
                             <p class="descr__left_text">
                                 Открыты для предложений <br />
@@ -330,7 +330,7 @@
                     </div>
                 </div>
                 <div class="companies__bottom_bg">
-                    <img src="/temple/images/about/background.png" />
+                    <img src="/temple/images/about/background.png" loading="lazy" decoding="async" />
                 </div>
             </div>
 

@@ -60,24 +60,24 @@
                         <div class="swiper contact_card__swiper">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide contact_card__slide">
-                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"
+                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async"
                                         alt="image" />
                                     <!-- <span class="contact_card__swiper_image_cover" style="background-image: url('/assets/contacts/photo/1.png');"></span> -->
                                 </div>
                                 <div class="swiper-slide contact_card__slide">
-                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"
+                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async"
                                         alt="image" />
                                 </div>
                                 <div class="swiper-slide contact_card__slide">
-                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"
+                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async"
                                         alt="image" />
                                 </div>
                                 <div class="swiper-slide contact_card__slide">
-                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"
+                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async"
                                         alt="image" />
                                 </div>
                                 <div class="swiper-slide contact_card__slide">
-                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"
+                                    <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async"
                                         alt="image" />
                                 </div>
                             </div>

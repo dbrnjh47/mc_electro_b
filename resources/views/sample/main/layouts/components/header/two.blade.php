@@ -52,7 +52,7 @@
                 @if($settings->tg)
                 <li>
                     <a itemprop="url" href="{{$settings->tg}}">
-                        <img src="/temple/images/layout/icon/social/tg.svg" alt="tg">
+                        <img src="/temple/images/layout/icon/social/tg.svg" alt="tg" loading="lazy" decoding="async">
                     </a>
                 </li>
                 @endif
@@ -60,7 +60,7 @@
                 @if($settings->yt)
                 <li>
                     <a itemprop="url" href="{{$settings->yt}}">
-                        <img src="/temple/images/layout/icon/social/yt.svg" alt="yt">
+                        <img src="/temple/images/layout/icon/social/yt.svg" alt="yt" loading="lazy" decoding="async">
                     </a>
                 </li>
                 @endif
@@ -68,13 +68,13 @@
                 @if($settings->vk)
                 <li>
                     <a itemprop="url" href="{{$settings->vk}}">
-                        <img src="/temple/images/layout/icon/social/vk.svg" alt="vk">
+                        <img src="/temple/images/layout/icon/social/vk.svg" alt="vk" loading="lazy" decoding="async">
                     </a>
                 </li>
                 @endif
             </ul>
 
-            <img src="/temple/images/layout/icon/social/phone.svg" alt="phone">
+            <img src="/temple/images/layout/icon/social/phone.svg" alt="phone" loading="lazy" decoding="async">
             <div class="header_two__phones">
                 <a href="tel:{{$settings->phone}}" itemprop="telephone">{{$settings->phone}}</a>,<br>
                 <a href="mailto:{{$settings->email}}" itemprop="email">{{$settings->email}}</a>

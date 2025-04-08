@@ -68,7 +68,7 @@
                 <button class="app__title_button">Оценить статью</button>
                 <div class="share">
                     <div class="share__icon">
-                        <img src="{{ Vite::asset('resources/js/custom/share/icons/share.svg') }}" alt="share">
+                        <img src="{{ Vite::asset('resources/js/custom/share/icons/share.svg') }}" loading="lazy" decoding="async" alt="share">
                     </div>
                     <div class="share__menu">
                         <a class="share__item" target="_blank"
@@ -148,7 +148,7 @@
                     <div class="faq__info" itemprop="mainEntity" itemscope="" itemtype="https://schema.org/Question">
                         <div class="faq__answer">
                             <h1 itemprop="name">Могу ли я доставить эту машину?</h1>
-                            <img class="faq__trigger" src="{{ Vite::asset('resources/js/custom/faq/icon/str.svg') }}" alt="arrow">
+                            <img class="faq__trigger" src="{{ Vite::asset('resources/js/custom/faq/icon/str.svg') }}" alt="arrow" loading="lazy" decoding="async">
                         </div>
                         <div class="faq__result" itemprop="text">
                             Аренда роскошных суперкаров предлагает доставку по запросу до

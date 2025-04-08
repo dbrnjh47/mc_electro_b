@@ -52,7 +52,7 @@
         </div>
 
         <button class="header__catalog__button" onclick="openCategoryMenu();">
-            <img src="/temple/images/layout/icon/burger.svg" alt="burger">
+            <img src="/temple/images/layout/icon/burger.svg" alt="burger" loading="lazy" decoding="async">
             Каталог</button>
 
         <a href="#" class="header__button">Свяжитесь с нами</a>

@@ -10,7 +10,7 @@
     <div class="dop_menu__bg dop_menu__close"></div>
     <section class="dop_menu_mob dop_menu_mob__container profile_menu_mob dop_menu__open">
         <div class="dop_menu_mob__button">
-            <img src="{{ Vite::asset('resources/js/custom/dop_menu/mob/img/filter.svg') }}" alt="filter"> Меню
+            <img src="{{ Vite::asset('resources/js/custom/dop_menu/mob/img/filter.svg') }}" alt="filter" loading="lazy" decoding="async"> Меню
         </div>
     </section>
 
@@ -53,7 +53,7 @@
                 <div class="profile__user_wrapper">
                     <a href="#" class="profile__user">
                         <div class="profile__user_avatar">
-                            <img src="/assets/user/avatar/defult.svg" alt="avatar">
+                            <img src="/assets/user/avatar/defult.svg" alt="avatar" loading="lazy" decoding="async">
                         </div>
                         <p class="profile__user_balance">12,000₽</p>
                     </a>
@@ -85,7 +85,17 @@
                 </div>
                 <div class="profile_orders__grade_wrapper">
                     <div class="profile_orders__grade">
-                        <img src="/assets/product/miniature/test.png" alt="product">
+                        <img src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async">
+                        <div class="profile_orders__grade__action">
+                            <p>Как вам товар?</p>
+                            <button class="btn">
+                                <img src="/temple/images/profile/orders/star.svg" alt="star" loading="lazy" decoding="async">
+                                Оценить товар
+                            </button>
+                        </div>
+                    </div>
+                    <div class="profile_orders__grade">
+                        <img src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async">
                         <div class="profile_orders__grade__action">
                             <p>Как вам товар?</p>
                             <button class="btn">
@@ -95,7 +105,7 @@
                         </div>
                     </div>
                     <div class="profile_orders__grade">
-                        <img src="/assets/product/miniature/test.png" alt="product">
+                        <img src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async">
                         <div class="profile_orders__grade__action">
                             <p>Как вам товар?</p>
                             <button class="btn">
@@ -105,17 +115,7 @@
                         </div>
                     </div>
                     <div class="profile_orders__grade">
-                        <img src="/assets/product/miniature/test.png" alt="product">
-                        <div class="profile_orders__grade__action">
-                            <p>Как вам товар?</p>
-                            <button class="btn">
-                                <img src="/temple/images/profile/orders/star.svg" alt="star">
-                                Оценить товар
-                            </button>
-                        </div>
-                    </div>
-                    <div class="profile_orders__grade">
-                        <img src="/assets/product/miniature/test.png" alt="product">
+                        <img src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async">
                         <div class="profile_orders__grade__action">
                             <p>Как вам товар?</p>
                             <button class="btn">

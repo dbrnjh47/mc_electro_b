@@ -14,30 +14,30 @@
                     СНГ.</p>
                 <div class="footer__socials" itemscope itemtype="https://schema.org/Organization">
                     <a itemprop="email" href="mailto:{{$settings->email}}">
-                        <img src="/temple/images/layout/footer/icon/email.svg" alt="email">
+                        <img src="/temple/images/layout/footer/icon/email.svg" alt="email" loading="lazy" decoding="async">
                     </a>
 
                     @if($settings->tg)
                     <a itemprop="sameAs" href="{{$settings->tg}}" target="_blank">
-                        <img src="/temple/images/layout/footer/icon/tg.svg" alt="tg">
+                        <img src="/temple/images/layout/footer/icon/tg.svg" alt="tg" loading="lazy" decoding="async">
                     </a>
                     @endif
 
                     @if($settings->yt)
                     <a itemprop="sameAs" href="{{$settings->yt}}" target="_blank">
-                        <img src="/temple/images/layout/footer/icon/yt.svg" alt="yt">
+                        <img src="/temple/images/layout/footer/icon/yt.svg" alt="yt" loading="lazy" decoding="async">
                     </a>
                     @endif
 
                     @if($settings->vk)
                     <a itemprop="sameAs" href="{{$settings->vk}}" target="_blank">
-                        <img src="/temple/images/layout/footer/icon/vk.svg" alt="vk">
+                        <img src="/temple/images/layout/footer/icon/vk.svg" alt="vk" loading="lazy" decoding="async">
                     </a>
                     @endif
 
                     @if($settings->in)
                     <a itemprop="sameAs" href="{{$settings->in}}" target="_blank">
-                        <img src="/temple/images/layout/footer/icon/in.svg" alt="in">
+                        <img src="/temple/images/layout/footer/icon/in.svg" alt="in" loading="lazy" decoding="async">
                     </a>
                     @endif
                 </div>

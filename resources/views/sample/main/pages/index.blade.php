@@ -425,7 +425,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                    <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -467,7 +467,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                     <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -509,7 +509,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                     <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -551,7 +551,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                     <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -593,7 +593,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                     <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -635,7 +635,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                     <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -677,7 +677,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                     <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -719,7 +719,7 @@
                 </div>
 
                 <div class="product_card__img">
-                    <img src="/assets/product/miniature/test.png" alt="img">
+                     <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                 </div>
 
                 <div class="product_card__info">
@@ -791,7 +791,7 @@
                         nsectetur adipiscing elit</a>
                 </h3>
                 <div class="news__item_img">
-                    <img src="/assets/news/preview/1.png" alt="News image">
+                    <img src="/assets/news/preview/1.png" alt="News image" loading="lazy" decoding="async">
                 </div>
             </div>
 
@@ -801,7 +801,7 @@
                     <a href="#">Lorem </a>
                 </h3>
                 <div class="news__item_img">
-                    <img src="/assets/news/preview/1.png" alt="News image">
+                    <img src="/assets/news/preview/1.png" alt="News image" loading="lazy" decoding="async">
                 </div>
             </div>
 
@@ -811,7 +811,7 @@
                     <a href="#">Lorem ipsum dolor amet, consectetur adipiscing elit</a>
                 </h3>
                 <div class="news__item_img">
-                    <img src="/assets/news/preview/1.png" alt="News image">
+                    <img src="/assets/news/preview/1.png" alt="News image" loading="lazy" decoding="async">
                 </div>
             </div>
 

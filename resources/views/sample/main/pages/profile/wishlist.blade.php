@@ -144,7 +144,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">
@@ -186,7 +186,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">
@@ -228,7 +228,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">
@@ -270,7 +270,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">
@@ -312,7 +312,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">
@@ -354,7 +354,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">
@@ -396,7 +396,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">
@@ -438,7 +438,7 @@
                         </div>
 
                         <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
+                            <img src="/assets/product/miniature/test.png" alt="img" loading="lazy" decoding="async">
                         </div>
 
                         <div class="product_card__info">

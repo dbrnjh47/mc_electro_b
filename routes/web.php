@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Profile\CompanyController as ProfileCompanyController;
@@ -28,25 +29,44 @@ Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileOrderController::class, 'all'])->name('profile');
         Route::prefix('orders')->group(function () {
             Route::get('/', [ProfileOrderController::class, 'all'])->name('profile.orders');
+        });
+        Route::prefix('order')->group(function () {
             Route::get('/{id}', [ProfileOrderController::class, 'show'])->name('profile.order');
         });
         Route::get('/companies', [ProfileCompanyController::class, 'all'])->name('profile.companies');
     });
     Route::get('/wishlist', [WishlistController::class, 'show'])->name('wishlist');
 });
+
 //
+
 Route::prefix('promotions')->group(function () {
     Route::get('/', [PromotionController::class, 'all'])->name('promotions');
-    //
+});
+Route::prefix('promotion')->group(function () {
     Route::get('/{id}', [PromotionController::class, 'show'])->name('promotion');
 });
+
 //
+
 Route::prefix('contacts')->group(function () {
     Route::get('/', [СontactController::class, 'all'])->name('contacts');
-    //
+});
+Route::prefix('contact')->group(function () {
     Route::get('/{id}', [СontactController::class, 'show'])->name('contact');
 });
+
 //
+
+Route::prefix('companies')->group(function () {
+    Route::get('/', [CompanyController::class, 'all'])->name('companies');
+});
+Route::prefix('company')->group(function () {
+    Route::get('/{id}', [CompanyController::class, 'show'])->name('company');
+});
+
+//
+
 Route::prefix('auth')->group(function () {
     Route::middleware(['guest'])->group(function () {
         Route::get('/login', [AuthController::class, 'show'])->name('login');

@@ -188,7 +188,7 @@
                     @if($settings->tg)
                     <li>
                         <a href="{{$settings->tg}}" itemprop="sameAs" target="_blank">
-                            <img src="/temple/images/layout/icon/social/tg.svg" alt="tg">
+                            <img src="/temple/images/layout/icon/social/tg.svg" alt="tg" loading="lazy" decoding="async">
                         </a>
                     </li>
                     @endif
@@ -196,7 +196,7 @@
                     @if($settings->yt)
                     <li>
                         <a href="{{$settings->yt}}" itemprop="sameAs" target="_blank">
-                            <img src="/temple/images/layout/icon/social/yt.svg" alt="yt">
+                            <img src="/temple/images/layout/icon/social/yt.svg" alt="yt" loading="lazy" decoding="async">
                         </a>
                     </li>
                     @endif
@@ -204,7 +204,7 @@
                     @if($settings->vk)
                     <li>
                         <a href="{{$settings->vk}}" itemprop="sameAs" target="_blank">
-                            <img src="/temple/images/layout/icon/social/vk.svg" alt="vk">
+                            <img src="/temple/images/layout/icon/social/vk.svg" alt="vk" loading="lazy" decoding="async">
                         </a>
                     </li>
                     @endif

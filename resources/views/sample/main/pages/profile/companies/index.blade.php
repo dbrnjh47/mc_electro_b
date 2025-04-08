@@ -10,7 +10,7 @@
     <div class="dop_menu__bg dop_menu__close"></div>
     <section class="dop_menu_mob dop_menu_mob__container profile_menu_mob dop_menu__open">
         <div class="dop_menu_mob__button">
-            <img src="{{ Vite::asset('resources/js/custom/dop_menu/mob/img/filter.svg') }}" alt="filter"> Меню
+            <img src="{{ Vite::asset('resources/js/custom/dop_menu/mob/img/filter.svg') }}" alt="filter" loading="lazy" decoding="async"> Меню
         </div>
     </section>
 
@@ -53,7 +53,7 @@
                 <div class="profile__user_wrapper">
                     <a href="#" class="profile__user">
                         <div class="profile__user_avatar">
-                            <img src="/assets/user/avatar/defult.svg" alt="avatar">
+                            <img src="/assets/user/avatar/defult.svg" alt="avatar" loading="lazy" decoding="async">
                         </div>
                         <p class="profile__user_balance">12,000₽</p>
                     </a>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="user_companies_not_found">
-                    <img src="/temple/images/profile/user_companies/company.svg" alt="icon company">
+                    <img src="/temple/images/profile/user_companies/company.svg" alt="icon company" loading="lazy" decoding="async">
                     <h3>Пока нет привязанных организаций</h3>
                     <p>Добавьте организацию, чтобы совершать покупки как юрлицо</p>
                     <button class="btn">
