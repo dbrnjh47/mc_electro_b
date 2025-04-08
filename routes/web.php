@@ -14,6 +14,7 @@ use App\Http\Controllers\Profile\OrderController as ProfileOrderController;
 use App\Http\Controllers\Profile\WishlistController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\Text\AgreementController;
+use App\Http\Controllers\СontactController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -38,6 +39,12 @@ Route::prefix('promotions')->group(function () {
     Route::get('/', [PromotionController::class, 'all'])->name('promotions');
     //
     Route::get('/{id}', [PromotionController::class, 'show'])->name('promotion');
+});
+//
+Route::prefix('contacts')->group(function () {
+    Route::get('/', [СontactController::class, 'all'])->name('contacts');
+    //
+    Route::get('/{id}', [СontactController::class, 'show'])->name('contact');
 });
 //
 Route::prefix('auth')->group(function () {
