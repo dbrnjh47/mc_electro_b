@@ -5,9 +5,9 @@
     crossorigin="">
 
 <meta name="og:site_name" content="{{ $settings->name }}">
-<title itemprop="headline">{{ $settings->name }}</title>
-<meta property="og:title" content="{{ $settings->name }}">
-<meta name="twitter:title" content="{{ $settings->name }}">
+<title itemprop="headline">{{ $title }}</title>
+<meta property="og:title" content="{{ $title }}">
+<meta name="twitter:title" content="{{ $title }}">
 
 <meta itemprop="description" name="description" content="{{ $description }}">
 <meta name="twitter:description" content="{{ $description }}">

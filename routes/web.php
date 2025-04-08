@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PromotionController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,6 +18,12 @@ use Illuminate\Support\Facades\Route;
     Route::get('/feedback', [PageController::class, 'feedback'])->name('feedback');
 
     Route::get('/currency/set/{id}', [CurrencyController::class, 'set'])->name('currency.set');
+    //
+    Route::prefix('promotions')->group(function () {
+        Route::get('/', [PromotionController::class, 'all'])->name('promotions');
+        //
+        Route::get('/{id}', [PromotionController::class, 'one'])->name('promotion');
+    });
     //
     Route::prefix('auth')->group(function () {
         Route::middleware(['guest'])->group(function () {

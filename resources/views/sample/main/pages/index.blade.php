@@ -1,4 +1,4 @@
-@extends('sample.main.layouts.index', ['title' => "test_title", 'description' => "test_description"])
+@extends('sample.main.layouts.index', ['title' => $title, 'description' => $description])
 @section('head')
 
 @endsection

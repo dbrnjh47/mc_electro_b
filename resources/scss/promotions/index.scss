@@ -1,4 +1,4 @@
-.actions {
+.promotions {
     margin-bottom: 20px;
   .app__title .checkbox {
     margin: auto 0;
@@ -30,7 +30,7 @@
       display: none;
     }
     &:hover {
-      .actions__bg {
+      .promotions__bg {
         opacity: 0;
       }
     }
@@ -103,7 +103,7 @@
 
   &__big {
     grid-column: span 2;
-    .actions__wrapper {
+    .promotions__wrapper {
       display: flex;
     }
     @media (max-width: 500px) {
@@ -111,29 +111,29 @@
       background: #fff;
       border: 1px solid #dfe3ee;
       grid-column: span 1;
-      .actions__wrapper {
+      .promotions__wrapper {
         display: none;
       }
-      .actions_them_mini__wrapper {
+      .promotions_them_mini__wrapper {
         display: block !important;
       }
     }
   }
 }
 
-.actions_them_mini {
+.promotions_them_mini {
   padding: 0;
   background: #fff;
   border: 1px solid #dfe3ee;
   &:hover {
-    .actions_them_mini__bg {
+    .promotions_them_mini__bg {
       opacity: 0;
     }
-    .actions_them_mini__preview img {
+    .promotions_them_mini__preview img {
       transform: scale(1.2);
     }
   }
-  .actions_them_mini__wrapper {
+  .promotions_them_mini__wrapper {
     display: block !important;
   }
   &__preview {
@@ -185,7 +185,7 @@
   }
 }
 
-.actions_disable {
+.promotions_disable {
   &__wrapper {
     z-index: 7;
     position: absolute;
@@ -205,7 +205,7 @@
       margin: auto;
     }
   }
-  .actions_disable__wrapper{
+  .promotions_disable__wrapper{
     display: flex;
   }
 }

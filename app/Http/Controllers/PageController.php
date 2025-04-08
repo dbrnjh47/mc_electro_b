@@ -10,12 +10,13 @@ class PageController extends Controller
     public function index(Request $request)
     {
         $banners = (new BannerModelServices)->getByKey("home");
-
-        return view('sample.main.pages.index', compact("banners"));
+        $title = "Test";
+        $description = "description";
+        return view('sample.main.pages.index', compact("banners", "title", "description"));
     }
 
     public function feedback(Request $request)
     {
-        return view('sample.main.pages.feedback.index');
+        return view('sample.main.pages.feedback.index', ['title' => "Спасибо!"]);
     }
 }

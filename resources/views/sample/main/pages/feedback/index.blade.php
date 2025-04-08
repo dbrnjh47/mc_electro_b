@@ -1,4 +1,4 @@
-@extends('sample.main.layouts.index', ['title' => "Спасибо за заказ!", 'description' => ""])
+@extends('sample.main.layouts.index', ['title' => $title, 'description' => ""])
 @section('head')
 
 @endsection
