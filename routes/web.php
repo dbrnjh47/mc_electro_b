@@ -11,6 +11,7 @@ use App\Http\Controllers\Category\IndexController as CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Product\IndexController;
 use App\Http\Controllers\Profile\CompanyController as ProfileCompanyController;
 use App\Http\Controllers\Profile\OrderController as ProfileOrderController;
 use App\Http\Controllers\Profile\WishlistController;
@@ -73,7 +74,7 @@ Route::get('/categories', [CategoryController::class, 'all'])->name('categories'
 Route::prefix('category')->group(function () {
     Route::get('/{id}', [CategoryController::class, 'show'])->name('category');
 });
-
+Route::get('/product/{id}', [IndexController::class, 'show'])->name('product');
 //
 
 Route::prefix('auth')->group(function () {
