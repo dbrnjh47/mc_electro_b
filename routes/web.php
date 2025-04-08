@@ -9,7 +9,8 @@ use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Profile\OrderController;
+use App\Http\Controllers\Profile\CompanyController as ProfileCompanyController;
+use App\Http\Controllers\Profile\OrderController as ProfileOrderController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\Text\AgreementController;
 use Illuminate\Support\Facades\Route;
@@ -21,12 +22,12 @@ use Illuminate\Support\Facades\Route;
     Route::get('/currency/set/{id}', [CurrencyController::class, 'set'])->name('currency.set');
     //
     Route::prefix('profile')->middleware(['auth'])->group(function () {
-        Route::get('/', [OrderController::class, 'all'])->name('profile');
+        Route::get('/', [ProfileOrderController::class, 'all'])->name('profile');
         Route::prefix('orders')->group(function () {
-            Route::get('/', [OrderController::class, 'all'])->name('profile.orders');
-            Route::get('/{id}', [OrderController::class, 'show'])->name('profile.order');
+            Route::get('/', [ProfileOrderController::class, 'all'])->name('profile.orders');
+            Route::get('/{id}', [ProfileOrderController::class, 'show'])->name('profile.order');
         });
-
+        Route::get('/companies', [ProfileCompanyController::class, 'all'])->name('profile.companies');
     });
     //
     Route::prefix('promotions')->group(function () {
