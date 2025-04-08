@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\Profile\OrderController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\Text\AgreementController;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 
 // Route::group(['prefix' => '{locale?}', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
     Route::get('/', [PageController::class, 'index'])->name('home');
-    Route::get('/?', [PageController::class, 'index'])->name('profile');
 
     Route::get('/currency/set/{id}', [CurrencyController::class, 'set'])->name('currency.set');
+    //
+    Route::prefix('profile')->middleware(['auth'])->group(function () {
+        Route::get('/', [OrderController::class, 'all'])->name('profile');
+        Route::prefix('orders')->group(function () {
+            Route::get('/', [OrderController::class, 'all'])->name('profile.orders');
+            Route::get('/{id}', [OrderController::class, 'show'])->name('profile.order');
+        });
+
+    });
     //
     Route::prefix('promotions')->group(function () {
         Route::get('/', [PromotionController::class, 'all'])->name('promotions');
@@ -28,7 +37,7 @@ use Illuminate\Support\Facades\Route;
     //
     Route::prefix('auth')->group(function () {
         Route::middleware(['guest'])->group(function () {
-            // Route::get('/login', 'Auth\AuthController@show')->name('login');
+            Route::get('/login', [AuthController::class, 'show'])->name('login');
             Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 
             Route::prefix('signup')->group(function () {

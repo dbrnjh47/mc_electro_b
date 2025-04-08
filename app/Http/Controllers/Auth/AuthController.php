@@ -7,7 +7,9 @@ use App\Http\Services\Auth\AuthServices;
 
 class AuthController extends IndexController
 {
-    // public function show() {return view('auth.login');}
+    public function show() {
+        return view('sample.main.pages.auth.login');
+    }
 
     public function auth(AuthRequest $request)
     {
