@@ -37,7 +37,8 @@ class UpdateCurrenciesСommand extends Command implements Isolatable
      */
     public function handle()
     {
-        echo "start cpmand - UpdateCurrenciesСommand\n";
+        echo "\n";
+        dump("start - UpdateCurrenciesСommand");
         (new CurrencyServices)->update();
     }
 }
