@@ -8,7 +8,7 @@
 
 @section('content')
     <div class="auth auth__container">
-        @include("sample.main.pages.auth.modals.login")
+        @include("sample.main.pages.auth.modals.login", ['is_block' => 1])
     </div>
 @endsection
 
