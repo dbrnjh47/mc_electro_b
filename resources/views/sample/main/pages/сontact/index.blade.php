@@ -78,7 +78,6 @@
                                         </div>
                                     @endif
 
-
                                 </div>
                                 <div class="swiper-pagination"></div>
                             </div>
@@ -108,21 +107,23 @@
                                     9:00-18:00, сб-вс 9:00-17:00
                                 </p>
 
+                                @if (!$point->phones->isEmpty())
                                 <p class="contact_card__item">
                                     <span class="contact_card__item_bold"> Телефон:</span>
-                                    <a class="contact_card__item_link" href="tel:88001005441"> 8 800 100-54-41</a>,
-                                    <a class="contact_card__item_link" href="tel:89847079798"> 8 984 707-97-98</a>
+                                    @foreach ($point->phones as $phone)
+                                    <a class="contact_card__item_link" href="tel:{{$phone->phone->number}}">{{$phone->phone->text}}</a>@if(!$loop->last), @endif
+                                    @endforeach
                                 </p>
+                                @endif
+
                                 <div class="contact_card__buttons">
-                                    <button class="contact_card__button contact_card__button--gis">
-                                        2GIS
-                                    </button>
-                                    <button class="contact_card__button contact_card__button--yandex">
-                                        Яндекс
-                                    </button>
-                                    <button class="contact_card__button contact_card__button--google">
-                                        Google
-                                    </button>
+                                    @if (!$point->links->isEmpty())
+                                        @foreach ($point->links as $link)
+                                            <a href="{{$link->url}}" class="contact_card__button contact_card__button--{{$link->category->type}}">
+                                                {{$link->category->title}}
+                                            </a>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <a class="btn contact_card__red_button" href="#">Открыть</a>
                             </div>

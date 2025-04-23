@@ -2,6 +2,7 @@
 
 namespace App\Models\Point;
 
+use App\Models\Point\Link\PointLink;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,5 +27,10 @@ class Point extends Model
     public function phones()
     {
         return $this->hasMany(PointPhone::class, 'point_id', 'id');
+    }
+
+    public function links()
+    {
+        return $this->hasMany(PointLink::class, 'point_id', 'id');
     }
 }

@@ -9,7 +9,7 @@ class PointModelService
     public $pagination = 10;
     public function defult()
     {
-        return Point::where("is_on", 1)->with('phones')->with('photos')->with('locale')->whereHas('locale');
+        return Point::where("is_on", 1)->with('links.category')->with('phones')->with('photos')->with('locale')->whereHas('locale');
     }
     public function get()
     {

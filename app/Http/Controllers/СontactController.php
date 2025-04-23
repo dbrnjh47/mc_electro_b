@@ -12,7 +12,7 @@ class СontactController extends Controller
         $description = "";
         $points = (new PointModelService)->pagination();
         if($points->isEmpty()){abort("404");}
-
+        // dd($points);
         return view('sample.main.pages.сontact.index', compact("title", "description", "points"));
     }
 

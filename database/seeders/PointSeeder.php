@@ -29,5 +29,8 @@ class PointSeeder extends Seeder
         //
         $this->call(PointPhotoSeeder::class);
         $this->call(PointPhoneSeeder::class);
+        //
+        $this->call(PointLinkCategorySeeder::class);
+        $this->call(PointLinkSeeder::class);
     }
 }
