@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Services\SocialServices;
+use App\Http\Services\SocialService;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialController extends IndexController
@@ -23,7 +23,7 @@ class SocialController extends IndexController
 
     // public function callback($driver = null)
     // {
-    //     (new SocialServices)->create($driver);
+    //     (new SocialService)->create($driver);
     //     return redirect()->route('home');
     // }
 }

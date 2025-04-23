@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\Auth\IndexServices;
+use App\Http\Services\Auth\IndexService;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -15,7 +15,7 @@ class IndexController extends Controller
 
     public function logout(Request $request)
     {
-        (new IndexServices)->logout($request);
+        (new IndexService)->logout($request);
 
         return redirect()->route('home');
     }

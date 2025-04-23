@@ -3,17 +3,17 @@
 namespace App\Http\Services\Auth;
 
 use Illuminate\Validation\ValidationException;
-use App\Http\Services\Auth\UserTokenServices;
+use App\Http\Services\Auth\UserTokenService;
 use App\Jobs\Auth\ResetUserJob;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class RestoreServices
+class RestoreService
 {
     public function reset($user)
     {
-        $token = (new UserTokenServices("user_auth_reset_"))->create($user->id);
+        $token = (new UserTokenService("user_auth_reset_"))->create($user->id);
 
         dispatch(new ResetUserJob($user, $token));
 

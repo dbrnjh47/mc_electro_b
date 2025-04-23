@@ -4,7 +4,7 @@ namespace App\Http\Services\Auth;
 
 use Illuminate\Support\Facades\Auth;
 
-class IndexServices
+class IndexService
 {
     public function logout($request)
     {

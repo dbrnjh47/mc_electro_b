@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\Currency\CurrencyServices;
+use App\Http\Services\Currency\CurrencyService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use App\Http\Services\Locale\IndexServices as LocaleServices;
+use App\Http\Services\Locale\IndexService as LocaleService;
 
 use Auth;
 use App\Models\Setting;
@@ -52,7 +52,7 @@ class Controller extends BaseController
             return $next($request);
         });
 
-        $user_currency = (new CurrencyServices)->get();
+        $user_currency = (new CurrencyService)->get();
         view()->share('user_currency', $user_currency);
         app()->singleton('user_currency', function ($app) use ($user_currency) {
             return $user_currency;
@@ -60,7 +60,7 @@ class Controller extends BaseController
 
         //
 
-        $user_local = (new LocaleServices)->get();
+        $user_local = (new LocaleService)->get();
         view()->share('user_local', $user_local);
         app()->singleton('user_local', function ($app) use ($user_local) {
             return $user_local;

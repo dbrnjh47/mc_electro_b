@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Requests\Auth\RestoreRequest;
 use Illuminate\Http\Request;
-use App\Http\Services\Auth\RestoreServices;
+use App\Http\Services\Auth\RestoreService;
 
 class RestoreController extends IndexController
 {
@@ -12,7 +12,7 @@ class RestoreController extends IndexController
 
     public function reset(RestoreRequest $request)
     {
-        (new RestoreServices)->reset($request->user);
+        (new RestoreService)->reset($request->user);
         return view('sample.main.pages.feedback.modal', ['title' => "Отправлено письмо!", 'message' => "Вам отправили письмо с ссылкой для сброса пароля."]);
     }
 

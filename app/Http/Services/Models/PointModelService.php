@@ -4,7 +4,7 @@ namespace App\Http\Services\Models;
 
 use App\Models\Point\Point;
 
-class PointModelServices
+class PointModelService
 {
     public function get()
     {

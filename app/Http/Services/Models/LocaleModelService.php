@@ -4,7 +4,7 @@ namespace App\Http\Services\Models;
 
 use App\Models\Locale;
 
-class LocaleModelServices
+class LocaleModelService
 {
     public function firstBySlug($slug)
     {

@@ -2,7 +2,7 @@
 
 namespace App\Http\Migrations;
 
-use App\Http\Services\Models\LocaleModelServices;
+use App\Http\Services\Models\LocaleModelService;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -10,7 +10,7 @@ class PointModelMigration
 {
     public function createAll()
     {
-        $locals = (new LocaleModelServices)->get();
+        $locals = (new LocaleModelService)->get();
         foreach($locals as $local)
         {
             $this->create($local->slug);
@@ -37,7 +37,7 @@ class PointModelMigration
 
     public function dropAll()
     {
-        $locals = (new LocaleModelServices)->get();
+        $locals = (new LocaleModelService)->get();
         foreach($locals as $local)
         {
             $this->drop($local->slug);

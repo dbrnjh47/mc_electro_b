@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Auth\RegistrationMail;
 use App\Models\Setting;
 
-class RegistrationServices
+class RegistrationService
 {
     public function registration($request)
     {
@@ -23,7 +23,7 @@ class RegistrationServices
             'password' => $request->password,
         ]);
 
-        $token = (new UserTokenServices)->create($user->id);
+        $token = (new UserTokenService)->create($user->id);
 
         // Auth::login($user, true);
         dispatch(new RegistrationUserEmailJob($user, $request->password, $token));

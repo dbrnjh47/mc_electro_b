@@ -5,7 +5,7 @@ namespace App\Http\Services\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Cache;
 
-class UserTokenServices
+class UserTokenService
 {
     public $prefix;
     public function __construct($prefix = "user_auth_")

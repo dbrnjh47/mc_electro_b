@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Requests\Auth\UpdatePassword\ShowRequest;
 use App\Http\Requests\Auth\UpdatePassword\UpdatePasswordRequest;
 use Illuminate\Http\Request;
-use App\Http\Services\Auth\RestoreServices;
-use App\Http\Services\Auth\UserTokenServices;
+use App\Http\Services\Auth\RestoreService;
+use App\Http\Services\Auth\UserTokenService;
 
 class UpdatePasswordController extends IndexController
 {
@@ -19,6 +19,6 @@ class UpdatePasswordController extends IndexController
 
     public function update(UpdatePasswordRequest $request)
     {
-        return (new RestoreServices)->update($request);
+        return (new RestoreService)->update($request);
     }
 }

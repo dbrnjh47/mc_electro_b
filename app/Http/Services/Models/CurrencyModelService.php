@@ -4,7 +4,7 @@ namespace App\Http\Services\Models;
 
 use App\Models\Currency;
 
-class CurrencyModelServices
+class CurrencyModelService
 {
     public $defult = "RUB";
     public function all()

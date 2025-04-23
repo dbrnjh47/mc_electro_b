@@ -2,16 +2,16 @@
 
 namespace App\Http\Services\Locale;
 
-use App\Http\Services\Models\LocaleModelServices;
+use App\Http\Services\Models\LocaleModelService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cookie;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class IndexServices
+class IndexService
 {
     public function get()
     {
-        return (new LocaleModelServices)->firstBySlug((Cookie::get('locale_set') ?? App::getLocale()));
+        return (new LocaleModelService)->firstBySlug((Cookie::get('locale_set') ?? App::getLocale()));
         // $locale = Cookie::get('locale');
     }
 
@@ -22,7 +22,7 @@ class IndexServices
             if(!$off_not_found) throw new NotFoundHttpException('');
             return $this->create($this->get()->slug);
         }
-        if(!(new LocaleModelServices)->firstBySlug($locale))
+        if(!(new LocaleModelService)->firstBySlug($locale))
         {
             throw new NotFoundHttpException('');
         }

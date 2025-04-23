@@ -5,9 +5,9 @@ namespace App\Http\Services\Currency;
 use App\Http\API\ExchangerateApi;
 use Illuminate\Support\Facades\Cookie;
 
-use App\Http\Services\Models\CurrencyModelServices;
+use App\Http\Services\Models\CurrencyModelService;
 
-class CurrencyServices
+class CurrencyService
 {
     // public static function conversion($sum, $productCurrency, $userCurrencie)
     // {
@@ -26,11 +26,11 @@ class CurrencyServices
     public function get()
     {
         $currency_id = Cookie::get('user_currency');
-        $currency = (new CurrencyModelServices)->find($currency_id);
+        $currency = (new CurrencyModelService)->find($currency_id);
 
         if(!$currency)
         {
-            $currency = (new CurrencyModelServices)->defult();
+            $currency = (new CurrencyModelService)->defult();
             $this->set($currency->id);
         }
 
@@ -46,7 +46,7 @@ class CurrencyServices
 
     public function update()
     {
-        $currencies = (new CurrencyModelServices)->all();
+        $currencies = (new CurrencyModelService)->all();
         $allInfoCurrencies = (new ExchangerateApi)->getCurrencies();
         foreach($currencies as $currency)
         {

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Validation\ValidationException;
 
-class AuthServices
+class AuthService
 {
     public function login($request)
     {

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Http\Services\Locale\IndexServices as LocaleServices;
+use App\Http\Services\Locale\IndexService as LocaleService;
 
 class LocaleMiddleware
 {
@@ -19,12 +19,12 @@ class LocaleMiddleware
         $locale = $request->segment(1);
         if(preg_match('/^[a-zA-Z]{2}$/', $locale))
         {
-            $locale = (new LocaleServices)->set($locale, 1);
+            $locale = (new LocaleService)->set($locale, 1);
             $newUrl = str_replace('/'.$locale, '', $request->getRequestUri());
             return redirect($newUrl, 301);
         } else {
             $locale = null;
-            $locale = (new LocaleServices)->set($locale, 1);
+            $locale = (new LocaleService)->set($locale, 1);
         }
 
         return $next($request);

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Services\Currency\CurrencyServices;
+use App\Http\Services\Currency\CurrencyService;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Isolatable;
 use DateTimeInterface;
@@ -39,6 +39,6 @@ class UpdateCurrenciesСommand extends Command implements Isolatable
     {
         echo "\n";
         dump("start - UpdateCurrenciesСommand");
-        (new CurrencyServices)->update();
+        (new CurrencyService)->update();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Services\Models;
 
 use App\Models\Banner;
 
-class BannerModelServices
+class BannerModelService
 {
     public function getByKey($key)
     {
