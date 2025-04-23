@@ -1,185 +1,195 @@
 .contact_card {
-  --swiper-pagination-bullet-horizontal-gap: 2px;
-  --swiper-pagination-color: #de002b;
-  --swiper-pagination-bullet-width: 21px;
-  --swiper-pagination-bullet-height: 4px;
-  --swiper-pagination-bullet-border-radius: 82.12px;
-  --swiper-pagination-bullet-inactive-opacity: 0.45;
-  --swiper-pagination-bullet-inactive-color: #de002b;
+    --swiper-pagination-bullet-horizontal-gap: 2px;
+    --swiper-pagination-color: #de002b;
+    --swiper-pagination-bullet-width: 21px;
+    --swiper-pagination-bullet-height: 4px;
+    --swiper-pagination-bullet-border-radius: 82.12px;
+    --swiper-pagination-bullet-inactive-opacity: 0.45;
+    --swiper-pagination-bullet-inactive-color: #de002b;
 }
 
 .contact_card {
-  width: 100%;
-  border-radius: 12px;
-  border: 1px solid #dfe3ee;
-  transition: 0.5s all linear;
-  font-size: 30px;
-  display: flex;
-  flex-direction: column;
-  &:hover {
-    z-index: 2;
-    position: relative;
-  }
-
-  &:hover &__red_button {
-    height: auto;
-    padding: 10px 15px;
-    visibility: visible;
-  }
-  &__transform {
-    transform: translateY(61px);
-  }
-
-  &__info {
-    padding: 16px 20px 20px;
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #dfe3ee;
+    transition: 0.5s all linear;
+    font-size: 30px;
     display: flex;
     flex-direction: column;
-    gap: 15px 0;
-    flex-grow: 1;
-    position: relative;
-    overflow: hidden;
-  }
-
-  &__swiper {
-    width: 100%;
-    max-height: 240px;
-  }
-
-  &__slide {
-    position: relative;
-    width: auto;
-
-    &::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 4px;
-      border-radius: 11px 11px 0px 0px;
-
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0) 82.317%,
-        rgba(0, 0, 0, 0.76) 100%
-      );
-    }
-  }
-
-  &__swiper_image {
-    width: 100%;
-    border-radius: 11px 11px 0 0;
     height: 100%;
-    z-index: 1;
-    position: relative;
-    // object-fit: scale-down !important;
-    &_cover{
-      content: "";
-      opacity: 0.6;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      border-radius: 10px;
-      z-index: 0;
-    }
-  }
-
-  &__title {
-    font-weight: 700;
-    font-size: 22px;
-  }
-
-  &__item {
-    font-size: 18px;
-    line-height: 140%;
-
-    &_bold {
-      font-weight: 700;
-    }
-
-    &_link {
-      color: #de002b;
-    }
-  }
-
-  &__buttons {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
     &:hover {
-      opacity: inherit;
-    }
-  }
-
-  &__button {
-    padding: 8px 15px;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-
-    &--gis {
-      background-color: #2ebe11;
+        z-index: 2;
+        position: relative;
     }
 
-    &--yandex {
-      background-color: #de002b;
+    &:hover &__red_button {
+        height: auto;
+        padding: 10px 15px;
+        visibility: visible;
+    }
+    &__transform {
+        transform: translateY(61px);
     }
 
-    &--google {
-      background-color: #14168a;
+    &__info {
+        padding: 16px 20px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px 0;
+        flex-grow: 1;
+        position: relative;
+        overflow: hidden;
     }
-  }
 
-  &__red_button {
-    height: 0px;
-    padding: 0;
-    visibility: hidden;
-  }
+    &__swiper {
+        width: 100%;
+        max-height: 240px;
+    }
+
+    &__slide {
+        position: relative;
+        width: auto;
+        display: flex;
+        justify-content: center;
+        min-height: 240px;
+        align-items: center;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 4px;
+            border-radius: 11px 11px 0px 0px;
+
+            //   background: linear-gradient(
+            //     180deg,
+            //     rgba(0, 0, 0, 0) 82.317%,
+            //     rgba(0, 0, 0, 0.76) 100%
+            //   );
+        }
+    }
+
+    &__swiper_image {
+        width: 100%;
+        border-radius: 11px 11px 0 0;
+        height: 100%;
+        max-height: 240px;
+        z-index: 1;
+        position: relative;
+        // object-fit: scale-down !important;
+        &_cover {
+            content: "";
+            opacity: 0.6;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 10px;
+            z-index: 0;
+        }
+        &_defult {
+            width: auto;
+        }
+    }
+
+    &__title {
+        font-weight: 700;
+        font-size: 22px;
+    }
+
+    &__item {
+        font-size: 18px;
+        line-height: 140%;
+
+        &_bold {
+            font-weight: 700;
+        }
+
+        &_link {
+            color: #de002b;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 5px;
+        flex-wrap: wrap;
+        margin-top: auto;
+        &:hover {
+            opacity: inherit;
+        }
+    }
+
+    &__button {
+        padding: 8px 15px;
+        border-radius: 6px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+
+        &--gis {
+            background-color: #2ebe11;
+        }
+
+        &--yandex {
+            background-color: #de002b;
+        }
+
+        &--google {
+            background-color: #14168a;
+        }
+    }
+
+    &__red_button {
+        height: 0px;
+        padding: 0;
+        visibility: hidden;
+    }
 }
 
 @media (max-width: 1050px) {
-  .contact_card {
-    &__title {
-      font-size: 20px;
+    .contact_card {
+        &__title {
+            font-size: 20px;
+        }
+        &__item {
+            font-size: 16px;
+        }
+        &__button {
+            font-size: 13px;
+        }
     }
-    &__item {
-      font-size: 16px;
-    }
-    &__button {
-      font-size: 13px;
-    }
-  }
 }
 
 @media (max-width: 768px) {
-  .contact_card {
-    &__info {
-      padding: 12px;
-    }
+    .contact_card {
+        &__info {
+            padding: 12px;
+        }
 
-    &__title {
-      font-size: 18px;
-    }
+        &__title {
+            font-size: 18px;
+        }
 
-    &__item {
-      font-size: 14px;
+        &__item {
+            font-size: 14px;
+        }
     }
-  }
 }
 
 @media (max-width: 480px) {
-  .contact_card {
-    max-width: 100%;
+    .contact_card {
+        max-width: 100%;
 
-    &__info {
-      gap: 8px 0;
+        &__info {
+            gap: 8px 0;
+        }
     }
-  }
 }

@@ -24,6 +24,8 @@ class PointModelMigration
 
             $table->unsignedBigInteger('point_id');
 
+            $table->string('title');
+
             $table->string('address');
             $table->string('district');
             $table->string('comment');

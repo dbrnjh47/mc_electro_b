@@ -3,92 +3,97 @@
 @use "/resources/scss/components/pagination.scss";
 
 .contacts {
-  padding-top: 16px;
-  padding-bottom: 50px;
-  .pagination{
-    margin-top: 0;
-  }
-  &__content {
-    margin-top: 21px;
-    // display: flex;
-    // flex-wrap: wrap;
-    // gap: 20px;
-    column-count: 3;
-  }
-
-  &__box {
-    position: relative;
-    margin-bottom: 20px;
-    transition: 0.3s all linear;
-  }
-
-  &__city {
-    position: relative;
-
-    &_button {
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 16px;
-      transition: 0.3s all ease;
-      font-weight: 500;
-
-      svg {
-        pointer-events: none;
-      }
+    padding-top: 16px;
+    padding-bottom: 50px;
+    .pagination {
+        margin-top: 0;
+    }
+    &__content {
+        margin-top: 21px;
+        // display: flex;
+        // flex-wrap: wrap;
+        // gap: 20px;
+        display: grid;
+        justify-content: space-between;
+        grid-template-columns: repeat(3, calc(33% - 10px));
+        gap: 10px;
     }
 
-    &_wrapper {
-      width: 198px;
-      padding: 10px;
-      background-color: #f6f8fd;
-      z-index: 4;
-      border-radius: 10px;
-      position: absolute;
-      bottom: -12px;
-      left: 50%;
-      transform: translate(-50%, 120%);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s ease;
+    &__box {
+        position: relative;
+        margin-bottom: 20px;
+        transition: 0.3s all linear;
+
+
     }
 
-    &_button--active + &_wrapper {
-      transform: translate(-50%, 100%);
-      opacity: 1;
-      pointer-events: painted;
-    }
+    &__city {
+        position: relative;
 
-    &_button--active {
-      color: #cc222e;
-      fill: #cc222e;
-      svg {
-        transform: rotate(180deg);
-      }
+        &_button {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            transition: 0.3s all ease;
+            font-weight: 500;
+
+            svg {
+                pointer-events: none;
+            }
+        }
+
+        &_wrapper {
+            width: 198px;
+            padding: 10px;
+            background-color: #f6f8fd;
+            z-index: 4;
+            border-radius: 10px;
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translate(-50%, 120%);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        &_button--active + &_wrapper {
+            transform: translate(-50%, 100%);
+            opacity: 1;
+            pointer-events: painted;
+        }
+
+        &_button--active {
+            color: #cc222e;
+            fill: #cc222e;
+            svg {
+                transform: rotate(180deg);
+            }
+        }
     }
-  }
 }
 
 @media (max-width: 768px) {
-  .contacts {
-    &__content {
-      column-count: 2;
-    }
+    .contacts {
+        &__content {
+            grid-template-columns: repeat(2, calc(50% - 10px));
+        }
 
-    &__city_wrapper {
-      left: 0;
-      transform: translateY(120%);
-    }
+        &__city_wrapper {
+            left: 0;
+            transform: translateY(120%);
+        }
 
-    &__city_button--active + &__city_wrapper {
-      transform: translateY(100%);
+        &__city_button--active + &__city_wrapper {
+            transform: translateY(100%);
+        }
     }
-  }
 }
 
 @media (max-width: 480px) {
-  .contacts__content {
-    column-count: auto;
-  }
+    .contacts__content {
+        grid-template-columns: 100%;
+    }
 }

@@ -19,6 +19,7 @@ class PointFactory extends Factory
         return [
             "lon" => $this->faker->longitude,
             "lat" => $this->faker->latitude,
+            "email" => (rand(0, 10) > 5 ? fake()->unique()->safeEmail() : null),
             "is_on" => rand(0, 1),
         ];
     }

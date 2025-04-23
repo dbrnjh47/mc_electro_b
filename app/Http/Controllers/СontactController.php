@@ -8,9 +8,12 @@ class СontactController extends Controller
 {
     public function all()
     {
-        $points = (new PointModelService)->get();
-        // dd($points);
-        return view('sample.main.pages.сontact.index', ['title' => "Контакты", 'description' => ""]);
+        $title = "Контакты";
+        $description = "";
+        $points = (new PointModelService)->pagination();
+        if($points->isEmpty()){abort("404");}
+
+        return view('sample.main.pages.сontact.index', compact("title", "description", "points"));
     }
 
     public function show()

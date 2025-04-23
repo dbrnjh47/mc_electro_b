@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('points', function (Blueprint $table) {
             $table->id();
 
+            $table->string('email')->nullable();
             $table->decimal('lon', 12, 7)->nullable();
             $table->decimal('lat', 12, 7)->nullable();
             $table->boolean('is_on')->default(1);

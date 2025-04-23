@@ -23,6 +23,7 @@ class PointLocaleFactory extends Factory
     public function definition(): array
     {
         return [
+            'title' => fake()->text(10),
             'address' => fake()->address,
             'district' => fake()->streetName,
             'comment' => (rand(0,10) > 7 ? fake()->text(5) : "")

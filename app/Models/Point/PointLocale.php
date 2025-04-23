@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PointLocale extends Model
 {
     use HasFactory;
+    protected $guarded = false;
     public static $tabel_name = "points_";
     public function __construct(array $attributes = [], $key = null)
     {

@@ -15,10 +15,19 @@ class PointSeeder extends Seeder
     public function run(): void
     {
         Point::factory(10)
-            ->has(PointLocale::factory()
-                ->forTable(PointLocale::$tabel_name.'en'),
+            ->has(
+                PointLocale::factory()
+                    ->forTable(PointLocale::$tabel_name . 'en'),
                 // ->state(),
-            'locale')
+                'locale'
+            )
             ->create();
+
+        $point = Point::find(1);
+        $point->is_on = 1;
+        $point->save();
+        //
+        $this->call(PointPhotoSeeder::class);
+        $this->call(PointPhoneSeeder::class);
     }
 }
