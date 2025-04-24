@@ -133,54 +133,8 @@
 
             </div>
         </div>
-        <section class="pagination">
-            <div class="pagination__container">
-                <p>Показано 10 из 84</p>
-                <div class="pagination__items">
-                    <a class="pagination__arrow" href="#" title="">
-                        <img src="/temple/images/component/pagination/arrow.svg" alt="arrow">
-                    </a>
+        {{ $points->appends(request()->input())->onEachSide(1)->links() }}
 
-                    <span class="page">
-                        <a href="#" title="1">
-                            1
-                        </a>
-                    </span>
-
-                    <p class="pagination__activ">2</p>
-
-                    <span class="page">
-                        <a href="#" title="1">
-                            1
-                        </a>
-                    </span>
-                    <span class="page">
-                        <a href="#" title="1">
-                            1
-                        </a>
-                    </span>
-                    <span class="page">
-                        <a href="#" title="1">
-                            1
-                        </a>
-                    </span>
-                    <span class="page">
-                        <a href="#" title="1">
-                            1
-                        </a>
-                    </span>
-                    <span class="page">
-                        <a href="#" title="1">
-                            1
-                        </a>
-                    </span>
-
-                    <a class="pagination__arrow right" href="#" title="">
-                        <img src="/temple/images/component/pagination/arrow.svg" alt="arrow">
-                    </a>
-                </div>
-            </div>
-        </section>
     </section>
 @endsection
 

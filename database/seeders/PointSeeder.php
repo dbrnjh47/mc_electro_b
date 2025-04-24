@@ -14,7 +14,7 @@ class PointSeeder extends Seeder
      */
     public function run(): void
     {
-        Point::factory(10)
+        Point::factory(20)
             ->has(
                 PointLocale::factory()
                     ->forTable(PointLocale::$tabel_name . 'en'),
