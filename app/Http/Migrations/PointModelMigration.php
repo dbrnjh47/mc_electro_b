@@ -25,10 +25,11 @@ class PointModelMigration
             $table->unsignedBigInteger('point_id');
 
             $table->string('title');
+            $table->string('description', 126)->nullable();
 
             $table->string('address');
             $table->string('district');
-            $table->string('comment');
+            $table->string('comment')->nullable();
 
             $table->foreign('point_id')->references('id')->on('points')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

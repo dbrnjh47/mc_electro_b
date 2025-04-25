@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Сontact\FindRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\PointModelService;
 use Illuminate\Http\Request;
@@ -28,19 +29,19 @@ class СontactController extends Controller
         return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs"));
     }
 
-    public function show(Request $request)
+    public function show(FindRequest $request)
     {
         $point = (new PointModelService)->find($request->id);
-        dd($point);
+
         //
 
-        $title = "Точка";
+        $title = "Точка {$point->locale->title}";
         $description = "";
 
         //
         $breadcrumbs = $this->getBreadcrumbs();
-        $breadcrumbs->add("Контакт ");
+        $breadcrumbs->add("Точка {$point->locale->title}");
 
-        return view('sample.main.pages.сontact.one', compact("title", "description", "breadcrumbs"));
+        return view('sample.main.pages.сontact.one', compact("title", "description", "breadcrumbs", "point"));
     }
 }

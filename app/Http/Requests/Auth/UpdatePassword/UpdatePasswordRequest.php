@@ -4,7 +4,7 @@ namespace App\Http\Requests\Auth\UpdatePassword;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
-use App\Http\Services\Auth\UserTokenServices;
+use App\Http\Services\Auth\UserTokenService;
 class UpdatePasswordRequest extends FormRequest
 {
     /**
@@ -37,7 +37,7 @@ class UpdatePasswordRequest extends FormRequest
                 {
                     $data = $validator->getData();
 
-                    $res = (new UserTokenServices("user_auth_reset_"))->first($data['token']);
+                    $res = (new UserTokenService("user_auth_reset_"))->first($data['token']);
 
                     if (!$res || (int) $res != $data['user_id']) {
                         $validator->errors()->add('password', 'Время токена истекло!');

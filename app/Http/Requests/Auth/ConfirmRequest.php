@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
-use App\Http\Services\Auth\UserTokenServices;
+use App\Http\Services\Auth\UserTokenService;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -50,7 +50,7 @@ class ConfirmRequest extends FormRequest
                 {
                     $data = $validator->getData();
 
-                    $res = (new UserTokenServices)->first($data['token']);
+                    $res = (new UserTokenService)->first($data['token']);
 
                     if (!$res || (int) $res != $data['user_id']) {
                         throw new NotFoundHttpException('');

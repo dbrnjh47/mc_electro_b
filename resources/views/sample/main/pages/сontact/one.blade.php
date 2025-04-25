@@ -13,73 +13,16 @@
         <div class="contact__container">
             <div class="app__title">
                 <div class="app__title_wrapper">
-                    <h2 class="app__title_text">Контакт</h2>
-                    <p class="app__title_description">Подразделения компании МК Электро в Челябинске
-                    </p>
+                    <h2 class="app__title_text">{{$point->locale->title}}</h2>
+                    @if($point->locale->description)
+                        <p class="app__title_description">{{$point->locale->description}}</p>
+                    @endif
                 </div>
             </div>
 
             <div class="contact__block">
-                <div class="contact_card">
-                    <div class="swiper contact_card__swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide contact_card__slide">
-                                <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async" alt="image" />
-                                <!-- <span class="contact_card__swiper_image_cover" style="background-image: url('/assets/contacts/photo/1.png');"></span> -->
-                            </div>
-                            <div class="swiper-slide contact_card__slide">
-                                <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async" alt="image" />
-                            </div>
-                            <div class="swiper-slide contact_card__slide">
-                                <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async" alt="image" />
-                            </div>
-                            <div class="swiper-slide contact_card__slide">
-                                <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async" alt="image" />
-                            </div>
-                            <div class="swiper-slide contact_card__slide">
-                                <img class="contact_card__swiper_image" src="/assets/contacts/photo/1.png"  loading="lazy" decoding="async" alt="image" />
-                            </div>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                    </div>
-                    <div class="contact_card__info">
-                        <h5 class="contact_card__title">
-                            Центральный офис и склад
-                        </h5>
-                        <p class="contact_card__item">
-                            <span class="contact_card__item_bold">Адрес:</span>
-                            ул. Полярная, 57, Челябинск <br />(вход/въезд с пр.
-                            Победы)
-                        </p>
-                        <p class="contact_card__item">
-                            <span class="contact_card__item_bold">Почта:</span>
-                            <a class="contact_card__item_link" href="mailto:office@mkelektro.ru">
-                                office@mkelektro.ru</a>
-                        </p>
-                        <p class="contact_card__item">
-                            <span class="contact_card__item_bold">Режим работы склада:</span>
-                            пн-пт <br />
-                            9:00-18:00, сб-вс 9:00-17:00
-                        </p>
+                @include("sample.main.pages.сontact.components.card", ["is_card" => 1])
 
-                        <p class="contact_card__item">
-                            <span class="contact_card__item_bold"> Телефон:</span>
-                            <a class="contact_card__item_link" href="tel:88001005441"> 8 800 100-54-41</a>,
-                            <a class="contact_card__item_link" href="tel:89847079798"> 8 984 707-97-98</a>
-                        </p>
-                        <div class="contact_card__buttons">
-                            <button class="contact_card__button contact_card__button--gis">
-                                2GIS
-                            </button>
-                            <button class="contact_card__button contact_card__button--yandex">
-                                Яндекс
-                            </button>
-                            <button class="contact_card__button contact_card__button--google">
-                                Google
-                            </button>
-                        </div>
-                    </div>
-                </div>
                 <div class="contact__wrapper">
                     <div class="contact__info">
                         <h5 class="contact__info_title">Отдел оптовых продаж</h5>

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Auth\UpdatePassword;
+namespace App\Http\Requests\Сontact;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
-use App\Http\Services\Auth\UserTokenService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
-class ShowRequest extends FormRequest
+
+class FindRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,28 +20,8 @@ class ShowRequest extends FormRequest
     {
         // Добавляем параметры маршрута в данные запроса
         $this->merge([
-            'user_id' => $this->route('user_id'),
-            'token' => $this->route('token'),
+            'id' => $this->route('id'),
         ]);
-    }
-
-    public function after(): array
-    {
-        return [
-            function (Validator $validator) {
-                if(!$validator->errors()->messages())
-                {
-                    $data = $validator->getData();
-
-                    $res = (new UserTokenService("user_auth_reset_"))->first($data['token']);
-
-                    if (!$res || (int) $res != $data['user_id']) {
-                        throw new NotFoundHttpException('');
-                    }
-
-                }
-            }
-        ];
     }
 
     /**
@@ -53,8 +32,7 @@ class ShowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'exists:App\Models\User,id'],
-            'token' => ['required', 'string', 'min:10'],
+            'id' => ['required', 'integer'],
         ];
     }
 

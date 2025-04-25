@@ -6,7 +6,7 @@ use App\Models\Point\Point;
 
 class PointModelService
 {
-    public $pagination = 1;
+    public $pagination = 2;
     public function defult()
     {
         return Point::where("is_on", 1)->with('links.category')->with('phones')->with('photos')->with('locale')->whereHas('locale');
