@@ -45,7 +45,12 @@
                         <button class="btn">Отправить заявку</button>
                     </div>
                     <div class="contact__map">
-                        <img src="/temple/images/contact/map.png" alt="map">
+                        @if ($point->yandex_widget_href)
+                            <iframe src="{{$point->yandex_widget_href}}&lang={{$user_local->slug}}" frameborder="0"></iframe>
+                        @else
+
+                        @endif
+                        {{-- <img src="/temple/images/contact/map.png" alt="map"> --}}
                     </div>
                 </div>
             </div>

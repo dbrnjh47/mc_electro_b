@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->decimal('lon', 12, 7)->nullable();
             $table->decimal('lat', 12, 7)->nullable();
+            $table->string('yandex_widget_href')->nullable()->comment("https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=64442259794");
             $table->boolean('is_on')->default(1);
 
             $table->timestamps();
