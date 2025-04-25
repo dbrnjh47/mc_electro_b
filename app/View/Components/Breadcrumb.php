@@ -14,11 +14,8 @@ class Breadcrumb extends Component
      */
     public function __construct($breadcrumbs)
     {
-        $this->breadcrumbs = $breadcrumbs;
-        array_unshift($this->breadcrumbs, [
-            "href" => route("home"),
-            "text" => "Главная"
-        ]);
+        $breadcrumbs->add("Главная", route("home"), move_to_start:1);
+        $this->breadcrumbs = $breadcrumbs->get();
     }
 
     /**

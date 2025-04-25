@@ -7,37 +7,7 @@
 @endsection
 
 @section('content')
-    <section class="breadcrumb">
-        <div class="breadcrumb__container">
-            <ul class="breadcrumb__lists" itemscope="" itemtype="https://schema.org/BreadcrumbList">
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link start" href="#">
-                        <span itemprop="name">Главная</span>
-                    </a>
-                    <meta itemprop="position" content="1">
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link off">/</a>
-                </li>
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope=""
-                    itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link" href="#">
-                        <span itemprop="name">Контакты</span>
-                    </a>
-                    <meta itemprop="position" content="2">
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link off">/</a>
-                </li>
-                <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link active">
-                        <span itemprop="name">Контакт</span>
-                    </a>
-                    <meta itemprop="position" content="3">
-                </li>
-            </ul>
-        </div>
-    </section>
+    <x-breadcrumb :breadcrumbs="$breadcrumbs"></x-breadcrumb>
 
     <section class="contact">
         <div class="contact__container">

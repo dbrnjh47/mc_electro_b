@@ -20,4 +20,9 @@ class PointModelService
     {
         return $this->defult()->paginate($this->pagination);
     }
+
+    public function find($id)
+    {
+        return $this->defult()->findOrFail($id);
+    }
 }

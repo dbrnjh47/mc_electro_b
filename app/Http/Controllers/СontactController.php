@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\PointModelService;
+use Illuminate\Http\Request;
 
 class СontactController extends Controller
 {
     public function getBreadcrumbs()
     {
-        return [
-            [
-                "href" => route("contacts"),
-                "text" => "Контакты"
-            ],
-        ];
+        $breadcrumbs = (new BreadcrumbService);
+        $breadcrumbs->add("Контакты", route("contacts"));
+
+        return $breadcrumbs;
     }
 
     public function all()
@@ -28,8 +28,19 @@ class СontactController extends Controller
         return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs"));
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        return view('sample.main.pages.сontact.one', ['title' => "Точка", 'description' => ""]);
+        $point = (new PointModelService)->find($request->id);
+        dd($point);
+        //
+
+        $title = "Точка";
+        $description = "";
+
+        //
+        $breadcrumbs = $this->getBreadcrumbs();
+        $breadcrumbs->add("Контакт ");
+
+        return view('sample.main.pages.сontact.one', compact("title", "description", "breadcrumbs"));
     }
 }

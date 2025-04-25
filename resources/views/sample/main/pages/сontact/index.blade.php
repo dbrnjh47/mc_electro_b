@@ -105,7 +105,7 @@
                                         @endforeach
                                     @endif
                                 </div>
-                                <a class="btn contact_card__red_button" href="#">Открыть</a>
+                                <a class="btn contact_card__red_button" href="{{ route("contact", ["id" => $point->id]) }}">Открыть</a>
                             </div>
                         </div>
                     </div>
