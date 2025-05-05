@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('currencies', function (Blueprint $table) {
             $table->id();
 
-            $table->string('abbreviation')->unique();
-            $table->string('icon', 3)->nullable();
+            $table->string('abbreviation', 6)->unique();
+            $table->string('icon', 12)->nullable();
             $table->string('img')->nullable();
             $table->decimal('to', 8, 4)->unsigned()->default(1);
+            $table->boolean('is_on')->default(false);
 
             $table->timestamps();
         });

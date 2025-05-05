@@ -17,7 +17,8 @@ class CurrencyFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "to" => $this->faker->randomFloat(4, 0, 20.9999),
+            "is_on" => 0,
         ];
     }
 }

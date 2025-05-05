@@ -17,6 +17,8 @@ return new class extends Migration
 
             $table->string('cca2', 2)->unique();
             $table->boolean('is_on')->default(false);
+            $table->decimal('lon', 12, 7)->nullable();
+            $table->decimal('lat', 12, 7)->nullable();
 
             $table->timestamps();
         });

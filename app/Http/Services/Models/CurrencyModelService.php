@@ -7,18 +7,22 @@ use App\Models\Currency;
 class CurrencyModelService
 {
     public $defult = "RUB";
+    public function start()
+    {
+        return Currency::where("is_on", 1);
+    }
     public function all()
     {
-        return Currency::get();
+        return $this->start()->get();
     }
 
     public function find($id)
     {
-        return Currency::find($id);
+        return $this->start()->find($id);
     }
 
     public function defult()
     {
-        return Currency::where("abbreviation", $this->defult)->first();
+        return $this->start()->where("abbreviation", $this->defult)->first();
     }
 }
