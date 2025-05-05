@@ -1,4 +1,4 @@
-
+import '/resources/js/custom/loader/index.js';
 
 //
 
@@ -55,6 +55,25 @@ window.validationForm = function (msg, wrapper, button = null)
                     `);
         }
     }
+}
+
+window.setURL = function(data, convert_json = 0)
+{
+    console.log("setURL");
+    let url = window.location.href;
+    url = new URL(url);
+
+    let params = null;
+    if(convert_json)
+    {
+        params = new URLSearchParams({"json": JSON.stringify(data)});
+    } else {
+        params = new URLSearchParams(data);
+    }
+
+    let new_url = url.origin + url.pathname + '?' + params.toString() + url.hash;
+
+    window.history.pushState({}, '', new_url);
 }
 
 //

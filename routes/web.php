@@ -53,6 +53,7 @@ Route::prefix('promotion')->group(function () {
 
 Route::prefix('contacts')->group(function () {
     Route::get('/', [СontactController::class, 'all'])->name('contacts');
+    Route::post('/', [СontactController::class, 'block'])->name('contacts.block');
 });
 Route::prefix('contact')->group(function () {
     Route::get('/{id}', [СontactController::class, 'show'])->name('contact');

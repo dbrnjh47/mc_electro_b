@@ -6,15 +6,27 @@ use App\Models\Point\Point;
 
 class PointModelService
 {
-    public $pagination = 2;
+    public $pagination = 2, $search;
+    public function __construct($search = null)
+    {
+        $this->search = $search;
+    }
+
     public function defult()
     {
-        return Point::where("is_on", 1)
-        ->with('links.category')
-        ->with('phones')
-        ->with('photos')
-        ->with('locale')
-        ->whereHas('locale');
+        $points = Point::where("is_on", 1)
+            ->with('links.category')
+            ->with('phones')
+            ->with('photos')
+            ->with('locale')
+            ->whereHas('locale', function ($q) {
+                if($this->search)
+                {
+                    $q = $q->where("title", 'like', "%{$this->search}%")->orWhere("address", 'like', "%{$this->search}%");
+                }
+            });
+
+        return $points;
     }
     public function get()
     {

@@ -29,18 +29,14 @@
                         </select>
                     </div>
                     <div class="app__search">
-                        <input type="text" placeholder="Введите адресс">
+                        <input type="text" placeholder="Введите адресс" id="contacts_search">
                     </div>
                 </div>
 
             </div>
-            <div class="contacts__content">
 
-                @foreach ($points as $point)
-                    @include("sample.main.pages.сontact.components.card")
-                @endforeach
+            @include('sample.main.pages.сontact.components.cards')
 
-            </div>
         </div>
         {{ $points->appends(request()->input())->onEachSide(1)->links() }}
 
@@ -48,9 +44,15 @@
 @endsection
 
 @section('footer')
+    <script>
+        window.routes["contacts.block"] = "{{ route('contacts.block') }}";
+    </script>
     <x-sample.main.layout.footer></x-sample.main.layout.footer>
     <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
+
     @vite('resources/js/contacts/index.js')
+    @vite('resources/js/ajax/contacts/get.js')
+
 @endsection

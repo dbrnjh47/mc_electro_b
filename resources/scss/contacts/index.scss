@@ -17,6 +17,7 @@
         justify-content: space-between;
         grid-template-columns: repeat(3, calc(33% - 10px));
         gap: 10px;
+        position: relative;
     }
 
     &__box {
