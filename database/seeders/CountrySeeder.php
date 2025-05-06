@@ -22,6 +22,7 @@ class CountrySeeder extends Seeder
         foreach ($countries as $country) {
             $c = Country::create([
                 "cca2" => $country["cca2"],
+                "code" => ($country["ccn3"] && $country["ccn3"] != "" ? $country["ccn3"] : null),
                 "is_on" => true,
                 "lat" => $country["latlng"][0],
                 "lon" => $country["latlng"][1],

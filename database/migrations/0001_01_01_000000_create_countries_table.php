@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
 
-            $table->string('cca2', 2)->unique();
+            $table->string('cca2', 2)->unique()->index();
+            $table->integer('code')->index()->nullable();
             $table->boolean('is_on')->default(false);
             $table->decimal('lon', 12, 7)->nullable();
             $table->decimal('lat', 12, 7)->nullable();
