@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Point;
 
+use App\Models\City\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class PointFactory extends Factory
     public function definition(): array
     {
         return [
+            "city_id" => City::inRandomOrder()->first()->id,
             "lon" => $this->faker->longitude,
             "lat" => $this->faker->latitude,
             "email" => (rand(0, 10) > 5 ? fake()->unique()->safeEmail() : null),

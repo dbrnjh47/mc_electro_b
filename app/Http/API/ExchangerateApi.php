@@ -7,11 +7,15 @@ use GuzzleHttp\Client;
 
 class ExchangerateApi
 {
-    const ENDPOINT_PUBLIC = "https://v6.exchangerate-api.com/v6/",
-    SECRET_KEY = "d7d47edd196f0261129abf2d";
+    const ENDPOINT_PUBLIC = "https://v6.exchangerate-api.com/v6/";
     // d7d47edd196f0261129abf2d
     // c3a3384352bc27c0e563b523
+    private $secret_key;
 
+    public function __construct()
+    {
+        $this->secret_key = env("EXCHANGERATE_SECRET_KEY");
+    }
     public function getCurrencies()
     {
         return $this->request("get", "latest/RUB");
@@ -22,7 +26,7 @@ class ExchangerateApi
         try
         {
             $client = new \GuzzleHttp\Client();
-            $response = $client->request($method, self::ENDPOINT_PUBLIC.self::SECRET_KEY."/".$url,
+            $response = $client->request($method, self::ENDPOINT_PUBLIC.$this->secret_key."/".$url,
                 ($method == "get" ?
                     [
                         'query' => $parameters

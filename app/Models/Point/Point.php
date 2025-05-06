@@ -2,6 +2,7 @@
 
 namespace App\Models\Point;
 
+use App\Models\City\City;
 use App\Models\Point\Link\PointLink;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,11 @@ class Point extends Model
     public function locale()
     {
         return $this->hasOne(PointLocale::class, 'point_id', 'id');
+    }
+
+    public function city()
+    {
+        return $this->hasOne(City::class, 'id', 'city_id');
     }
 
     public function photos()

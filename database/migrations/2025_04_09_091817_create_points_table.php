@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('yandex_widget_href')->nullable()->comment("https://yandex.ru/map-widget/v1/?z=12&ol=biz&oid=64442259794");
             $table->boolean('is_on')->default(1);
 
+            $table->unsignedBigInteger('city_id');
+
+            $table->foreign('city_id')->references('id')->on('cities')->onUpdate('cascade');
             $table->timestamps();
         });
 

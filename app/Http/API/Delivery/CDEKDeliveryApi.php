@@ -7,14 +7,13 @@ use GuzzleHttp\Client;
 
 class CDEKDeliveryApi
 {
-    const
-    ACCOUNT = "ZHq1EYDzKivD9ruXyrqRh4kGF20CB9xv",
-    PASSWORD = "vFAcdRrIEX19x1JMinlkMFyyEdb9UWln",
-    ENDPOINT = "https://api.cdek.ru/v2/";
+    const ENDPOINT = "https://api.cdek.ru/v2/";
 
-    private $token = null;
+    private $token = null, $account, $password;
     public function __construct()
     {
+        $this->account = env("CDEK_DELIVERY_ACCOUNT");
+        $this->password = env("CDEK_DELIVERY_PASSWORD");
         $this->token = $this->auth();
     }
 
@@ -36,8 +35,8 @@ class CDEKDeliveryApi
                         ],
                         'form_params' => [
                             "grant_type" => "client_credentials",
-                            "client_id" => self::ACCOUNT,
-                            "client_secret" => self::PASSWORD
+                            "client_id" => $this->account,
+                            "client_secret" => $this->password
                         ]
                     ]
             );
