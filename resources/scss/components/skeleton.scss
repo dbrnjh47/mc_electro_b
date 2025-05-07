@@ -1,0 +1,54 @@
+.skeleton {
+    --skeleton-gradient-width: 300px;
+    --skeleton-animation-duration: 1.5s;
+    --color-skeleton-from: #f4f4f4;
+    --color-skeleton-to: #ffffff;
+    background-color: var(
+        --color-skeleton-from,
+        var(--vkui--color_skeleton_from)
+    );
+    max-width: 100%;
+    border-radius: 6px;
+    flex-shrink: 0;
+    line-height: 1;
+    position: relative;
+    overflow: hidden;
+    visibility: visible;
+    z-index: 1;
+    &::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        height: 100%;
+        width: calc(100% + var(--skeleton-gradient-width, 300px));
+        background-image: linear-gradient(
+            to right,
+            var(--color-skeleton-from, var(--vkui--color_skeleton_from)) 0,
+            var(--color-skeleton-to, var(--vkui--color_skeleton_to))
+                calc(var(--skeleton-gradient-width, 300px) * 0.5),
+            var(--color-skeleton-from, var(--vkui--color_skeleton_from))
+                calc(var(--skeleton-gradient-width, 300px) * 0.75)
+        );
+        background-size: var(--skeleton-gradient-width, 300px) 100%;
+        background-attachment: fixed;
+        animation-name: skeleton-iso;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-duration: var(--skeleton-animation-duration, 1.5s);
+        animation-timing-function: ease-in-out;
+    }
+}
+
+@keyframes skeleton-iso {
+    0% {
+        transform: translateX(calc(var(--skeleton-gradient-width, 300px)*-1))
+    }
+
+    to {
+        transform: translateX(0)
+    }
+}

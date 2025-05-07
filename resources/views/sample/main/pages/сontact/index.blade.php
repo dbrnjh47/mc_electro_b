@@ -14,14 +14,14 @@
             <div class="app__title">
                 <div class="app__title_wrapper">
                     <h2 class="app__title_text">Контакты</h2>
-                    <p class="app__title_description">Подразделения компании МК Электро в Челябинске</p>
+                    <p class="app__title_description">Подразделения компании {{$settings->fullName()}}</p>
                 </div>
                 <div class="app__filters">
                     <div id="select2_sort" class="select2_sample_nude">
-                        <select class="select2_custom" name="lang" data-dropdown-position="below"
+                        <select class="select2_custom" name="city_id" data-dropdown-position="below"
                             data-minimum-results-for-search="5" data-dropdown-parent="#select2_sort"
                             data-search-input-placeholder="Введите город">
-                            <option value="1" selected="">Челябинск</option>
+                            <option value="" selected="">Города</option>
                             <option value="10">Москва</option>
                             <option value="2">Новосибирск</option>
                             <option value="3">Москва</option>

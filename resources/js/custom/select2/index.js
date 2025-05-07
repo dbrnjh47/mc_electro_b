@@ -15,8 +15,9 @@ $(document).ready(function () {
 window.readySelect2 = function(obj)
 {
   obj.select2({
-    placeholder: "Выбрать",
+    // placeholder: "Выбрать",
     searchInputPlaceholder: ($(this).data('search-input-placeholder') ? $(this).data('search-input-placeholder') : "Найти..."),
+
     language: {
       //https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/i18n/en.js
       noResults: function (query) {
@@ -24,6 +25,9 @@ window.readySelect2 = function(obj)
       },
       searching: function () {
         return "Поиск...";
+      },
+      loadingMore: function () {
+        return "Загрузка результатов...";
       },
     }
   });
