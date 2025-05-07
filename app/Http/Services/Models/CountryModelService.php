@@ -4,12 +4,13 @@ namespace App\Http\Services\Models;
 
 use App\Models\Country\Country;
 
-class CountryModelService
+class CountryModelService extends ControllerModelService
 {
     public $select_list;
     public function __construct($select_list = null)
     {
         $this->select_list = $select_list;
+        $this->model = $this->defult();
     }
 
     public function defult()
@@ -24,7 +25,7 @@ class CountryModelService
 
     public function getIn($key, $data)
     {
-        return $this->defult()->whereIn($key, $data)
+        return $this->model->whereIn($key, $data)
             ->get();
     }
 }

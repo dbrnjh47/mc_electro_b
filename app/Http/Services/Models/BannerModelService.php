@@ -6,14 +6,20 @@ use App\Models\Banner;
 
 class BannerModelService extends ControllerModelService
 {
-    public function __construct()
+    public $select_list;
+    public function __construct($select_list = null)
     {
+        $this->select_list = $select_list;
         $this->model = $this->defult();
     }
 
     public function defult()
     {
         $model = Banner::query();
+        if($this->select_list)
+        {
+            $model->select($this->select_list);
+        }
         $model = BannerModelService::whereOn($model);
 
         return $model;

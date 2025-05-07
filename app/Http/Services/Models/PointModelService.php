@@ -6,16 +6,21 @@ use App\Models\Point\Point;
 
 class PointModelService extends ControllerModelService
 {
-    public $pagination = 9, $search;
-    public function __construct($search = null)
+    public $pagination = 9, $search, $select_list;
+    public function __construct($search = null, $select_list = null)
     {
         $this->search = $search;
+        $this->select_list = $select_list;
         $this->model = $this->defult();
     }
 
     public function defult()
     {
         $model = Point::query();
+        if($this->select_list)
+        {
+            $model->select($this->select_list);
+        }
         $model = PointModelService::whereOn($model);
         $model->with('links.category')
             ->with('phones')

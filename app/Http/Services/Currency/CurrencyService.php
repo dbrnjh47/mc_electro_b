@@ -30,7 +30,7 @@ class CurrencyService
 
         if(!$currency)
         {
-            $currency = (new CurrencyModelService)->defult();
+            $currency = (new CurrencyModelService)->defultUser();
             $this->set($currency->id);
         }
 

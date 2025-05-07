@@ -9,4 +9,9 @@ class ControllerModelService
     {
         $this->model->where($key, $value);
     }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
 }

@@ -4,25 +4,43 @@ namespace App\Http\Services\Models;
 
 use App\Models\Currency;
 
-class CurrencyModelService
+class CurrencyModelService extends ControllerModelService
 {
-    public $defult = "RUB";
-    public function start()
+    public $defult_abbreviation = "RUB";
+    public $select_list;
+    public function __construct($select_list = null)
     {
-        return Currency::where("is_on", 1);
-    }
-    public function all()
-    {
-        return $this->start()->get();
-    }
-
-    public function find($id)
-    {
-        return $this->start()->find($id);
+        $this->select_list = $select_list;
+        $this->model = $this->defult();
     }
 
     public function defult()
     {
-        return $this->start()->where("abbreviation", $this->defult)->first();
+        $model = Currency::query();
+        $model = CurrencyModelService::whereOn($model);
+        if($this->select_list)
+        {
+            $model->select($this->select_list);
+        }
+        return $model;
+    }
+
+    public static function whereOn($model)
+    {
+        return $model->where("is_on", 1);
+    }
+    public function all()
+    {
+        return $this->model->get();
+    }
+
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
+
+    public function defultUser()
+    {
+        return $this->model->where("abbreviation", $this->defult_abbreviation)->first();
     }
 }
