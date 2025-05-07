@@ -13,6 +13,7 @@ class CityLocale extends Model
     public static $tabel_name = "city_";
     public function __construct(array $attributes = [], $key = null)
     {
+        $key = "ru";
         parent::__construct($attributes);
         if(!$key){$key = app()->getLocale();}
         $this->setTable(CityLocale::$tabel_name.$key);

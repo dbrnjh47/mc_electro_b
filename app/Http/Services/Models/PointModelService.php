@@ -4,18 +4,20 @@ namespace App\Http\Services\Models;
 
 use App\Models\Point\Point;
 
-class PointModelService
+class PointModelService extends ControllerModelService
 {
-    public $pagination = 2, $search;
+    public $pagination = 9, $search;
     public function __construct($search = null)
     {
         $this->search = $search;
+        $this->model = $this->defult();
     }
 
     public function defult()
     {
-        $points = Point::where("is_on", 1)
-            ->with('links.category')
+        $model = Point::query();
+        $model = PointModelService::whereOn($model);
+        $model->with('links.category')
             ->with('phones')
             ->with('photos')
             ->with('locale')
@@ -26,20 +28,26 @@ class PointModelService
                 }
             });
 
-        return $points;
+        return $model;
     }
+
+    public static function whereOn($model)
+    {
+        return $model->where("is_on", 1);
+    }
+
     public function get()
     {
-        return $this->defult()->get();
+        return $this->model->get();
     }
 
     public function pagination()
     {
-        return $this->defult()->paginate($this->pagination);
+        return $this->model->paginate($this->pagination);
     }
 
     public function find($id)
     {
-        return $this->defult()->findOrFail($id);
+        return $this->model->findOrFail($id);
     }
 }

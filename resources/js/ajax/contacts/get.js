@@ -1,22 +1,32 @@
-console.log("contacts_search");
-let contacts_search = $("#contacts_search");
+let contacts_wrapper = $(".contacts");
+let contacts_search = contacts_wrapper.find("#contacts_search");
 let contacts_timer;
+let contacts_filter = contacts_wrapper.find('select[name="city_id"]');
+
 
 contacts_search.on('input', function() {
     clearTimeout(contacts_timer);
     contacts_timer = setTimeout(updateContacts, 500);
 });
 
+contacts_filter.on('change', function() {
+    clearTimeout(contacts_timer);
+    updateContacts();
+});
+
 function getDataContacts() {
     return {
-        "search": contacts_search.val()
+        "search": contacts_search.val(),
+        "city_id": contacts_filter.val()
     };
 }
 
 function updateContacts() {
     console.log("start");
-    let louder = getLouder();
-    $(".contacts__content").append(louder);
+    // let louder = getLouder();
+    // $(".contacts__content").append(louder);
+    $(".contacts__content>*").addClass("skeleton");
+    contacts_wrapper.find(".pagination__container").addClass("skeleton");
     //
 
     let data = getDataContacts();
@@ -32,7 +42,9 @@ function updateContacts() {
             $(".pagination").html(results[1]);
 
             setURL(data);
-            distroyLouder();
+            // distroyLouder();
+            startSliderContact();
+            $(".contacts__content>*").removeClass("skeleton");
         },
         error: function (msg) {
 

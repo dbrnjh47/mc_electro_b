@@ -22,10 +22,9 @@
                             data-minimum-results-for-search="5" data-dropdown-parent="#select2_sort"
                             data-search-input-placeholder="Введите город">
                             <option value="" selected="">Города</option>
-                            <option value="10">Москва</option>
-                            <option value="2">Новосибирск</option>
-                            <option value="3">Москва</option>
-                            <option value="3">Москва</option>
+                            @foreach ($cities as $city)
+                                <option value="{{$city->id}}" @if($city_id == $city->id) selected="" @endif>{{$city->locale->name}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="app__search">

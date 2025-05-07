@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Сontact\FindRequest;
 use App\Http\Requests\Сontact\AllRequest;
 use App\Http\Services\BreadcrumbService;
+use App\Http\Services\Models\CityModelService;
 use App\Http\Services\Models\PointModelService;
 use Illuminate\Http\Request;
 
@@ -18,21 +19,45 @@ class СontactController extends Controller
         return $breadcrumbs;
     }
 
+    public function getPoints($request)
+    {
+        $points = (new PointModelService($request->search));
+
+        if(isset($request->city_id))
+        {
+            $points->where("city_id", $request->city_id);
+        }
+
+        $points = $points->pagination();
+        return $points;
+    }
+
     public function all(AllRequest $request)
     {
         $title = "Контакты";
         $description = "";
-        $points = (new PointModelService($request->search))->pagination();
+
+        $points = $this->getPoints($request);
+
         if($points->isEmpty()){abort("404");}
-        // dd($points);
+
         $breadcrumbs = $this->getBreadcrumbs();
 
-        return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs"));
+        $cities = (new CityModelService(["id"]))
+            ->defult()
+            ->whereHas('points', function ($q) {
+                $q = PointModelService::whereOn($q);
+            })
+            ->get();
+
+        $city_id = ($request->city_id ?? null);
+
+        return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs", "cities", "city_id"));
     }
 
     public function block(AllRequest $request)
     {
-        $points = (new PointModelService($request->search))->pagination();
+        $points = $this->getPoints($request);
         $html = view('sample.main.pages.сontact.components.cards', compact("points"))->render();
         $pagination = $points->appends(request()->input())->onEachSide(1)->links()->render();
 
