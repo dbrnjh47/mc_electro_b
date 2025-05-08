@@ -51,7 +51,7 @@
             <ul class="header_two__contacts">
                 @if($settings->tg)
                 <li>
-                    <a itemprop="url" href="{{$settings->tg}}">
+                    <a itemprop="url" target="_blank" href="{{$settings->tg}}">
                         <img src="/temple/images/layout/icon/social/tg.svg" alt="tg" loading="lazy" decoding="async">
                     </a>
                 </li>
@@ -59,7 +59,7 @@
 
                 @if($settings->yt)
                 <li>
-                    <a itemprop="url" href="{{$settings->yt}}">
+                    <a itemprop="url" target="_blank" href="{{$settings->yt}}">
                         <img src="/temple/images/layout/icon/social/yt.svg" alt="yt" loading="lazy" decoding="async">
                     </a>
                 </li>
@@ -67,7 +67,7 @@
 
                 @if($settings->vk)
                 <li>
-                    <a itemprop="url" href="{{$settings->vk}}">
+                    <a itemprop="url" target="_blank" href="{{$settings->vk}}">
                         <img src="/temple/images/layout/icon/social/vk.svg" alt="vk" loading="lazy" decoding="async">
                     </a>
                 </li>

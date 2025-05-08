@@ -17,6 +17,7 @@ use App\Http\Controllers\Profile\OrderController as ProfileOrderController;
 use App\Http\Controllers\Profile\WishlistController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\Text\AgreementController;
+use App\Http\Controllers\Text\PolicyController;
 use App\Http\Controllers\СontactController;
 use Illuminate\Support\Facades\Route;
 
@@ -128,4 +129,5 @@ Route::get('/about', [AboutController::class, 'show'])->name('about');
 
 // txt
 Route::get('/agreement', [AgreementController::class, 'show'])->name('agreement');
+Route::get('/policy', [PolicyController::class, 'show'])->name('policy');
 // });

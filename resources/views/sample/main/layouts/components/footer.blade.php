@@ -47,8 +47,8 @@
                 <h4>Информация</h4>
                 <ul itemscope itemtype="https://schema.org/SiteNavigationElement">
                     <li><a itemprop="url" href="#">Способы оплаты</a></li>
-                    <li><a itemprop="url" href="#">Пользовательское <br> соглашение</a></li>
-                    <li><a itemprop="url" href="#">Политика <br> конфиденциальности</a></li>
+                    <li><a itemprop="url" href="{{route("agreement")}}">Пользовательское <br> соглашение</a></li>
+                    <li><a itemprop="url" href="{{route("policy")}}">Политика <br> конфиденциальности</a></li>
                     <li><a itemprop="url" href="#">Статьи и обзоры</a></li>
                     <li><a itemprop="url" href="#">Производители и бренды</a></li>
                     <li><a itemprop="url" href="#">Архив товаров</a></li>

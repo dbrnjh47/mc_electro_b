@@ -6,7 +6,7 @@
   --content-margin: 10px;
   img {
     transition: all 0.4s;
-    transform: rotate(180deg);
+    transform: rotate(-90deg);
   }
   &__head {
     display: flex;
@@ -27,7 +27,7 @@
   &__target{
     &.activ{
         img{
-            transform: rotate(0deg);  
+            transform: rotate(0deg);
         }
     }
   }
@@ -46,6 +46,7 @@
       font-size: 18px;
       font-weight: 400;
       color: #16161f;
+      display: block;
       @media (max-width: 650px) {
         font-size: 16px;
       }
@@ -63,7 +64,7 @@
       }
       ul {
         margin-top: var(--content-margin);
-        
+
         // display: grid;
         padding-left: 17px;
         li {

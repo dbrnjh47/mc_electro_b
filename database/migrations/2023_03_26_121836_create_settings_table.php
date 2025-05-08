@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->default("");
             $table->string('abbreviation')->default("");
+            $table->string('ie')->default("ИП Виктор");
             $table->string('email')->comment("temple@mail.com");
             $table->string('phone')->comment("+954637592634");
 

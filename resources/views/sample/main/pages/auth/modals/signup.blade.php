@@ -29,7 +29,7 @@
             <div class="checkbox">
               <input name="agreement" id="modal_signup_agreement" type="checkbox">
               <label for="modal_signup_agreement">
-                Я подтверждаю, что согласен с <a href="#" target="_blank">политикой
+                Я подтверждаю, что согласен с <a href="{{route('policy')}}" target="_blank">политикой
                   конфидециальности</a>
               </label>
             </div>

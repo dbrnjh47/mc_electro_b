@@ -12,6 +12,12 @@ target.click(function() {
     }
 });
 
+dop_menu__open_buttons.on("click", function (e) {
+    let block = $(".content__head.content__target");
+    block.addClass('activ');
+    block.siblings('.content__menu').slideDown();
+});
+
 //
 
 $(".content a").click(function() {
