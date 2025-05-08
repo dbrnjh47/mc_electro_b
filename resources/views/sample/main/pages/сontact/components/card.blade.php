@@ -62,7 +62,7 @@
             <div class="contact_card__buttons">
                 @if (!$point->links->isEmpty())
                     @foreach ($point->links as $link)
-                        <a href="{{$link->url}}" class="contact_card__button contact_card__button--{{$link->category->type}}">
+                        <a target="_blank" href="{{$link->url}}" class="contact_card__button contact_card__button--{{$link->category->type}}">
                             {{$link->category->title}}
                         </a>
                     @endforeach
