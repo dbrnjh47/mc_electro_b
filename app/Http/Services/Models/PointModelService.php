@@ -46,8 +46,12 @@ class PointModelService extends ControllerModelService
         return $this->model->get();
     }
 
-    public function pagination()
+    public function pagination($page = null)
     {
+        if($page)
+        {
+            return $this->model->paginate($this->pagination, page:$page);
+        }
         return $this->model->paginate($this->pagination);
     }
 

@@ -28,12 +28,18 @@ class СontactController extends Controller
             $points->where("city_id", $request->city_id);
         }
 
-        $points = $points->pagination();
+        $points = $points->pagination($request->page);
         return $points;
     }
 
     public function all(AllRequest $request)
     {
+        if(!isset($request->page) && $this->route('page'))
+        {
+            $this->merge([
+                'page' => (int)$this->route('page'),
+            ]);
+        }
         $title = "Контакты";
         $description = "";
 
