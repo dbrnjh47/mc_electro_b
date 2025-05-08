@@ -25,6 +25,7 @@ class AllRequest extends FormRequest
     {
         return [
             'search' => ['nullable', 'string'],
+            'city_id' => ['nullable', 'integer'],
         ];
     }
 

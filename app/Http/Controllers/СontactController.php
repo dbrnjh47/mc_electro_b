@@ -34,12 +34,6 @@ class СontactController extends Controller
 
     public function all(AllRequest $request)
     {
-        if(!isset($request->page) && $this->route('page'))
-        {
-            $this->merge([
-                'page' => (int)$this->route('page'),
-            ]);
-        }
         $title = "Контакты";
         $description = "";
 
