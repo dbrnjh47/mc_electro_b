@@ -74,7 +74,7 @@ Route::prefix('company')->group(function () {
 //
 Route::get('/categories', [CategoryController::class, 'all'])->name('categories');
 Route::prefix('category')->group(function () {
-    Route::get('/{id}', [CategoryController::class, 'show'])->name('category');
+    Route::get('/{slugs}', [CategoryController::class, 'show'])->where('slugs', '.*')->name('category');
 });
 Route::get('/product/{id}', [IndexController::class, 'show'])->name('product');
 //
