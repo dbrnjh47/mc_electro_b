@@ -9,7 +9,10 @@ class IndexController extends Controller
 {
     public function all()
     {
-       Category::first()->parents();
+       $i = Category::find(4);
+    //    dd($i->children());
+    //    dd($i->parents());
+
         return view('sample.main.pages.category.all.index', ['title' => "Категории", 'description' => ""]);
     }
 

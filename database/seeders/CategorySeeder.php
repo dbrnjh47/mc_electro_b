@@ -20,6 +20,7 @@ class CategorySeeder extends Seeder
         for ($i = 0; $i < 15; $i++) {
             $c = Category::create([
                 "is_on" => rand(0,1),
+                "slug" => str_replace('.', '', str_replace(' ', '_', strtolower(fake()->unique()->sentence(rand(2, 5))))),
             ]);
             foreach ($locales as $local) {
                 $model = new CategoryLocal();
