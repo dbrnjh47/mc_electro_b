@@ -11,7 +11,7 @@ use App\Http\Services\Locale\IndexService as LocaleService;
 use Auth;
 use App\Models\Setting;
 use Illuminate\Support\Facades\App;
-
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
@@ -70,5 +70,10 @@ class Controller extends BaseController
     public static function photoAccessor($value, $path)
     {
         return $path . $value;
+    }
+
+    public function notFound($text = "")
+    {
+        throw new NotFoundHttpException($text);
     }
 }

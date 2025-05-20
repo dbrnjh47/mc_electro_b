@@ -26,6 +26,11 @@ class CategoryModelService extends ControllerModelService
         return $model;
     }
 
+    public function firstBySlug($slug)
+    {
+        return $this->model->where("slug", $slug)->first();
+    }
+
     public static function whereOn($model)
     {
         return $model;
