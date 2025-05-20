@@ -62,8 +62,10 @@ class Category extends Model
                     0 AS level
                 FROM
                     " . (new Subcategory())->getTable() . "
+                LEFT JOIN
+                    categories ON " . (new Subcategory())->getTable() . ".category_parent_id = categories.id
                 WHERE
-                    category_child_id = {$this->id}
+                    category_child_id = {$this->id} AND categories.is_on = 1
                 UNION ALL
                 SELECT
                     c.category_parent_id,
@@ -73,12 +75,16 @@ class Category extends Model
                     " . (new Subcategory())->getTable() . " AS c
                 INNER JOIN
                     CategoryPath cp ON c.category_child_id = cp.category_parent_id
-                " . ($max_level ? "WHERE cp.level < {$max_level}" : "") . "
+                LEFT JOIN
+                    categories ON c.category_parent_id = categories.id
+                WHERE categories.is_on = 1
+                " . ($max_level ? "AND cp.level < {$max_level}" : "") . "
             )
             SELECT * FROM CategoryPath as cp) as subquery
         "))->get();
 
         $parents = $this->addInfo($parents);
+
         $this->setCurrentParentPath($parents);
 
         $parents = $this->buildTree($parents);

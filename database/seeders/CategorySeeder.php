@@ -17,7 +17,7 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $locales = (new LocaleModelService)->get();
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 45; $i++) {
             $c = Category::create([
                 "is_on" => rand(0,1),
                 "slug" => str_replace('.', '', str_replace(' ', '_', strtolower(fake()->unique()->sentence(rand(2, 5))))),

@@ -9,4 +9,5 @@ class Subcategory extends Model
 {
     protected $table = "categories_sub";
     use HasFactory;
+    protected $guarded = false;
 }
