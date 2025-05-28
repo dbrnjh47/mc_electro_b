@@ -19,33 +19,45 @@ class Category extends Model
         return $this->hasOne(CategoryLocal::class, 'category_id', 'id');
     }
 
-    public function children($max_level = null)
+    public function childrens($max_level = null)
     {
         if (isset($this->children_on)) {
-            return $this->children;
+            return $this->childrens;
         }
-        $children = DB::table(DB::raw("
+        $childrens = DB::table(DB::raw("
         (WITH RECURSIVE subcategories AS (
-            SELECT category_child_id, category_parent_id, 0 AS level
-                FROM " . (new Subcategory())->getTable() . "
-            WHERE category_parent_id = {$this->id}
+            SELECT
+                category_child_id,
+                category_parent_id,
+                0 AS level,
+                categories.slug AS path
+            FROM " . (new Subcategory())->getTable() . " as c
+            LEFT JOIN categories ON c.category_child_id = categories.id
+            WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
 
             UNION ALL
 
-            SELECT c.category_child_id, c.category_parent_id, s.level + 1
-                FROM " . (new Subcategory())->getTable() . " c
+            SELECT
+                c.category_child_id,
+                c.category_parent_id,
+                s.level + 1,
+                CONCAT(s.path, '/', categories.slug ) AS path
+            FROM " . (new Subcategory())->getTable() . " c
             INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
-            " . ($max_level ? "WHERE s.level < {$max_level}" : "") . "
+            LEFT JOIN categories ON c.category_child_id = categories.id
+            WHERE categories.is_on = 1
+            " . ($max_level ? "AND s.level < {$max_level}" : "") . "
         )
         SELECT * FROM subcategories as cp) as subquery
         "))->get();
-        $children = $this->addInfo($children, is_child: 1);
 
-        $children = $this->buildTreeChildren($children);
+        $childrens = $this->addInfo($childrens, is_child: 1);
 
-        $this->children = $children;
+        $childrens = $this->buildTreeChildren($childrens);
+
+        $this->childrens = $childrens;
         $this->children_on = 1;
-        return $children;
+        return $childrens;
     }
 
 
@@ -164,6 +176,7 @@ class Category extends Model
                     $category->category_parent_id = $result[$key]->category_parent_id;
                     $category->category_child_id = $result[$key]->category_child_id;
                     $category->level = $result[$key]->level;
+                    $category->path = $result[$key]->path;
                     $result[$key] = $category;
                     // $result[$key] = (object)array_merge((array)$category, (array)$result[$key]);
                 }
@@ -208,7 +221,7 @@ class Category extends Model
             if ($id != null && $item->category_parent_id != $id) {
                 continue;
             }
-            $item->children = $this->buildTreeChildren($list, $item->level + 1, $item->category_child_id);
+            $item->childrens = $this->buildTreeChildren($list, $item->level + 1, $item->category_child_id);
 
 
             $tree[] = $item;

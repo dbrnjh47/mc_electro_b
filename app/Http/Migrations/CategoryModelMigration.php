@@ -24,6 +24,7 @@ class CategoryModelMigration
             $table->id();
 
             $table->string('name');
+            $table->string('description', 64)->nullable();
             $table->unsignedBigInteger('category_id');
 
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');

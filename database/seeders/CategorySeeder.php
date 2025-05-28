@@ -20,14 +20,15 @@ class CategorySeeder extends Seeder
         for ($i = 0; $i < 45; $i++) {
             $c = Category::create([
                 "is_on" => rand(0,1),
-                "slug" => str_replace('.', '', str_replace(' ', '_', strtolower(fake()->unique()->sentence(rand(2, 5))))),
+                "slug" => str_replace('.', '', str_replace(' ', '_', strtolower(fake()->unique()->sentence(rand(1, 3))))),
             ]);
             foreach ($locales as $local) {
                 $model = new CategoryLocal();
                 $model->setTable(CategoryLocal::$tabel_name . $local->slug);
                 $model->create([
                     "name" => fake()->text(rand(5, 15)),
-                    "category_id" => $c->id
+                    "category_id" => $c->id,
+                    "description" => fake()->text(rand(10, 35)),
                 ]);
             }
 

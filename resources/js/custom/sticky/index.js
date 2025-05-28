@@ -91,14 +91,14 @@ window.Ascroll = function (bottom) {
     if (!stickyTargetArticle) {
         stickyTargetArticle = document.getElementById('sticky_article');
         stickyTargetAside = document.querySelector('#sticky_aside1 > div');
-        console.log(stickyTargetAside);
+        // console.log(stickyTargetAside);
         let stickyResizeObserver = new ResizeObserver(entries => {
             for (let entry of entries) {
                 if (window.stickyTargetHeight != entry.contentRect.height) {
-                    console.log('была высота:', window.stickyTargetHeight);
+                    // console.log('была высота:', window.stickyTargetHeight);
                     window.stickyTargetHeight = entry.contentRect.height;
-                    console.log('Высота блока изменилась!');
-                    console.log('Новая высота:', entry.contentRect.height);
+                    // console.log('Высота блока изменилась!');
+                    // console.log('Новая высота:', entry.contentRect.height);
                     startSticky();
                 }
 

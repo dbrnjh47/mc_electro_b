@@ -25,593 +25,75 @@
         </div>
     </section>
 
-    <section class="breadcrumb">
-        <div class="breadcrumb__container">
-            <ul class="breadcrumb__lists" itemscope="" itemtype="https://schema.org/BreadcrumbList">
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope=""
-                    itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link start" href="#">
-                        <span itemprop="name">Главная</span>
-                    </a>
-                    <meta itemprop="position" content="1">
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link off">/</a>
-                </li>
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope=""
-                    itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link" href="#">
-                        <span itemprop="name">Каталог</span>
-                    </a>
-                    <meta itemprop="position" content="2">
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link off">/</a>
-                </li>
-                <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link active">
-                        <span itemprop="name">Название категории</span>
-                    </a>
-                    <meta itemprop="position" content="3">
-                </li>
-            </ul>
-        </div>
-    </section>
+    <x-breadcrumb :breadcrumbs="$breadcrumbs"></x-breadcrumb>
 
     <section class="categories">
         <div class="categories__container">
             <div class="app__title">
                 <div class="app__title_wrapper">
-                    <h2 class="app__title_text">Название категории <span>(19)</span></h2>
-                    <p class="app__title_description">Описание категории</p>
+                    <h2 class="app__title_text">{{$category->locale->name}} <span>(19)</span></h2>
+                    @if($category->locale->description)
+                        <p class="app__title_description">{{$category->locale->description}}</p>
+                    @endif
                 </div>
             </div>
 
+            @if($category->childrens)
+            @php
+                $path_slugs = route("category", ["slugs" => implode('/', $path_slugs)]);
+            @endphp
             <div class="categories__lists">
-                <div class="categories__item activ">
+                @foreach ($category->childrens as $category_children)
+                    @php
+                        $category_children->full_path = $path_slugs."/".$category_children->path;
+                    @endphp
+                    @if(!$category_children->childrens) <a href="{{$category_children->full_path}}" @else <div @endif class="categories__item @if($category_children->childrens && count($category_children->childrens) <= 3) activ @endif ">
+                    @if($category_children->childrens)
                     <div class="categories__hover">
                         <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
+                            <a href="{{$category_children->full_path}}" class="categories__hover_item">
+                                <h4 class="categories__hover_item_title bold">{{$category_children->locale->name}}</h4>
                                 <div class="categories__hover_item_line"></div>
                                 <p class="categories__hover_item_count">5</p>
                             </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
+                            @foreach ($category_children->childrens as $c)
+                            <a href="{{$path_slugs."/".$c->path}}" class="categories__hover_item">
+                                <h4 class="categories__hover_item_title">{{$c->locale->name}}</h4>
                                 <div class="categories__hover_item_line"></div>
                                 <p class="categories__hover_item_count">5</p>
                             </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
+                            @endforeach
                         </div>
 
-                        <button class="categories__hover_item_btn">Еще 8</button>
+                        <button class="categories__hover_item_btn">Еще {{count($category_children->childrens) - 3}}</button>
 
                     </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
+                    @endif
+
+                    <div class="categories__item_title">{{$category_children->locale->name}}</div>
+                    @if($category_children->locale->description)
+                        <div class="categories__item_description">{{$category_children->locale->description}}</div>
+                    @endif
 
                     <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
+                        decoding="async" alt="{{$category_children->locale->name}}">
+                @if(!$category_children->childrens) </a> @else </div> @endif
+                @endforeach
 
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
-                <div class="categories__item">
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">Название
-                                    категssssssssssssssssssssории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            <a href="#" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">Название категории</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                        </div>
-
-                        <button class="categories__hover_item_btn">Еще 8</button>
-
-                    </div>
-                    <div class="categories__item_title">Lorem ipsum</div>
-                    <div class="categories__item_description">Lorem ipsum</div>
-
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="">
-                </div>
                 <div class="categories__item categories__item_last">
-                    <h3>Оставить заявку наподбор техники</h3>
+                    <h3>Оставить заявку на подбор техники</h3>
                     <button>Заявка</button>
                 </div>
+
             </div>
 
+            @if(count($category->childrens) > 5)
             <div class="categories__btn">
                 <button class="btn">Показать еще</button>
             </div>
+            @endif
+
+            @endif
         </div>
     </section>
 
