@@ -4,3 +4,5 @@ import "/resources/scss/landing/categories.scss";
 import "/resources/scss/categories/index.scss";
 
 import "/resources/js/landing/companies.js";
+
+import "/resources/js/category/categories.js";

@@ -12,12 +12,29 @@ class IndexController extends Controller
 {
     public function all()
     {
+        $service_categories = (new CategoryModelService);
+        $categories = $service_categories
+            ->model
+            ->with(['relation_childrens' => function ($query) {
+                $query->whereHas('category', function ($q) {
+                    $q = CategoryModelService::whereOn($q);
+                })->with('category'); // Дополнительно подгружаем категорию, если нужно
+            }])
+            ->doesntHave('relation_parent');
+        $service_categories->model = $categories;
+        $categories = $service_categories->pagination();
+        // dd($categories);
+        //
 
-       $i = Category::find(4);
-    //    dd($i->children());
-    //    dd($i->parents());
+        $breadcrumbs = (new BreadcrumbService);
+        $breadcrumbs->add("Каталог", route("categories"));
 
-        return view('sample.main.pages.category.all.index', ['title' => "Категории", 'description' => ""]);
+        return view('sample.main.pages.category.all.index', [
+            'title' => "Каталог",
+            'description' => "",
+            'breadcrumbs' => $breadcrumbs,
+            'categories' => $categories
+        ]);
     }
 
     public function show(Request $request)
@@ -27,10 +44,10 @@ class IndexController extends Controller
         if(!$category || !$category->is_on){$this->notFound();}
         $category->parent_slugs = $slugs;
         $category->parents();
-        dump($category->parents_paths);
+        // dump($category->parents_paths);
         if(!in_array($request->slugs, $category->parents_paths)){$this->notFound();}
         $category->childrens(1);
-        dump($category->childrens);
+        // dump($category->childrens);
         //
 
         $breadcrumbs = (new BreadcrumbService);

@@ -10,4 +10,9 @@ class Subcategory extends Model
     protected $table = "categories_sub";
     use HasFactory;
     protected $guarded = false;
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_child_id')->with("locale")->whereHas("locale");
+    }
 }

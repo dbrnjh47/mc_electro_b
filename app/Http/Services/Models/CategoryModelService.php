@@ -6,12 +6,17 @@ use App\Models\Category\Category;
 
 class CategoryModelService extends ControllerModelService
 {
-    public $select_list;
-    public function __construct($select_list = null)
+    public $select_list, $pagination = 9;
+    public function __construct($select_list = null, $model = null)
     {
-        $this->select_list = $select_list;
-        $this->model = $this->defult();
-        $this->model->with("locale")->whereHas("locale");
+        if($model)
+        {
+            $this->model = $model;
+        } else {
+            $this->select_list = $select_list;
+            $this->model = $this->defult();
+            $this->model->with("locale")->whereHas("locale");
+        }
     }
 
     public function defult()
@@ -26,6 +31,15 @@ class CategoryModelService extends ControllerModelService
         return $model;
     }
 
+    public function pagination($page = null)
+    {
+        if($page)
+        {
+            return $this->model->paginate($this->pagination, page:$page);
+        }
+        return $this->model->paginate($this->pagination);
+    }
+
     public function firstBySlug($slug)
     {
         return $this->model->where("slug", $slug)->first();
@@ -33,7 +47,7 @@ class CategoryModelService extends ControllerModelService
 
     public static function whereOn($model)
     {
-        return $model;
+        return $model->where("is_on", 1);
     }
 
     public function getIn($ids)

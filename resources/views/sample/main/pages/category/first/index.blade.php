@@ -65,8 +65,9 @@
                             @endforeach
                         </div>
 
+                        @if((count($category_children->childrens) - 3) > 0)
                         <button class="categories__hover_item_btn">Еще {{count($category_children->childrens) - 3}}</button>
-
+                        @endif
                     </div>
                     @endif
 

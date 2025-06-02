@@ -19,6 +19,16 @@ class Category extends Model
         return $this->hasOne(CategoryLocal::class, 'category_id', 'id');
     }
 
+    public function relation_parent()
+    {
+        return $this->hasOne(Subcategory::class, 'category_child_id', 'id');
+    }
+
+    public function relation_childrens()
+    {
+        return $this->hasMany(Subcategory::class, 'category_parent_id', 'id');
+    }
+
     public function childrens($max_level = null)
     {
         if (isset($this->children_on)) {
