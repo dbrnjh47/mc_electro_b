@@ -7,12 +7,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Http\Controllers\Controller;
+
 class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
 
     protected $guarded = false;
+    const PATH = "/assets/categories/previews/";
+
+    protected function preview(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => ($value ? Controller::photoAccessor($value, self::PATH) : null),
+            // set: fn ($value) => $this->setPhotoAccessor($value),
+        );
+    }
 
     public function locale()
     {
@@ -173,7 +185,7 @@ class Category extends Model
             ->values()
             ->toArray();
 
-        $categories = (new CategoryModelService(["id", "is_on", "slug"]))->getIn($parent_ids);
+        $categories = (new CategoryModelService(["id", "is_on", "slug", "preview"]))->getIn($parent_ids);
 
         foreach ($categories as $category) {
             foreach ($result as $key => $parent) {

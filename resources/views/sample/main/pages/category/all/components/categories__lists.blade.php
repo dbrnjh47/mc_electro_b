@@ -38,8 +38,11 @@
             <div class="categories__item_title">{{ $category->locale->name }}</div>
             <div class="categories__item_description">{{ $category->locale->description }}</div>
 
-            <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                decoding="async" alt="{{ $category->locale->name }}">
+            @if ($category->preview)
+                <img class="categories__item_bg" src="{{$category->preview}}" loading="lazy"
+                    decoding="async" alt="{{ $category->locale->name }}">
+            @endif
+
         @if($category->relation_childrens->isEmpty()) </a> @else </div> @endif
     @endforeach
 

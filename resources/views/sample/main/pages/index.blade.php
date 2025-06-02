@@ -76,7 +76,7 @@
                 {{-- <p class="app__title_description">Мы собрали для вас лучшие категории, которые есть в нашем
                     магазине</p> --}}
             </div>
-            <button class="app__title_button">Смотреть все</button>
+            <a href="{{route('categories')}}" class="app__title_button">Смотреть все</a>
         </div>
 
         @include('sample.main.pages.category.all.components.categories__lists')

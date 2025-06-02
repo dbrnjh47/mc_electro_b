@@ -16,7 +16,7 @@
                     <h2 class="app__title_text">Популярные категории</h2>
                     <p class="app__title_description">Мы собрали для вас лучшие категории, которые есть в нашем магазине</p>
                 </div>
-                <p class="app__text">Кол-во категорий: <span>21</span></p>
+                {{-- <p class="app__text">Кол-во категорий: <span>21</span></p> --}}
             </div>
 
             @include('sample.main.pages.category.all.components.categories__lists')

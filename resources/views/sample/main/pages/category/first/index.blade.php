@@ -76,8 +76,10 @@
                         <div class="categories__item_description">{{$category_children->locale->description}}</div>
                     @endif
 
-                    <img class="categories__item_bg" src="/assets/categories/previews/1.png" loading="lazy"
-                        decoding="async" alt="{{$category_children->locale->name}}">
+                    @if ($category_children->preview)
+                        <img class="categories__item_bg" src="{{$category_children->preview}}" loading="lazy"
+                            decoding="async" alt="{{$category_children->locale->name}}">
+                    @endif
                 @if(!$category_children->childrens) </a> @else </div> @endif
                 @endforeach
 

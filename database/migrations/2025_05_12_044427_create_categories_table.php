@@ -17,6 +17,7 @@ return new class extends Migration
 
             $table->string('slug', 64)->unique();
             $table->boolean('is_on')->default(1);
+            $table->string('preview')->nullable();
 
             $table->timestamps();
         });
