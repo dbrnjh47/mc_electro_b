@@ -14,9 +14,9 @@ class ProductPhoto extends Model
 
     const PATH = "/assets/product/";
     protected $guarded = false;
-    protected $appends = ['photo', 'miniature'];
+    protected $appends = ['path', 'miniature'];
 
-    public function getPhotoAttribute()
+    public function getPathAttribute()
     {
         return Controller::photoAccessor($this->name, self::PATH."photo/");
     }

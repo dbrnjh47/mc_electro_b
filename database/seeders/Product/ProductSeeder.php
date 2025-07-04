@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Product;
 
 use App\Models\Category\Category;
 use App\Models\Product\Product;
@@ -21,5 +21,6 @@ class ProductSeeder extends Seeder
         }
 
         $this->call(ProductPhotoSeeder::class);
+        $this->call(ProductDocumentSeeder::class);
     }
 }

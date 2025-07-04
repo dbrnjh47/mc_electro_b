@@ -11,8 +11,8 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::with('photos')->limit(10)->get();
-        dd($products[1]->photos[0]->photo);
+        $products = Product::with(['photos', 'documents'])->limit(10)->get();
+        dd($products[1]->documents[0]->path);
         // end test
 
         $service_categories = (new CategoryModelService);

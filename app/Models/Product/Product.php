@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Product\Document\ProductDocument;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,5 +14,10 @@ class Product extends Model
     public function photos()
     {
         return $this->hasMany(ProductPhoto::class, 'product_id', 'id');
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(ProductDocument::class, 'product_id', 'id');
     }
 }
