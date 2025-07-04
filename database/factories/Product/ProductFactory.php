@@ -1,0 +1,30 @@
+<?php
+
+namespace Database\Factories\Product;
+
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product\Product>
+ */
+class ProductFactory extends Factory
+{
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
+    {
+        return [
+            "uuid" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 64).'}'),
+            "article" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 64).'}'),
+            "weight" => fake()->randomFloat(4, 1, 100),
+            "length" => fake()->randomFloat(4, 1, 100),
+            "width" => fake()->randomFloat(4, 1, 100),
+            "height" => fake()->randomFloat(4, 1, 100),
+            "step" => (rand(1, 100) > 50 ? 100 : 1),
+            "slug" => fake()->unique()->slug(rand(1, 5)),
+        ];
+    }
+}

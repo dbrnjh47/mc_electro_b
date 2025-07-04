@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\Models\BannerModelService;
 use App\Http\Services\Models\CategoryModelService;
+use App\Models\Product\Product;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
     public function index(Request $request)
     {
+        $products = Product::with('photos')->limit(10)->get();
+        dd($products[1]->photos[0]->photo);
+        // end test
+
         $service_categories = (new CategoryModelService);
         $categories = $service_categories
             ->model
