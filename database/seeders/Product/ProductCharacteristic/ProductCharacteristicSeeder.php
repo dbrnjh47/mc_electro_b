@@ -16,5 +16,6 @@ class ProductCharacteristicSeeder extends Seeder
         $this->call(ProductCharacteristicCategorySeeder::class);
         $products_ids = Product::pluck('id')->toArray();
 
+        $this->call(ProductCharacteristicTitleSeeder::class);
     }
 }

@@ -9,4 +9,9 @@ class ProductCharacteristicTitle extends Model
 {
     /** @use HasFactory<\Database\Factories\Product\Characteristic\ProductCharacteristicTitleFactory> */
     use HasFactory;
+
+    public function local()
+    {
+        return $this->hasOne(ProductCharacteristicTitleLocal::class, 'id', 'product_characteristic_id');
+    }
 }

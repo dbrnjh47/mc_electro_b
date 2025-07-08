@@ -17,7 +17,7 @@ class ProductCharacteristicTitleLocalFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "text" => fake()->text(rand(10, 20)),
         ];
     }
 }

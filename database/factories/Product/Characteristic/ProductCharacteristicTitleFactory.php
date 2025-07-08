@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Product\Characteristic;
 
+use App\Models\Product\Characteristic\ProductCharacteristicCategory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,13 @@ class ProductCharacteristicTitleFactory extends Factory
      */
     public function definition(): array
     {
+        $product_characteristic_category_id = null;
+        if(rand(1, 100) > 50)
+        {
+            $product_characteristic_category_id = ProductCharacteristicCategory::inRandomOrder()->first()->id;
+        }
         return [
-            //
+            "product_characteristic_category_id" => $product_characteristic_category_id
         ];
     }
 }
