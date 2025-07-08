@@ -12,9 +12,9 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\Product\ProductFactory> */
     use HasFactory;
 
-    public function photos()
+    public function medias()
     {
-        return $this->hasMany(ProductPhoto::class, 'product_id', 'id');
+        return $this->hasMany(ProductMedia::class, 'product_id', 'id');
     }
 
     public function documents()

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Http\Controllers\Controller;
 
-class ProductPhoto extends Model
+class ProductMedia extends Model
 {
     /** @use HasFactory<\Database\Factories\Product\ProductPhotoFactory> */
     use HasFactory;

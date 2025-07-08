@@ -6,9 +6,9 @@ use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product\ProductPhoto>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product\ProductMedia>
  */
-class ProductPhotoFactory extends Factory
+class ProductMediaFactory extends Factory
 {
     /**
      * Define the model's default state.

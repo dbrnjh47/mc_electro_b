@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
             Product::factory(rand(1, 30))->create();
         }
 
-        $this->call(ProductPhotoSeeder::class);
+        $this->call(ProductMediaSeeder::class);
         $this->call(ProductDocumentSeeder::class);
         $this->call(ProductCharacteristicSeeder::class);
     }
