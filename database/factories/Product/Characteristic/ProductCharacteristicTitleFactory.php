@@ -5,9 +5,9 @@ namespace Database\Factories\Product\Characteristic;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product\Characteristic\ProductCharacteristicConvert>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product\Characteristic\ProductCharacteristicTitle>
  */
-class ProductCharacteristicConvertFactory extends Factory
+class ProductCharacteristicTitleFactory extends Factory
 {
     /**
      * Define the model's default state.

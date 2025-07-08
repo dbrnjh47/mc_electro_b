@@ -1,11 +1,11 @@
 <?php
 
-namespace Database\Seeders\ProductCharacteristic;
+namespace Database\Seeders\Product\ProductCharacteristic;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductCharacteristicCategorySeeder extends Seeder
+class ProductCharacteristicTitleSeeder extends Seeder
 {
     /**
      * Run the database seeds.

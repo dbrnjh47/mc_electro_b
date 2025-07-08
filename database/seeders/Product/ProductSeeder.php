@@ -4,6 +4,7 @@ namespace Database\Seeders\Product;
 
 use App\Models\Category\Category;
 use App\Models\Product\Product;
+use Database\Seeders\Product\ProductCharacteristic\ProductCharacteristicSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,5 +23,6 @@ class ProductSeeder extends Seeder
 
         $this->call(ProductPhotoSeeder::class);
         $this->call(ProductDocumentSeeder::class);
+        $this->call(ProductCharacteristicSeeder::class);
     }
 }

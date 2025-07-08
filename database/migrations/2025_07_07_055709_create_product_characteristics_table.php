@@ -17,12 +17,10 @@ return new class extends Migration
             $table->decimal('value', 11, 6)->nullable();
 
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('product_characteristic_category_id')->nullable();
-            $table->unsignedBigInteger('product_characteristic_convert_id')->nullable();
+            $table->unsignedBigInteger('product_characteristic_title_id');
 
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
-            $table->foreign('product_characteristic_category_id', "product_ch_product_ch_category_id_foreign")->references('id')->on('product_characteristic_categories')->onUpdate('cascade'); // ->onDelete('cascade')
-            $table->foreign('product_characteristic_convert_id', "product_ch_product_ch_convert_id_foreign")->references('id')->on('product_characteristic_converts')->onUpdate('cascade'); // ->onDelete('cascade')
+            $table->foreign('product_characteristic_title_id', "product_ch_product_ch_title_id_foreign")->references('id')->on('product_characteristic_titles')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->timestamps();
         });
     }

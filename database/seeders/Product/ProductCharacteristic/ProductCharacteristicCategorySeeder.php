@@ -1,12 +1,13 @@
 <?php
 
-namespace Database\Seeders\ProductCharacteristic;
+namespace Database\Seeders\Product\ProductCharacteristic;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductCharacteristicCategoryLocalSeeder extends Seeder
+class ProductCharacteristicCategorySeeder extends Seeder
 {
+    public $titles = [""];
     /**
      * Run the database seeds.
      */
