@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Product\Characteristic;
 
+use App\Models\Product\Characteristic\ProductCharacteristicTitle;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class ProductCharacteristicFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "product_characteristic_title_id" => ProductCharacteristicTitle::whereNull("unit_id")->inRandomOrder()->first()->id
         ];
     }
 }

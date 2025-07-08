@@ -12,6 +12,6 @@ class ProductCharacteristicTitle extends Model
 
     public function local()
     {
-        return $this->hasOne(ProductCharacteristicTitleLocal::class, 'id', 'product_characteristic_id');
+        return $this->hasOne(ProductCharacteristicTitleLocal::class, 'id', 'product_characteristic_title_id');
     }
 }
