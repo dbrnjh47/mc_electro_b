@@ -12,6 +12,10 @@ class ProductCharacteristicTitle extends Model
 
     public function locale()
     {
-        return $this->hasOne(ProductCharacteristicTitleLocal::class, 'id', 'product_characteristic_title_id');
+        return $this->hasOne(ProductCharacteristicTitleLocal::class, 'product_characteristic_title_id', 'id');
+    }
+    public function category()
+    {
+        return $this->hasOne(ProductCharacteristicCategory::class, 'id', 'product_characteristic_category_id');
     }
 }

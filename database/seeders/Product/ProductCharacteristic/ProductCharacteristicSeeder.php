@@ -18,7 +18,7 @@ class ProductCharacteristicSeeder extends Seeder
     public function run(): void
     {
         $this->call(ProductCharacteristicCategorySeeder::class);
-        $products_ids = Product::pluck('id')->toArray();
+        $products_ids = Product::where("id", "!=", 1)->pluck('id')->toArray();
         $local = Locale::where("slug", "ru")->first();
         $this->call(ProductCharacteristicTitleSeeder::class);
 

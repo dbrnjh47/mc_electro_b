@@ -137,7 +137,9 @@
 
                 <section class="product_menu_blocks product_menu_blocks__container">
                     <div class="activ">Описание</div>
-                    <div>Характеристики</div>
+                    @if(!$product->characteristics->isEmpty())
+                        <div>Характеристики</div>
+                    @endif
                     <div>Отзывы <span>(9)</span></div>
                     <div>Вопрос ответ <span>(9)</span></div>
                     @if(!$product->documents->isEmpty())
@@ -575,50 +577,32 @@
                         </div>
                     </section>
 
+                    @if(!$product->characteristics->isEmpty())
                     <section class="product_menu_block__characteristics">
-                        <h1 class="product_menu_block__title">Общие характеристики</h1>
-                        <div class="product_menu_block__characteristics_content">
-                            <h3 class="product_menu_block__characteristics_title">
-                                Название
-                            </h3>
-                            <div class="product_menu_block__characteristics_line">
-                                <div class="product_menu_block__characteristics_name">
-                                    Характеристика
-                                </div>
-                                <span></span>
-                                <div class="pproduct_menu_block__characteristics_value">
-                                    Значение
-                                </div>
+                        <h1 class="product_menu_block__title">Характеристики</h1>
+                        <div class="product_menu_block__characteristics_contents">
+                            @foreach ($product->characteristics as $characteristic_category)
+                            <div class="product_menu_block__characteristics_content">
+                                <h3 class="product_menu_block__characteristics_title">
+                                    {{$characteristic_category['category']->locale->title}}
+                                </h3>
+                                @foreach ($characteristic_category['items'] as $characteristic)
+                                    <div class="product_menu_block__characteristics_line">
+                                        <div class="product_menu_block__characteristics_name">
+                                            {{$characteristic->title->locale->text}}
+                                        </div>
+                                        <span></span>
+                                        <div class="product_menu_block__characteristics_value">
+                                            {{($characteristic->value != null ? $characteristic->value : $characteristic->locale->text)}}
+                                        </div>
+                                    </div>
+                                @endforeach
                             </div>
-                            <div class="product_menu_block__characteristics_line">
-                                <div class="product_menu_block__characteristics_name">
-                                    Характеристика
-                                </div>
-                                <span></span>
-                                <div class="pproduct_menu_block__characteristics_value">
-                                    Значение
-                                </div>
-                            </div>
-                            <div class="product_menu_block__characteristics_line">
-                                <div class="product_menu_block__characteristics_name">
-                                    Характеристика
-                                </div>
-                                <span></span>
-                                <div class="pproduct_menu_block__characteristics_value">
-                                    Значение
-                                </div>
-                            </div>
-                            <div class="product_menu_block__characteristics_line">
-                                <div class="product_menu_block__characteristics_name">
-                                    Характеристика
-                                </div>
-                                <span></span>
-                                <div class="pproduct_menu_block__characteristics_value">
-                                    Значение
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
+
                     </section>
+                    @endif
 
                     @if(!$product->documents->isEmpty())
                     <section class="product_menu_block__documentations">
