@@ -1,35 +1,32 @@
-.product_menu_block__documentations{
-    &_content{
-        display: flex
-        ;
-            gap: 30px;
-            flex-wrap: wrap;
+.product_menu_block__documentations {
+    &_content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        row-gap: 15px;
     }
-    &_list{
-        
-        h3{
+    &_list {
+        h3 {
             font-size: 18px;
             font-weight: 600;
-            color: #16161F;
+            color: #16161f;
         }
-        a{
+        a {
             font-size: 18px;
             font-weight: 400;
             transition: all 0.4s;
-            color: #8E95A6;
-            display: flex
-            ;
-                align-items: center;
-                gap: 5px;
-                margin-top: 10px;
-            svg{
-                fill: #8E95A6;
+            color: #8e95a6;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            svg {
+                fill: #8e95a6;
                 transition: all 0.4s;
             }
-            &:hover{
-                color: #DE002B;
-                svg{
-                    fill: #DE002B;
+            &:hover {
+                color: #de002b;
+                svg {
+                    fill: #de002b;
                 }
             }
         }
