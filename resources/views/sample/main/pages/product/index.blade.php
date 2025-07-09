@@ -47,11 +47,14 @@
                 </li>
             </ul>
         </section>
+
         <section class="product_title">
             <div class="app__title">
                 <div class="app__title_wrapper">
-                    <h2 class="app__title_text">Название товара <span class="copy_button">#К00023764</span><span
-                            class="copy_button">#К00023764</span></h2>
+                    <h2 class="app__title_text">{{$product->locale->name}}
+                        @if($product->uuid)<span class="copy_button">#{{$product->uuid}}</span>@endif
+                        @if($product->article)<span class="copy_button">#{{$product->article}}</span>@endif
+                    </h2>
                     <div class="product_title__statistics">
                         <div>
                             <!-- public\temple\images\company\icon\star.svg -->
@@ -80,129 +83,51 @@
             <section id="sticky_article" class="product_info">
                 <section class="product_basic_sliders">
 
+                    @if(!$product->medias->isEmpty())
                     <div class="product_basic_slider_miniature">
                         <div class="swiper" id="product_basic_slider_miniature">
                             <div class="swiper-wrapper">
+                                @foreach ($product->medias as $media)
                                 <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
+                                    <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
                                 </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
-
-                                <div class="swiper-slide">
-                                    <img src="/assets/product/miniature/test.png" alt="" />
-                                </div>
+                                @endforeach
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
                         </div>
                     </div>
+                    @endif
 
                     <div class="swiper product_basic_slider" id="product_basic_slider">
                         <div class="product_info__tips">
                             <span>Хит</span>
                             <span class="recommend">Советуем</span>
                         </div>
+
                         <div class="swiper-wrapper">
-
+                            @if($product->medias->isEmpty())
+                            @php
+                                $defult_media = \App\Models\Product\ProductMedia::getDefult();
+                            @endphp
                             <div class="swiper-slide">
                                 <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
+                                    <img src="{{$defult_media->path}}" alt="defult" loading="lazy" decoding="async">
                                 </div>
                             </div>
+                            @else
 
+                            @foreach ($product->medias as $media)
                             <div class="swiper-slide">
                                 <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
+                                    <img src="{{$media->path}}" alt="{{$product->locale->name}}" loading="lazy" decoding="async">
                                     <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
+                                        style="background-image: url('{{$media->path}}');"></span>
                                 </div>
                             </div>
+                            @endforeach
 
-                            <div class="swiper-slide">
-                                <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
-                                </div>
-                            </div>
-
-                            <div class="swiper-slide">
-                                <div class="product_basic_slider__slide">
-                                    <img src="/assets/product/photo/test.png" alt="">
-                                    <span class="product_basic_slider__slide_cover"
-                                        style="background-image: url('/assets/product/photo/test.png');"></span>
-                                </div>
-                            </div>
-
+                            @endif
                         </div>
 
                     </div>

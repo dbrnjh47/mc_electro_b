@@ -29,7 +29,7 @@ class ProductCharacteristicTitleSeeder extends Seeder
                             'product_characteristic_title_id' => $title->id
                         ];
                     }),
-                    'local'
+                    'locale'
                 )
                 ->create([
                     "unit_id" => $unit_rule->unit_id,
@@ -45,7 +45,7 @@ class ProductCharacteristicTitleSeeder extends Seeder
                             'product_characteristic_title_id' => $title->id
                         ];
                     }),
-                    'local'
+                    'locale'
                 )
                 ->create();
 

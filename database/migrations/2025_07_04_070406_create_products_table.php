@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
 
-            $table->string('uuid')->nullable()->index();
-            $table->string('article')->nullable()->index();
+            $table->string('uuid', 124)->nullable()->index();
+            $table->string('article', 124)->nullable()->index();
 
             $table->string('slug', 128)->unique();
 

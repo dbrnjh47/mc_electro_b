@@ -13,6 +13,7 @@ class ProductMedia extends Model
     use HasFactory;
 
     const PATH = "/assets/product/";
+    const DEFAULT = "default.jpg";
     protected $guarded = false;
     protected $appends = ['path', 'miniature'];
 
@@ -24,5 +25,13 @@ class ProductMedia extends Model
     public function getMiniatureAttribute()
     {
         return Controller::photoAccessor($this->name, self::PATH."miniature/");
+    }
+
+    public static function getDefult()
+    {
+        return (object)[
+            "path" => Controller::photoAccessor(self::DEFAULT, self::PATH."photo/"),
+            "miniature" => Controller::photoAccessor(self::DEFAULT, self::PATH."miniature/")
+        ];
     }
 }

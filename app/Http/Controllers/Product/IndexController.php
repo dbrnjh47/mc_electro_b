@@ -3,11 +3,21 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Models\ProductModelService;
 
 class IndexController extends Controller
 {
-    public function show()
+    public function show($slug)
     {
-        return view('sample.main.pages.product.index', ['title' => "Продукт", 'description' => ""]);
+        $product = (new ProductModelService(slug: $slug))
+            ->getModel()
+            ->with("medias")
+            ->firstOrFail();
+        // dump($product);
+        return view('sample.main.pages.product.index', [
+            'title' => $product->locale->name,
+            'description' => "",
+            'product' => $product
+        ]);
     }
 }

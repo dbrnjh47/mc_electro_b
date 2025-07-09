@@ -17,8 +17,8 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            "uuid" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 64).'}'),
-            "article" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 64).'}'),
+            "uuid" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 48).'}'),
+            "article" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 48).'}'),
             "weight" => fake()->randomFloat(4, 1, 100),
             "length" => fake()->randomFloat(4, 1, 100),
             "width" => fake()->randomFloat(4, 1, 100),

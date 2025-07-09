@@ -38,7 +38,7 @@ class ProductCharacteristicSeeder extends Seeder
                                 'product_characteristic_id' => $product_characteristic->id
                             ];
                         }),
-                        'local'
+                        'locale'
                     )->create([
                         "product_id" => $products_id
                     ]);
