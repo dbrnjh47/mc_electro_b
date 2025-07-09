@@ -12,8 +12,11 @@ class IndexController extends Controller
         $product = (new ProductModelService(slug: $slug))
             ->getModel()
             ->with("medias")
+            ->with("documents", function ($q) {
+                $q = $q->where("locale_id", app()->user_local->id);
+            })
             ->firstOrFail();
-        // dump($product);
+        dump($product);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
             'description' => "",

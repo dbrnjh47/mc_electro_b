@@ -32,7 +32,7 @@ class ProductModelService extends ControllerModelService
 
         $model->with('locale')
             ->whereHas('locale', function ($q) {
-                $q = $q->where("id", app()->user_local->id);
+                $q = $q->where("locale_id", app()->user_local->id);
             });
 
         return $model;
