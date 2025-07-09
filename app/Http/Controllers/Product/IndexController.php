@@ -9,12 +9,18 @@ class IndexController extends Controller
 {
     public function show($slug)
     {
-        $product = (new ProductModelService(slug: $slug))
+        $product = (new ProductModelService(slug: $slug, select_list: [
+            "id", "uuid", "article", "slug", "weight", "length", "width", "height", "step"
+        ]))
             ->getModel()
-            ->with("medias")
-            ->with("documents", function ($q) {
-                $q = $q->where("locale_id", app()->user_local->id);
-            })
+            ->with([
+                'medias' => function ($q) {
+                    $q->select(['name', 'product_id']);
+                },
+                'documents' => function ($q) {
+                    $q = $q->select(['title', 'name', 'product_id'])->where("locale_id", app()->user_local->id);
+                }
+            ])
             ->with(['characteristics' => function ($query) {
                 $query->where(function($q) {
                         $q->whereNotNull('value') // value != null
@@ -22,19 +28,26 @@ class IndexController extends Controller
                                 $q2 = $q2->where("locale_id", app()->user_local->id);
                             });  // ИЛИ local существует
                     })
-                    ->with(['locale' => function ($q) {
-                        $q->where('locale_id', app()->user_local->id);
-                    }])
-
+                    ->with([
+                        'locale' => function ($q) {
+                            $q->select(['text', 'product_characteristic_id'])->where('locale_id', app()->user_local->id);
+                        },
+                        'title' => function ($q) {
+                            $q->select(['id', 'product_characteristic_category_id', 'unit_id', 'to_unit_id']);
+                        },
+                        'title.locale' => function ($q) {
+                            $q->select(['text', 'product_characteristic_title_id'])->where('locale_id', app()->user_local->id);
+                        },
+                        'title.category' => function ($q) {
+                            $q->select(['id']);
+                        },
+                        'title.category.locale' => function ($q) {
+                            $q->select(['title', 'product_characteristic_category_id'])->where('locale_id', app()->user_local->id);
+                        },
+                    ])
                     ->whereHas('title.locale', function ($q) {
                         $q->where('locale_id', app()->user_local->id);
-                    })
-                    ->with(['title.locale' => function ($q) {
-                        $q->where('locale_id', app()->user_local->id);
-                    }])
-                    ->with(['title.category.locale' => function ($q) {
-                        $q->where('locale_id', app()->user_local->id);
-                    }]);
+                    });
             }])
             ->firstOrFail();
         // dump($product->characteristics);
