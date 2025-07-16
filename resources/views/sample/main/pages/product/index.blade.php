@@ -592,7 +592,7 @@
                                         </div>
                                         <span></span>
                                         <div class="product_menu_block__characteristics_value">
-                                            {{($characteristic->value != null ? $characteristic->value : $characteristic->locale->text)}}
+                                            {{($characteristic->value != null ? "{$characteristic->getValueProccess()} {$characteristic->getValueName()}" : $characteristic->locale->text)}}
                                         </div>
                                     </div>
                                 @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 use App\Http\Services\Models\ProductModelService;
 
 class IndexController extends Controller
@@ -47,13 +48,32 @@ class IndexController extends Controller
                         'title.category.locale' => function ($q) {
                             $q->select(['title', 'product_characteristic_category_id'])->where('locale_id', app()->user_local->id);
                         },
+                        //
+                        'title.unit' => function ($q) {
+                            $q->select(['id']);
+                        },
+                        'title.toUnit' => function ($q) {
+                            $q->select(['id']);
+                        },
+                        'title.unit.locale' => function ($q) {
+                            $q->select(['text', 'unit_id'])->where('locale_id', app()->user_local->id);
+                        },
+                        'title.toUnit.locale' => function ($q) {
+                            $q->select(['text', 'unit_id'])->where('locale_id', app()->user_local->id);
+                        },
+
+                        // 'title.unitRules' => function ($q) {
+                        //     $q->select(['unit_id', 'to_unit_id', 'value', 'action']);
+                        // },
                     ])
                     ->whereHas('title.locale', function ($q) {
                         $q->where('locale_id', app()->user_local->id);
                     });
             }])
             ->firstOrFail();
-        // dump($product->characteristics);
+        $product->characteristics = (new ProductCharacteristicModelService)->setUnitRules($product->characteristics);
+        // dd($product->characteristics);
+
         $product->characteristics = $product->characteristics->groupBy(function ($char) {
                 return $char->title->category ? $char->title->category->id : 'other';
             })->map(function ($chars, $key) {
@@ -67,7 +87,7 @@ class IndexController extends Controller
                 return $group['category']->id === null ? 9999 : $group['category']->id;
             })->values();
 
-
+            // dd($product);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
             'description' => "",

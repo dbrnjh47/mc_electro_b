@@ -9,4 +9,9 @@ class Unit extends Model
 {
     /** @use HasFactory<\Database\Factories\Unit\UnitFactory> */
     use HasFactory;
+
+    public function locale()
+    {
+        return $this->hasOne(UnitLocal::class, 'unit_id', 'id');
+    }
 }
