@@ -19,7 +19,10 @@ class IndexController extends Controller
                 },
                 'documents' => function ($q) {
                     $q = $q->select(['title', 'name', 'product_id'])->where("locale_id", app()->user_local->id);
-                }
+                },
+                'description' => function ($q) {
+                    $q = $q->select(['text', 'product_id'])->where("locale_id", app()->user_local->id);
+                },
             ])
             ->with(['characteristics' => function ($query) {
                 $query->where(function($q) {
@@ -64,7 +67,7 @@ class IndexController extends Controller
                 return $group['category']->id === null ? 9999 : $group['category']->id;
             })->values();
 
-        // dd($product->characteristics);
+
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
             'description' => "",
