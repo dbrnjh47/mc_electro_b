@@ -52,8 +52,8 @@
             <div class="app__title">
                 <div class="app__title_wrapper">
                     <h2 class="app__title_text">{{$product->locale->name}}
-                        @if($product->uuid)<span class="copy_button">#{{$product->uuid}}</span>@endif
-                        @if($product->article)<span class="copy_button">#{{$product->article}}</span>@endif
+                        @if($product->uuid)<span class="copy_button" data-copy-text="{{$product->uuid}}">#{{$product->uuid}}</span>@endif
+                        @if($product->article)<span class="copy_button" data-copy-text="{{$product->article}}">#{{$product->article}}</span>@endif
                     </h2>
                     <div class="product_title__statistics">
                         <div>
