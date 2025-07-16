@@ -12,12 +12,9 @@ class Currency extends Model
     use HasFactory;
 
     const PATH = "/assets/banners/";
-
-    protected function img(): Attribute
+    protected $appends = ['img_path'];
+    public function getIMGPathAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => ($value ? Controller::photoAccessor($value, self::PATH) : null),
-            // set: fn ($value) => $this->setPhotoAccessor($value),
-        );
+        return ($this->img ? Controller::photoAccessor($this->img, self::PATH) : null);
     }
 }

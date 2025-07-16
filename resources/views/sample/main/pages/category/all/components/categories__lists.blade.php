@@ -39,7 +39,7 @@
             <div class="categories__item_description">{{ $category->locale->description }}</div>
 
             @if ($category->preview)
-                <img class="categories__item_bg" src="{{$category->preview}}" loading="lazy"
+                <img class="categories__item_bg" src="{{$category->preview_path}}" loading="lazy"
                     decoding="async" alt="{{ $category->locale->name }}">
             @endif
 

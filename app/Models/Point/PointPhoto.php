@@ -14,13 +14,12 @@ class PointPhoto extends Model
     use HasFactory;
 
     const PATH = "/assets/contacts/photo/";
+    const DEFULT_PREVIEW_PATH = "/temple/images/contact/default.jpg";
     protected $guarded = false;
+    protected $appends = ['img_path'];
 
-    protected function img(): Attribute
+    public function getIMGPathAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => ($value ? Controller::photoAccessor($value, self::PATH) : null),
-            // set: fn ($value) => $this->setPhotoAccessor($value),
-        );
+        return ($this->img ? Controller::photoAccessor($this->img, self::PATH) : null);
     }
 }

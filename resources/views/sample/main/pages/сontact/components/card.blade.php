@@ -6,15 +6,15 @@
                 @if (!$point->photos->isEmpty())
                     @foreach ($point->photos as $photo)
                         <div class="swiper-slide contact_card__slide">
-                            <img class="contact_card__swiper_image" src="{{ $photo->img }}"
+                            <img class="contact_card__swiper_image" src="{{ $photo->img_path }}"
                                 loading="lazy" decoding="async" alt="{{ $point->locale->address }}" />
                             <span class="contact_card__swiper_image_cover"
-                                style="background-image: url('{{ $photo->img }}');"></span>
+                                style="background-image: url('{{ $photo->img_path }}');"></span>
                         </div>
                     @endforeach
                 @else
                     <div class="swiper-slide contact_card__slide">
-                        <img class="contact_card__swiper_image contact_card__swiper_image_defult" src="{{ \App\Models\Point\Point::DEFULT_PREVIEW_PATH }}" loading="lazy"
+                        <img class="contact_card__swiper_image contact_card__swiper_image_defult" src="{{ \App\Models\Point\PointPhoto::DEFULT_PREVIEW_PATH }}" loading="lazy"
                             decoding="async" alt="{{ $point->locale->address }}" />
                     </div>
                 @endif

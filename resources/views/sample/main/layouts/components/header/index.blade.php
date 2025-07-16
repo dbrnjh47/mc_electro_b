@@ -160,7 +160,7 @@
                         <div class="header__world_dropdown__menu_items">
                             @foreach ($locales as $locale)
                             <a href="{{$locale->getUrl()}}" class="header__world_dropdown__menu_item @if($user_local->id == $locale->id) active @endif">
-                                <img src="{{$locale->icon}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
+                                <img src="{{$locale->icon_path}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
                                 {{$locale->text}}
                             </a>
                             @endforeach

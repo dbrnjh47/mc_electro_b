@@ -125,7 +125,7 @@
                         <div class="setting_item_select">
                             @foreach ($locales as $locale)
                                 @if ($user_local->id == $locale->id)
-                                    <img src="{{$locale->icon}}" alt="{{$locale->slug}}" loading="lazy" decoding="async">
+                                    <img src="{{$locale->icon_path}}" alt="{{$locale->slug}}" loading="lazy" decoding="async">
                                     {{$locale->text}}
                                     @break
                                 @endif
@@ -141,7 +141,7 @@
                         <div class="setting_items">
                             @foreach ($locales as $locale)
                             <a href="{{$locale->getUrl()}}" class="setting_item @if($user_local->id == $locale->id) activ @endif">
-                                <img src="{{$locale->icon}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
+                                <img src="{{$locale->icon_path}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
                                 {{$locale->text}}
                             </a>
                             @endforeach
@@ -154,7 +154,7 @@
 
                     <div class="setting_items_wrapper">
                         <div class="setting_item_select">
-                            {{$user_currency->icon}}
+                            {{$user_currency->icon_path}}
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="6"
                                 viewBox="0 0 9 6" fill="none">
                                 <path
@@ -166,7 +166,7 @@
                         <div class="setting_items">
                             @foreach ($currencies as $currency)
                                 <a href="{{ route("currency.set", ["id" => $currency->id]) }}" class="setting_item @if($user_currency->id == $currency->id) activ @endif">
-                                    {{$currency->icon}}
+                                    {{$currency->icon_path}}
                                 </a>
                             @endforeach
                             {{-- <a class="setting_item  activ " onclick="setCurrencie(1)">

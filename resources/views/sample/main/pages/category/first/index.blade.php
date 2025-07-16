@@ -77,7 +77,7 @@
                     @endif
 
                     @if ($category_children->preview)
-                        <img class="categories__item_bg" src="{{$category_children->preview}}" loading="lazy"
+                        <img class="categories__item_bg" src="{{$category_children->preview_path}}" loading="lazy"
                             decoding="async" alt="{{$category_children->locale->name}}">
                     @endif
                 @if(!$category_children->childrens) </a> @else </div> @endif

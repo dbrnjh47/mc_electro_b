@@ -13,7 +13,6 @@ class Point extends Model
     use HasFactory;
 
     protected $guarded = false;
-    const DEFULT_PREVIEW_PATH = "/temple/images/contact/default.jpg";
 
     public function locale()
     {

@@ -18,12 +18,11 @@ class Category extends Model
     protected $guarded = false;
     const PATH = "/assets/categories/previews/";
 
-    protected function preview(): Attribute
+    protected $appends = ['preview_path'];
+
+    public function getPreviewPathAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => ($value ? Controller::photoAccessor($value, self::PATH) : null),
-            // set: fn ($value) => $this->setPhotoAccessor($value),
-        );
+        return ($this->preview ? Controller::photoAccessor($this->preview, self::PATH) : null);
     }
 
     public function locale()

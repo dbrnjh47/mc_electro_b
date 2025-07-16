@@ -13,8 +13,8 @@ class Banner extends Model
     use HasFactory;
 
     const PATH = "/assets/banners/";
-
-    public function getHref()
+    protected $appends = ['img_path'];
+    public function getIMGPathAttribute()
     {
         return ($this->img ? Controller::photoAccessor($this->img, self::PATH) : null);
     }

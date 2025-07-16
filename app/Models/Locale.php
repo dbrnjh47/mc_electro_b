@@ -13,13 +13,10 @@ class Locale extends Model
     /** @use HasFactory<\Database\Factories\LocaleFactory> */
     use HasFactory;
     const PATH = "/temple/images/locales/icon/";
-
-    protected function icon(): Attribute
+    protected $appends = ['icon_path'];
+    public function getIconPathAttribute()
     {
-        return Attribute::make(
-            get: fn ($value) => ($value ? Controller::photoAccessor($value, self::PATH) : null),
-            // set: fn ($value) => $this->setPhotoAccessor($value),
-        );
+        return ($this->icon ? Controller::photoAccessor($this->icon, self::PATH) : null);
     }
 
     // {{$locale->getUrl()}}
