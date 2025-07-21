@@ -18,3 +18,6 @@
 !/assets/product/photo/default.jpg
 /assets/user/avatar/*
 !/assets/user/avatar/defult.svg
+/assets/product/review/*
+!/assets/product/review/test.mp4
+!/assets/product/review/test.webp

@@ -10,6 +10,7 @@ use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductLocale;
 use Database\Seeders\Product\ProductCharacteristic\ProductCharacteristicSeeder;
 use Database\Seeders\Product\ProductLabel\ProductLabelOptionSeeder;
+use Database\Seeders\Product\ProductReview\ProductReviewSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -57,6 +58,7 @@ class ProductSeeder extends Seeder
         $this->call(ProductDocumentSeeder::class);
         $this->call(ProductCharacteristicSeeder::class);
         $this->call(ProductDescriptionSeeder::class);
+        $this->call(ProductReviewSeeder::class);
 
         ProductLabel::where("product_id", 1)->delete();
     }
