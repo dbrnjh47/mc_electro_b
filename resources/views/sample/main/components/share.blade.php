@@ -4,6 +4,9 @@
     </div>
     <div class="share__menu">
 
+        <a class="share__item copy_button" data-copy-text="{{$url}}">
+            коп
+        </a>
         <a class="share__item" target="_blank"
             href="https://vk.com/share.php?url={{$url}}&title={{$text}}">
             вк

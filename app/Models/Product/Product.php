@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use App\Models\Product\Characteristic\ProductCharacteristic;
 use App\Models\Product\Document\ProductDocument;
+use App\Models\Product\Label\ProductLabel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +16,11 @@ class Product extends Model
     public function locale()
     {
         return $this->hasOne(ProductLocale::class, 'product_id', 'id');
+    }
+
+    public function categories()
+    {
+        return $this->hasOne(ProductCategory::class, 'product_id', 'id');
     }
 
     public function description()
@@ -35,5 +41,10 @@ class Product extends Model
     public function characteristics()
     {
         return $this->hasMany(ProductCharacteristic::class, 'product_id', 'id');
+    }
+
+    public function labels()
+    {
+        return $this->hasMany(ProductLabel::class, 'product_id', 'id');
     }
 }
