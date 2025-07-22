@@ -21,3 +21,5 @@
 /assets/product/review/*
 !/assets/product/review/test.mp4
 !/assets/product/review/test.webp
+/assets/companies/media/*
+!/assets/companies/media/1.png

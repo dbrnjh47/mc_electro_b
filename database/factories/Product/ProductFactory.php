@@ -2,6 +2,7 @@
 
 namespace Database\Factories\Product;
 
+use App\Models\Company\Company;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -25,6 +26,7 @@ class ProductFactory extends Factory
             "height" => fake()->randomFloat(4, 1, 100),
             "step" => (rand(1, 100) > 50 ? 100 : 1),
             "slug" => fake()->unique()->slug(rand(1, 5)),
+            "company_id" => (rand(0, 100) > 50 ? Company::inRandomOrder()->where("id", "!=", 1)->first()->id : null)
         ];
     }
 }
