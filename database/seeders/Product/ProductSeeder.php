@@ -59,6 +59,7 @@ class ProductSeeder extends Seeder
         $this->call(ProductCharacteristicSeeder::class);
         $this->call(ProductDescriptionSeeder::class);
         $this->call(ProductReviewSeeder::class);
+        $this->call(ProductPointSeeder::class);
 
         ProductLabel::where("product_id", 1)->delete();
     }
