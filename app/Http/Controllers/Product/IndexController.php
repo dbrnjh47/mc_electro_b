@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Http\Controllers\Category\IndexController as CategoryIndexController;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 use App\Http\Services\Models\ProductModelService;
 
 class IndexController extends Controller
 {
-    public function show($slug)
+    public function __construct()
+    {
+
+    }
+    public function show($category, $slug)
     {
         $product = (new ProductModelService(slug: $slug, select_list: [
             "id",
@@ -86,6 +91,9 @@ class IndexController extends Controller
                         $q->where('locale_id', app()->user_local->id);
                     });
             }])
+            ->whereHas('categories', function ($q) use ($category) {
+                $q->where('category_id', $category->id);
+            })
             ->firstOrFail();
         $product->characteristics = (new ProductCharacteristicModelService)->setUnitRules($product->characteristics);
         // dd($product->characteristics);
@@ -103,12 +111,20 @@ class IndexController extends Controller
             return $group['category']->id === null ? 9999 : $group['category']->id;
         })->values();
 
-        dump($product);
+        // dump($product);
+
+        //
+
+        [$path_slugs, $breadcrumbs] = (new CategoryIndexController)->getBreadcrumbsShow($category);
+        $breadcrumbs->add($product->locale->name, "#");
+
+        // dd($breadcrumbs);
         // dd($product);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
             'description' => "",
-            'product' => $product
+            'product' => $product,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 }
