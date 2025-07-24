@@ -27,7 +27,7 @@
                     </svg> 300 отзывов</span>
             </p>
             <p>
-                Кол-во товаров: <span>200</span>
+                Кол-во товаров: <span>{{$company->products_count}}</span>
             </p>
         </div>
     </div>

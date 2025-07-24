@@ -35,6 +35,7 @@ class IndexController extends Controller
                 },
                 'company' => function ($q) {
                     $q = $q->select(['id', 'preview', 'name', 'slug']);
+                    $q = $q->withCount('products');
                 },
                 'company.locale' => function ($q) {
                     $q->select(['short', 'company_id'])->where('locale_id', app()->user_local->id)->whereNotNull("short");
