@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Product;
 
-use App\Http\Controllers\Category\IndexController as CategoryIndexController;
 use App\Http\Controllers\Controller;
+use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 use App\Http\Services\Models\ProductModelService;
 
@@ -115,7 +115,7 @@ class IndexController extends Controller
 
         //
 
-        [$path_slugs, $breadcrumbs] = (new CategoryIndexController)->getBreadcrumbsShow($category);
+        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
         $breadcrumbs->add($product->locale->name, "#");
 
         // dd($breadcrumbs);

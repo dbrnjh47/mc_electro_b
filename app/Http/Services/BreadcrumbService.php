@@ -23,4 +23,23 @@ class BreadcrumbService
     {
         return $this->breadcrumbs;
     }
+
+    public static function getForCategory($category = null) {
+        $path_slugs = [];
+
+        $breadcrumbs = (new BreadcrumbService);
+        $breadcrumbs->add("Каталог", route("categories"));
+        if(!$category){return [$path_slugs, $breadcrumbs];}
+
+        //
+
+        foreach($category->parent_list as $parent_category){
+            $path_slugs[] = $parent_category->slug;
+            $breadcrumbs->add($parent_category->locale->name, route("category", ["slugs" => implode('/', $path_slugs)]));
+        }
+        $path_slugs[] = $category->slug;
+        $breadcrumbs->add($category->locale->name, route("category", ["slugs" => implode('/', $path_slugs)]));
+
+        return [$path_slugs, $breadcrumbs];
+    }
 }

@@ -11,14 +11,6 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function getBreadcrumbs()
-    {
-        $breadcrumbs = (new BreadcrumbService);
-        $breadcrumbs->add("Каталог", route("categories"));
-
-        return $breadcrumbs;
-    }
-
     public function all()
     {
         $category_service = (new CategoryModelService);
@@ -35,7 +27,7 @@ class IndexController extends Controller
         // dd($categories);
         //
 
-        $breadcrumbs = $this->getBreadcrumbs();
+        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory();
 
         return view('sample.main.pages.category.all.index', [
             'title' => "Каталог",
@@ -43,22 +35,6 @@ class IndexController extends Controller
             'breadcrumbs' => $breadcrumbs,
             'categories' => $categories
         ]);
-    }
-
-    public function getBreadcrumbsShow($category)
-    {
-        $breadcrumbs = $this->getBreadcrumbs();
-
-        $path_slugs = [];
-
-        foreach($category->parent_list as $parent_category){
-            $path_slugs[] = $parent_category->slug;
-            $breadcrumbs->add($parent_category->locale->name, route("category", ["slugs" => implode('/', $path_slugs)]));
-        }
-        $path_slugs[] = $category->slug;
-        $breadcrumbs->add($category->locale->name, route("category", ["slugs" => implode('/', $path_slugs)]));
-
-        return [$path_slugs, $breadcrumbs];
     }
 
     public function show(Request $request)
@@ -91,7 +67,7 @@ class IndexController extends Controller
 
         //
 
-        [$path_slugs, $breadcrumbs] = $this->getBreadcrumbsShow($category);
+        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
 
         //
 
