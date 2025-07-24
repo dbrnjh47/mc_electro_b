@@ -1,14 +1,17 @@
+@php
+    $url_company = route("company", ["slug" => $company->slug]);
+@endphp
 <div class="company_card">
     <div class="company_card__content">
-        <div class="company_card__miniature">
+        <a class="company_card__miniature" href="{{$url_company}}" target="_blank">
             <img src="{{$company->path_preview}}" alt="{{$company->name}}">
             <span class="company_card__miniature_cover"
                 style="background-image: url('{{$company->path_preview}}');"></span>
-        </div>
+        </a>
         <div class="company_card__info">
-            <div class="company_card__name">
+            <a class="company_card__name" href="{{$url_company}}" target="_blank">
                 {{$company->name}}
-            </div>
+            </a>
             <p>
                 <span>
                     <svg class="red" width="18" height="17" viewBox="0 0 18 17"
@@ -36,7 +39,7 @@
         {{$company->locale->short}}
     </div>
     @endif
-    <a href="{{route("company", ["slug" => $company->slug])}}" target="_blank" class="btn">
+    <a href="{{$url_company}}" target="_blank" class="btn">
         Показать товары компании
     </a>
 </div>

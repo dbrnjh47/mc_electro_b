@@ -52,14 +52,14 @@
             {{-- <x-company.card></x-company.card> --}}
             <div class="company_card">
                 <div class="company_card__content">
-                  <div class="company_card__miniature">
+                  <a class="company_card__miniature" href="#" target="_blank">
                     <img src="/assets/companies/logo/1.svg" alt="" loading="lazy" decoding="async">
                     <span class="company_card__miniature_cover" style="background-image: url('/assets/companies/logo/1.svg');"></span>
-                  </div>
+                  </a>
                   <div class="company_card__info">
-                    <div class="company_card__name">
+                    <a class="company_card__name" href="#" target="_blank">
                       Название компании
-                    </div>
+                    </a>
                     <p>
                       <span>
                         <svg class="red" width="18" height="17" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
@@ -87,14 +87,14 @@
 
               <div class="company_card">
                 <div class="company_card__content">
-                  <div class="company_card__miniature">
+                  <a class="company_card__miniature" href="#" target="_blank">
                     <img src="/assets/companies/logo/1.svg" alt="" loading="lazy" decoding="async">
                     <span class="company_card__miniature_cover" style="background-image: url('/assets/companies/logo/1.svg');"></span>
-                  </div>
+                  </a>
                   <div class="company_card__info">
-                    <div class="company_card__name">
+                    <a class="company_card__name" href="#" target="_blank">
                       Название компании
-                    </div>
+                    </a>
                     <p>
                         <span>
                             <svg class="red" width="18" height="17" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
