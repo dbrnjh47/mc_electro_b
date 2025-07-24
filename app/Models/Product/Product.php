@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Company\Company;
 use App\Models\Product\Characteristic\ProductCharacteristic;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
@@ -46,5 +47,10 @@ class Product extends Model
     public function labels()
     {
         return $this->hasMany(ProductLabel::class, 'product_id', 'id');
+    }
+
+    public function company()
+    {
+        return $this->hasOne(Company::class, 'id', 'company_id')->where("is_on", 1);
     }
 }

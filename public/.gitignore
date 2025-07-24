@@ -6,6 +6,7 @@
 !/assets/categories/previews/[1-9].png
 /assets/companies/logo/*
 !/assets/companies/logo/[1-9].svg
+!/assets/companies/logo/default.jpg
 /assets/contacts/photo/*
 !/assets/contacts/photo/[1-9].png
 /assets/news/preview/*

@@ -66,7 +66,7 @@ Route::prefix('companies')->group(function () {
     Route::get('/', [CompanyController::class, 'all'])->name('companies');
 });
 Route::prefix('company')->group(function () {
-    Route::get('/{id}', [CompanyController::class, 'show'])->name('company');
+    Route::get('/{slug}', [CompanyController::class, 'show'])->name('company');
 });
 
 //

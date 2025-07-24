@@ -44,6 +44,12 @@
         </div>
 
         <div class="companies__list">
+            {{-- <x-company.card></x-company.card> --}}
+            {{-- <x-company.card></x-company.card> --}}
+            {{-- <x-company.card></x-company.card> --}}
+            {{-- <x-company.card></x-company.card> --}}
+            {{-- <x-company.card></x-company.card> --}}
+            {{-- <x-company.card></x-company.card> --}}
             <div class="company_card">
                 <div class="company_card__content">
                   <div class="company_card__miniature">

@@ -11,7 +11,16 @@ class IndexController extends Controller
     public function show($slug)
     {
         $product = (new ProductModelService(slug: $slug, select_list: [
-            "id", "uuid", "article", "slug", "weight", "length", "width", "height", "step"
+            "id",
+            "uuid",
+            "company_id",
+            "article",
+            "slug",
+            "weight",
+            "length",
+            "width",
+            "height",
+            "step"
         ]))
             ->getModel()
             ->with([
@@ -24,14 +33,20 @@ class IndexController extends Controller
                 'description' => function ($q) {
                     $q = $q->select(['text', 'product_id'])->where("locale_id", app()->user_local->id);
                 },
+                'company' => function ($q) {
+                    $q = $q->select(['id', 'preview', 'name', 'slug']);
+                },
+                'company.locale' => function ($q) {
+                    $q->select(['short', 'company_id'])->where('locale_id', app()->user_local->id)->whereNotNull("short");
+                },
             ])
             ->with(['characteristics' => function ($query) {
-                $query->where(function($q) {
-                        $q->whereNotNull('value') // value != null
-                            ->orWhereHas('locale', function ($q2) {
-                                $q2 = $q2->where("locale_id", app()->user_local->id);
-                            });  // ИЛИ local существует
-                    })
+                $query->where(function ($q) {
+                    $q->whereNotNull('value') // value != null
+                        ->orWhereHas('locale', function ($q2) {
+                            $q2 = $q2->where("locale_id", app()->user_local->id);
+                        });  // ИЛИ local существует
+                })
                     ->with([
                         'locale' => function ($q) {
                             $q->select(['text', 'product_characteristic_id'])->where('locale_id', app()->user_local->id);
@@ -75,19 +90,20 @@ class IndexController extends Controller
         // dd($product->characteristics);
 
         $product->characteristics = $product->characteristics->groupBy(function ($char) {
-                return $char->title->category ? $char->title->category->id : 'other';
-            })->map(function ($chars, $key) {
-                return [
-                    'category' => $key === 'other' ?
-                                 (object)['id' => null, 'locale' => (object)["title" => 'Другое']] :
-                                 $chars->first()->title->category,
-                    'items' => $chars
-                ];
-            })->sortBy(function ($group) {
-                return $group['category']->id === null ? 9999 : $group['category']->id;
-            })->values();
+            return $char->title->category ? $char->title->category->id : 'other';
+        })->map(function ($chars, $key) {
+            return [
+                'category' => $key === 'other' ?
+                    (object)['id' => null, 'locale' => (object)["title" => 'Другое']] :
+                    $chars->first()->title->category,
+                'items' => $chars
+            ];
+        })->sortBy(function ($group) {
+            return $group['category']->id === null ? 9999 : $group['category']->id;
+        })->values();
 
-            // dd($product);
+        dump($product);
+        // dd($product);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
             'description' => "",
