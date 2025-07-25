@@ -7,12 +7,13 @@ use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 use App\Http\Services\Models\ProductModelService;
+use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function show($slug)
+    public function show(Request $request)
     {
-        $product = (new ProductModelService(slug: $slug, select_list: [
+        $product = (new ProductModelService(slug: $request->slug, select_list: [
             "id",
             "uuid",
             "company_id",
@@ -115,6 +116,8 @@ class IndexController extends Controller
             return $group['category']->id === null ? 9999 : $group['category']->id;
         })->values();
 
+        //
+
         $category = null;
         // нужно узнать подходящую категорию
         foreach($product->categories as $c)
@@ -125,21 +128,39 @@ class IndexController extends Controller
                 $category = $c->category;
             }
         }
-        if(!$category)
+        if(!$category){$this->notFound();}
+
+        foreach($category->parents_paths as $parents_path)
         {
-            $this->notFound();
+            if($request->category_slug)
+            {
+                $parts = explode('/', $parents_path);
+                $is_included = in_array($request->category_slug, $parts, true);
+                if($is_included)
+                {
+                    $category->parent_slugs = $parts;
+                    break;
+                }
+            } else {
+                $category->parent_slugs = explode("/", $parents_path);
+                break;
+            }
         }
-        $category->parent_slugs = explode("/", $category->parents_paths[0]);
+
+        if(!isset($category->parent_slugs)){$this->notFound();}
+
         $category->setCurrentParentPath();
         // $category = $product->categories->category;
         // $category->parents();
 
-        //
 
+        //
+        // dump($category);
         [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
 
         $breadcrumbs->add($product->locale->name, "#");
 
+        // dd($breadcrumbs);
         // dd($product);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
