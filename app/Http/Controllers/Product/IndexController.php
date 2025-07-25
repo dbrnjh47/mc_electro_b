@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Product\ShowRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
@@ -11,7 +12,7 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
-    public function show(Request $request)
+    public function show(ShowRequest $request)
     {
         $product = (new ProductModelService(slug: $request->slug, select_list: [
             "id",
@@ -117,7 +118,7 @@ class IndexController extends Controller
 
         foreach($category->parents_paths as $parents_path)
         {
-            if($request->category_slug)
+            if(isset($request->category_slug))
             {
                 $parts = explode('/', $parents_path);
                 $is_included = in_array($request->category_slug, $parts, true);
