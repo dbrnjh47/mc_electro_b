@@ -41,29 +41,15 @@ class IndexController extends Controller
     {
         $slugs = explode('/', $request->slugs);
         $category = (new CategoryModelService)->firstBySlug(end($slugs));
-        $product_slug = null;
-        // dump($category);
-        // dump($slugs);
-        if(!$category){
-            $category = (new CategoryModelService)->firstBySlug(array_slice($slugs, -2, 1)[0]);
-            // dump("видимо ссылка товар");
-            if(!$category || !$category->is_on){
-                // dump("not", $category);
-                $this->notFound();
-            }
-            $product_slug = array_pop($slugs);
+
+        if(!$category || !$category->is_on){
+            $this->notFound();
         }
-        if(!$category->is_on){$this->notFound();}
-        // dump($slugs);
-        // dump($category);
+
         $category->parent_slugs = $slugs;
         $category->parents();
         // dump($category->parents_paths);
         if(!in_array(implode('/', $slugs), $category->parents_paths)){$this->notFound();}
-        if($product_slug)
-        {
-            return (new ProductIndexController())->show($category, $product_slug);
-        }
 
         //
 
@@ -72,12 +58,7 @@ class IndexController extends Controller
         //
 
         $category->childrens(1);
-        // dump($category->childrens);
-
-        // dump($request->slugs);
-        // dump($category->parents_paths);
-        // dump($category->parent_list);
-        // dd($category);
+        http://mc-electro/product/ratione-quo-aut-fuga
         return view('sample.main.pages.category.first.index', [
             'title' => $category->locale->name,
             'description' => "",

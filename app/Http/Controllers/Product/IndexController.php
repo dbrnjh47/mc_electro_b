@@ -9,11 +9,7 @@ use App\Http\Services\Models\ProductModelService;
 
 class IndexController extends Controller
 {
-    public function __construct()
-    {
-
-    }
-    public function show($category, $slug)
+    public function show($slug)
     {
         $product = (new ProductModelService(slug: $slug, select_list: [
             "id",
@@ -91,9 +87,9 @@ class IndexController extends Controller
                         $q->where('locale_id', app()->user_local->id);
                     });
             }])
-            ->whereHas('categories', function ($q) use ($category) {
-                $q->where('category_id', $category->id);
-            })
+            // ->whereHas('categories', function ($q) use ($category) {
+            //     $q->where('category_id', $category->id);
+            // })
             ->firstOrFail();
         $product->characteristics = (new ProductCharacteristicModelService)->setUnitRules($product->characteristics);
         // dd($product->characteristics);
@@ -115,7 +111,8 @@ class IndexController extends Controller
 
         //
 
-        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
+        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory();
+        // [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
         $breadcrumbs->add($product->locale->name, "#");
 
         // dd($breadcrumbs);
