@@ -100,23 +100,8 @@ class IndexController extends Controller
                 $q = CategoryModelService::whereOn($q);
             })
             ->firstOrFail();
-        $product->characteristics = (new ProductCharacteristicModelService)->setUnitRules($product->characteristics);
-        // dd($product->characteristics);
 
-        $product->characteristics = $product->characteristics->groupBy(function ($char) {
-            return $char->title->category ? $char->title->category->id : 'other';
-        })->map(function ($chars, $key) {
-            return [
-                'category' => $key === 'other' ?
-                    (object)['id' => null, 'locale' => (object)["title" => 'Другое']] :
-                    $chars->first()->title->category,
-                'items' => $chars
-            ];
-        })->sortBy(function ($group) {
-            return $group['category']->id === null ? 9999 : $group['category']->id;
-        })->values();
-
-        //
+            //
 
         $category = null;
         // нужно узнать подходящую категорию
@@ -150,9 +135,24 @@ class IndexController extends Controller
         if(!isset($category->parent_slugs)){$this->notFound();}
 
         $category->setCurrentParentPath();
-        // $category = $product->categories->category;
-        // $category->parents();
 
+        //
+
+        $product->characteristics = (new ProductCharacteristicModelService)->setUnitRules($product->characteristics);
+        // dd($product->characteristics);
+
+        $product->characteristics = $product->characteristics->groupBy(function ($char) {
+            return $char->title->category ? $char->title->category->id : 'other';
+        })->map(function ($chars, $key) {
+            return [
+                'category' => $key === 'other' ?
+                    (object)['id' => null, 'locale' => (object)["title" => 'Другое']] :
+                    $chars->first()->title->category,
+                'items' => $chars
+            ];
+        })->sortBy(function ($group) {
+            return $group['category']->id === null ? 9999 : $group['category']->id;
+        })->values();
 
         //
         // dump($category);
