@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\BreadcrumbService;
+use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 use App\Http\Services\Models\ProductModelService;
 
@@ -25,6 +26,13 @@ class IndexController extends Controller
         ]))
             ->getModel()
             ->with([
+                'categories' => function ($q) {
+                    $q = $q->whereHas('category', function ($q2) {
+                        $q2 = CategoryModelService::whereOn($q2);
+                    });
+                },
+                'categories.category' => function ($q) {
+                },
                 'medias' => function ($q) {
                     $q->select(['name', 'product_id']);
                 },
@@ -87,9 +95,9 @@ class IndexController extends Controller
                         $q->where('locale_id', app()->user_local->id);
                     });
             }])
-            // ->whereHas('categories', function ($q) use ($category) {
-            //     $q->where('category_id', $category->id);
-            // })
+            ->whereHas('categories.category', function ($q) {
+                $q = CategoryModelService::whereOn($q);
+            })
             ->firstOrFail();
         $product->characteristics = (new ProductCharacteristicModelService)->setUnitRules($product->characteristics);
         // dd($product->characteristics);
@@ -107,15 +115,31 @@ class IndexController extends Controller
             return $group['category']->id === null ? 9999 : $group['category']->id;
         })->values();
 
-        // dump($product);
+        $category = null;
+        // нужно узнать подходящую категорию
+        foreach($product->categories as $c)
+        {
+            $c->category->parents(on_check: 0);
+            if(!empty($c->category->parents_paths))
+            {
+                $category = $c->category;
+            }
+        }
+        if(!$category)
+        {
+            $this->notFound();
+        }
+        $category->parent_slugs = explode("/", $category->parents_paths[0]);
+        $category->setCurrentParentPath();
+        // $category = $product->categories->category;
+        // $category->parents();
 
         //
 
-        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory();
-        // [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
+        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
+
         $breadcrumbs->add($product->locale->name, "#");
 
-        // dd($breadcrumbs);
         // dd($product);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,

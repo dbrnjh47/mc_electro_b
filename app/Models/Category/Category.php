@@ -82,7 +82,7 @@ class Category extends Model
     }
 
 
-    public function parents($max_level = null)
+    public function parents($max_level = null, $on_check = 1)
     {
         if (isset($this->parents_on)) {
             return $this->parents;
@@ -98,7 +98,7 @@ class Category extends Model
                 LEFT JOIN
                     categories ON " . (new Subcategory())->getTable() . ".category_parent_id = categories.id
                 WHERE
-                    category_child_id = {$this->id} AND categories.is_on = 1
+                    category_child_id = {$this->id} ".($on_check ? "AND categories.is_on = 1" : "")."
                 UNION ALL
                 SELECT
                     c.category_parent_id,
@@ -110,17 +110,19 @@ class Category extends Model
                     CategoryPath cp ON c.category_child_id = cp.category_parent_id
                 LEFT JOIN
                     categories ON c.category_parent_id = categories.id
-                WHERE categories.is_on = 1
-                " . ($max_level ? "AND cp.level < {$max_level}" : "") . "
+                ".($on_check ? "WHERE categories.is_on = 1" : "")."
+                " . ($max_level ? (($on_check ? "AND" : "WHERE")." cp.level < {$max_level}") : "") . "
             )
             SELECT * FROM CategoryPath as cp) as subquery
         "))->get();
+        // dump($this->id);
+        // dump($parents);
+        // dump("__________________");
+        $this->parents_array = $this->addInfo($parents);
+        // dd($parents);
+        $this->setCurrentParentPath();
 
-        $parents = $this->addInfo($parents);
-
-        $this->setCurrentParentPath($parents);
-
-        $parents = $this->buildTree($parents);
+        $parents = $this->buildTree($this->parents_array);
         $this->parents = $parents;
         $this->parents_paths = $this->getParentsPath($this->parents, $this->slug);
         $this->parents_on = 1;
@@ -128,8 +130,12 @@ class Category extends Model
         return $parents;
     }
 
-    private function setCurrentParentPath($parents)
+    public function setCurrentParentPath($parents = null)
     {
+        if(!$parents)
+        {
+            $parents = $this->parents_array;
+        }
         if(!isset($this->parent_slugs)){
             $this->parent_list = null;
             return;
@@ -163,12 +169,16 @@ class Category extends Model
         } else {
             foreach ($items as $item) {
                 $current_path = $parent_path ? $item->slug . '/' .  $parent_path : $item->slug;
-                $paths[] = $current_path;
-
-                if (!empty($item->parents)) {
-                    $childPaths = $this->getParentsPath($item->parents, $current_path);
-                    $paths = array_merge($paths, $childPaths);
+                if($item->is_on)
+                {
+                    if (!empty($item->parents)) {
+                        $childPaths = $this->getParentsPath($item->parents, $current_path);
+                        $paths = array_merge($paths, $childPaths);
+                    } else {
+                        $paths[] = $current_path;
+                    }
                 }
+
             }
         }
 
@@ -184,7 +194,7 @@ class Category extends Model
             ->values()
             ->toArray();
 
-        $categories = (new CategoryModelService(["id", "is_on", "slug", "preview"]))->getIn($parent_ids);
+        $categories = (new CategoryModelService(["id", "is_on", "slug", "preview"], on_check: 0))->getIn($parent_ids);
 
         foreach ($categories as $category) {
             foreach ($result as $key => $parent) {

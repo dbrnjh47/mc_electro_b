@@ -58,7 +58,7 @@ class IndexController extends Controller
         //
 
         $category->childrens(1);
-        http://mc-electro/product/ratione-quo-aut-fuga
+
         return view('sample.main.pages.category.first.index', [
             'title' => $category->locale->name,
             'description' => "",

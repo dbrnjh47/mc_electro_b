@@ -6,9 +6,10 @@ use App\Models\Category\Category;
 
 class CategoryModelService extends ControllerModelService
 {
-    public $select_list, $pagination = 9;
-    public function __construct($select_list = null, $model = null)
+    public $select_list, $pagination = 9, $on_check;
+    public function __construct($select_list = null, $model = null, $on_check = 1)
     {
+        $this->on_check = $on_check;
         if($model)
         {
             $this->model = $model;
@@ -26,7 +27,10 @@ class CategoryModelService extends ControllerModelService
         {
             $model->select($this->select_list);
         }
-        $model = CategoryModelService::whereOn($model);
+        if($this->on_check)
+        {
+            $model = CategoryModelService::whereOn($model);
+        }
 
         return $model;
     }
