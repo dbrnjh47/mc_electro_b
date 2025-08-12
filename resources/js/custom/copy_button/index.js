@@ -5,12 +5,19 @@ $(".copy_button").click(function () {
 });
 
 function copyToClipboard(obj) {
+    obj = $(obj);
+    let textToCopy = (obj.data("copy-text") !== undefined ? obj.data("copy-text") : obj.text());
+    copyText(textToCopy);
+
+    miniAlert("Текст успешно скопирован");
+}
+
+function copyText(text)
+{
     const $temp = $('<input>');
     $("body").append($temp);
 
-    obj = $(obj);
-    let textToCopy = (obj.data("copy-text") !== undefined ? obj.data("copy-text") : obj.text());
-    $temp.val(textToCopy).select();
+    $temp.val(text).select();
     document.execCommand("copy");
     $temp.remove();
 }

@@ -12,3 +12,5 @@ import "./header.js";
 
 import "./burger_menu.js";
 import "./menu_categories.js";
+
+import "/resources/js/custom/mini_alert/index.js";

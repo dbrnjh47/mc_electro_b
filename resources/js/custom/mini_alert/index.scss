@@ -1,0 +1,29 @@
+.mini_alert {
+    display: none;
+    padding: 11px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #379646;
+    background-color: #e5ffe9;
+    border-color: #4cd964;
+    margin-top: 5px;
+    cursor: pointer;
+
+    &_wrapper{
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        z-index: 99999999;
+        max-width: calc(100% - 5px);
+
+        @media (max-width: 520px) {
+            width: 100%;
+        }
+    }
+    &.error {
+        background-color: #ffe8e7;
+        border-color: #fe3b30;
+        color: #e2342a;
+    }
+}
