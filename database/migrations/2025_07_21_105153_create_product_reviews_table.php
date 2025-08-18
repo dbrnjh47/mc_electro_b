@@ -17,13 +17,13 @@ return new class extends Migration
             $table->integer('quantity')->unsignedTinyInteger()->unsigned();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('local_id');
+            $table->unsignedBigInteger('locale_id');
             $table->boolean('is_on')->default(false);
 
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
-            $table->foreign('local_id')->references('id')->on('locales')->onUpdate('cascade'); // ->onDelete('cascade')
+            $table->foreign('locale_id')->references('id')->on('locales')->onUpdate('cascade'); // ->onDelete('cascade')
             $table->timestamps();
         });
     }

@@ -8,7 +8,9 @@ use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 use App\Http\Services\Models\ProductModelService;
+use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class IndexController extends Controller
 {
@@ -46,10 +48,26 @@ class IndexController extends Controller
                 },
                 'company' => function ($q) {
                     $q = $q->select(['id', 'preview', 'name', 'slug']);
-                    $q = $q->withCount('products');
+                    $q = $q->withCount(['products']);
                 },
                 'company.locale' => function ($q) {
                     $q->select(['short', 'company_id'])->where('locale_id', app()->user_local->id)->whereNotNull("short");
+                },
+
+                //
+
+                'reviews' => function ($q) {
+                    $q->select(['id', 'quantity', 'product_id', 'user_id', 'created_at'])->where('locale_id', app()->user_local->id)->limit(15);
+                },
+                'reviews.descriptions' => function ($q) {
+                    $q->select(['id', 'text', 'type', 'product_review_id'])
+                        ->orderByRaw("FIELD(type, 'comment', 'dignity', 'flaw')");
+                },
+                'reviews.medias' => function ($q) {
+                    $q->select(['id', 'name', 'product_review_id']);
+                },
+                'reviews.user' => function ($q) {
+                    $q->select(['id', 'name']);
                 },
             ])
             ->with(['characteristics' => function ($query) {
@@ -100,6 +118,10 @@ class IndexController extends Controller
             ->whereHas('categories.category', function ($q) {
                 $q = CategoryModelService::whereOn($q);
             })
+            ->withCount(['reviews' => function (Builder $q) {
+                $q->where('locale_id', app()->user_local->id)->where("is_on", 1);
+            },])
+            ->withSum('reviews', 'quantity')
             ->firstOrFail();
 
             //
@@ -161,13 +183,32 @@ class IndexController extends Controller
 
         $breadcrumbs->add($product->locale->name, "#");
 
+        //
+
+        if($product->reviews_count)
+        {
+            $review_statistics = ProductReview::select('quantity')
+            ->selectRaw('COUNT(*) as count')
+            ->where([
+                ["product_id", $product->id],
+                ["locale_id", app()->user_local->id],
+                ["is_on", 1]
+            ])
+            ->groupBy('quantity')
+            ->orderBy('quantity', 'desc')
+            ->get();
+        } else {
+            $review_statistics = null;
+        }
+
         // dd($breadcrumbs);
         // dd($product);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
             'description' => "",
             'product' => $product,
-            'breadcrumbs' => $breadcrumbs
+            'breadcrumbs' => $breadcrumbs,
+            'review_statistics' => $review_statistics
         ]);
     }
 }

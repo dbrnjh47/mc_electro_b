@@ -17,6 +17,7 @@
                         @if($product->uuid)<span class="copy_button" data-copy-text="{{$product->uuid}}">#{{$product->uuid}}</span>@endif
                         @if($product->article)<span class="copy_button" data-copy-text="{{$product->article}}">#{{$product->article}}</span>@endif
                     </h2>
+                    @if($product->reviews_count)
                     <div class="product_title__statistics">
                         <div>
                             <!-- public\temple\images\company\icon\star.svg -->
@@ -26,7 +27,7 @@
                                     d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
                                 </path>
                             </svg>
-                            4.6
+                            {{round($product->reviews_sum_quantity / $product->reviews_count, 1)}}
                         </div>
                         <div>
                             <svg width="19" height="16" viewBox="0 0 19 16" xmlns="http://www.w3.org/2000/svg">
@@ -34,9 +35,11 @@
                                     d="M18.9216 6.50596C19.029 7.0658 19.0232 7.59029 18.9216 8.12607C18.7202 9.18742 18.2973 10.1533 17.653 11.0237C17.3943 11.3289 17.1364 11.6333 16.8794 11.9371C17.3726 12.9936 17.8574 14.054 18.3337 15.1181C18.4591 15.6191 18.2735 15.9131 17.7767 16C17.5916 15.9531 17.4162 15.8796 17.2507 15.7795C16.1671 15.0961 15.0842 14.4138 14.0018 13.7323C10.0487 15.2239 6.30476 14.8145 2.77005 12.504C1.73146 11.6798 0.937316 10.6614 0.387546 9.44889C-0.357961 7.26693 -0.0278762 5.27218 1.37768 3.46471C3.34909 1.3528 5.77287 0.208495 8.64895 0.0316779C11.6603 -0.178965 14.3419 0.660899 16.6938 2.55133C17.878 3.60833 18.6206 4.9383 18.9216 6.50596Z">
                                 </path>
                             </svg>
-                            10 отзывов
+                            {{$product->reviews_count}} отзывов
                         </div>
                     </div>
+                    @endif
+
                 </div>
             </div>
         </section>
@@ -101,11 +104,17 @@
                     @if($product->description)
                     <div class="activ">Описание</div>
                     @endif
+
                     @if(!$product->characteristics->isEmpty())
                         <div>Характеристики</div>
                     @endif
-                    <div>Отзывы <span>(9)</span></div>
-                    <div>Вопрос ответ <span>(9)</span></div>
+
+                    @if(!$product->reviews->isEmpty())
+                    <div>Отзывы <span>({{$product->reviews_count}})</span></div>
+                    @endif
+
+                    {{-- <div>Вопрос ответ <span>(9)</span></div> --}}
+
                     @if(!$product->documents->isEmpty())
                         <div>Документация <span>({{$product->documents->count()}})</span></div>
                     @endif
@@ -113,7 +122,7 @@
 
                 <div class="product_menu_block product_menu_block__container">
 
-                    <section class="product_menu_block__faq">
+                    {{-- <section class="product_menu_block__faq">
 
                         <div class="app__title">
                             <div class="app__title_wrapper">
@@ -258,10 +267,12 @@
                             </div>
                         </div>
 
-                    </section>
+                    </section> --}}
 
+                    @if(!$product->reviews->isEmpty())
                     <section class="product_menu_block__reviews">
                         <h1 class="product_menu_block__title">Отзывы</h1>
+                        @if($product->reviews_count)
                         <div class="product_title__statistics">
                             <div>
                                 <!-- public\temple\images\company\icon\star.svg -->
@@ -271,7 +282,7 @@
                                         d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
                                     </path>
                                 </svg>
-                                4.6
+                                {{round($product->reviews_sum_quantity / $product->reviews_count, 1)}}
                             </div>
                             <div>
                                 <svg width="19" height="16" viewBox="0 0 19 16"
@@ -280,9 +291,10 @@
                                         d="M18.9216 6.50596C19.029 7.0658 19.0232 7.59029 18.9216 8.12607C18.7202 9.18742 18.2973 10.1533 17.653 11.0237C17.3943 11.3289 17.1364 11.6333 16.8794 11.9371C17.3726 12.9936 17.8574 14.054 18.3337 15.1181C18.4591 15.6191 18.2735 15.9131 17.7767 16C17.5916 15.9531 17.4162 15.8796 17.2507 15.7795C16.1671 15.0961 15.0842 14.4138 14.0018 13.7323C10.0487 15.2239 6.30476 14.8145 2.77005 12.504C1.73146 11.6798 0.937316 10.6614 0.387546 9.44889C-0.357961 7.26693 -0.0278762 5.27218 1.37768 3.46471C3.34909 1.3528 5.77287 0.208495 8.64895 0.0316779C11.6603 -0.178965 14.3419 0.660899 16.6938 2.55133C17.878 3.60833 18.6206 4.9383 18.9216 6.50596Z">
                                     </path>
                                 </svg>
-                                10 отзывов
+                                {{$product->reviews_count}} отзывов
                             </div>
                         </div>
+                        @endif
                         <div class="product_menu_block__reviews_rating">
                             <div class="product_menu_block__reviews_line">
                                 5
@@ -314,220 +326,97 @@
                             <div id="select2_sort" class="select2_sample_nude">
                                 <select class="select2_custom" name="lang" data-dropdown-position="below"
                                     data-minimum-results-for-search="5" data-dropdown-parent="#select2_sort">
-                                    <option value="1" selected="">Сначала новые</option>
-                                    <option value="10">1</option>
-                                    <option value="2">Сначала старые</option>
-                                    <option value="3">Сначала дорогие</option>
-                                    <option value="3">Сначала дешевые</option>
+                                    <option value="created_at_asc" selected="">Сначала новые</option>
+                                    <option value="created_at_desc">Сначала старые</option>
                                 </select>
                             </div>
                         </div>
+
                         <div class="product_menu_block__reviews_list">
+                            @foreach ($product->reviews as $review)
                             <div class="product_menu_block__reviews_item">
                                 <div class="product_menu_block__reviews_user">
                                     <div class="product_menu_block__reviews_user_name">
-                                        Username
+                                        {{$review->user->name}}
                                         <div class="product_menu_block__reviews_user_stars">
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
+                                            @for($i = 0; $i < 5; $i++)
+                                                <svg @if($review["quantity"] > $i) class="red" @endif viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
+                                                    <path
+                                                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
+                                                    </path>
+                                                </svg>
+                                            @endfor
                                         </div>
                                     </div>
                                     <div class="product_menu_block__reviews_user_date">
-                                        15.11.2024
+                                        {{$review->created_at->format('d.m.Y')}}
                                     </div>
                                 </div>
                                 <div class="product_menu_block__reviews_menu">
-                                    <button class="activ">Коментарий</button>
-                                    <button>Достоинства</button>
-                                    <button>Недостатки</button>
+                                    @foreach ($review->descriptions as $description)
+                                        <button @if($loop->first) class="activ" @endif data-type="{{$description["type"]}}">{{ ($description["type"] == "comment" ? "Коментарий" : ($description["type"] == "dignity" ? "Достоинства" : "Недостатки")) }}</button>
+                                    @endforeach
                                 </div>
                                 <div>
                                     <div class="swiper product_menu_block__reviews_slider">
                                         <div class="swiper-wrapper">
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
-
-                                            <div class="swiper-slide">
-                                                <img src="/assets/product/miniature/test.png" alt="" />
-                                            </div>
+                                            @foreach ($review->medias as $media)
+                                                <div class="swiper-slide">
+                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
+                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @foreach ($review->medias as $media)
+                                                <div class="swiper-slide">
+                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
+                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @foreach ($review->medias as $media)
+                                                <div class="swiper-slide">
+                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
+                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @foreach ($review->medias as $media)
+                                                <div class="swiper-slide">
+                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
+                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @foreach ($review->medias as $media)
+                                                <div class="swiper-slide">
+                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
+                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                            @foreach ($review->medias as $media)
+                                                <div class="swiper-slide">
+                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
+                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
+                                                    </div>
+                                                </div>
+                                            @endforeach
                                         </div>
                                         <div class="swiper-button-next"></div>
                                         <div class="swiper-button-prev"></div>
                                     </div>
                                 </div>
-                                <div class="product_menu_block__reviews_text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut
+                                @foreach ($review->descriptions as $description)
+                                <div class="product_menu_block__reviews_text @if($loop->first) activ @endif" data-type="{{$description["type"]}}">
+                                    {{$description->text}}
                                 </div>
+                                @endforeach
                             </div>
-
-                            <div class="product_menu_block__reviews_item">
-                                <div class="product_menu_block__reviews_user">
-                                    <div class="product_menu_block__reviews_user_name">
-                                        Username
-                                        <div class="product_menu_block__reviews_user_stars">
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="product_menu_block__reviews_user_date">
-                                        15.11.2024
-                                    </div>
-                                </div>
-                                <div class="product_menu_block__reviews_menu">
-                                    <button class="activ">Коментарий</button>
-                                    <button>Достоинства</button>
-                                    <button>Недостатки</button>
-                                </div>
-
-                                <div class="product_menu_block__reviews_text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut
-                                </div>
-                            </div>
-
-                            <div class="product_menu_block__reviews_item">
-                                <div class="product_menu_block__reviews_user">
-                                    <div class="product_menu_block__reviews_user_name">
-                                        Username
-                                        <div class="product_menu_block__reviews_user_stars">
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg class="red" viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                            <svg viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                </path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <div class="product_menu_block__reviews_user_date">
-                                        15.11.2024
-                                    </div>
-                                </div>
-                                <div class="product_menu_block__reviews_menu">
-                                    <button class="activ">Коментарий</button>
-                                    <button>Достоинства</button>
-                                    <button>Недостатки</button>
-                                </div>
-
-                                <div class="product_menu_block__reviews_text">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </section>
+                    @endif
 
                     @if($product->description)
                     <section class="product_menu_block__description">

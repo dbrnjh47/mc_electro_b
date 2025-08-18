@@ -16,3 +16,16 @@ window.startReviewsMiniatureSlider = function() {
 }
 
 startReviewsMiniatureSlider();
+
+//
+
+$(".product_menu_block__reviews_menu button").click(function () {
+    let obj = $(this);
+    let wrapper = obj.closest(".product_menu_block__reviews_item");
+
+    wrapper.find(".product_menu_block__reviews_menu button").removeClass("activ");
+    wrapper.find(".product_menu_block__reviews_text").slideUp();
+
+    wrapper.find('.product_menu_block__reviews_text[data-type="'+obj.data("type")+'"]').slideDown();
+    obj.addClass("activ");
+});

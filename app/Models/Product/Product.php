@@ -6,6 +6,7 @@ use App\Models\Company\Company;
 use App\Models\Product\Characteristic\ProductCharacteristic;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
+use App\Models\Product\Review\ProductReview;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -57,5 +58,10 @@ class Product extends Model
     public function company()
     {
         return $this->hasOne(Company::class, 'id', 'company_id')->where("is_on", 1);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(ProductReview::class, 'product_id', 'id')->where("is_on", 1);
     }
 }

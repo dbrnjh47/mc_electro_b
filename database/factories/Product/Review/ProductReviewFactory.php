@@ -22,7 +22,8 @@ class ProductReviewFactory extends Factory
             "quantity" => rand(1, 5),
             "user_id" => User::inRandomOrder()->first()->id,
             // "product_id" => Product::inRandomOrder()->first()->id,
-            "is_on" => rand(0, 1)
+            "is_on" => rand(0, 1),
+            "created_at" => $this->faker->dateTimeBetween('-1 year', 'now')
         ];
     }
 }
