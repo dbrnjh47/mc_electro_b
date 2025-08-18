@@ -9,7 +9,8 @@ window.miniAlert = function(text, status = 1)
     createMiniAlertWrapper();
 
     let key = Math.floor(Math.random() * 101);
-    wrapperMiniAlert.append(`
+    // append
+    wrapperMiniAlert.prepend(`
         <div class="mini_alert `+(status == "error" ? "error" : "")+`" data-key="`+key+`">
             `+text+`
         </div>
