@@ -296,31 +296,23 @@
                         </div>
                         @endif
                         <div class="product_menu_block__reviews_rating">
+                            @for($i = 5; $i > 0; $i--)
+                            @php
+                                $review_statistic = Arr::first($review_statistics, function ($review_statistic) use ($i) {
+                                    return $review_statistic->quantity == $i;
+                                });
+                                $procent = 0;
+                                if($review_statistic)
+                                {
+                                    $procent = round((($review_statistic->count / $product->reviews_count) * 100), 1);
+                                }
+                            @endphp
                             <div class="product_menu_block__reviews_line">
-                                5
-                                <div><span style="width: 67%;"></span></div>
-                                67%
+                                {{$i}}
+                                <div><span style="width: {{$procent}}%;"></span></div>
+                                {{$procent}}%
                             </div>
-                            <div class="product_menu_block__reviews_line">
-                                4
-                                <div><span style="width: 0%;"></span></div>
-                                0%
-                            </div>
-                            <div class="product_menu_block__reviews_line">
-                                3
-                                <div><span style="width: 3%;"></span></div>
-                                3%
-                            </div>
-                            <div class="product_menu_block__reviews_line">
-                                2
-                                <div><span style="width: 30%;"></span></div>
-                                30%
-                            </div>
-                            <div class="product_menu_block__reviews_line">
-                                1
-                                <div><span style="width: 0%;"></span></div>
-                                0%
-                            </div>
+                            @endfor
                         </div>
                         <div class="product_menu_block__reviews_sorting">
                             <div id="select2_sort" class="select2_sample_nude">

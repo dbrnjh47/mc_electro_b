@@ -202,7 +202,7 @@ class IndexController extends Controller
         }
 
         // dd($breadcrumbs);
-        // dd($product);
+        // dd($review_statistics);
         return view('sample.main.pages.product.index', [
             'title' => $product->locale->name,
             'description' => "",
