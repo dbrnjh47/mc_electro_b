@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Product\Information\ReviewController;
 use App\Http\Requests\Product\ShowRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
@@ -57,7 +58,10 @@ class IndexController extends Controller
                 //
 
                 'reviews' => function ($q) {
-                    $q->select(['id', 'quantity', 'product_id', 'user_id', 'created_at'])->where('locale_id', app()->user_local->id)->limit(15);
+                    $q->select(['id', 'quantity', 'product_id', 'user_id', 'created_at'])
+                        ->where('locale_id', app()->user_local->id)
+                        ->orderBy("created_at", "desc")
+                        ->limit(ReviewController::LIMIT);
                 },
                 'reviews.descriptions' => function ($q) {
                     $q->select(['id', 'text', 'type', 'product_review_id'])

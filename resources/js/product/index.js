@@ -11,12 +11,12 @@ import "./product_result/product_result_processing.js";
 import "/resources/js/custom/faq/faq.js";
 import "/resources/js/custom/input_count/index.js";
 
-// 
+//
 import "/resources/js/custom/swiper/swiper.js";
 import "./basic_slider/index.js";
-// 
+//
 import "./similar_slider/index.js"
-// 
+//
 
 import "./product_menu_blocks/index.js";
 import "/resources/scss/product/index.scss";
@@ -37,3 +37,8 @@ window.startSticky = function () {
 
 window.addEventListener('scroll', startSticky, false);
 document.body.addEventListener('scroll', startSticky, false);
+
+
+// ajax
+
+import "/resources/js/ajax/product/product_menu_block/reviews/get.js";

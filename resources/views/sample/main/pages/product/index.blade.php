@@ -315,9 +315,9 @@
                             @endfor
                         </div>
                         <div class="product_menu_block__reviews_sorting">
-                            <div id="select2_sort" class="select2_sample_nude">
+                            <div id="select2_product_menu_block__reviews_sort" class="select2_sample_nude">
                                 <select class="select2_custom" name="lang" data-dropdown-position="below"
-                                    data-minimum-results-for-search="5" data-dropdown-parent="#select2_sort">
+                                    data-minimum-results-for-search="5" data-dropdown-parent="#select2_product_menu_block__reviews_sort">
                                     <option value="created_at_asc" selected="">Сначала новые</option>
                                     <option value="created_at_desc">Сначала старые</option>
                                 </select>
@@ -352,41 +352,6 @@
                                 <div>
                                     <div class="swiper product_menu_block__reviews_slider">
                                         <div class="swiper-wrapper">
-                                            @foreach ($review->medias as $media)
-                                                <div class="swiper-slide">
-                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
-                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            @foreach ($review->medias as $media)
-                                                <div class="swiper-slide">
-                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
-                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            @foreach ($review->medias as $media)
-                                                <div class="swiper-slide">
-                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
-                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            @foreach ($review->medias as $media)
-                                                <div class="swiper-slide">
-                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
-                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                            @foreach ($review->medias as $media)
-                                                <div class="swiper-slide">
-                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
-                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
-                                                    </div>
-                                                </div>
-                                            @endforeach
                                             @foreach ($review->medias as $media)
                                                 <div class="swiper-slide">
                                                     <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
@@ -1152,5 +1117,11 @@
     <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
+
+    <script>
+        window.routes["product.information.review.get"] = "{{ route('product.information.review.get') }}";
+
+        let product_id = {{$product->id}};
+    </script>
     @vite('resources/js/product/index.js')
 @endsection

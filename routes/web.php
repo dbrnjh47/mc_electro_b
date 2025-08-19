@@ -12,6 +12,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Product\IndexController;
+use App\Http\Controllers\Product\Information\ReviewController;
 use App\Http\Controllers\Profile\CompanyController as ProfileCompanyController;
 use App\Http\Controllers\Profile\OrderController as ProfileOrderController;
 use App\Http\Controllers\Profile\WishlistController;
@@ -76,7 +77,24 @@ Route::get('/categories', [CategoryController::class, 'all'])->name('categories'
 Route::prefix('category')->group(function () {
     Route::get('/{slugs}', [CategoryController::class, 'show'])->where('slugs', '.*')->name('category');
 });
-Route::get('/product/{slug}', [IndexController::class, 'show'])->name('product');
+
+//
+
+
+Route::prefix('product')->group(function () {
+    Route::prefix('information')->group(function () {
+        Route::prefix('review')->group(function () {
+            Route::get('/', [ReviewController::class, 'get'])->name('product.information.review.get');
+        });
+
+    });
+
+
+    //
+
+    Route::get('{slug}', [IndexController::class, 'show'])->name('product');
+});
+
 //
 
 Route::prefix('auth')->group(function () {
