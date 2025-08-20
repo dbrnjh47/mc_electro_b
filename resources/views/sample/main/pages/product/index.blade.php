@@ -318,58 +318,18 @@
                             <div id="select2_product_menu_block__reviews_sort" class="select2_sample_nude">
                                 <select class="select2_custom" name="lang" data-dropdown-position="below"
                                     data-minimum-results-for-search="5" data-dropdown-parent="#select2_product_menu_block__reviews_sort">
-                                    <option value="created_at_asc" selected="">Сначала новые</option>
-                                    <option value="created_at_desc">Сначала старые</option>
+                                    <option value="created_at_asc">Сначала новые</option>
+                                    <option value="created_at_desc" selected="">Сначала старые</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="product_menu_block__reviews_list">
                             @foreach ($product->reviews as $review)
-                            <div class="product_menu_block__reviews_item">
-                                <div class="product_menu_block__reviews_user">
-                                    <div class="product_menu_block__reviews_user_name">
-                                        {{$review->user->name}}
-                                        <div class="product_menu_block__reviews_user_stars">
-                                            @for($i = 0; $i < 5; $i++)
-                                                <svg @if($review["quantity"] > $i) class="red" @endif viewBox="0 0 18 17" xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                                    </path>
-                                                </svg>
-                                            @endfor
-                                        </div>
-                                    </div>
-                                    <div class="product_menu_block__reviews_user_date">
-                                        {{$review->created_at->format('d.m.Y')}}
-                                    </div>
-                                </div>
-                                <div class="product_menu_block__reviews_menu">
-                                    @foreach ($review->descriptions as $description)
-                                        <button @if($loop->first) class="activ" @endif data-type="{{$description["type"]}}">{{ ($description["type"] == "comment" ? "Коментарий" : ($description["type"] == "dignity" ? "Достоинства" : "Недостатки")) }}</button>
-                                    @endforeach
-                                </div>
-                                <div>
-                                    <div class="swiper product_menu_block__reviews_slider">
-                                        <div class="swiper-wrapper">
-                                            @foreach ($review->medias as $media)
-                                                <div class="swiper-slide">
-                                                    <div class="product_menu_block__reviews_slider_miniature @if($media->is_video()) is_video @endif" data-path="{{$media->path}}">
-                                                        <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="swiper-button-next"></div>
-                                        <div class="swiper-button-prev"></div>
-                                    </div>
-                                </div>
-                                @foreach ($review->descriptions as $description)
-                                <div class="product_menu_block__reviews_text @if($loop->first) activ @endif" data-type="{{$description["type"]}}">
-                                    {{$description->text}}
-                                </div>
-                                @endforeach
-                            </div>
+                                <x-sample.main.product.information.review
+                                    :product_name="$product->locale->name"
+                                    :review="$review">
+                                </x-sample.main.product.information.review>
                             @endforeach
                         </div>
                     </section>

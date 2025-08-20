@@ -4,19 +4,33 @@ let product_review_select_sort_wrapper = $("#select2_product_menu_block__reviews
 let product_review_page = 1;
 let is_get_product_review = 1;
 
-product_review_list.on('scroll', function() {
+product_review_list.on('scroll', function () {
     let $this = $(this);
-    let is_end = $this[0].scrollHeight - $this.scrollTop() === $this.outerHeight();
-
+    let is_end = Math.round($this[0].scrollHeight - $this.scrollTop()) === Math.round($this.outerHeight());
+    // console.log("$this.outerHeight()", Math.round($this.outerHeight()));
+    // console.log("$this[0].scrollHeight - $this.scrollTop()", Math.round($this[0].scrollHeight - $this.scrollTop()));
+    // console.log(is_end);
     if (is_end) {
         getProuctReviews();
     }
 });
 
+product_review_select_sort_wrapper.find("select").on('change', function()
+{
+    clearProductReview();
+});
+
+function clearProductReview()
+{
+    product_review_list.html("");
+    is_get_product_review = 1;
+    product_review_page = 0;
+    getProuctReviews();
+}
 
 function getProuctReviews()
 {
-    if(!is_get_product_review){return;}
+    if (!is_get_product_review) { return; }
     console.log("получаем отзывы");
 
     $.ajax({
@@ -29,7 +43,11 @@ function getProuctReviews()
         },
         success: function (results) {
             product_review_page++;
-            console.log(results);
+            // console.log(results);
+            product_review_list.append(results);
+
+            startReviewsMiniatureSlider();
+            setEventReviewsMenuButton();
         },
         error: function (msg) {
             is_get_product_review = 0;
