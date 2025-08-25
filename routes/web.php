@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Category\IndexController as CategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\Product\IndexController;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::group(['prefix' => '{locale?}', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
 Route::get('/', [PageController::class, 'index'])->name('home');
+Route::post('/cookie/agreement', [CookieController::class, 'agreement'])->name('cookie.agreement');
 
 Route::get('/currency/set/{id}', [CurrencyController::class, 'set'])->name('currency.set');
 //

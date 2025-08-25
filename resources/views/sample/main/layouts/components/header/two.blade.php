@@ -11,13 +11,13 @@
                     <option value="WY">Краснодар</option>
                 </select>
 
-                <div class="location">
+                {{-- <div class="location">
                     <h2 class="location__text">Ваш город <span>Москва?</span></h2>
                     <div class="location__inner">
                         <button class="btn">Все верно</button>
                         <button class="btn btn_upend">Сменить город</button>
                     </div>
-                </div>
+                </div> --}}
 
             </li>
             <li><a href="#" itemprop="url" class="header_two__menu_link">Распродажа</a></li>

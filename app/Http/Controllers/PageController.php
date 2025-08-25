@@ -11,9 +11,9 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::with(['medias', 'documents'])->limit(5)->get();
+        // $products = Product::with(['medias', 'documents'])->limit(5)->get();
         // dd($products[1]->documents[0]->path);
-        dump($products);
+        // dump($products);
         // end test
 
         $service_categories = (new CategoryModelService);
