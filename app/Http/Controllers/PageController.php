@@ -33,12 +33,37 @@ class PageController extends Controller
         // dd($categories);
         //
 
-            $companies = Company::select(['id', 'preview', 'name', 'slug'])
-                ->where('is_on', 1)
-                ->whereNotNull("preview")
-                ->inRandomOrder()
-                ->limit(15)
-                ->get();
+        $companies = Company::select(['id', 'preview', 'name', 'slug'])
+            ->where('is_on', 1)
+            ->whereNotNull("preview")
+            ->inRandomOrder()
+            ->limit(15)
+            ->get();
+
+        //
+
+        $products = Product::select(['id', 'mrp', 'slug', 'step'])
+            ->with([
+                'medias' => function ($q) {
+                    $q->select(['name', 'product_id'])->limit(1);
+                },
+                'locale' => function ($q) {
+                    $q->where('locale_id', app()->user_local->id);
+                },
+            ])
+            ->whereHas('locale', function ($q) {
+                $q->where('locale_id', app()->user_local->id);
+            })
+            ->where(function($query) {
+                $query->whereNull('company_id')
+                      ->orWhereHas('company', function($q) {
+                          $q->where('is_on', 1);
+                      });
+            })
+            ->inRandomOrder()
+            ->limit(8)
+            ->get();
+            // dd( $products);
 
         //
 
@@ -50,7 +75,8 @@ class PageController extends Controller
             "banners",
             "title",
             "description",
-            "companies"
+            "companies",
+            "products"
         ));
     }
 
