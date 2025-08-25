@@ -21,7 +21,7 @@ class CompanyFactory extends Factory
             "preview" => ((rand(0, 100) < 80) ? array_rand($this->previews).".svg" : null),
             "name" => fake()->text(rand(5, 20)),
             "slug" => fake()->unique()->slug(rand(1, 15)),
-            "phone" => ((rand(0, 100) < 80) ? fake()->phoneNumber() : null),
+            "phone" => ((rand(0, 100) < 80) ? fake()->e164PhoneNumber() : null),
             "email" => ((rand(0, 100) < 80) ? fake()->email() : null),
             "is_on" => rand(0,1),
         ];

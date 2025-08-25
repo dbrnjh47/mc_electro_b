@@ -1,4 +1,7 @@
 .product_menu_block__characteristics {
+    &.activ {
+        display: block;
+    }
     &_contents {
         display: grid;
         gap: 10px;

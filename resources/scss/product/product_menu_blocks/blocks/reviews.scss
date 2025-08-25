@@ -1,4 +1,7 @@
 .product_menu_block__reviews {
+    &.activ {
+        display: block;
+    }
     &_rating {
         display: grid;
         gap: 5px;

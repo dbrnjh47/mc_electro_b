@@ -30,6 +30,12 @@ class IndexController extends Controller
             "step"
         ]))
             ->getModel()
+            ->where(function($query) {
+                $query->whereNull('company_id')
+                      ->orWhereHas('company', function($q) {
+                          $q->where('is_on', 1); // есть компания - только с is_on = 1
+                      });
+            })
             ->with([
                 'categories' => function ($q) {
                     $q = $q->whereHas('category', function ($q2) {
@@ -48,7 +54,7 @@ class IndexController extends Controller
                     $q = $q->select(['text', 'product_id'])->where("locale_id", app()->user_local->id);
                 },
                 'company' => function ($q) {
-                    $q = $q->select(['id', 'preview', 'name', 'slug']);
+                    $q = $q->select(['id', 'preview', 'name', 'slug', 'count_reviews', 'grade_review']);
                     $q = $q->withCount(['products']);
                 },
                 'company.locale' => function ($q) {
@@ -122,6 +128,7 @@ class IndexController extends Controller
             ->whereHas('categories.category', function ($q) {
                 $q = CategoryModelService::whereOn($q);
             })
+
             ->withCount(['reviews' => function (Builder $q) {
                 $q->where('locale_id', app()->user_local->id)->where("is_on", 1);
             },])

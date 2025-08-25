@@ -100,27 +100,167 @@
 
                 </section>
 
+                @if($product->description || !$product->characteristics->isEmpty() || !$product->reviews->isEmpty() || !$product->documents->isEmpty())
+                @php $is_first_block = 0; @endphp
                 <section class="product_menu_blocks product_menu_blocks__container">
                     @if($product->description)
-                    <div class="activ">Описание</div>
+                        <div @if(!$is_first_block) class="activ" @endif data-block="description">Описание</div>
+                        @php $is_first_block = 1; @endphp
                     @endif
 
                     @if(!$product->characteristics->isEmpty())
-                        <div>Характеристики</div>
+                        <div @if(!$is_first_block) class="activ" @endif data-block="characteristics">Характеристики</div>
+                        @php $is_first_block = 1; @endphp
                     @endif
 
                     @if(!$product->reviews->isEmpty())
-                    <div>Отзывы <span>({{$product->reviews_count}})</span></div>
+                        <div @if(!$is_first_block) class="activ" @endif data-block="reviews">Отзывы <span>({{$product->reviews_count}})</span></div>
+                        @php $is_first_block = 1; @endphp
                     @endif
 
                     {{-- <div>Вопрос ответ <span>(9)</span></div> --}}
 
                     @if(!$product->documents->isEmpty())
-                        <div>Документация <span>({{$product->documents->count()}})</span></div>
+                        <div @if(!$is_first_block) class="activ" @endif data-block="documentations">Документация <span>({{$product->documents->count()}})</span></div>
+                        @php $is_first_block = 1; @endphp
                     @endif
                 </section>
 
+
+                @php $is_first_block = 0; @endphp
                 <div class="product_menu_block product_menu_block__container">
+
+                    @if($product->description)
+                    <section class="product_menu_block__description @if(!$is_first_block) activ @endif" data-block="description">
+                        <h1 class="product_menu_block__title">Описание</h1>
+                        <div class="product_menu_block__description_content">
+                            {!! $product->description->text !!}
+                        </div>
+                    </section>
+                    @php $is_first_block = 1; @endphp
+                    @endif
+
+                    @if(!$product->characteristics->isEmpty())
+                    <section class="product_menu_block__characteristics @if(!$is_first_block) activ @endif" data-block="characteristics">
+                        <h1 class="product_menu_block__title">Характеристики</h1>
+                        <div class="product_menu_block__characteristics_contents">
+                            @foreach ($product->characteristics as $characteristic_category)
+                            <div class="product_menu_block__characteristics_content">
+                                <h3 class="product_menu_block__characteristics_title">
+                                    {{$characteristic_category['category']->locale->title}}
+                                </h3>
+                                @foreach ($characteristic_category['items'] as $characteristic)
+                                    <div class="product_menu_block__characteristics_line">
+                                        <div class="product_menu_block__characteristics_name">
+                                            {{$characteristic->title->locale->text}}
+                                        </div>
+                                        <span></span>
+                                        <div class="product_menu_block__characteristics_value">
+                                            {{($characteristic->value != null ? "{$characteristic->getValueProccess()} {$characteristic->getValueName()}" : $characteristic->locale->text)}}
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </div>
+
+                    </section>
+                    @php $is_first_block = 1; @endphp
+                    @endif
+
+                    @if(!$product->reviews->isEmpty())
+                    <section class="product_menu_block__reviews @if(!$is_first_block) activ @endif" data-block="reviews">
+                        <h1 class="product_menu_block__title">Отзывы</h1>
+                        @if($product->reviews_count)
+                        <div class="product_title__statistics">
+                            <div>
+                                <!-- public\temple\images\company\icon\star.svg -->
+                                <svg class="red" width="18" height="17" viewBox="0 0 18 17"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
+                                    </path>
+                                </svg>
+                                {{round($product->reviews_sum_quantity / $product->reviews_count, 1)}}
+                            </div>
+                            <div>
+                                <svg width="19" height="16" viewBox="0 0 19 16"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path opacity="0.99" fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M18.9216 6.50596C19.029 7.0658 19.0232 7.59029 18.9216 8.12607C18.7202 9.18742 18.2973 10.1533 17.653 11.0237C17.3943 11.3289 17.1364 11.6333 16.8794 11.9371C17.3726 12.9936 17.8574 14.054 18.3337 15.1181C18.4591 15.6191 18.2735 15.9131 17.7767 16C17.5916 15.9531 17.4162 15.8796 17.2507 15.7795C16.1671 15.0961 15.0842 14.4138 14.0018 13.7323C10.0487 15.2239 6.30476 14.8145 2.77005 12.504C1.73146 11.6798 0.937316 10.6614 0.387546 9.44889C-0.357961 7.26693 -0.0278762 5.27218 1.37768 3.46471C3.34909 1.3528 5.77287 0.208495 8.64895 0.0316779C11.6603 -0.178965 14.3419 0.660899 16.6938 2.55133C17.878 3.60833 18.6206 4.9383 18.9216 6.50596Z">
+                                    </path>
+                                </svg>
+                                {{$product->reviews_count}} отзывов
+                            </div>
+                        </div>
+                        @endif
+                        <div class="product_menu_block__reviews_rating">
+                            @for($i = 5; $i > 0; $i--)
+                            @php
+                                $review_statistic = Arr::first($review_statistics, function ($review_statistic) use ($i) {
+                                    return $review_statistic->quantity == $i;
+                                });
+                                $procent = 0;
+                                if($review_statistic)
+                                {
+                                    $procent = round((($review_statistic->count / $product->reviews_count) * 100), 1);
+                                }
+                            @endphp
+                            <div class="product_menu_block__reviews_line">
+                                {{$i}}
+                                <div><span style="width: {{$procent}}%;"></span></div>
+                                {{$procent}}%
+                            </div>
+                            @endfor
+                        </div>
+                        <div class="product_menu_block__reviews_sorting">
+                            <div id="select2_product_menu_block__reviews_sort" class="select2_sample_nude">
+                                <select class="select2_custom" name="lang" data-dropdown-position="below"
+                                    data-minimum-results-for-search="5" data-dropdown-parent="#select2_product_menu_block__reviews_sort">
+                                    <option value="created_at_asc">Сначала новые</option>
+                                    <option value="created_at_desc" selected="">Сначала старые</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="product_menu_block__reviews_list">
+                            @foreach ($product->reviews as $review)
+                                <x-sample.main.product.information.review
+                                    :product_name="$product->locale->name"
+                                    :review="$review">
+                                </x-sample.main.product.information.review>
+                            @endforeach
+                        </div>
+                    </section>
+                    @php $is_first_block = 1; @endphp
+                    @endif
+
+                    @if(!$product->documents->isEmpty())
+                    <section class="product_menu_block__documentations @if(!$is_first_block) activ @endif" data-block="documentations">
+                        <h1 class="product_menu_block__title">Документация</h1>
+                        <div class="product_menu_block__documentations_content">
+                            <div class="product_menu_block__documentations_list">
+                                {{-- <h3>Название</h3> --}}
+                                <!-- temple\images\product\icon\download.svg -->
+                                @foreach ($product->documents as $document)
+                                <a href="{{$document->path}}" target="_blank" alt="{{$document->title}}"> <svg width="15" height="17" viewBox="0 0 15 17"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8.65882 0H6.34118C6.00981 0 5.74118 0.262453 5.74118 0.586206V5.40287H1.94833C1.59445 5.40287 1.41488 5.81882 1.66186 6.06643L7.0703 11.4887C7.3058 11.7248 7.6942 11.7248 7.9297 11.4887L13.3381 6.06643C13.5851 5.81882 13.4056 5.40287 13.0517 5.40287H9.25882V0.586207C9.25882 0.262454 8.9902 0 8.65882 0Z" />
+                                    <path
+                                        d="M0 14.2644C0 14.0485 0.179086 13.8736 0.4 13.8736H14.6C14.8209 13.8736 15 14.0485 15 14.2644V16.6092C15 16.825 14.8209 17 14.6 17H0.4C0.179086 17 0 16.825 0 16.6092V14.2644Z" />
+                                </svg>
+                                {{$document->title}}</a>
+                                @endforeach
+                            </div>
+
+                            {{-- x3 --}}
+
+
+                        </div>
+                    </section>
+                    @php $is_first_block = 1; @endphp
+                    @endif
 
                     {{-- <section class="product_menu_block__faq">
 
@@ -268,135 +408,8 @@
                         </div>
 
                     </section> --}}
-
-                    @if(!$product->reviews->isEmpty())
-                    <section class="product_menu_block__reviews">
-                        <h1 class="product_menu_block__title">Отзывы</h1>
-                        @if($product->reviews_count)
-                        <div class="product_title__statistics">
-                            <div>
-                                <!-- public\temple\images\company\icon\star.svg -->
-                                <svg class="red" width="18" height="17" viewBox="0 0 18 17"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9 0L11.0206 6.21885H17.5595L12.2694 10.0623L14.2901 16.2812L9 12.4377L3.70993 16.2812L5.73056 10.0623L0.440492 6.21885H6.97937L9 0Z">
-                                    </path>
-                                </svg>
-                                {{round($product->reviews_sum_quantity / $product->reviews_count, 1)}}
-                            </div>
-                            <div>
-                                <svg width="19" height="16" viewBox="0 0 19 16"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path opacity="0.99" fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M18.9216 6.50596C19.029 7.0658 19.0232 7.59029 18.9216 8.12607C18.7202 9.18742 18.2973 10.1533 17.653 11.0237C17.3943 11.3289 17.1364 11.6333 16.8794 11.9371C17.3726 12.9936 17.8574 14.054 18.3337 15.1181C18.4591 15.6191 18.2735 15.9131 17.7767 16C17.5916 15.9531 17.4162 15.8796 17.2507 15.7795C16.1671 15.0961 15.0842 14.4138 14.0018 13.7323C10.0487 15.2239 6.30476 14.8145 2.77005 12.504C1.73146 11.6798 0.937316 10.6614 0.387546 9.44889C-0.357961 7.26693 -0.0278762 5.27218 1.37768 3.46471C3.34909 1.3528 5.77287 0.208495 8.64895 0.0316779C11.6603 -0.178965 14.3419 0.660899 16.6938 2.55133C17.878 3.60833 18.6206 4.9383 18.9216 6.50596Z">
-                                    </path>
-                                </svg>
-                                {{$product->reviews_count}} отзывов
-                            </div>
-                        </div>
-                        @endif
-                        <div class="product_menu_block__reviews_rating">
-                            @for($i = 5; $i > 0; $i--)
-                            @php
-                                $review_statistic = Arr::first($review_statistics, function ($review_statistic) use ($i) {
-                                    return $review_statistic->quantity == $i;
-                                });
-                                $procent = 0;
-                                if($review_statistic)
-                                {
-                                    $procent = round((($review_statistic->count / $product->reviews_count) * 100), 1);
-                                }
-                            @endphp
-                            <div class="product_menu_block__reviews_line">
-                                {{$i}}
-                                <div><span style="width: {{$procent}}%;"></span></div>
-                                {{$procent}}%
-                            </div>
-                            @endfor
-                        </div>
-                        <div class="product_menu_block__reviews_sorting">
-                            <div id="select2_product_menu_block__reviews_sort" class="select2_sample_nude">
-                                <select class="select2_custom" name="lang" data-dropdown-position="below"
-                                    data-minimum-results-for-search="5" data-dropdown-parent="#select2_product_menu_block__reviews_sort">
-                                    <option value="created_at_asc">Сначала новые</option>
-                                    <option value="created_at_desc" selected="">Сначала старые</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="product_menu_block__reviews_list">
-                            @foreach ($product->reviews as $review)
-                                <x-sample.main.product.information.review
-                                    :product_name="$product->locale->name"
-                                    :review="$review">
-                                </x-sample.main.product.information.review>
-                            @endforeach
-                        </div>
-                    </section>
-                    @endif
-
-                    @if($product->description)
-                    <section class="product_menu_block__description">
-                        <h1 class="product_menu_block__title">Описание</h1>
-                        <div class="product_menu_block__description_content">
-                            {!! $product->description->text !!}
-                        </div>
-                    </section>
-                    @endif
-
-                    @if(!$product->characteristics->isEmpty())
-                    <section class="product_menu_block__characteristics">
-                        <h1 class="product_menu_block__title">Характеристики</h1>
-                        <div class="product_menu_block__characteristics_contents">
-                            @foreach ($product->characteristics as $characteristic_category)
-                            <div class="product_menu_block__characteristics_content">
-                                <h3 class="product_menu_block__characteristics_title">
-                                    {{$characteristic_category['category']->locale->title}}
-                                </h3>
-                                @foreach ($characteristic_category['items'] as $characteristic)
-                                    <div class="product_menu_block__characteristics_line">
-                                        <div class="product_menu_block__characteristics_name">
-                                            {{$characteristic->title->locale->text}}
-                                        </div>
-                                        <span></span>
-                                        <div class="product_menu_block__characteristics_value">
-                                            {{($characteristic->value != null ? "{$characteristic->getValueProccess()} {$characteristic->getValueName()}" : $characteristic->locale->text)}}
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                            @endforeach
-                        </div>
-
-                    </section>
-                    @endif
-
-                    @if(!$product->documents->isEmpty())
-                    <section class="product_menu_block__documentations">
-                        <h1 class="product_menu_block__title">Документация</h1>
-                        <div class="product_menu_block__documentations_content">
-                            <div class="product_menu_block__documentations_list">
-                                {{-- <h3>Название</h3> --}}
-                                <!-- temple\images\product\icon\download.svg -->
-                                @foreach ($product->documents as $document)
-                                <a href="{{$document->path}}" target="_blank" alt="{{$document->title}}"> <svg width="15" height="17" viewBox="0 0 15 17"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M8.65882 0H6.34118C6.00981 0 5.74118 0.262453 5.74118 0.586206V5.40287H1.94833C1.59445 5.40287 1.41488 5.81882 1.66186 6.06643L7.0703 11.4887C7.3058 11.7248 7.6942 11.7248 7.9297 11.4887L13.3381 6.06643C13.5851 5.81882 13.4056 5.40287 13.0517 5.40287H9.25882V0.586207C9.25882 0.262454 8.9902 0 8.65882 0Z" />
-                                    <path
-                                        d="M0 14.2644C0 14.0485 0.179086 13.8736 0.4 13.8736H14.6C14.8209 13.8736 15 14.0485 15 14.2644V16.6092C15 16.825 14.8209 17 14.6 17H0.4C0.179086 17 0 16.825 0 16.6092V14.2644Z" />
-                                </svg>
-                                {{$document->title}}</a>
-                                @endforeach
-                            </div>
-
-                            {{-- x3 --}}
-
-
-                        </div>
-                    </section>
-                    @endif
                 </div>
+                @endif
             </section>
 
             <div id="sticky_aside1">
@@ -463,7 +476,7 @@
                         <div class="product_result_processing__actions">
                             <button class="btn">Купить</button>
                             <button class="btn btn_upend" onclick="getProductPhone();">Позвонить</button>
-                            <div class="product_result_processing__actions_phone copy_button">
+                            <div class="product_result_processing__actions_phone copy_button" data-copy-text="+7 900 000 00 00">
                                 <!-- temple\images\product\icon\phone.svg -->
                                 <svg width="22" height="22" viewBox="0 0 22 22"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -471,7 +484,7 @@
                                         d="M4.01297 0.0183455C4.83339 -0.0757563 5.50644 0.192157 6.03212 0.822085C6.6475 1.8502 7.22186 2.90398 7.75513 3.98346C8.13204 4.60861 8.50894 5.2337 8.88585 5.85885C9.20477 6.54042 9.20477 7.2191 8.88585 7.89499C8.75124 8.10037 8.58072 8.27007 8.37433 8.40403C7.97707 8.60721 7.56425 8.76796 7.13592 8.88627C6.80688 9.18633 6.77996 9.51672 7.05516 9.87755C8.5538 11.7261 10.2319 13.3962 12.0896 14.8875C12.4708 15.2119 12.8388 15.203 13.1934 14.8607C13.6783 12.9251 14.818 12.416 16.6125 13.3336C18.1376 14.1638 19.6453 15.0212 21.1353 15.9056C22.1072 16.8318 22.2598 17.8767 21.593 19.0402C20.9786 19.8661 20.2876 20.6252 19.52 21.3174C18.472 22.019 17.3412 22.1797 16.1279 21.7997C8.48622 18.7854 3.16466 13.4718 0.163132 5.85885C-0.18785 4.60486 0.0275262 3.46178 0.80926 2.42956C1.543 1.66341 2.34169 0.975765 3.20532 0.366633C3.46737 0.217989 3.73659 0.101897 4.01297 0.0183455Z" />
                                 </svg>
 
-                                <input class="input" type="text" value="+7 900 000 00 00" disabled>
+                                <input class="input" type="text" value="+7 900 000 00 00" readonly>
                             </div>
 
                         </div>

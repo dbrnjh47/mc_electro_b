@@ -1,4 +1,7 @@
 .product_menu_block__documentations {
+    &.activ {
+        display: block;
+    }
     &_content {
         display: flex;
         flex-wrap: wrap;
