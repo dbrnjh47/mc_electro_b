@@ -20,7 +20,7 @@ var companies_slider = new Swiper("#companies_slider", {
         rows: 2,
       },
     grabCursor: 1,
-    spaceBetween: 15,
+    spaceBetween: 5,
     keyboard: {
         enabled: 1
     },

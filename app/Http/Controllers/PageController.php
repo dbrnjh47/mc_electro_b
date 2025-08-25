@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\Models\BannerModelService;
 use App\Http\Services\Models\CategoryModelService;
+use App\Models\Company\Company;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
 
@@ -32,12 +33,25 @@ class PageController extends Controller
         // dd($categories);
         //
 
+            $companies = Company::select(['id', 'preview', 'name', 'slug'])
+                ->where('is_on', 1)
+                ->whereNotNull("preview")
+                ->inRandomOrder()
+                ->limit(15)
+                ->get();
+
         //
 
         $banners = (new BannerModelService)->getByKey("home");
         $title = "Test";
         $description = "description";
-        return view('sample.main.pages.index', compact("categories", "banners", "title", "description"));
+        return view('sample.main.pages.index', compact(
+            "categories",
+            "banners",
+            "title",
+            "description",
+            "companies"
+        ));
     }
 
     public function feedback(Request $request)
