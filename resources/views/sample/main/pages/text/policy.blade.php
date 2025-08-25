@@ -13,7 +13,7 @@
         </div>
     </section>
     <section class="agreement__container">
-        <x-breadcrumb :breadcrumbs="$breadcrumbs"></x-breadcrumb>
+        <x-sample.main.breadcrumb :breadcrumbs="$breadcrumbs"></x-sample.main.breadcrumb>
         <section class="agreement">
             <div class="dop_menu__bg dop_menu__close"></div>
             <div class="content dop_menu">

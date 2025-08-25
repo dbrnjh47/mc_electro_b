@@ -8,7 +8,7 @@
 
 @section('content')
     <section class="product product__container">
-        <x-breadcrumb :breadcrumbs="$breadcrumbs"></x-breadcrumb>
+        <x-sample.main.breadcrumb :breadcrumbs="$breadcrumbs"></x-sample.main.breadcrumb>
 
         <section class="product_title">
             <div class="app__title">
@@ -490,7 +490,7 @@
                         </div>
                     </div>
 
-                    <x-company.card :company="$product->company"></x-company.card>
+                    <x-sample.main.company.card :company="$product->company"></x-sample.main.company.card>
                 </section>
 
             </div>

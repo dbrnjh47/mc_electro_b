@@ -4,15 +4,18 @@
 
 .product {
     margin-bottom: 20px;
-  &__wrapper {
-    display: grid;
-    // grid-template-columns: 1fr 415px;
-    grid-template-columns: calc(100% - 435px) 415px;
-    gap: 20px;
-    margin-bottom: 20px;
-    margin-top: 20px;
-    @media (max-width: 840px) {
-      grid-template-columns: 100%;
+    &__wrapper {
+        display: grid;
+        // grid-template-columns: 1fr 415px;
+        grid-template-columns: calc(100% - 435px) 415px;
+        gap: 20px;
+        margin-bottom: 20px;
+        margin-top: 20px;
+        @media (max-width: 840px) {
+            grid-template-columns: 100%;
+        }
     }
-  }
+    .breadcrumb__container{
+        padding: 0;
+    }
 }

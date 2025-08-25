@@ -44,12 +44,8 @@
         </div>
 
         <div class="companies__list">
-            {{-- <x-company.card></x-company.card> --}}
-            {{-- <x-company.card></x-company.card> --}}
-            {{-- <x-company.card></x-company.card> --}}
-            {{-- <x-company.card></x-company.card> --}}
-            {{-- <x-company.card></x-company.card> --}}
-            {{-- <x-company.card></x-company.card> --}}
+            {{-- <x-sample.main.company.card :company="$product->company"></x-sample.main.company.card> --}}
+
             <div class="company_card">
                 <div class="company_card__content">
                   <a class="company_card__miniature" href="#" target="_blank">

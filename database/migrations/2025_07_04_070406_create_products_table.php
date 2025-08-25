@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('slug', 128)->unique();
 
-            $table->decimal('mrp', 10, 2)->default(0)->comment("мрц");
+            $table->decimal('mrp', 10, 2)->unsigned()->default(0)->comment("мрц");
 
             $table->decimal('weight', 10, 4); // кг, может в граммы?
             $table->decimal('length', 10, 4); // мм

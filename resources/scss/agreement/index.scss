@@ -5,6 +5,9 @@
     margin-top: 20px;
     &__container {
         margin-bottom: 80px;
+        .breadcrumb__container{
+            padding: 0;
+        }
     }
     &__content {
         & > div {
