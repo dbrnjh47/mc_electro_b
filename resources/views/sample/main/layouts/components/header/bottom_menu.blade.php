@@ -1,6 +1,6 @@
 <div class="bottom_menu">
 
-    <a href="#" class="bottom_menu__item activ">
+    <a href="{{route('wishlist')}}" class="bottom_menu__item activ">
         <!-- public\temple\images\layout\icon\favorite.svg -->
         <svg width="18" height="21" viewBox="0 0 18 21" xmlns="http://www.w3.org/2000/svg">
             <path

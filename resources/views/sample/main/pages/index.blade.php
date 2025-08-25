@@ -136,6 +136,7 @@
 
 </section>
 
+@if(!$products->isEmpty())
 <section class="produtcs">
     <div class="produtcs__container">
         <div class="app__title">
@@ -170,7 +171,7 @@
         </div>
     </div>
 </section>
-
+@endif
 <section class="news">
     <div class="news__container">
         <div class="news__bg">

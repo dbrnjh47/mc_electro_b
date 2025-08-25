@@ -58,7 +58,7 @@
         <a href="#" class="header__button">Свяжитесь с нами</a>
 
         <div class="header__actions">
-            <a href="#" itemprop="url" class="header__action header__action_hover">
+            <a href="{{route('wishlist')}}" itemprop="url" class="header__action header__action_hover">
                 <!-- public\temple\images\layout\icon\favorite.svg -->
                 <svg width="18" height="21" viewBox="0 0 18 21" xmlns="http://www.w3.org/2000/svg">
                     <path
