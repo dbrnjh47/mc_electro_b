@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\Models\BannerModelService;
 use App\Http\Services\Models\CategoryModelService;
-use App\Http\Services\WishListService;
+use App\Http\Services\UserCache\WishListService;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
@@ -14,10 +14,13 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
-        $wishlist = (new WishListService)->get();
-        // dump($wishlist);
-        (new WishListService)->add(112);
-        $wishlist = (new WishListService)->get();
+
+        // (new WishListService)->add(142);
+        // (new WishListService)->delite(142);
+        // $wishlist = (new WishListService)->get();
+        // (new WishListService)->clear();
+
+        // $wishlist = (new WishListService)->get();
         // dump($wishlist);
         // $products = Product::with(['medias', 'documents'])->limit(5)->get();
         // dd($products[1]->documents[0]->path);
