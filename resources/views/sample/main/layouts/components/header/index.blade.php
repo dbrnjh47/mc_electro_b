@@ -97,7 +97,7 @@
                         <li><a href="#">Профиль</a></li>
                         <li><a href="#">Список заказов</a></li>
                         <li><a href="#">Пополнить баланс</a></li>
-                        <li><a href="#">Выйти</a></li>
+                        <li><a href="{{route('logout')}}">Выйти</a></li>
                     </ul>
                 </div>
             </div>

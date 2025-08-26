@@ -21,8 +21,8 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->boolean('is_on')->default(false);
 
-            $table->integer('count_reviews')->default(0);
-            $table->decimal('grade_review', 4, 1)->default(0);
+            $table->integer('count_reviews')->default(0)->unsigned();
+            $table->decimal('grade_review', 4, 1)->default(0)->unsigned();
 
             $table->timestamps();
         });

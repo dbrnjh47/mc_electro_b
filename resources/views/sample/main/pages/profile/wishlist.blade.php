@@ -14,38 +14,7 @@
         </div>
     </section>
 
-    <section class="breadcrumb">
-        <div class="breadcrumb__container">
-            <ul class="breadcrumb__lists" itemscope="" itemtype="https://schema.org/BreadcrumbList">
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope=""
-                    itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link start" href="#">
-                        <span itemprop="name">Главная</span>
-                    </a>
-                    <meta itemprop="position" content="1">
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link off">/</a>
-                </li>
-                <li class="breadcrumb__item" itemprop="itemListElement" itemscope=""
-                    itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link" href="#">
-                        <span itemprop="name">Профиль</span>
-                    </a>
-                    <meta itemprop="position" content="2">
-                </li>
-                <li class="breadcrumb__item">
-                    <a class="breadcrumb__link off">/</a>
-                </li>
-                <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                    <a itemprop="item" class="breadcrumb__link active">
-                        <span itemprop="name">Избранное</span>
-                    </a>
-                    <meta itemprop="position" content="3">
-                </li>
-            </ul>
-        </div>
-    </section>
+    <x-sample.main.breadcrumb :breadcrumbs="$breadcrumbs"></x-sample.main.breadcrumb>
 
     <section class="profile__container">
         <div class="profile">

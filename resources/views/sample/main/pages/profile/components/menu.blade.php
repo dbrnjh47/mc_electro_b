@@ -24,7 +24,7 @@
         <a href="#">Организации</a>
         <a href="#">История баланса</a>
         <a href="#">Пополнить баланс</a>
-        <a href="#" class="red">Выход</a>
+        <a href="{{route('logout')}}" class="red">Выход</a>
     </div>
 </div>
 @endauth

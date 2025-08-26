@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\Models\BannerModelService;
 use App\Http\Services\Models\CategoryModelService;
-use App\Http\Services\UserCache\WishListService;
+use App\Http\Services\User\WishListService;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;

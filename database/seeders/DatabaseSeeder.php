@@ -6,6 +6,7 @@ use App\Models\User;
 use Database\Seeders\Company\CompanySeeder;
 use Database\Seeders\Product\ProductSeeder;
 use Database\Seeders\Unit\UnitSeeder;
+use Database\Seeders\User\WishlistSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -48,5 +49,8 @@ class DatabaseSeeder extends Seeder
         $this->call(CompanySeeder::class);
         $this->call(ProductSeeder::class);
 
+        // user
+        $this->call(WishlistSeeder::class);
+        $this->call(CartSeeder::class);
     }
 }

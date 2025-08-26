@@ -9,6 +9,8 @@ use App\Models\Product\Product;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use App\Http\Services\BreadcrumbService;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
@@ -57,11 +59,21 @@ class WishlistController extends Controller
                 ->get();
         }
 
+        //
+
+        $breadcrumbs = (new BreadcrumbService);
+        if(Auth::check())
+        {
+            $breadcrumbs->add("Профиль", route("profile"));
+        }
+        $breadcrumbs->add("Избранное", route("wishlist"));
+
         return view('sample.main.pages.profile.wishlist', [
             'title' => "Избранное",
             'description' => "",
             'products' => $products,
-            'pagination' => $paginatedItems
+            'pagination' => $paginatedItems,
+            'breadcrumbs' => $breadcrumbs
         ]);
     }
 }
