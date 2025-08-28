@@ -9,4 +9,5 @@ class Wishlist extends Model
 {
     /** @use HasFactory<\Database\Factories\User\Wishlist\WishlistFactory> */
     use HasFactory;
+    protected $guarded = false;
 }

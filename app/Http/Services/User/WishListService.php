@@ -3,6 +3,7 @@
 namespace App\Http\Services\User;
 
 use App\Models\User\Wishlist\Wishlist;
+use App\Models\User\Wishlist\WishlistProduct;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
@@ -11,37 +12,53 @@ use Carbon\Carbon;
 
 class WishListService
 {
-    public $key = null, $type = "wishlist", $wishlist = null;
+    public $id = null, $type = "wishlist", $wishlist = null;
+    public $limit = 10;
     public function __construct()
     {
-        if(!Auth::check()){$this->key = $this->getKey($this->type);}
+        $this->id = $this->getID($this->type);
         $this->getWishlist();
+
+        if($this->wishlist && !$this->id){$this->id = $this->wishlist->id;}
+
+        // если авторезовался
+        if($this->wishlist){$this->setCookie();}
+        if($this->wishlist && Auth::check() && !$this->wishlist->user_id){$this->setUserId();}
     }
 
     // количество элементов
-    public function count()
-    {
+    public function count() {
+        if (!$this->wishlist) {return 0;}
 
+        return WishlistProduct::where("wishlist_id", $this->wishlist->id)->count();
     }
 
     // получить список
     public function get()
     {
-        if(!$this->wishlist){return null;}
+        if (!$this->wishlist) {return null;}
 
         // получаю список и возвращаю
+        return WishlistProduct::where("wishlist_id", $this->wishlist->id)->paginate($this->limit);
     }
 
     // добавить товар
     public function add($product_id)
     {
-        if(!$this->wishlist){
-            // создаю wishlist
-            // если нужно setCookie()
+        if (!$this->wishlist) {
+            $this->create();
         }
 
         $product_id = (int)$product_id;
         // делаю запрос в бд с ид wishlist и product_id, если записи нету, то создаю
+        WishlistProduct::firstOrCreate(
+            [
+                'wishlist_id' => $this->wishlist->id,
+                'product_id' => $product_id
+            ],
+            [
+            ]
+        );
 
         return;
     }
@@ -49,10 +66,16 @@ class WishListService
     // удаляю товар
     public function delite($product_id)
     {
-        if(!$this->wishlist){return;}
+        if (!$this->wishlist) {
+            return;
+        }
         $product_id = (int)$product_id;
 
         // по ид wishlist и product_id удаляю без проверок
+        WishlistProduct::where([
+            ["wishlist_id", $this->wishlist->id],
+            ["product_id", $product_id]
+        ])->delete();
 
         return;
     }
@@ -60,42 +83,64 @@ class WishListService
     // очистка
     public function clear()
     {
-        if($this->wishlist){$this->wishlist->delete(); $this->wishlist = null;}
+        if ($this->wishlist) {
+            $this->wishlist->delete();
+            $this->wishlist = null;
+        }
         Cookie::queue(Cookie::forget($this->type));
+    }
+
+    public function create()
+    {
+        // создаю wishlist
+        $wishlist = new Wishlist;
+
+        if(isset(app()->user))
+        {
+            $wishlist->user_id = app()->user->id;
+        }
+
+        $wishlist->save();
+        $this->id = $wishlist->id;
+        $this->setCookie();
+
+        $this->wishlist = $wishlist;
     }
 
     //
 
     public function setCookie()
     {
-        Cookie::queue($this->type, $this->key, (60 * 24 * 30));
+        Cookie::queue($this->type, $this->id, (60 * 24 * 30));
         return;
     }
 
-    protected function getKey(string $type)
+    protected function getID(string $type)
     {
-        $key = Cookie::get($type);
-        if($key){return $key;}
-
-        // генерирую свободный код
-        while(true)
-        {
-            $key = "{$type}_" . str()->random(random_int(12, 60));
-            if(!Wishlist::where("key", $key)->count()){break;}
+        $id = Cookie::get($type);
+        if ($id && $id != "") {
+            return $id;
         }
 
-        return $key;
+        return null;
+    }
+
+    public function setUserId()
+    {
+        // dump("setUserId");
+        Wishlist::where("user_id", app()->user->id)->delete();
+        $this->wishlist->user_id = app()->user->id;
+        $this->wishlist->save();
     }
 
     public function getWishlist()
     {
         $list = Wishlist::query();
+        if(!Auth::check() && !$this->id){return;}
 
-        if($this->key)
-        {
-            $list->where("key", $this->key);
-        } else
-        {
+        if ($this->id) {
+            $list->where("id", $this->id);
+        } else {
             $list->where("user_id", app()->user->id);
         }
 

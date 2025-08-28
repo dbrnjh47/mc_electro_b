@@ -14,14 +14,18 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
+        // $r = (new WishListService())->get();
+        // dd($r);
 
-        // (new WishListService)->add(142);
-        // (new WishListService)->delite(142);
-        // $wishlist = (new WishListService)->get();
-        // (new WishListService)->clear();
+        // $r = (new WishListService())->count();
+        // dd($r);
 
-        // $wishlist = (new WishListService)->get();
-        // dump($wishlist);
+        // (new WishListService)->add(3);
+        // (new WishListService)->delite(2);
+
+        // (new WishListService(0))->clear();
+
+
         // $products = Product::with(['medias', 'documents'])->limit(5)->get();
         // dd($products[1]->documents[0]->path);
         // dump($products);
