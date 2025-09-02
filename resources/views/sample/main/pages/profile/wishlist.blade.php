@@ -56,14 +56,15 @@
                     </div> --}}
 
                 </div>
+                @if($wish_list_products)
+                    <section class="products_list">
+                        @foreach ($wish_list_products as $wish_list_product)
+                            <x-sample.main.product.card :product="$wish_list_product->product"></x-sample.main.product.card>
+                        @endforeach
+                    </section>
 
-                <section class="products_list">
-                    @foreach ($products as $product)
-                        <x-sample.main.product.card :product="$product"></x-sample.main.product.card>
-                    @endforeach
-                </section>
-
-                {{ $pagination->appends(request()->input())->onEachSide(1)->links() }}
+                    {{ $wish_list_products->appends(request()->input())->onEachSide(1)->links() }}
+                @endif
             </div>
         </div>
     </section>

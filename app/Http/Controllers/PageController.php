@@ -20,7 +20,7 @@ class PageController extends Controller
         // $r = (new WishListService())->count();
         // dd($r);
 
-        // (new WishListService)->add(3);
+        (new WishListService)->add(3);
         // (new WishListService)->delite(2);
 
         // (new WishListService(0))->clear();

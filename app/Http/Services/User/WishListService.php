@@ -19,16 +19,25 @@ class WishListService
         $this->id = $this->getID($this->type);
         $this->getWishlist();
 
-        if($this->wishlist && !$this->id){$this->id = $this->wishlist->id;}
+        if ($this->wishlist && !$this->id) {
+            $this->id = $this->wishlist->id;
+        }
 
         // если авторезовался
-        if($this->wishlist){$this->setCookie();}
-        if($this->wishlist && Auth::check() && !$this->wishlist->user_id){$this->setUserId();}
+        if ($this->wishlist) {
+            $this->setCookie();
+        }
+        if ($this->wishlist && Auth::check() && !$this->wishlist->user_id) {
+            $this->setUserId();
+        }
     }
 
     // количество элементов
-    public function count() {
-        if (!$this->wishlist) {return 0;}
+    public function count()
+    {
+        if (!$this->wishlist) {
+            return 0;
+        }
 
         return WishlistProduct::where("wishlist_id", $this->wishlist->id)->count();
     }
@@ -36,10 +45,47 @@ class WishListService
     // получить список
     public function get()
     {
-        if (!$this->wishlist) {return null;}
+        if (!$this->wishlist) {
+            return null;
+        }
 
         // получаю список и возвращаю
-        return WishlistProduct::where("wishlist_id", $this->wishlist->id)->paginate($this->limit);
+        return WishlistProduct::where("wishlist_id", $this->wishlist->id)
+            ->with([
+                'product' => function ($q) {
+                    $q = $q->select(['id', 'mrp', 'slug', 'step'])
+                        ->with([
+                            'medias' => function ($q2) {
+                                $q2->select(['name', 'product_id'])->limit(1);
+                            },
+                            'locale' => function ($q2) {
+                                $q2->where('locale_id', app()->user_local->id);
+                            },
+                        ])
+                        ->whereHas('locale', function ($q2) {
+                            $q2->where('locale_id', app()->user_local->id);
+                        })
+                        ->where(function ($q2) {
+                            $q2->whereNull('company_id')
+                                ->orWhereHas('company', function ($q3) {
+                                    $q3->where('is_on', 1);
+                                });
+                        });
+                },
+            ])
+            ->whereHas('product', function ($q) {
+                $q = $q
+                    ->whereHas('locale', function ($q2) {
+                        $q2->where('locale_id', app()->user_local->id);
+                    })
+                    ->where(function ($q2) {
+                        $q2->whereNull('company_id')
+                            ->orWhereHas('company', function ($q3) {
+                                $q3->where('is_on', 1);
+                            });
+                    });
+            })
+            ->paginate($this->limit);
     }
 
     // добавить товар
@@ -56,8 +102,7 @@ class WishListService
                 'wishlist_id' => $this->wishlist->id,
                 'product_id' => $product_id
             ],
-            [
-            ]
+            []
         );
 
         return;
@@ -95,8 +140,7 @@ class WishListService
         // создаю wishlist
         $wishlist = new Wishlist;
 
-        if(isset(app()->user))
-        {
+        if (Auth::check()) {
             $wishlist->user_id = app()->user->id;
         }
 
@@ -136,7 +180,9 @@ class WishListService
     public function getWishlist()
     {
         $list = Wishlist::query();
-        if(!Auth::check() && !$this->id){return;}
+        if (!Auth::check() && !$this->id) {
+            return;
+        }
 
         if ($this->id) {
             $list->where("id", $this->id);
