@@ -13,11 +13,6 @@ class City extends Model
 
     protected $guarded = false;
 
-    public function locale()
-    {
-        return $this->hasOne(CityLocale::class, 'city_id', 'id');
-    }
-
     public function points()
     {
         return $this->hasMany(Point::class, 'city_id', 'id');

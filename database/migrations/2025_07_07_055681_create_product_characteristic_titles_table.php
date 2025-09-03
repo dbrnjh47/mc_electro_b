@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('product_characteristic_titles', function (Blueprint $table) {
             $table->id();
 
+            $table->string('text', 128);
+
             $table->unsignedBigInteger('product_characteristic_category_id')->nullable();
 
             $table->unsignedBigInteger('unit_id')->nullable();

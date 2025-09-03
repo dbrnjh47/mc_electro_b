@@ -11,9 +11,4 @@ class Country extends Model
     use HasFactory;
 
     protected $guarded = false;
-
-    public function locale()
-    {
-        return $this->hasOne(CountryLocale::class, 'country_id', 'id');
-    }
 }

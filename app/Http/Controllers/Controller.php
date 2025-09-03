@@ -60,11 +60,11 @@ class Controller extends BaseController
 
         //
 
-        $user_local = (new LocaleService)->get();
-        view()->share('user_local', $user_local);
-        app()->singleton('user_local', function ($app) use ($user_local) {
-            return $user_local;
-        });
+        // $user_local = (new LocaleService)->get();
+        // view()->share('user_local', $user_local);
+        // app()->singleton('user_local', function ($app) use ($user_local) {
+        //     return $user_local;
+        // });
     }
 
     public static function photoAccessor($value, $path)

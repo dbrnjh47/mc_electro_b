@@ -3,11 +3,9 @@
 namespace Database\Seeders\Product;
 
 use App\Models\Category\Category;
-use App\Models\Locale;
 use App\Models\Product\Label\ProductLabel;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
-use App\Models\Product\ProductLocale;
 use Database\Seeders\Product\ProductCharacteristic\ProductCharacteristicSeeder;
 use Database\Seeders\Product\ProductLabel\ProductLabelOptionSeeder;
 use Database\Seeders\Product\ProductReview\ProductReviewSeeder;
@@ -21,21 +19,11 @@ class ProductSeeder extends Seeder
      */
     public function run(): void
     {
-        $local = Locale::where("slug", "ru")->first();
         $categories = Category::where("id", "!=", 1)->get();
         $this->call(ProductLabelOptionSeeder::class);
 
         foreach ($categories as $category) {
             Product::factory(rand(1, 30))->has(
-                ProductLocale::factory(1)
-                    ->state(function (array $attributes, Product $product) use ($local) {
-                        return [
-                            'locale_id' => $local->id,
-                            'product_id' => $product->id
-                        ];
-                    }),
-                'locale'
-            )->has(
                 ProductLabel::factory(rand(1, 2))
                     ->state(function (array $attributes, Product $product)  {
                         return [

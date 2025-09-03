@@ -17,13 +17,17 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
+        $rand = (rand(0, 100) > 50 ? 1 : 0);
         return [
-            "preview" => ((rand(0, 100) < 80) ? array_rand($this->previews).".svg" : null),
+            "preview" => ((rand(0, 100) < 80) ? $this->previews[array_rand($this->previews)].".svg" : null),
             "name" => fake()->text(rand(5, 20)),
             "slug" => fake()->unique()->slug(rand(1, 15)),
             "phone" => ((rand(0, 100) < 80) ? fake()->e164PhoneNumber() : null),
             "email" => ((rand(0, 100) < 80) ? fake()->email() : null),
             "is_on" => rand(0,1),
+
+            "description" => ($rand ? fake()->text(rand(70, 200)) : null),
+            "short" => (!$rand ? fake()->text(rand(20, 60)) : null),
         ];
     }
 }

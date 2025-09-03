@@ -60,7 +60,7 @@ class IndexController extends Controller
         $category->childrens(1);
 
         return view('sample.main.pages.category.first.index', [
-            'title' => $category->locale->name,
+            'title' => $category->name,
             'description' => "",
             "breadcrumbs" => $breadcrumbs,
             "category" => $category,

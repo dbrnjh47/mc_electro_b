@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
 
-            $table->string('preview', 128)->nullable(); // /assets/companies/logo
             $table->string('name');
+            $table->string('preview', 128)->nullable(); // /assets/companies/logo
+
             $table->string('slug')->unique();
             $table->string('phone', 60)->nullable();
             $table->string('email')->nullable();
@@ -23,6 +24,9 @@ return new class extends Migration
 
             $table->integer('count_reviews')->default(0)->unsigned();
             $table->decimal('grade_review', 4, 1)->default(0)->unsigned();
+
+            $table->string('description', 600)->nullable();
+            $table->string('short', 60)->nullable();
 
             $table->timestamps();
         });

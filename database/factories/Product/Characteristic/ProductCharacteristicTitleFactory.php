@@ -23,6 +23,7 @@ class ProductCharacteristicTitleFactory extends Factory
             $product_characteristic_category_id = ProductCharacteristicCategory::inRandomOrder()->first()->id;
         }
         return [
+            "text" => fake()->text(rand(10, 20)),
             "product_characteristic_category_id" => $product_characteristic_category_id
         ];
     }

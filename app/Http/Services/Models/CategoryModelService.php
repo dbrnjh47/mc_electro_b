@@ -16,7 +16,6 @@ class CategoryModelService extends ControllerModelService
         } else {
             $this->select_list = $select_list;
             $this->model = $this->defult();
-            $this->model->with("locale")->whereHas("locale");
         }
     }
 

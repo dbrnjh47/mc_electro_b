@@ -13,7 +13,7 @@
         <section class="product_title">
             <div class="app__title">
                 <div class="app__title_wrapper">
-                    <h2 class="app__title_text">{{$product->locale->name}}
+                    <h2 class="app__title_text">{{$product->name}}
                         @if($product->uuid)<span class="copy_button" data-copy-text="{{$product->uuid}}">#{{$product->uuid}}</span>@endif
                         @if($product->article)<span class="copy_button" data-copy-text="{{$product->article}}">#{{$product->article}}</span>@endif
                     </h2>
@@ -54,7 +54,7 @@
                             <div class="swiper-wrapper">
                                 @foreach ($product->medias as $media)
                                 <div class="swiper-slide">
-                                    <img src="{{$media->miniature}}" alt="{{$product->locale->name}}" />
+                                    <img src="{{$media->miniature}}" alt="{{$product->name}}" />
                                 </div>
                                 @endforeach
                             </div>
@@ -85,7 +85,7 @@
                             @foreach ($product->medias as $media)
                             <div class="swiper-slide">
                                 <div class="product_basic_slider__slide">
-                                    <img src="{{$media->path}}" alt="{{$product->locale->name}}" loading="lazy" decoding="async">
+                                    <img src="{{$media->path}}" alt="{{$product->name}}" loading="lazy" decoding="async">
                                     <span class="product_basic_slider__slide_cover"
                                         style="background-image: url('{{$media->path}}');"></span>
                                 </div>
@@ -147,16 +147,16 @@
                             @foreach ($product->characteristics as $characteristic_category)
                             <div class="product_menu_block__characteristics_content">
                                 <h3 class="product_menu_block__characteristics_title">
-                                    {{$characteristic_category['category']->locale->title}}
+                                    {{$characteristic_category['category']->title}}
                                 </h3>
                                 @foreach ($characteristic_category['items'] as $characteristic)
                                     <div class="product_menu_block__characteristics_line">
                                         <div class="product_menu_block__characteristics_name">
-                                            {{$characteristic->title->locale->text}}
+                                            {{$characteristic->title->text}}
                                         </div>
                                         <span></span>
                                         <div class="product_menu_block__characteristics_value">
-                                            {{($characteristic->value != null ? "{$characteristic->getValueProccess()} {$characteristic->getValueName()}" : $characteristic->locale->text)}}
+                                            {{($characteristic->value != null ? "{$characteristic->getValueProccess()} {$characteristic->getValueName()}" : $characteristic->text)}}
                                         </div>
                                     </div>
                                 @endforeach
@@ -226,7 +226,7 @@
                         <div class="product_menu_block__reviews_list">
                             @foreach ($product->reviews as $review)
                                 <x-sample.main.product.information.review
-                                    :product_name="$product->locale->name"
+                                    :product_name="$product->name"
                                     :review="$review">
                                 </x-sample.main.product.information.review>
                             @endforeach
@@ -428,7 +428,7 @@
                                 В избранное
                             </button>
 
-                            <x-sample.main.share url="{{url()->current()}}" text="{{$product->locale->name}}"></x-sample.main.share>
+                            <x-sample.main.share url="{{url()->current()}}" text="{{$product->name}}"></x-sample.main.share>
                         </div>
                     </div>
                     <div class="product_result_count">

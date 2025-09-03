@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Locale;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +18,6 @@ class BannerFactory extends Factory
     {
         return [
             "is_on" => rand(0,1),
-            "locale_id" => Locale::inRandomOrder()->first()->id,
             "key" => "home",
             "img" => "test.png"
         ];

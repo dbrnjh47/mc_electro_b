@@ -23,7 +23,7 @@
                             data-search-input-placeholder="Введите город">
                             <option value="" selected="">Города</option>
                             @foreach ($cities as $city)
-                                <option value="{{$city->id}}" @if($city_id == $city->id) selected="" @endif>{{$city->locale->name}}</option>
+                                <option value="{{$city->id}}" @if($city_id == $city->id) selected="" @endif>{{$city->name}}</option>
                             @endforeach
                         </select>
                     </div>

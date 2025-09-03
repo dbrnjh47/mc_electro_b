@@ -15,11 +15,6 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\Product\ProductFactory> */
     use HasFactory;
 
-    public function locale()
-    {
-        return $this->hasOne(ProductLocale::class, 'product_id', 'id');
-    }
-
     public function categories()
     {
         return $this->hasMany(ProductCategory::class, 'product_id', 'id');

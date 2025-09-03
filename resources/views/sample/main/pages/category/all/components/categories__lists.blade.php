@@ -10,7 +10,7 @@
                 <div class="categories__hover">
                     <div class="categories__hover_items">
                         <a href="{{$path}}" class="categories__hover_item">
-                            <h4 class="categories__hover_item_title bold">{{ $category->locale->name }}</h4>
+                            <h4 class="categories__hover_item_title bold">{{ $category->name }}</h4>
                             <div class="categories__hover_item_line"></div>
                             <p class="categories__hover_item_count">5</p>
                         </a>
@@ -20,7 +20,7 @@
                                 $c = $c->category;
                             @endphp
                             <a href="{{$path}}/{{$c->slug}}" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">{{ $c->locale->name }}</h4>
+                                <h4 class="categories__hover_item_title">{{ $c->name }}</h4>
                                 <div class="categories__hover_item_line"></div>
                                 <p class="categories__hover_item_count">5</p>
                             </a>
@@ -35,12 +35,12 @@
                 </div>
             @endif
 
-            <div class="categories__item_title">{{ $category->locale->name }}</div>
-            <div class="categories__item_description">{{ $category->locale->description }}</div>
+            <div class="categories__item_title">{{ $category->name }}</div>
+            <div class="categories__item_description">{{ $category->description }}</div>
 
             @if ($category->preview)
                 <img class="categories__item_bg" src="{{$category->preview_path}}" loading="lazy"
-                    decoding="async" alt="{{ $category->locale->name }}">
+                    decoding="async" alt="{{ $category->name }}">
             @endif
 
         @if($category->relation_childrens->isEmpty()) </a> @else </div> @endif

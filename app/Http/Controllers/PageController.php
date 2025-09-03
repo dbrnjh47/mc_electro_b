@@ -61,18 +61,22 @@ class PageController extends Controller
                 'medias' => function ($q) {
                     $q->select(['name', 'product_id'])->limit(1);
                 },
-                'locale' => function ($q) {
-                    $q->where('locale_id', app()->user_local->id);
+            ])
+            ->with([
+                'categories' => function ($q) {
+                    $q = $q->whereHas('category', function ($q2) {
+                        $q2 = CategoryModelService::whereOn($q2);
+                    });
                 },
             ])
-            ->whereHas('locale', function ($q) {
-                $q->where('locale_id', app()->user_local->id);
-            })
             ->where(function($query) {
                 $query->whereNull('company_id')
                       ->orWhereHas('company', function($q) {
                           $q->where('is_on', 1);
                       });
+            })
+            ->whereHas('categories.category', function ($q) {
+                $q = CategoryModelService::whereOn($q);
             })
             ->inRandomOrder()
             ->limit(8)

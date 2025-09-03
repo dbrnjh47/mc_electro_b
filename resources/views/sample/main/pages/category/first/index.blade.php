@@ -31,9 +31,9 @@
         <div class="categories__container">
             <div class="app__title">
                 <div class="app__title_wrapper">
-                    <h2 class="app__title_text">{{$category->locale->name}} <span>(19)</span></h2>
-                    @if($category->locale->description)
-                        <p class="app__title_description">{{$category->locale->description}}</p>
+                    <h2 class="app__title_text">{{$category->name}} <span>(19)</span></h2>
+                    @if($category->description)
+                        <p class="app__title_description">{{$category->description}}</p>
                     @endif
                 </div>
             </div>
@@ -52,13 +52,13 @@
                     <div class="categories__hover">
                         <div class="categories__hover_items">
                             <a href="{{$category_children->full_path}}" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">{{$category_children->locale->name}}</h4>
+                                <h4 class="categories__hover_item_title bold">{{$category_children->name}}</h4>
                                 <div class="categories__hover_item_line"></div>
                                 <p class="categories__hover_item_count">5</p>
                             </a>
                             @foreach ($category_children->childrens as $c)
                             <a href="{{$path_slugs."/".$c->path}}" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">{{$c->locale->name}}</h4>
+                                <h4 class="categories__hover_item_title">{{$c->name}}</h4>
                                 <div class="categories__hover_item_line"></div>
                                 <p class="categories__hover_item_count">5</p>
                             </a>
@@ -71,14 +71,14 @@
                     </div>
                     @endif
 
-                    <div class="categories__item_title">{{$category_children->locale->name}}</div>
-                    @if($category_children->locale->description)
-                        <div class="categories__item_description">{{$category_children->locale->description}}</div>
+                    <div class="categories__item_title">{{$category_children->name}}</div>
+                    @if($category_children->description)
+                        <div class="categories__item_description">{{$category_children->description}}</div>
                     @endif
 
                     @if ($category_children->preview)
                         <img class="categories__item_bg" src="{{$category_children->preview_path}}" loading="lazy"
-                            decoding="async" alt="{{$category_children->locale->name}}">
+                            decoding="async" alt="{{$category_children->name}}">
                     @endif
                 @if(!$category_children->childrens) </a> @else </div> @endif
                 @endforeach

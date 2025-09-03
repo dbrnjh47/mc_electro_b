@@ -3,7 +3,6 @@
 namespace Database\Seeders\Product\ProductReview;
 
 use App\Models\Company\Company;
-use App\Models\Locale;
 use App\Models\Product\Product;
 use App\Models\Product\ProductDescription;
 use App\Models\Product\Review\ProductReview;
@@ -20,7 +19,7 @@ class ProductReviewSeeder extends Seeder
     public function run(): void
     {
         $total = Product::count();
-        $local = Locale::where("slug", "ru")->first();
+
         $product_ids = Product::inRandomOrder()
             ->where("id", "!=", 1)
             ->take($total / 2)
@@ -40,7 +39,6 @@ class ProductReviewSeeder extends Seeder
             )
                 ->create([
                     "product_id" => $product_ids[$i],
-                    "locale_id" => $local->id
                 ]);
         }
         unset($product_ids);

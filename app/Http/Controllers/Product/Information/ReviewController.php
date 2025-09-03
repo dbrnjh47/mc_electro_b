@@ -20,7 +20,6 @@ class ReviewController extends Controller
             ->where([
                 ["product_id", $request->product_id],
                 ["is_on", 1],
-                ["locale_id", app()->user_local->id],
             ]);
 
         $reviews->with([

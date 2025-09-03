@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Migrations\CountryModelMigration;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +14,9 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
 
+            $table->string('name');
+            $table->string('official');
+
             $table->string('cca2', 2)->unique()->index();
             $table->integer('code')->index()->nullable();
             $table->boolean('is_on')->default(false);
@@ -23,8 +25,6 @@ return new class extends Migration
 
             $table->timestamps();
         });
-
-        (new CountryModelMigration)->createAll();
     }
 
     /**
@@ -33,6 +33,5 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('countries');
-        (new CountryModelMigration)->dropAll();
     }
 };

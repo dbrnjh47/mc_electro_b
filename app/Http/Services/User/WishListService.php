@@ -58,13 +58,7 @@ class WishListService
                             'medias' => function ($q2) {
                                 $q2->select(['name', 'product_id'])->limit(1);
                             },
-                            'locale' => function ($q2) {
-                                $q2->where('locale_id', app()->user_local->id);
-                            },
                         ])
-                        ->whereHas('locale', function ($q2) {
-                            $q2->where('locale_id', app()->user_local->id);
-                        })
                         ->where(function ($q2) {
                             $q2->whereNull('company_id')
                                 ->orWhereHas('company', function ($q3) {
@@ -75,9 +69,6 @@ class WishListService
             ])
             ->whereHas('product', function ($q) {
                 $q = $q
-                    ->whereHas('locale', function ($q2) {
-                        $q2->where('locale_id', app()->user_local->id);
-                    })
                     ->where(function ($q2) {
                         $q2->whereNull('company_id')
                             ->orWhereHas('company', function ($q3) {

@@ -15,11 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('text', 1200);
-            $table->unsignedBigInteger('locale_id');
             $table->unsignedBigInteger('product_id');
 
 
-            $table->foreign('locale_id')->references('id')->on('locales')->onUpdate('cascade'); // ->onDelete('cascade')
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
 
             $table->timestamps();

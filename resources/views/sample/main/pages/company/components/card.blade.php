@@ -34,9 +34,9 @@
             </p>
         </div>
     </div>
-    @if($company->locale && $company->locale->short)
+    @if($company->short)
     <div class="company_card__description">
-        {{$company->locale->short}}
+        {{$company->short}}
     </div>
     @endif
     <a href="{{$url_company}}" target="_blank" class="btn">

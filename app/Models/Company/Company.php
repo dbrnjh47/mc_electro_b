@@ -18,10 +18,6 @@ class Company extends Model
     {
         return $this->hasMany(Product::class, 'company_id', 'id');
     }
-    public function locale()
-    {
-        return $this->hasOne(CompanyLocale::class, 'company_id', 'id');
-    }
 
     public function getPathPreviewAttribute()
     {

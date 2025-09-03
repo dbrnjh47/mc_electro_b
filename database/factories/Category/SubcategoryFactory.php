@@ -3,7 +3,6 @@
 namespace Database\Factories\Category;
 
 use App\Models\Category\Category;
-use App\Models\Locale;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

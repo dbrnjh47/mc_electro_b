@@ -12,7 +12,6 @@ class BannerSeeder extends Seeder
         // [
         //     "img" => 'test.svg',
         //     "href" => '/',
-        //     "locale_id" => 3,
         //     "is_on" => 1
         // ],
         [

@@ -1,5 +1,5 @@
 <?php
-
+//off
 namespace App\Http\Services\Models;
 
 use App\Models\Locale;

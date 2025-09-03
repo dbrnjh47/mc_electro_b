@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('product_label_options', function (Blueprint $table) {
             $table->id();
+
+            $table->string('title', 128);
+
             $table->timestamps();
         });
     }

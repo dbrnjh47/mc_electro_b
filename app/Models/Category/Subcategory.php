@@ -13,6 +13,6 @@ class Subcategory extends Model
 
     public function category()
     {
-        return $this->hasOne(Category::class, 'id', 'category_child_id')->with("locale")->whereHas("locale");
+        return $this->hasOne(Category::class, 'id', 'category_child_id');
     }
 }

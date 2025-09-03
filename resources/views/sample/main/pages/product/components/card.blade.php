@@ -1,7 +1,7 @@
 <div class="product_card">
     <div class="product_card__buttons">
 
-        <a href="{{route('product', ['slug' => $product->slug])}}" alt="{{$product->locale->name}}" class="btn">Подробнее</a>
+        <a href="{{route('product', ['slug' => $product->slug])}}" alt="{{$product->name}}" class="btn">Подробнее</a>
         <button class="btn btn_upend">Добавить в корзину</button>
 
     </div>
@@ -20,7 +20,7 @@
             <span class="recommend">Советуем</span>
         </div>
 
-        <h4 class="product_card__head_name">{{$product->locale->name}}</h4>
+        <h4 class="product_card__head_name">{{$product->name}}</h4>
         <p class="product_card__head_description">{{$product->article}}</p>
     </div>
 
@@ -35,7 +35,7 @@
                 $path = $product->medias[0]->miniature;
             }
         @endphp
-        <img src="{{$path}}" alt="{{$product->locale->name}}" loading="lazy" decoding="async">
+        <img src="{{$path}}" alt="{{$product->name}}" loading="lazy" decoding="async">
     </div>
 
     <div class="product_card__info">

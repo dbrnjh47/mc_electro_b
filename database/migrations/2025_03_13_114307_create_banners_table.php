@@ -18,9 +18,7 @@ return new class extends Migration
             $table->string('key')->comment("home");
             $table->string('img');
             $table->boolean('is_on')->default(1);
-            $table->unsignedBigInteger('locale_id')->nullable();
 
-            $table->foreign('locale_id')->references('id')->on('locales')->onUpdate('cascade'); // ->onDelete('cascade')
             $table->timestamps();
         });
     }

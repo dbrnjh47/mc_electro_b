@@ -9,9 +9,5 @@ class ProductLabelOption extends Model
 {
     /** @use HasFactory<\Database\Factories\Product\Label\ProductLabelOptionFactory> */
     use HasFactory;
-    public function locale()
-    {
-        return $this->hasOne(ProductLabelOptionLocal::class, 'product_label_option_id', 'id');
-    }
 
 }

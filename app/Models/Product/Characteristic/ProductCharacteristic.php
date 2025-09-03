@@ -10,11 +10,6 @@ class ProductCharacteristic extends Model
     /** @use HasFactory<\Database\Factories\Product\Characteristic\ProductCharacteristicFactory> */
     use HasFactory;
 
-    public function locale()
-    {
-        return $this->hasOne(ProductCharacteristicLocal::class, 'product_characteristic_id', 'id');
-    }
-
     public function title()
     {
         return $this->hasOne(ProductCharacteristicTitle::class, 'id', 'product_characteristic_title_id');
@@ -25,10 +20,10 @@ class ProductCharacteristic extends Model
         if($this->valueName){return $this->valueName;}
         $this->valueName = "";
 
-        if($this->unitRule && $this->title && $this->title->toUnit && $this->title->toUnit->locale){
-            $this->valueName = $this->title->toUnit->locale->text;
-        } else if($this->title && $this->title->unit && $this->title->unit->locale) {
-            $this->valueName = $this->title->unit->locale->text;
+        if($this->unitRule && $this->title && $this->title->toUnit){
+            $this->valueName = $this->title->toUnit->text;
+        } else if($this->title && $this->title->unit) {
+            $this->valueName = $this->title->unit->text;
         }
 
         return $this->valueName;

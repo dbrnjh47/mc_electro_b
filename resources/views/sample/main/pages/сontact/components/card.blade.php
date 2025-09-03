@@ -7,7 +7,7 @@
                     @foreach ($point->photos as $photo)
                         <div class="swiper-slide contact_card__slide">
                             <img class="contact_card__swiper_image" src="{{ $photo->img_path }}"
-                                loading="lazy" decoding="async" alt="{{ $point->locale->address }}" />
+                                loading="lazy" decoding="async" alt="{{ $point->address }}" />
                             <span class="contact_card__swiper_image_cover"
                                 style="background-image: url('{{ $photo->img_path }}');"></span>
                         </div>
@@ -15,7 +15,7 @@
                 @else
                     <div class="swiper-slide contact_card__slide">
                         <img class="contact_card__swiper_image contact_card__swiper_image_defult" src="{{ \App\Models\Point\PointPhoto::DEFULT_PREVIEW_PATH }}" loading="lazy"
-                            decoding="async" alt="{{ $point->locale->address }}" />
+                            decoding="async" alt="{{ $point->address }}" />
                     </div>
                 @endif
 
@@ -25,14 +25,14 @@
         <div class="contact_card__info">
             @if(!isset($is_card))
             <h5 class="contact_card__title">
-                {{ $point->locale->title }}
+                {{ $point->title }}
             </h5>
             @endif
             <p class="contact_card__item">
                 <span class="contact_card__item_bold">Адрес:</span>
-                {{ $point->locale->address }} <br />
-                @if ($point->locale->comment)
-                    ({{ $point->locale->comment }})
+                {{ $point->address }} <br />
+                @if ($point->comment)
+                    ({{ $point->comment }})
                 @endif
             </p>
 

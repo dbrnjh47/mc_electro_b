@@ -16,10 +16,9 @@ return new class extends Migration
 
             $table->string('title', 128);
             $table->string('name', 128); // /assets/product/document/test.pdf
-            $table->unsignedBigInteger('locale_id')->nullable();
+
             $table->unsignedBigInteger('product_id')->nullable();
 
-            $table->foreign('locale_id')->references('id')->on('locales')->onUpdate('cascade'); // ->onDelete('cascade')
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->timestamps();
         });

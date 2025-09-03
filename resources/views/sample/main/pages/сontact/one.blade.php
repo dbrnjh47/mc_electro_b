@@ -13,9 +13,9 @@
         <div class="contact__container">
             <div class="app__title">
                 <div class="app__title_wrapper">
-                    <h2 class="app__title_text">{{$point->locale->title}}</h2>
-                    @if($point->locale->description)
-                        <p class="app__title_description">{{$point->locale->description}}</p>
+                    <h2 class="app__title_text">{{$point->title}}</h2>
+                    @if($point->description)
+                        <p class="app__title_description">{{$point->description}}</p>
                     @endif
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="contact__map">
                         @if ($point->yandex_widget_href)
-                            <iframe src="{{$point->yandex_widget_href}}&lang={{$user_local->slug}}" frameborder="0"></iframe>
+                            <iframe src="{{$point->yandex_widget_href}}&lang=ru" frameborder="0"></iframe>
                         @else
 
                         @endif

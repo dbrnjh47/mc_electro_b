@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Http\API\Delivery\CDEKDeliveryApi;
 use App\Http\Services\Models\CountryModelService;
 use App\Models\City\City;
-use App\Models\City\CityLocale;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -37,14 +36,8 @@ class CitySeeder extends Seeder
 
         foreach($this->cities as $name => $city)
         {
-            $c = City::create($city);
-
-            $model = new CityLocale();
-            $model->setTable(CityLocale::$tabel_name . "ru");
-            $model->create([
-                "name" => $name,
-                "city_id" => $c->id
-            ]);
+            $city["name"] = $name;
+            City::create($city);
         }
     }
 

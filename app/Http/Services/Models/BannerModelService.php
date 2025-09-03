@@ -27,8 +27,7 @@ class BannerModelService extends ControllerModelService
 
     public static function whereOn($model)
     {
-        return $model->where("is_on", 1)
-            ->where("locale_id", app('user_local')->id);
+        return $model->where("is_on", 1);
     }
 
     public function getByKey($key)

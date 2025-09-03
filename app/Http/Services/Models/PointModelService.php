@@ -24,15 +24,12 @@ class PointModelService extends ControllerModelService
         $model = PointModelService::whereOn($model);
         $model->with('links.category')
             ->with('phones')
-            ->with('photos')
-            ->with('locale')
-            ->whereHas('locale', function ($q) {
-                if($this->search)
-                {
-                    $q = $q->where("title", 'like', "%{$this->search}%")->orWhere("address", 'like', "%{$this->search}%");
-                }
-            });
+            ->with('photos');
 
+        if($this->search)
+        {
+            $model->where("title", 'like', "%{$this->search}%")->orWhere("address", 'like', "%{$this->search}%");
+        }
         return $model;
     }
 

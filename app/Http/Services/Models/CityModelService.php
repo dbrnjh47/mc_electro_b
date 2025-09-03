@@ -16,9 +16,6 @@ class CityModelService extends ControllerModelService
     public function defult()
     {
         $model = City::query();
-        $model->with(["locale" => function($query) {
-            $query->select('name', 'city_id');
-        }])->whereHas("locale");
 
         if($this->select_list)
         {

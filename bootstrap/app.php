@@ -14,7 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(\Illuminate\Session\Middleware\StartSession::class);
-        $middleware->append(LocaleMiddleware::class);
+        // $middleware->append(LocaleMiddleware::class);
         $middleware->web(append: [
             // \Illuminate\Session\Middleware\StartSession::class,
         ]);

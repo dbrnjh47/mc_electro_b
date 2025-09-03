@@ -19,6 +19,7 @@ class IndexController extends Controller
     {
         $product = (new ProductModelService(slug: $request->slug, select_list: [
             "id",
+            "name",
             "uuid",
             "company_id",
             "article",
@@ -37,9 +38,6 @@ class IndexController extends Controller
                       });
             })
             ->with([
-                'locale' => function ($q) {
-                    $q->where('locale_id', app()->user_local->id);
-                },
                 'categories' => function ($q) {
                     $q = $q->whereHas('category', function ($q2) {
                         $q2 = CategoryModelService::whereOn($q2);
@@ -51,24 +49,20 @@ class IndexController extends Controller
                     $q->select(['name', 'product_id']);
                 },
                 'documents' => function ($q) {
-                    $q = $q->select(['title', 'name', 'product_id'])->where("locale_id", app()->user_local->id);
+                    $q = $q->select(['title', 'name', 'product_id']);
                 },
                 'description' => function ($q) {
-                    $q = $q->select(['text', 'product_id'])->where("locale_id", app()->user_local->id);
+                    $q = $q->select(['text', 'product_id']);
                 },
                 'company' => function ($q) {
-                    $q = $q->select(['id', 'preview', 'name', 'slug', 'count_reviews', 'grade_review']);
+                    $q = $q->select(['id', 'preview', 'name', 'short', 'slug', 'count_reviews', 'grade_review']);
                     $q = $q->withCount(['products']);
-                },
-                'company.locale' => function ($q) {
-                    $q->select(['short', 'company_id'])->where('locale_id', app()->user_local->id)->whereNotNull("short");
                 },
 
                 //
 
                 'reviews' => function ($q) {
                     $q->select(['id', 'quantity', 'product_id', 'user_id', 'created_at'])
-                        ->where('locale_id', app()->user_local->id)
                         ->orderBy("created_at", "desc")
                         ->limit(ReviewController::LIMIT);
                 },
@@ -84,58 +78,34 @@ class IndexController extends Controller
                 },
             ])
             ->with(['characteristics' => function ($query) {
-                $query->where(function ($q) {
-                    $q->whereNotNull('value') // value != null
-                        ->orWhereHas('locale', function ($q2) {
-                            $q2 = $q2->where("locale_id", app()->user_local->id);
-                        });  // ИЛИ local существует
+                $query->select(['text', 'id'])->where(function ($q) {
+                    $q->whereNotNull('value');
                 })
                     ->with([
-                        'locale' => function ($q) {
-                            $q->select(['text', 'product_characteristic_id'])->where('locale_id', app()->user_local->id);
-                        },
                         'title' => function ($q) {
-                            $q->select(['id', 'product_characteristic_category_id', 'unit_id', 'to_unit_id']);
-                        },
-                        'title.locale' => function ($q) {
-                            $q->select(['text', 'product_characteristic_title_id'])->where('locale_id', app()->user_local->id);
+                            $q->select(['id', 'product_characteristic_category_id', 'text', 'unit_id', 'to_unit_id']);
                         },
                         'title.category' => function ($q) {
-                            $q->select(['id']);
-                        },
-                        'title.category.locale' => function ($q) {
-                            $q->select(['title', 'product_characteristic_category_id'])->where('locale_id', app()->user_local->id);
+                            $q->select(['id', 'title']);
                         },
                         //
                         'title.unit' => function ($q) {
-                            $q->select(['id']);
+                            $q->select(['id', 'text']);
                         },
                         'title.toUnit' => function ($q) {
-                            $q->select(['id']);
-                        },
-                        'title.unit.locale' => function ($q) {
-                            $q->select(['text', 'unit_id'])->where('locale_id', app()->user_local->id);
-                        },
-                        'title.toUnit.locale' => function ($q) {
-                            $q->select(['text', 'unit_id'])->where('locale_id', app()->user_local->id);
+                            $q->select(['id', 'text']);
                         },
 
                         // 'title.unitRules' => function ($q) {
                         //     $q->select(['unit_id', 'to_unit_id', 'value', 'action']);
                         // },
-                    ])
-                    ->whereHas('title.locale', function ($q) {
-                        $q->where('locale_id', app()->user_local->id);
-                    });
+                    ]);
             }])
             ->whereHas('categories.category', function ($q) {
                 $q = CategoryModelService::whereOn($q);
             })
-            ->whereHas('locale', function ($q) {
-                $q->where('locale_id', app()->user_local->id);
-            })
             ->withCount(['reviews' => function (Builder $q) {
-                $q->where('locale_id', app()->user_local->id)->where("is_on", 1);
+                $q->where("is_on", 1);
             },])
             ->withSum('reviews', 'quantity')
             ->firstOrFail();
@@ -185,7 +155,7 @@ class IndexController extends Controller
         })->map(function ($chars, $key) {
             return [
                 'category' => $key === 'other' ?
-                    (object)['id' => null, 'locale' => (object)["title" => 'Другое']] :
+                    (object)['id' => null, "title" => 'Другое'] :
                     $chars->first()->title->category,
                 'items' => $chars
             ];
@@ -197,7 +167,7 @@ class IndexController extends Controller
         // dump($category);
         [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
 
-        $breadcrumbs->add($product->locale->name, "#");
+        $breadcrumbs->add($product->name, "#");
 
         //
 
@@ -207,7 +177,6 @@ class IndexController extends Controller
             ->selectRaw('COUNT(*) as count')
             ->where([
                 ["product_id", $product->id],
-                ["locale_id", app()->user_local->id],
                 ["is_on", 1]
             ])
             ->groupBy('quantity')
@@ -220,7 +189,7 @@ class IndexController extends Controller
         // dd($breadcrumbs);
         // dd($review_statistics);
         return view('sample.main.pages.product.index', [
-            'title' => $product->locale->name,
+            'title' => $product->name,
             'description' => "",
             'product' => $product,
             'breadcrumbs' => $breadcrumbs,

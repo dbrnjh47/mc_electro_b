@@ -2,9 +2,8 @@
 
 namespace Database\Seeders\Product\ProductCharacteristic;
 
-use App\Models\Locale;
+
 use App\Models\Product\Characteristic\ProductCharacteristic;
-use App\Models\Product\Characteristic\ProductCharacteristicLocal;
 use App\Models\Product\Characteristic\ProductCharacteristicTitle;
 use App\Models\Product\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -19,7 +18,7 @@ class ProductCharacteristicSeeder extends Seeder
     {
         $this->call(ProductCharacteristicCategorySeeder::class);
         $products_ids = Product::where("id", "!=", 1)->pluck('id')->toArray();
-        $local = Locale::where("slug", "ru")->first();
+
         $this->call(ProductCharacteristicTitleSeeder::class);
 
         foreach($products_ids as $products_id)
@@ -31,16 +30,9 @@ class ProductCharacteristicSeeder extends Seeder
 
                 if($is_text)
                 {
-                    $productCharacteristicFactory->has(ProductCharacteristicLocal::factory(1)
-                        ->state(function (array $attributes, ProductCharacteristic $product_characteristic) use ($local) {
-                            return [
-                                'locale_id' => $local->id,
-                                'product_characteristic_id' => $product_characteristic->id
-                            ];
-                        }),
-                        'locale'
-                    )->create([
-                        "product_id" => $products_id
+                    $productCharacteristicFactory->create([
+                        "product_id" => $products_id,
+                        "text" => fake()->text(rand(5, 10))
                     ]);
                 } else {
                     $productCharacteristicFactory->create([

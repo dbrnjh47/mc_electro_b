@@ -118,7 +118,7 @@
                     </div>
                 </div>
 
-                <div class="setting_wrapper">
+                {{-- <div class="setting_wrapper">
                     <p class="title">Язык</p>
 
                     <div class="setting_items_wrapper">
@@ -147,7 +147,7 @@
                             @endforeach
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
                 <div class="setting_wrapper">
                     <p class="title">Валюта</p>

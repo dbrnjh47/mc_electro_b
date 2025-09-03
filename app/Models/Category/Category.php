@@ -25,11 +25,6 @@ class Category extends Model
         return ($this->preview ? Controller::photoAccessor($this->preview, self::PATH) : null);
     }
 
-    public function locale()
-    {
-        return $this->hasOne(CategoryLocal::class, 'category_id', 'id');
-    }
-
     public function relation_parent()
     {
         return $this->hasOne(Subcategory::class, 'category_child_id', 'id');

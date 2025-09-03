@@ -18,9 +18,4 @@ class Banner extends Model
     {
         return ($this->img ? Controller::photoAccessor($this->img, self::PATH) : null);
     }
-
-    public function locale()
-    {
-        return $this->hasOne(Locale::class, 'id', 'locale_id');
-    }
 }
