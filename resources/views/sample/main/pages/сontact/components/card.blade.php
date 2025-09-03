@@ -24,9 +24,9 @@
         </div>
         <div class="contact_card__info">
             @if(!isset($is_card))
-            <h5 class="contact_card__title">
+            <a href="{{ route("contact", ["id" => $point->id]) }}" class="contact_card__title">
                 {{ $point->title }}
-            </h5>
+            </a>
             @endif
             <p class="contact_card__item">
                 <span class="contact_card__item_bold">Адрес:</span>

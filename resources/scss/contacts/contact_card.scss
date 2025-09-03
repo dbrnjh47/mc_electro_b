@@ -101,6 +101,10 @@
     &__title {
         font-weight: 700;
         font-size: 22px;
+        color: black;
+        &:hover{
+            color: #de002b;
+        }
     }
 
     &__item {

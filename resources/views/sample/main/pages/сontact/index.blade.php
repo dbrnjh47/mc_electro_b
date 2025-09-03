@@ -21,7 +21,7 @@
                         <select class="select2_custom" name="city_id" data-dropdown-position="below"
                             data-minimum-results-for-search="5" data-dropdown-parent="#select2_sort"
                             data-search-input-placeholder="Введите город">
-                            <option value="" selected="">Города</option>
+                            <option value="" selected="">Все города</option>
                             @foreach ($cities as $city)
                                 <option value="{{$city->id}}" @if($city_id == $city->id) selected="" @endif>{{$city->name}}</option>
                             @endforeach

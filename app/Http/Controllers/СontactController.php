@@ -43,7 +43,7 @@ class СontactController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs();
 
-        $cities = (new CityModelService(select_list:["id"]))
+        $cities = (new CityModelService(select_list:["id", "name"]))
             ->getModel()
             ->whereHas('points', function ($q) {
                 $q = PointModelService::whereOn($q);

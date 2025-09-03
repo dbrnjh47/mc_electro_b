@@ -419,13 +419,13 @@
                     <div class="product_result__price_wrapper">
                         <p class="product_result__price">₽ 999 <span>2000</span></p>
                         <div class="product_result__top_actions">
-                            <button class="btn" data-active="@php echo ($product->wishlist_products_count ? 1 : 0); @endphp" >
+                            <button class="btn" data-product-id="{{$product->id}}" data-active="{{($product->wishlist_products_count ? 1 : 0)}}" >
                                 <svg width="14" height="17" viewBox="0 0 14 17"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M0 1.20799C0 0.540836 0.535728 0 1.19658 0H12.8034C13.4643 0 14 0.540836 14 1.20799V16.5564C14 16.9041 13.6212 17.1162 13.329 16.9321L7.23225 13.0919C7.09011 13.0024 6.90988 13.0024 6.76775 13.0919L0.670995 16.9321C0.378757 17.1162 0 16.9041 0 16.5564V1.20799Z" />
                                 </svg>
-                                В избранное
+                                {{ ($product->wishlist_products_count ? "В избранном" : "В избранное") }}
                             </button>
 
                             <x-sample.main.share url="{{url()->current()}}" text="{{$product->name}}"></x-sample.main.share>
