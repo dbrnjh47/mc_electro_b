@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\Models\BannerModelService;
 use App\Http\Services\Models\CategoryModelService;
+use App\Http\Services\Models\ProductModelService;
 use App\Http\Services\User\WishListService;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
@@ -20,7 +21,7 @@ class PageController extends Controller
         // $r = (new WishListService())->count();
         // dd($r);
 
-        (new WishListService)->add(3);
+        // (new WishListService)->add(413);
         // (new WishListService)->delite(2);
 
         // (new WishListService(0))->clear();
@@ -30,6 +31,10 @@ class PageController extends Controller
         // dd($products[1]->documents[0]->path);
         // dump($products);
         // end test
+
+        $wishlist_id = (new WishListService(0))->getID();
+
+        //
 
         $service_categories = (new CategoryModelService);
         $categories = $service_categories
@@ -56,7 +61,11 @@ class PageController extends Controller
 
         //
 
-        $products = Product::select(['id', 'mrp', 'slug', 'step'])
+        $products = (new ProductModelService(select_list: ['id', 'mrp', 'slug', 'step']));
+
+        $products->wishlist($wishlist_id);
+
+        $products = $products->getModel()
             ->with([
                 'medias' => function ($q) {
                     $q->select(['name', 'product_id'])->limit(1);

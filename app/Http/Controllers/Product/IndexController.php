@@ -9,6 +9,7 @@ use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 use App\Http\Services\Models\ProductModelService;
+use App\Http\Services\User\WishListService;
 use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -17,6 +18,8 @@ class IndexController extends Controller
 {
     public function show(ShowRequest $request)
     {
+        $wishlist_id = (new WishListService(0))->getID();
+
         $product = (new ProductModelService(slug: $request->slug, select_list: [
             "id",
             "name",
@@ -29,8 +32,11 @@ class IndexController extends Controller
             "width",
             "height",
             "step"
-        ]))
-            ->getModel()
+        ]));
+
+        $product->wishlist($wishlist_id);
+
+        $product = $product->getModel()
             ->where(function($query) {
                 $query->whereNull('company_id')
                       ->orWhereHas('company', function($q) {
@@ -107,10 +113,11 @@ class IndexController extends Controller
             ->withCount(['reviews' => function (Builder $q) {
                 $q->where("is_on", 1);
             },])
-            ->withSum('reviews', 'quantity')
-            ->firstOrFail();
+            ->withSum('reviews', 'quantity');
 
-            //
+        $product = $product->firstOrFail();
+        // dd($product);
+        //
 
         $category = null;
         // нужно узнать подходящую категорию

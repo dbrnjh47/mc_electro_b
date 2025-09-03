@@ -3,6 +3,7 @@
 namespace App\Http\Services\Models;
 
 use App\Models\Product\Product;
+use Illuminate\Database\Eloquent\Builder;
 
 class ProductModelService extends ControllerModelService
 {
@@ -55,5 +56,16 @@ class ProductModelService extends ControllerModelService
     public function find($id)
     {
         return $this->model->findOrFail($id);
+    }
+
+    public function wishlist($wishlist_id)
+    {
+        if($wishlist_id)
+        {
+            $this->model->withCount(['wishlist_products' => function (Builder $q) use ($wishlist_id) {
+                    $q->where("wishlist_id", $wishlist_id)->limit(1);
+                },
+            ]);
+        }
     }
 }

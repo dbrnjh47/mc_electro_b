@@ -419,7 +419,7 @@
                     <div class="product_result__price_wrapper">
                         <p class="product_result__price">₽ 999 <span>2000</span></p>
                         <div class="product_result__top_actions">
-                            <button class="btn">
+                            <button class="btn" data-active="@php echo ($product->wishlist_products_count ? 1 : 0); @endphp" >
                                 <svg width="14" height="17" viewBox="0 0 14 17"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path

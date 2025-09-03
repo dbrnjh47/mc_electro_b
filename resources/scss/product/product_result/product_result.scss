@@ -40,19 +40,27 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      &:hover {
-        box-shadow: 0px 1px 4px #de002b63;
+      transition: all 0.3s;
+
+      svg {
+        transition: all 0.3s;
+        fill: #9096a7;
       }
-      &.activ {
+
+      &[data-active="1"], &:hover {
         color: #ffffff;
         background: #de002b;
         svg {
           fill: #ffffff;
         }
       }
-      svg {
-        transition: all 0.3s;
-        fill: #9096a7;
+
+      &:hover[data-active="1"] {
+        color: #9096a7;
+        background: #e8eaf3;
+        svg {
+          fill: #9096a7;
+        }
       }
     }
   }

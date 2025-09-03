@@ -14,21 +14,24 @@ class WishListService
 {
     public $id = null, $type = "wishlist", $wishlist = null;
     public $limit = 10;
-    public function __construct()
+    public function __construct($is_start = 1)
     {
-        $this->id = $this->getID($this->type);
-        $this->getWishlist();
+        if($is_start)
+        {
+            $this->id = $this->getID();
+            $this->getWishlist();
 
-        if ($this->wishlist && !$this->id) {
-            $this->id = $this->wishlist->id;
-        }
+            if ($this->wishlist && !$this->id) {
+                $this->id = $this->wishlist->id;
+            }
 
-        // если авторезовался
-        if ($this->wishlist) {
-            $this->setCookie();
-        }
-        if ($this->wishlist && Auth::check() && !$this->wishlist->user_id) {
-            $this->setUserId();
+            // если авторезовался
+            if ($this->wishlist) {
+                $this->setCookie();
+            }
+            if ($this->wishlist && Auth::check() && !$this->wishlist->user_id) {
+                $this->setUserId();
+            }
         }
     }
 
@@ -150,9 +153,9 @@ class WishListService
         return;
     }
 
-    protected function getID(string $type)
+    public function getID()
     {
-        $id = Cookie::get($type);
+        $id = Cookie::get($this->type);
         if ($id && $id != "") {
             return $id;
         }

@@ -189,7 +189,7 @@ class Category extends Model
             ->values()
             ->toArray();
 
-        $categories = (new CategoryModelService(["id", "is_on", "slug", "preview"], on_check: 0))->getIn($parent_ids);
+        $categories = (new CategoryModelService(["id", "is_on", "slug", "name", "preview"], on_check: 0))->getIn($parent_ids);
 
         foreach ($categories as $category) {
             foreach ($result as $key => $parent) {

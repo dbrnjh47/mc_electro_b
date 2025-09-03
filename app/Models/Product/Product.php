@@ -7,6 +7,7 @@ use App\Models\Product\Characteristic\ProductCharacteristic;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
 use App\Models\Product\Review\ProductReview;
+use App\Models\User\Wishlist\WishlistProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -58,5 +59,10 @@ class Product extends Model
     public function reviews()
     {
         return $this->hasMany(ProductReview::class, 'product_id', 'id')->where("is_on", 1);
+    }
+
+    public function wishlist_products()
+    {
+        return $this->hasMany(WishlistProduct::class, 'product_id', 'id');
     }
 }
