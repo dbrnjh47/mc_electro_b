@@ -32,7 +32,7 @@ class SetRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id" => ['required', 'exists:App\Models\Currency,id'],
+            "id" => ['required', 'integer', 'exists:App\Models\Currency,id'],
         ];
     }
 

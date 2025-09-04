@@ -45,6 +45,9 @@ Route::prefix('profile')->group(function () {
     Route::prefix('wishlist')->group(function () {
         Route::get('/', [WishlistController::class, 'show'])->name('wishlist');
         Route::post('/clear', [WishlistController::class, 'clear'])->name('wishlist.clear');
+
+        Route::post('/{product_id?}', [WishlistController::class, 'add'])->name('wishlist.add');
+        Route::delete('/{product_id?}', [WishlistController::class, 'delete'])->name('wishlist.delete');
     });
 });
 

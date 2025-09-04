@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Profile;
+namespace App\Http\Requests\Profile\Wishlist;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShowWishlistRequest extends FormRequest
+class DeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -12,6 +12,14 @@ class ShowWishlistRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        // Добавляем параметры маршрута в данные запроса
+        $this->merge([
+            'product_id' => $this->route('product_id'),
+        ]);
     }
 
     /**
@@ -22,7 +30,7 @@ class ShowWishlistRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // "page" => ['required', 'integer'],
+            "product_id" => ['required', 'integer'],
         ];
     }
 }

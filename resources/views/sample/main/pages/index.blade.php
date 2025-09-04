@@ -262,4 +262,7 @@
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
     @vite('resources/js/landing/index.js')
+
+    @include("sample.main.components.wishlist_action")
+
 @endsection

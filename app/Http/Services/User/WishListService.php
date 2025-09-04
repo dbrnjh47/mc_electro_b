@@ -106,7 +106,7 @@ class WishListService
     }
 
     // удаляю товар
-    public function delite($product_id)
+    public function delete($product_id)
     {
         if (!$this->wishlist) {
             return;

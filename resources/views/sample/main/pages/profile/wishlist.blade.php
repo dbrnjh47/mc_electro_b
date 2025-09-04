@@ -60,7 +60,7 @@
                     </div>
                     @endif
                 </div>
-                @if($wish_list_products)
+                @if($wish_list_products && !$wish_list_products->isEmpty())
                     <section class="products_list">
                         @foreach ($wish_list_products as $wish_list_product)
                             <x-sample.main.product.card :product="$wish_list_product->product"></x-sample.main.product.card>
@@ -91,4 +91,6 @@
         window.routes["wishlist.clear"] = "{{ route('wishlist.clear') }}";
     </script>
     @vite('resources/js/profile/wishlist/index.js')
+
+    @include("sample.main.components.wishlist_action")
 @endsection

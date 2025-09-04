@@ -8,7 +8,7 @@
 
     <button class="product_card__favorite">
         <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-        <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg" data-product-id="{{$product->id}}" data-active="{{($product->wishlist_products_count ? 1 : 0)}}">
+        <svg class="wishlist_action" width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg" data-product-id="{{$product->id}}" data-active="{{($product->wishlist_products_count ? 1 : 0)}}">
             <path
                 d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
         </svg>
