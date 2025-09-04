@@ -10,3 +10,9 @@ import "/resources/scss/components/pagination.scss";
 import "/resources/scss/category/products_list.scss";
 import "/resources/scss/components/product/product_cart.scss";
 import '/resources/scss/profile/wishlist/index.scss';
+
+import '/resources/js/ajax/profile/wishlist/clear.js';
+
+$("#wishlist_clear_button").click(function (e) {
+    wishListClear();
+});

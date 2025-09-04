@@ -38,8 +38,10 @@
                             <button class="btn">Лампы (2)</button>
                         </div> --}}
                     </div>
-                    {{-- <div class="app__filters">
-                        <div id="select2_sort" class="select2_sample_nude">
+
+                    @if($wish_list_products)
+                    <div class="app__filters">
+                        {{-- <div id="select2_sort" class="select2_sample_nude">
                             <select class="select2_custom" name="lang" data-dropdown-position="below"
                                 data-minimum-results-for-search="5" data-dropdown-parent="#select2_sort"
                                 data-search-input-placeholder="Введите город">
@@ -52,9 +54,11 @@
                         </div>
                         <div class="app__search">
                             <input type="text" placeholder="Введите адресс">
-                        </div>
-                    </div> --}}
+                        </div> --}}
 
+                        <a class="app__title_button" id="wishlist_clear_button">Очистить</a>
+                    </div>
+                    @endif
                 </div>
                 @if($wish_list_products)
                     <section class="products_list">
@@ -64,6 +68,13 @@
                     </section>
 
                     {{ $wish_list_products->appends(request()->input())->onEachSide(1)->links() }}
+                @else
+                    <x-sample.main.empty-list
+                        title="В избранном пока пусто"
+                        text="Добавляйте товары в избранное, чтобы не потерять их и купить позже"
+                        :button="['url' => route('categories'), 'text' => 'Перейти в каталог']"
+                    >
+                    </x-sample.main.empty-list>
                 @endif
             </div>
         </div>
@@ -75,5 +86,9 @@
     <x-sample.main.layout.cookie></x-sample.main.layout.cookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
+
+    <script>
+        window.routes["wishlist.clear"] = "{{ route('wishlist.clear') }}";
+    </script>
     @vite('resources/js/profile/wishlist/index.js')
 @endsection

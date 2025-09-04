@@ -41,7 +41,11 @@ Route::prefix('profile')->group(function () {
         });
         Route::get('/companies', [ProfileCompanyController::class, 'all'])->name('profile.companies');
     });
-    Route::get('/wishlist', [WishlistController::class, 'show'])->name('wishlist');
+
+    Route::prefix('wishlist')->group(function () {
+        Route::get('/', [WishlistController::class, 'show'])->name('wishlist');
+        Route::post('/clear', [WishlistController::class, 'clear'])->name('wishlist.clear');
+    });
 });
 
 //

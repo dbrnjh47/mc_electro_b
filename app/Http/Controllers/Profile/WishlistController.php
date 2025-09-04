@@ -19,7 +19,7 @@ class WishlistController extends Controller
     public function show(ShowWishlistRequest $request)
     {
         $wish_list_products = (new WishListService)->get();
-
+        // dd($wish_list_products);
         //
 
         $breadcrumbs = (new BreadcrumbService);
@@ -35,5 +35,10 @@ class WishlistController extends Controller
             'wish_list_products' => $wish_list_products,
             'breadcrumbs' => $breadcrumbs
         ]);
+    }
+
+    public function clear()
+    {
+        (new WishListService)->clear();
     }
 }

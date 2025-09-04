@@ -1,37 +1,48 @@
 <?php
 
-namespace App\Http\Services\Models;
+namespace App\Http\Services\Models\Product;
 
+use App\Http\Services\Models\ControllerModelService;
 use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Builder;
 
 class ProductModelService extends ControllerModelService
 {
     public $pagination = 9, $slug, $select_list;
-    public function __construct($slug = null, $select_list = null)
+    public function __construct($slug = null, $select_list = null, $model = null)
     {
         $this->slug = $slug;
         $this->select_list = $select_list;
+        if($model)
+        {
+            $this->model = $model;
+        }
         $this->model = $this->defult();
+    }
+
+    public function getModel()
+    {
+        return $this->model;
     }
 
     public function defult()
     {
-        $model = Product::query();
+        if(!$this->model){$this->model = Product::query();}
+
 
         if($this->select_list)
         {
-            $model->select($this->select_list);
+            $this->model->select($this->select_list);
         }
 
-        $model = ProductModelService::whereOn($model);
+        $this->model = ProductModelService::whereOn($this->model);
 
         if($this->slug)
         {
-            $model->where("slug", $this->slug);
+            $this->model->where("slug", $this->slug);
         }
 
-        return $model;
+        return $this->model;
     }
 
     public static function whereOn($model)

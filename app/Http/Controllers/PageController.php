@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Services\Models\BannerModelService;
 use App\Http\Services\Models\CategoryModelService;
-use App\Http\Services\Models\ProductModelService;
+
+use App\Http\Services\Models\Product\ProductModelService;
 use App\Http\Services\User\WishListService;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
@@ -61,7 +62,7 @@ class PageController extends Controller
 
         //
 
-        $products = (new ProductModelService(select_list: ['id', 'mrp', 'slug', 'step']));
+        $products = (new ProductModelService(select_list: ['id', 'mrp', 'slug', 'step', 'name', 'article']));
 
         $products->wishlist($wishlist_id);
 

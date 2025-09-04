@@ -2,6 +2,7 @@
 
 namespace App\Http\Services\User;
 
+use App\Http\Services\Models\Product\ProductModelService;
 use App\Models\User\Wishlist\Wishlist;
 use App\Models\User\Wishlist\WishlistProduct;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class WishListService
 {
@@ -56,7 +58,8 @@ class WishListService
         return WishlistProduct::where("wishlist_id", $this->wishlist->id)
             ->with([
                 'product' => function ($q) {
-                    $q = $q->select(['id', 'mrp', 'slug', 'step'])
+                    $q = (new ProductModelService(select_list: ['id', 'mrp', 'slug', 'step', 'name', 'article', DB::raw('1 as wishlist_products_count')], model: $q))
+                        ->getModel()
                         ->with([
                             'medias' => function ($q2) {
                                 $q2->select(['name', 'product_id'])->limit(1);

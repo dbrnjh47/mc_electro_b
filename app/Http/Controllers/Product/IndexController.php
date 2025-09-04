@@ -8,7 +8,8 @@ use App\Http\Requests\Product\ShowRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
-use App\Http\Services\Models\ProductModelService;
+
+use App\Http\Services\Models\Product\ProductModelService;
 use App\Http\Services\User\WishListService;
 use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
