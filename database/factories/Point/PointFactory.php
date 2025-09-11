@@ -27,7 +27,7 @@ class PointFactory extends Factory
 
             'title' => fake()->text(10),
             'address' => fake()->address,
-            'district' => fake()->streetName,
+            // 'district' => fake()->streetName,
             'comment' => (rand(0,10) > 7 ? fake()->text(5) : null),
             'description' => (rand(0, 10) > 3 ? fake()->text(rand(50, 100)) : null)
         ];

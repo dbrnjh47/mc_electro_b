@@ -75,7 +75,7 @@ class СontactController extends Controller
 
         //
         $breadcrumbs = $this->getBreadcrumbs();
-        $breadcrumbs->add("Точка {$point->title}");
+        $breadcrumbs->add($point->title);
 
         return view('sample.main.pages.сontact.one', compact("title", "description", "breadcrumbs", "point"));
     }

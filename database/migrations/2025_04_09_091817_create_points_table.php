@@ -23,7 +23,7 @@ return new class extends Migration
             $table->boolean('is_on')->default(1);
 
             $table->string('address');
-            $table->string('district');
+            // $table->string('district');
             $table->string('comment')->nullable();
             $table->string('description', 126)->nullable();
 

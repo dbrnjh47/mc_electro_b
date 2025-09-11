@@ -23,4 +23,9 @@ class CityModelService extends ControllerModelService
         }
         return $model;
     }
+
+    public function first($city)
+    {
+        return $this->model->where("name", $city)->first();
+    }
 }
