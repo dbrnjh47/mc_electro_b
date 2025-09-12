@@ -9,6 +9,7 @@ use App\Models\Point\Link\PointLinkCategory;
 use App\Models\Point\Point;
 use App\Models\Point\PointPhone;
 use App\Models\Point\PointPhoto;
+use Illuminate\Support\Facades\Storage;
 
 class PointSeeder extends MKElectroApi
 {
@@ -57,9 +58,23 @@ class PointSeeder extends MKElectroApi
             }
 
             if (isset($point["photos"])) {
-                foreach ($point["photos"] as $photo) {
+                foreach ($point["photos"] as $name => $d) {
+                    // создание файла
+                    $path = PointPhoto::PATH . $name;
+
+                    if (strpos($d, 'base64,') !== false) {
+                        $d = explode('base64,', $d)[1];
+                    }
+
+                    $fileData = base64_decode($d, true);
+                    if ($fileData === false) {
+                        dd("Invalid base64 data");
+                    }
+
+                    Storage::disk('public_user')->put($path, $fileData);
+
                     $p_photo = new PointPhoto();
-                    $p_photo->img = basename($photo);
+                    $p_photo->img = basename($name);
                     $p_photo->point_id = $p->id;
                     $p_photo->save();
                 }
