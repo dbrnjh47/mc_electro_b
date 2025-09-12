@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('name', 128);
+            $table->string('short_desc')->nullable();
+            $table->text('desc')->nullable();
 
             $table->string('uuid', 124)->nullable()->index();
             $table->string('article', 124)->nullable()->index();
@@ -23,10 +25,12 @@ return new class extends Migration
 
             $table->decimal('mrp', 10, 2)->unsigned()->default(0)->comment("мрц");
 
-            $table->decimal('weight', 10, 4); // кг, может в граммы?
-            $table->decimal('length', 10, 4); // мм
-            $table->decimal('width', 10, 4); // мм
-            $table->decimal('height', 10, 4); // мм
+            $table->decimal('weight', 10, 4)->comment("кг"); // кг, может в граммы?
+            $table->decimal('length', 10, 4)->comment("мм"); // мм
+            $table->decimal('width', 10, 4)->comment("мм"); // мм
+            $table->decimal('height', 10, 4)->comment("мм"); // мм
+
+            $table->boolean('is_on')->default(1);
 
             $table->integer('step')->default(1);
 

@@ -100,10 +100,10 @@
 
                 </section>
 
-                @if($product->description || !$product->characteristics->isEmpty() || !$product->reviews->isEmpty() || !$product->documents->isEmpty())
+                @if($product->desc || !$product->characteristics->isEmpty() || !$product->reviews->isEmpty() || !$product->documents->isEmpty())
                 @php $is_first_block = 0; @endphp
                 <section class="product_menu_blocks product_menu_blocks__container">
-                    @if($product->description)
+                    @if($product->desc)
                         <div @if(!$is_first_block) class="activ" @endif data-block="description">Описание</div>
                         @php $is_first_block = 1; @endphp
                     @endif
@@ -130,11 +130,11 @@
                 @php $is_first_block = 0; @endphp
                 <div class="product_menu_block product_menu_block__container">
 
-                    @if($product->description)
+                    @if($product->desc)
                     <section class="product_menu_block__description @if(!$is_first_block) activ @endif" data-block="description">
                         <h1 class="product_menu_block__title">Описание</h1>
                         <div class="product_menu_block__description_content">
-                            {!! $product->description->text !!}
+                            {!! $product->desc !!}
                         </div>
                     </section>
                     @php $is_first_block = 1; @endphp

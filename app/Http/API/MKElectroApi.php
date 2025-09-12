@@ -4,6 +4,7 @@ namespace App\Http\API;
 
 use Log;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class MKElectroApi
 {
@@ -11,17 +12,27 @@ class MKElectroApi
 
     public function getPoints()
     {
-        return $this->request("post", "",[
+        return $this->request("post", "", [
             "type" => "get_points"
+        ]);
+    }
+
+    public function getProducts($limit, $offset)
+    {
+        return $this->request("post", "", [
+            "type" => "get_products",
+            "limit" => $limit,
+            "offset" => $offset,
         ]);
     }
 
     private function request($method, $url, $parameters = [])
     {
-        try
-        {
+        try {
             $client = new \GuzzleHttp\Client();
-            $response = $client->request($method, self::ENDPOINT_PUBLIC."/".$url,
+            $response = $client->request(
+                $method,
+                self::ENDPOINT_PUBLIC . "/" . $url,
                 ($method == "get" ?
                     [
                         'headers' => [
@@ -38,12 +49,20 @@ class MKElectroApi
                     ]
                 )
             );
-
-            $responseJSON = json_decode($response->getBody()->getContents(), true);
+            $res = $response->getBody()->getContents();
+            dump($res);
+            $responseJSON = json_decode($res, true);
             return $responseJSON;
-        }
-        catch(\Exception $e){
-            Log::debug($e->getMessage());
+        } catch (RequestException $e) {
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+                $body = $response->getBody()->getContents();
+
+                Log::debug($body);
+            } else {
+                Log::debug($e->getMessage());
+            }
+
             return null;
         }
     }

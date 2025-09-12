@@ -29,7 +29,11 @@ class ProductFactory extends Factory
             "slug" => fake()->unique()->slug(rand(1, 5)),
             "company_id" => (rand(0, 100) > 50 ? Company::inRandomOrder()->where("id", "!=", 1)->first()->id : null),
 
-            "name" => fake()->text(rand(5, 20))
+            "name" => fake()->text(rand(5, 20)),
+            "is_on" => rand(0, 1),
+
+            "short_desc" => (rand(0, 100) > 50 ? fake()->text(rand(50, 255)) : null),
+            "desc" => (rand(0, 100) > 50 ? fake()->text(rand(100, 1000)) : null),
         ];
     }
 }

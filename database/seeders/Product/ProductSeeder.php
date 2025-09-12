@@ -45,7 +45,6 @@ class ProductSeeder extends Seeder
         $this->call(ProductMediaSeeder::class);
         $this->call(ProductDocumentSeeder::class);
         $this->call(ProductCharacteristicSeeder::class);
-        $this->call(ProductDescriptionSeeder::class);
         $this->call(ProductReviewSeeder::class);
         $this->call(ProductPointSeeder::class);
 

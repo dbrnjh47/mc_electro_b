@@ -24,6 +24,8 @@ class IndexController extends Controller
         $product = (new ProductModelService(slug: $request->slug, select_list: [
             "id",
             "name",
+            "short_desc",
+            "desc",
             "uuid",
             "company_id",
             "article",
@@ -57,9 +59,6 @@ class IndexController extends Controller
                 },
                 'documents' => function ($q) {
                     $q = $q->select(['title', 'name', 'product_id']);
-                },
-                'description' => function ($q) {
-                    $q = $q->select(['text', 'product_id']);
                 },
                 'company' => function ($q) {
                     $q = $q->select(['id', 'preview', 'name', 'short', 'slug', 'count_reviews', 'grade_review']);
