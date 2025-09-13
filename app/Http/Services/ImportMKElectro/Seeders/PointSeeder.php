@@ -3,6 +3,7 @@
 namespace App\Http\Services\ImportMKElectro\Seeders;
 
 use App\Http\API\MKElectroApi;
+use App\Http\Services\MediaService;
 use App\Http\Services\Models\CityModelService;
 use App\Models\Point\Link\PointLink;
 use App\Models\Point\Link\PointLinkCategory;
@@ -62,21 +63,14 @@ class PointSeeder extends MKElectroApi
                     // создание файла
                     $path = PointPhoto::PATH . $name;
 
-                    if (strpos($d, 'base64,') !== false) {
-                        $d = explode('base64,', $d)[1];
+                    $name = (new MediaService)->createImgBase64($path, $d);
+
+                    if ($name) {
+                        $p_photo = new PointPhoto();
+                        $p_photo->img = basename($name);
+                        $p_photo->point_id = $p->id;
+                        $p_photo->save();
                     }
-
-                    $fileData = base64_decode($d, true);
-                    if ($fileData === false) {
-                        dd("Invalid base64 data");
-                    }
-
-                    Storage::disk('public_user')->put($path, $fileData);
-
-                    $p_photo = new PointPhoto();
-                    $p_photo->img = basename($name);
-                    $p_photo->point_id = $p->id;
-                    $p_photo->save();
                 }
             }
         }

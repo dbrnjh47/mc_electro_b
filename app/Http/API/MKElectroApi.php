@@ -10,6 +10,20 @@ class MKElectroApi
 {
     const ENDPOINT_PUBLIC = "http://mc-api";
 
+    public function getCategorySub()
+    {
+        return $this->request("post", "", [
+            "type" => "get_category_sub"
+        ]);
+    }
+
+    public function getCategories()
+    {
+        return $this->request("post", "", [
+            "type" => "get_categories"
+        ]);
+    }
+
     public function getPoints()
     {
         return $this->request("post", "", [
@@ -50,7 +64,7 @@ class MKElectroApi
                 )
             );
             $res = $response->getBody()->getContents();
-            dump($res);
+            // dump($res);
             $responseJSON = json_decode($res, true);
             return $responseJSON;
         } catch (RequestException $e) {

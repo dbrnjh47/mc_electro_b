@@ -44,7 +44,7 @@
                 </div>
             </li>
             <li><a itemprop="url" href="#" class="header_two__menu_link">Доставка</a></li>
-            <li><a itemprop="url" href="#" class="header_two__menu_link">Контакты</a></li>
+            <li><a itemprop="url" href="{{route("contacts")}}" class="header_two__menu_link">Контакты</a></li>
         </ul>
 
         <div class="header_two__contacts_wrapper">

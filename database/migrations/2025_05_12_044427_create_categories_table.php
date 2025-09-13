@@ -20,7 +20,7 @@ return new class extends Migration
             $table->boolean('is_on')->default(1);
             $table->string('preview')->nullable();
 
-            $table->string('description', 64)->nullable();
+            $table->text('description')->nullable();
 
             $table->timestamps();
         });

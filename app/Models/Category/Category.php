@@ -46,7 +46,8 @@ class Category extends Model
                 category_child_id,
                 category_parent_id,
                 0 AS level,
-                categories.slug AS path
+                CAST(SUBSTRING(categories.slug, 1, 255) AS CHAR(255)) AS path
+                -- categories.slug AS path
             FROM " . (new Subcategory())->getTable() . " as c
             LEFT JOIN categories ON c.category_child_id = categories.id
             WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
@@ -57,7 +58,8 @@ class Category extends Model
                 c.category_child_id,
                 c.category_parent_id,
                 s.level + 1,
-                CONCAT(s.path, '/', categories.slug ) AS path
+                CAST(SUBSTRING(CONCAT(s.path, '/', categories.slug), 1, 255) AS CHAR(255)) AS path
+                -- CONCAT(s.path, '/', categories.slug ) AS path
             FROM " . (new Subcategory())->getTable() . " c
             INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
             LEFT JOIN categories ON c.category_child_id = categories.id

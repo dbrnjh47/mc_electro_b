@@ -3,8 +3,11 @@
 namespace App\Http\Services\ImportMKElectro\Seeders;
 
 use App\Http\API\MKElectroApi;
-
+use App\Http\Services\MediaService;
+use App\Http\Services\Models\CategoryModelService;
 use App\Models\Product\Product;
+use App\Models\Product\ProductCategory;
+use App\Models\Product\ProductMedia;
 use Illuminate\Support\Facades\Storage;
 
 class ProductSeeder extends MKElectroApi
@@ -25,7 +28,9 @@ class ProductSeeder extends MKElectroApi
             for ($i = 0; $i < count($products); $i++) {
                 $product_api = $products[$i];
                 $product_id = $this->createProduct($product_api);
-
+                if (isset($product_api["relationships"]) && !empty($product_api["relationships"])) {
+                    $this->relationships($product_api["relationships"], $product_id);
+                }
             }
 
             $this->offset += $this->limit;
@@ -33,6 +38,46 @@ class ProductSeeder extends MKElectroApi
         }
 
         return;
+    }
+
+    public function relationships($relationships, $product_id)
+    {
+        if (isset($relationships["medias"])) {
+            foreach ($relationships["medias"] as $name => $media) {
+                $name = (new MediaService)->createImgBase64(ProductMedia::PATH ."photo/".$name, $media);
+                if($name)
+                {
+                    $this->createProductMedia($product_id, $name);
+                }
+            }
+        }
+
+        if (isset($relationships["categories"])) {
+            foreach($relationships["categories"] as $category)
+            {
+                $this->createProductCategory($product_id, $category["slug"]);
+            }
+        }
+    }
+
+    public function createProductCategory($product_id, $category_slug)
+    {
+        $product_media = new ProductCategory();
+
+        $product_media->product_id = $product_id;
+        $product_media->category_id = (new CategoryModelService(select_list:["id"], on_check: 0))->firstBySlug($category_slug)->id;
+
+        $product_media->save();
+    }
+
+    public function createProductMedia($product_id, $name)
+    {
+        $product_media = new ProductMedia();
+
+        $product_media->name = $name;
+        $product_media->product_id = $product_id;
+
+        $product_media->save();
     }
 
     public function createProduct($product_api)

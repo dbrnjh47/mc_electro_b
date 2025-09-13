@@ -6,3 +6,11 @@ btn.click(function () {
     list.css("max-height", "none");
     btn.fadeOut();
 });
+
+//
+
+let categories__hover_item_btn = $(".categories__hover_item_btn");
+
+categories__hover_item_btn.click(function () {
+    $(this).closest(".categories__item").addClass("activ");
+});

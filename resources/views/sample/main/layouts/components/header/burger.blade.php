@@ -86,7 +86,7 @@
                 </li>
 
                 <li>
-                    <a class="navigation" itemprop="url" href="">
+                    <a class="navigation" itemprop="url" href="{{route("contacts")}}">
                         Контакты
                     </a>
                 </li>
