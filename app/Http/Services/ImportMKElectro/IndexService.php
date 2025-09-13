@@ -13,14 +13,14 @@ class IndexService
 {
     public function start()
     {
-        dump("Интеграция контактов");
-        (new PointSeeder)->start();
+        // dump("Интеграция контактов");
+        // (new PointSeeder)->start();
 
         dump("Интеграция категорий");
         (new CategorySeeder)->start();
 
-        dump("Интеграция товаров");
-        (new ProductSeeder)->start();
+        // dump("Интеграция товаров");
+        // (new ProductSeeder)->start();
     }
 
     public function cleaning()

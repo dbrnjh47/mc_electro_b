@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Storage;
 class MediaService
 {
     public $video_extensions = ['mp4', 'avi', 'mov', 'wmv', 'flv', 'mkv'];
-    public $img_extensions = ['webp', 'jpg', 'png', 'jpag'];
+    public $img_extensions = ['webp', 'jpg', 'png', 'jpeg'];
     public function is_video($name)
     {
         $extension = strtolower(pathinfo($name, PATHINFO_EXTENSION));

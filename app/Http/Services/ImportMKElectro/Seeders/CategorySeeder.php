@@ -57,5 +57,15 @@ class CategorySeeder extends MKElectroApi
         $category->description = (isset($category_api["category_description"]) && $category_api["category_description"] != "" ? strip_tags(str_replace(['&#13;&#10;', '&#13;', '&#10;'], '', $category_api["category_description"])) : null);
 
         $category->save();
+
+        if(isset($category_api["file_name"]) || isset($category_api["file"]))
+        {
+            $name = (new MediaService)->createImgBase64(Category::PATH .$category_api["file_name"], $category_api["file"]);
+            if($name)
+            {
+                $category->preview = $name;
+                $category->save();
+            }
+        }
     }
 }

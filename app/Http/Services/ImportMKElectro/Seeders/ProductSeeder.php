@@ -27,6 +27,7 @@ class ProductSeeder extends MKElectroApi
 
             for ($i = 0; $i < count($products); $i++) {
                 $product_api = $products[$i];
+                dump($product_api);
                 $product_id = $this->createProduct($product_api);
                 if (isset($product_api["relationships"]) && !empty($product_api["relationships"])) {
                     $this->relationships($product_api["relationships"], $product_id);

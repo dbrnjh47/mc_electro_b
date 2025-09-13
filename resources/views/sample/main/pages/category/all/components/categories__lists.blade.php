@@ -35,8 +35,11 @@
                 </div>
             @endif
 
-            <div class="categories__item_title">{{ $category->name }}</div>
-            <div class="categories__item_description">{{ $category->description }}</div>
+
+            <div class="categories__item_description">
+                <div class="categories__item_title">{{ $category->name }}</div>
+                {{ $category->description }}
+            </div>
 
             @if ($category->preview)
                 <img class="categories__item_bg" src="{{$category->preview_path}}" loading="lazy"

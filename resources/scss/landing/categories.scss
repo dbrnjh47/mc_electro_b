@@ -96,21 +96,29 @@
     }
     &_title {
       color: #16161f;
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 600;
     }
     &_description {
-      color: #8e95a6;
-      font-size: 18px;
-      font-weight: 400;
+        color: #8e95a6;
+        font-size: 14px;
+        font-weight: 400;
+        display: -webkit-box;
+        -webkit-line-clamp: 6;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     &_bg {
       position: absolute;
       bottom: 0;
       right: 0;
-      width: calc(100% - 24px);
-      height: calc(100% - 30%);
+      width: 100px;
+      z-index: -1;
+      margin-right: 8px;
+      -o-object-fit: contain;
       object-fit: contain;
+      -o-object-position: right;
       object-position: right;
     }
     &:hover {
