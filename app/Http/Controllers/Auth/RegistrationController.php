@@ -8,7 +8,7 @@ use App\Http\Services\Auth\RegistrationService;
 
 class RegistrationController extends IndexController
 {
-    // public function show() {return view('auth.registration');}
+    public function show() {return view('sample.main.pages.auth.signup');}
 
     public function registration(RegistrationRequest $request)
     {

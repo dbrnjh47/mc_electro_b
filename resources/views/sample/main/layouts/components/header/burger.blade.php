@@ -38,27 +38,19 @@
                     </a>
                 </li>
                 <li>
-                    <a class="navigation">
-                        <!-- <img src="/sample/v1/temple/images/header/menu/car.svg" alt="car"> -->
+                    <a class="navigation" itemprop="url" href="{{route('category', ["slugs" => 'sale'])}}">
                         Распродажа
-                        <!-- <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd"
-            d="M11.8047 0.18794C12.0651 0.438526 12.0651 0.844807 11.8047 1.09539L6.4714 6.81206C6.21105 7.06265 5.78894 7.06265 5.5286 6.81206L0.195262 1.09539C-0.0650874 0.844807 -0.0650873 0.438526 0.195262 0.187939C0.455612 -0.0626471 0.877722 -0.0626471 1.13807 0.187939L6 5.45088L10.8619 0.18794C11.1223 -0.0626467 11.5444 -0.0626466 11.8047 0.18794Z"
-            fill="white"></path>
-        </svg> -->
-
                     </a>
                 </li>
 
-                <li>
+                {{-- <li>
                     <a class="navigation" itemprop="url" href="">
                         Акции
                     </a>
-                </li>
+                </li> --}}
 
                 <li>
                     <a class="navigation">
-                        <!-- <img src="/sample/v1/temple/images/header/menu/boat.svg" alt="boat"> -->
                         О компании
                         <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -71,17 +63,8 @@
 
                     <div class="navigation_list">
                         <a class="navigation" itemprop="url" href="{{route('about')}}">Краткая информация</a>
-                        <a class="navigation" itemprop="url" href="">История</a>
-                        <a class="navigation" itemprop="url" href="">Реквизиты</a>
                         <a class="navigation" itemprop="url" href="">Новости</a>
-                        <a class="navigation" itemprop="url" href="">Отзывы</a>
                     </div>
-                </li>
-
-                <li>
-                    <a class="navigation" itemprop="url" href="">
-                        Доставка
-                    </a>
                 </li>
 
                 <li>
@@ -153,7 +136,7 @@
 
                     <div class="setting_items_wrapper">
                         <div class="setting_item_select">
-                            {{$user_currency->icon_path}}
+                            {{$user_currency->abbreviation}}
                             <svg xmlns="http://www.w3.org/2000/svg" width="9" height="6"
                                 viewBox="0 0 9 6" fill="none">
                                 <path
@@ -165,7 +148,7 @@
                         <div class="setting_items">
                             @foreach ($currencies as $currency)
                                 <a href="{{ route("currency.set", ["id" => $currency->id]) }}" class="setting_item @if($user_currency->id == $currency->id) activ @endif">
-                                    {{$currency->icon_path}}
+                                    {{$currency->abbreviation}}
                                 </a>
                             @endforeach
                             {{-- <a class="setting_item  activ " onclick="setCurrencie(1)">

@@ -117,7 +117,7 @@ Route::prefix('auth')->group(function () {
 
         Route::prefix('signup')->group(function () {
             // Route::group(['middleware' => 'throttle:5,5'], function () {
-            // Route::get('/', 'Auth\RegistrationController@show')->name('signup');
+            Route::get('/', [RegistrationController::class, 'show'])->name('signup');
             Route::post('/', [RegistrationController::class, 'registration'])->name('registration');
             // });
 

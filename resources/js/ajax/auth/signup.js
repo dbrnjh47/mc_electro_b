@@ -1,7 +1,9 @@
-var wrapper = $("#modal_signup"),
-    button = $("#modal_signup_btn");
+var button = $("#modal_signup_btn, #block_signup_btn");
 
 button.click(function (e) {
+    let wrapper = $(this).closest("#modal_signup");
+    if(!wrapper.length){wrapper = $(this).closest("#block_signup");}
+
     let data = getInfo(wrapper);
     window.validationDistroy(wrapper, button);
 

@@ -11,17 +11,17 @@
                     <option value="WY">Краснодар</option>
                 </select>
 
-                {{-- <div class="location">
+                <div class="location">
                     <h2 class="location__text">Ваш город <span>Москва?</span></h2>
                     <div class="location__inner">
                         <button class="btn">Все верно</button>
                         <button class="btn btn_upend">Сменить город</button>
                     </div>
-                </div> --}}
+                </div>
 
             </li>
-            <li><a href="#" itemprop="url" class="header_two__menu_link">Распродажа</a></li>
-            <li><a href="#" itemprop="url" class="header_two__menu_link">Акции</a></li>
+            <li><a href="{{route('category', ["slugs" => 'sale'])}}" itemprop="url" class="header_two__menu_link">Распродажа</a></li>
+            {{-- <li><a href="#" itemprop="url" class="header_two__menu_link">Акции</a></li> --}}
             <li>
                 <div class="header_two__sub_menu">
                     <button class="header_two__menu_link header_two__sub_menu_title">
@@ -35,14 +35,10 @@
                     </button>
                     <div class="header_two__sub_menu_wrapper">
                         <a href="{{route('about')}}" itemprop="url" class="header_two__sub_menu_wrapper_link">Краткая информация</a>
-                        <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">История</a>
-                        <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Реквизиты</a>
                         <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Новости</a>
-                        <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Отзывы</a>
                     </div>
                 </div>
             </li>
-            <li><a itemprop="url" href="#" class="header_two__menu_link">Доставка</a></li>
             <li><a itemprop="url" href="{{route("contacts")}}" class="header_two__menu_link">Контакты</a></li>
         </ul>
 

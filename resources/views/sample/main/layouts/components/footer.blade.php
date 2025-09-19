@@ -46,25 +46,25 @@
             <div class="footer__menu">
                 <h4>Информация</h4>
                 <ul itemscope itemtype="https://schema.org/SiteNavigationElement">
-                    <li><a itemprop="url" href="#">Способы оплаты</a></li>
+                    {{-- <li><a itemprop="url" href="#">Способы оплаты</a></li> --}}
                     <li><a itemprop="url" href="{{route("agreement")}}">Пользовательское <br> соглашение</a></li>
                     <li><a itemprop="url" href="{{route("policy")}}">Политика <br> конфиденциальности</a></li>
-                    <li><a itemprop="url" href="#">Статьи и обзоры</a></li>
-                    <li><a itemprop="url" href="#">Производители и бренды</a></li>
-                    <li><a itemprop="url" href="#">Архив товаров</a></li>
+                    {{-- <li><a itemprop="url" href="#">Статьи и обзоры</a></li> --}}
+                    <li><a itemprop="url" href="{{route("companies")}}">Производители и бренды</a></li>
+                    <li><a itemprop="url" href="{{route("category", ["slugs" => "archive"])}}">Архив товаров</a></li>
                 </ul>
             </div>
 
             <div class="footer__menu">
                 <h4>Сервисы</h4>
                 <ul itemscope itemtype="https://schema.org/SiteNavigationElement">
-                    <li><a itemprop="url" href="#">Корзина</a></li>
-                    <li><a itemprop="url" href="#">Авторизация</a></li>
-                    <li><a itemprop="url" href="#">Настройки аккаунта</a></li>
-                    <li><a itemprop="url" href="#">Мой адрес</a></li>
-                    <li><a itemprop="url" href="#">Мои заказы</a></li>
-                    <li><a itemprop="url" href="#">Поиск на сайте</a></li>
-                    <li><a itemprop="url" href="#">Карта сайта</a></li>
+                    @if(!Auth::check())
+                        <li><a itemprop="url" href="{{route('login')}}">Авторизация</a></li>
+                        <li><a itemprop="url" href="{{route('signup')}}">Регистрация</a></li>
+                        <li><a itemprop="url" href="{{route('restore')}}">Сброс пароля</a></li>
+                    @else
+                        <li><a itemprop="url" href="{{route('profile')}}">Мои заказы</a></li>
+                    @endif
                 </ul>
             </div>
 
@@ -72,10 +72,7 @@
                 <h4>Компания</h4>
                 <ul itemscope itemtype="https://schema.org/SiteNavigationElement">
                     <li><a itemprop="url" href="{{route('about')}}">Краткая информация</a></li>
-                    <li><a itemprop="url" href="#">История</a></li>
-                    <li><a itemprop="url" href="#">Реквизиты</a></li>
                     <li><a itemprop="url" href="#">Новости</a></li>
-                    <li><a itemprop="url" href="#">Отзывы</a></li>
                 </ul>
             </div>
 
