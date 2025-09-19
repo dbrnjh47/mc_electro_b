@@ -51,7 +51,7 @@
 
         </div>
 
-        <button class="header__catalog__button" onclick="openCategoryMenu();">
+        <button class="header__catalog__button" onclick="getCategories();">
             <img src="/temple/images/layout/icon/burger.svg" alt="burger" loading="lazy" decoding="async">
             Каталог</button>
 

@@ -57,6 +57,8 @@
 @vite('resources/js/_jquery.js')
 <script>
     window.routes = {};
+    window.routes["categories.list"] = "{{ route('categories.list') }}";
+    window.routes["category"] = "{{ route('category') }}";
 </script>
 @vite('resources/js/layout/layout.js')
 @vite('resources/js/layout/location.js')

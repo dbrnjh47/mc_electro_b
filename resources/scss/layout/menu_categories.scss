@@ -30,6 +30,7 @@
   }
 
   &__main {
+    --color-skeleton-from: #e0e0e0;
     -webkit-transform: translateX(-100vw);
     transform: translateX(-100vw);
     width: 370px;
@@ -114,7 +115,7 @@
       display: grid;
       gap: 15px;
       margin-top: 15px;
-      max-height: 240px;
+    //   max-height: 240px;
       transition: all 0.4s;
       overflow: hidden;
       & > div {

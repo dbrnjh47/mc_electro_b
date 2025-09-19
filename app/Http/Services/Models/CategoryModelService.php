@@ -10,28 +10,28 @@ class CategoryModelService extends ControllerModelService
     public function __construct($select_list = null, $model = null, $on_check = 1)
     {
         $this->on_check = $on_check;
-        if($model)
-        {
-            $this->model = $model;
-        } else {
-            $this->select_list = $select_list;
-            $this->model = $this->defult();
-        }
+        $this->model = $model;
+        $this->select_list = $select_list;
+        $this->model = $this->defult();
     }
 
     public function defult()
     {
-        $model = Category::query();
+        if(!$this->model)
+        {
+            $this->model = Category::query();
+        }
+
         if($this->select_list)
         {
-            $model->select($this->select_list);
+            $this->model->select($this->select_list);
         }
         if($this->on_check)
         {
-            $model = CategoryModelService::whereOn($model);
+            $this->model = CategoryModelService::whereOn($this->model);
         }
 
-        return $model;
+        return $this->model;
     }
 
     public function pagination($page = null)

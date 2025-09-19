@@ -82,9 +82,13 @@ Route::prefix('company')->group(function () {
 //
 
 //
-Route::get('/categories', [CategoryController::class, 'all'])->name('categories');
+Route::prefix('categories')->group(function () {
+    Route::get('/', [CategoryController::class, 'all'])->name('categories');
+    Route::post('/', [CategoryController::class, 'list'])->name('categories.list');
+});
+
 Route::prefix('category')->group(function () {
-    Route::get('/{slugs}', [CategoryController::class, 'show'])->where('slugs', '.*')->name('category');
+    Route::get('/{slugs?}', [CategoryController::class, 'show'])->where('slugs', '.*')->name('category');
 });
 
 //

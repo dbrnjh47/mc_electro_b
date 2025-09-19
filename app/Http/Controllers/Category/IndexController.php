@@ -11,6 +11,23 @@ use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
+
+    public function list()
+    {
+        $categories = (new CategoryModelService(["id", "name", "slug"]))
+            ->model
+            ->with(['relation_childrens' => function ($query) {
+                $query->whereHas('category', function ($q) {
+                    $q = CategoryModelService::whereOn($q);
+                })->with('category', function ($q) {
+                    $q = (new CategoryModelService(["id", "name", "slug"], $q));
+                }); // Дополнительно подгружаем категорию, если нужно
+            }])
+            ->doesntHave('relation_parent')
+            ->get();
+
+        return $categories;
+    }
     public function all()
     {
         $category_service = (new CategoryModelService);

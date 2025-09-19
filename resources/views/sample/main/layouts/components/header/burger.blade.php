@@ -22,10 +22,10 @@
 
                 <div class="burger_menu__main__buttons">
                     <a class="button" onclick="modal('#modal_login');">
-                        Login
+                        Войти
                     </a>
                     <a class="button button_two" onclick="modal('#modal_signup');">
-                        Register
+                        Зарегистрироваться
                     </a>
                 </div>
 
@@ -33,7 +33,7 @@
 
             <ul class="burger_menu__main__navigations">
                 <li>
-                    <a class="navigation" onclick="openCategoryMenu();">
+                    <a class="navigation" onclick="getCategories();">
                         Каталог
                     </a>
                 </li>
