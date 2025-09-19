@@ -10,29 +10,11 @@
     <section class="about">
         <div class="top__container">
             <div class="top">
-                <section class="breadcrumb">
-                    <ul class="breadcrumb__lists" itemscope="" itemtype="https://schema.org/BreadcrumbList">
-                        <li class="breadcrumb__item" itemprop="itemListElement" itemscope=""
-                            itemtype="https://schema.org/ListItem">
-                            <a itemprop="item" class="breadcrumb__link start" href="#">
-                                <span itemprop="name">Главная</span>
-                            </a>
-                            <meta itemprop="position" content="1">
-                        </li>
-                        <li class="breadcrumb__item">
-                            <a class="breadcrumb__link off">/</a>
-                        </li>
-                        <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
-                            <a itemprop="item" class="breadcrumb__link active">
-                                <span itemprop="name">О нас</span>
-                            </a>
-                            <meta itemprop="position" content="2">
-                        </li>
-                    </ul>
-                </section>
+                <x-sample.main.breadcrumb :breadcrumbs="$breadcrumbs"></x-sample.main.breadcrumb>
+
                 <div class="app__title">
                     <div class="app__title_wrapper">
-                        <h2 class="app__title_text"><span>МК</span> Электро - Компания
+                        <h2 class="app__title_text"><span>{{$settings->abbreviation}}</span> {{$settings->name}} - Компания
                             основаная в 2005 году</h2>
                     </div>
                 </div>
@@ -48,98 +30,14 @@
         </div>
         <div class="cards__container">
             <div class="cards">
-                <div class="card">
-                    <h5 class="card_title">Lorem ipsum</h5>
-                    <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
-                    <div class="card_bottom">
-                        <div class="card_item">
-                            <span>Цена</span>
-                            <span class="card_item_red">250 ₽</span>
-                        </div>
-                        <div class="card_item">
-                            <span>Кол-во (шт.)</span>
-                            <span class="card_item_red">12</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card_title">Lorem ipsum</h5>
-                    <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
-                    <div class="card_bottom">
-                        <div class="card_item">
-                            <span>Цена</span>
-                            <span class="card_item_red">250 ₽</span>
-                        </div>
-                        <div class="card_item">
-                            <span>Кол-во (шт.)</span>
-                            <span class="card_item_red">12</span>
-                        </div>
-                    </div>
-                </div>
+                <x-sample.main.product.card :product="$products[0]"></x-sample.main.product.card>
+                <x-sample.main.product.card :product="$products[1]"></x-sample.main.product.card>
                 <div></div>
                 <div></div>
-                <div class="card">
-                    <h5 class="card_title">Lorem ipsum</h5>
-                    <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
-                    <div class="card_bottom">
-                        <div class="card_item">
-                            <span>Цена</span>
-                            <span class="card_item_red">250 ₽</span>
-                        </div>
-                        <div class="card_item">
-                            <span>Кол-во (шт.)</span>
-                            <span class="card_item_red">12</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card_title">Lorem ipsum</h5>
-                    <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
-                    <div class="card_bottom">
-                        <div class="card_item">
-                            <span>Цена</span>
-                            <span class="card_item_red">250 ₽</span>
-                        </div>
-                        <div class="card_item">
-                            <span>Кол-во (шт.)</span>
-                            <span class="card_item_red">12</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card_title">Lorem ipsum</h5>
-                    <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
-                    <div class="card_bottom">
-                        <div class="card_item">
-                            <span>Цена</span>
-                            <span class="card_item_red">250 ₽</span>
-                        </div>
-                        <div class="card_item">
-                            <span>Кол-во (шт.)</span>
-                            <span class="card_item_red">12</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <h5 class="card_title">Lorem ipsum</h5>
-                    <p class="card_subtitle">Lorem ipsum</p>
-                    <img class="card_image" src="/assets/product/miniature/test.png" alt="product" loading="lazy" decoding="async" />
-                    <div class="card_bottom">
-                        <div class="card_item">
-                            <span>Цена</span>
-                            <span class="card_item_red">250 ₽</span>
-                        </div>
-                        <div class="card_item">
-                            <span>Кол-во (шт.)</span>
-                            <span class="card_item_red">12</span>
-                        </div>
-                    </div>
-                </div>
+                <x-sample.main.product.card :product="$products[2]"></x-sample.main.product.card>
+                <x-sample.main.product.card :product="$products[3]"></x-sample.main.product.card>
+                <x-sample.main.product.card :product="$products[4]"></x-sample.main.product.card>
+                <x-sample.main.product.card :product="$products[5]"></x-sample.main.product.card>
             </div>
         </div>
         <div class="slider__container">
@@ -256,7 +154,7 @@
                     <p class="descr__right_text">
                         Приобретайте товары удобно и выгодно
                     </p>
-                    <a class="btn" href="#">Совершить покупку</a>
+                    <a class="btn" href="{{route('home')}}">Совершить покупку</a>
                 </div>
             </div>
         </div>
@@ -267,68 +165,7 @@
                         <h2 class="app__title_text">Мы официальные <span>партнеры</span></h2>
                     </div>
                 </div>
-                <div class="swiper" id="companies_slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/1.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/2.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/3.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/4.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/5.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/6.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/7.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/8.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/9.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/10.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/1.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/2.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/3.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/4.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/5.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/7.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/8.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/9.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                        <div class="swiper-slide company__slide">
-                            <img src="/assets/companies/logo/10.svg" alt="imh" loading="lazy" decoding="async" />
-                        </div>
-                    </div>
-                </div>
+                <x-sample.main.company.slider></x-sample.main.company.slider>
                 <div class="companies__bottom_bg">
                     <img src="/temple/images/about/background.png" loading="lazy" decoding="async" />
                 </div>
@@ -346,4 +183,6 @@
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
     @vite('resources/js/about/index.js')
+
+    @include("sample.main.components.wishlist_action")
 @endsection

@@ -7,6 +7,9 @@
   line-height: normal;
   z-index: 5;
 
+  .breadcrumb__container{
+    padding: 0;
+  }
   &_text {
     color: #8e95a6;
     font-size: 18px;

@@ -51,14 +51,6 @@ class PageController extends Controller
 
         $categories = $categories->get();
         // dd($categories);
-        //
-
-        $companies = Company::select(['id', 'preview', 'name', 'slug'])
-            ->where('is_on', 1)
-            ->whereNotNull("preview")
-            ->inRandomOrder()
-            ->limit(15)
-            ->get();
 
         //
 
@@ -85,9 +77,9 @@ class PageController extends Controller
                           $q->where('is_on', 1);
                       });
             })
-            ->whereHas('categories.category', function ($q) {
-                $q = CategoryModelService::whereOn($q);
-            })
+            // ->whereHas('categories.category', function ($q) {
+            //     $q = CategoryModelService::whereOn($q);
+            // })
             ->inRandomOrder()
             ->limit(8)
             ->get();
@@ -96,14 +88,13 @@ class PageController extends Controller
         //
 
         $banners = (new BannerModelService)->getByKey("home");
-        $title = "Test";
-        $description = "description";
+        $title = app()->settings->abbreviation." ".app()->settings->name;
+        $description = "";
         return view('sample.main.pages.index', compact(
             "categories",
             "banners",
             "title",
             "description",
-            "companies",
             "products"
         ));
     }

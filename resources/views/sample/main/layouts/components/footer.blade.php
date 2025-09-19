@@ -71,11 +71,10 @@
             <div class="footer__menu">
                 <h4>Компания</h4>
                 <ul itemscope itemtype="https://schema.org/SiteNavigationElement">
-                    <li><a itemprop="url" href="#">Краткая информация</a></li>
+                    <li><a itemprop="url" href="{{route('about')}}">Краткая информация</a></li>
                     <li><a itemprop="url" href="#">История</a></li>
                     <li><a itemprop="url" href="#">Реквизиты</a></li>
                     <li><a itemprop="url" href="#">Новости</a></li>
-                    <li><a itemprop="url" href="#">Адреса магазинов</a></li>
                     <li><a itemprop="url" href="#">Отзывы</a></li>
                 </ul>
             </div>

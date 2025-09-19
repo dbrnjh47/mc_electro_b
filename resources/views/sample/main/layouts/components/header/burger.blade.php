@@ -70,11 +70,10 @@
                     </a>
 
                     <div class="navigation_list">
-                        <a class="navigation" itemprop="url" href="">Краткая информация</a>
+                        <a class="navigation" itemprop="url" href="{{route('about')}}">Краткая информация</a>
                         <a class="navigation" itemprop="url" href="">История</a>
                         <a class="navigation" itemprop="url" href="">Реквизиты</a>
                         <a class="navigation" itemprop="url" href="">Новости</a>
-                        <a class="navigation" itemprop="url" href="">Адреса магазинов</a>
                         <a class="navigation" itemprop="url" href="">Отзывы</a>
                     </div>
                 </li>

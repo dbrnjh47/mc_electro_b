@@ -34,11 +34,10 @@
                         </svg>
                     </button>
                     <div class="header_two__sub_menu_wrapper">
-                        <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Краткая информация</a>
+                        <a href="{{route('about')}}" itemprop="url" class="header_two__sub_menu_wrapper_link">Краткая информация</a>
                         <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">История</a>
                         <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Реквизиты</a>
                         <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Новости</a>
-                        <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Адреса магазинов</a>
                         <a href="#" itemprop="url" class="header_two__sub_menu_wrapper_link">Отзывы</a>
                     </div>
                 </div>

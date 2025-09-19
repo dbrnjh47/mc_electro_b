@@ -22,7 +22,7 @@ class SettingSeeder extends Seeder
             "yt" => "https://www.youtube.com/",
             "tg" => "https://t.me/",
             "name" => "IMPYREX",
-            "abbreviation" => "IM",
+            "abbreviation" => "MC",
             "email" => "temple@mail.com",
             "phone" => "+954637592634",
             "address" => null,

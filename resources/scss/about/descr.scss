@@ -3,6 +3,8 @@
   display: flex;
   gap: 0 81px;
   align-items: center;
+  z-index: 1;
+  position: relative;
 
   &__left {
     &_item {

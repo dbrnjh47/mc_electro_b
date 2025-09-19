@@ -27,68 +27,7 @@
 
     <section class="companies">
         <div class="companies__container">
-            <div class="swiper" id="companies_slider">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/1.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/2.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/3.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/4.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/5.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/6.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/7.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/8.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/9.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/10.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/1.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/2.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/3.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/4.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/5.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/7.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/8.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/9.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                    <div class="swiper-slide company__slide">
-                        <img src="/assets/companies/logo/10.svg" alt="imh" loading="lazy" decoding="async" />
-                    </div>
-                </div>
-            </div>
+            <x-sample.main.company.slider></x-sample.main.company.slider>
         </div>
 
     </section>
