@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Category\IndexController as CategoryController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\CurrencyController;
@@ -26,7 +27,6 @@ use Illuminate\Support\Facades\Route;
 
 // Route::group(['prefix' => '{locale?}', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
 Route::get('/', [PageController::class, 'index'])->name('home');
-Route::post('/cookie/agreement', [CookieController::class, 'agreement'])->name('cookie.agreement');
 
 Route::get('/currency/set/{id}', [CurrencyController::class, 'set'])->name('currency.set');
 //
@@ -161,4 +161,15 @@ Route::get('/about', [AboutController::class, 'show'])->name('about');
 // txt
 Route::get('/agreement', [AgreementController::class, 'show'])->name('agreement');
 Route::get('/policy', [PolicyController::class, 'show'])->name('policy');
+
+Route::post('/cities', [CityController::class, 'get'])->name('cities');
+Route::prefix('city')->group(function () {
+    Route::post('/{id?}', [CityController::class, 'set'])->name('city.set');
+});
+
+Route::prefix('cookie')->group(function () {
+    Route::post('/agreement', [CookieController::class, 'agreement'])->name('cookie.agreement');
+    Route::post('/city', [CookieController::class, 'city'])->name('cookie.city');
+});
+
 // });

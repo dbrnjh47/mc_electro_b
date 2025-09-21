@@ -1,5 +1,5 @@
 
-@if(!Cookie::get('cookies_checked'))
+@if(!Cookie::get('cookie_checked'))
 <script>
      window.routes["cookie.agreement"] = "{{route('cookie.agreement')}}";
 </script>

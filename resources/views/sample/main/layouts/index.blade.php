@@ -23,6 +23,7 @@
                 window.routes["profile"] = "{{ route('profile') }}";
                 window.routes["registration"] = "{{ route('registration') }}";
                 window.routes["auth"] = "{{ route('auth') }}";
+                window.routes["city.set"] = "{{ route('city.set') }}";
             </script>
             @vite('resources/js/auth/login.js')
             @vite('resources/js/auth/signup.js')

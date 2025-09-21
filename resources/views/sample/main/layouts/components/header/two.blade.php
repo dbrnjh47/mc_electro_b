@@ -2,8 +2,11 @@
     <div class="header_two">
         <ul class="header_two__menu" itemscope itemtype="https://schema.org/SiteNavigationElement">
             <li id="city_select">
-                <select class="select2_custom" data-placholder="Введите название города"
-                    data-dropdown-parent="#city_select" data-minimum-results-for-search="2" name="state">
+                <script>
+                    window.routes["cities"] = "{{ route('cities') }}";
+                </script>
+                <select class="" data-placholder="Введите название города"
+                    data-dropdown-parent="#city_select" data-minimum-results-for-search="1" name="state">
                     @if($user_city)
                         <option value="{{$user_city->id}}" selected>{{$user_city->name}}</option>
                     @else
@@ -11,12 +14,15 @@
                     @endif
                 </select>
 
-                @if($user_city)
-                <div class="location">
+                @if($user_city && !Cookie::get('city_checked'))
+                <script>
+                    window.routes["cookie.city"] = "{{route('cookie.city')}}";
+                </script>
+                <div class="location" id="location_info_wrapper">
                     <h2 class="location__text">Ваш город <span>{{$user_city->name}}?</span></h2>
                     <div class="location__inner">
                         <button class="btn">Все верно</button>
-                        <button class="btn btn_upend">Сменить город</button>
+                        <button class="btn btn_upend" onclick="$('#city_select select').select2('open');">Сменить город</button>
                     </div>
                 </div>
                 @endif

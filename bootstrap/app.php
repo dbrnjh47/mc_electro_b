@@ -15,7 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->encryptCookies(except: [
-            'city_id', 'user_currency',
+            'city_id', 'user_currency', 'cookie_checked', 'city_checked',
         ]);
 
         $middleware->append(\Illuminate\Session\Middleware\StartSession::class);
