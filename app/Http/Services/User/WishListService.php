@@ -159,6 +159,7 @@ class WishListService
     public function getID()
     {
         $id = Cookie::get($this->type);
+
         if ($id && $id != "") {
             return $id;
         }

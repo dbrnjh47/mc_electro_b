@@ -9,16 +9,33 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Http\Controllers\Controller;
-
+use Cviebrock\EloquentSluggable\Sluggable;
 class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
+    use Sluggable;
 
     protected $guarded = false;
     const PATH = "/assets/categories/previews/";
 
     protected $appends = ['preview_path'];
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'onUpdate' => false, // обновлять slug при изменении title
+                'unique' => true, // гарантировать уникальность
+                'separator' => '-', // разделитель
+                // 'maxLength' => 100, // максимальная длина
+                // 'method' => function ($string, $separator) {
+                //     return Str::slug($string, $separator);
+                // }
+            ]
+        ];
+    }
 
     public function getPreviewPathAttribute()
     {

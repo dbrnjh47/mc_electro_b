@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\City\IndexService as CityService;
 use App\Http\Services\Currency\CurrencyService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -60,11 +61,11 @@ class Controller extends BaseController
 
         //
 
-        // $user_local = (new LocaleService)->get();
-        // view()->share('user_local', $user_local);
-        // app()->singleton('user_local', function ($app) use ($user_local) {
-        //     return $user_local;
-        // });
+        $user_city = (new CityService)->get();
+        view()->share('user_city', $user_city);
+        app()->singleton('user_city', function ($app) use ($user_city) {
+            return $user_city;
+        });
     }
 
     public static function photoAccessor($value, $path)

@@ -7,7 +7,7 @@ use App\Models\City\City;
 class CityModelService extends ControllerModelService
 {
     public $select_list;
-    public function __construct($select_list = null)
+    public function __construct($select_list = null, public $on_check = 1)
     {
         $this->select_list = $select_list;
         $this->model = $this->defult();
@@ -15,17 +15,38 @@ class CityModelService extends ControllerModelService
 
     public function defult()
     {
-        $model = City::query();
+        $this->model = City::query();
 
         if($this->select_list)
         {
-            $model->select($this->select_list);
+            $this->model->select($this->select_list);
         }
-        return $model;
+
+        if($this->on_check)
+        {
+            $this->model = CategoryModelService::whereOn($this->model);
+        }
+
+        return $this->model;
+    }
+
+    public static function whereOn($model)
+    {
+        return $model->where("is_on", 1);
     }
 
     public function first($city)
     {
         return $this->model->where("name", $city)->first();
+    }
+
+    public function firstBySlug($slug)
+    {
+        return $this->model->where("slug", $slug)->first();
+    }
+
+    public function find($id)
+    {
+        return $this->model->find($id);
     }
 }

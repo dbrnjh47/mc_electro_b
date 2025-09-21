@@ -15,7 +15,8 @@ return new class extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->string('name')->index();
+            $table->string('slug')->unique()->index();
 
             $table->unsignedBigInteger('country_id')->nullable();
 

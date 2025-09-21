@@ -15,6 +15,8 @@ class CitySeeder extends Seeder
      * Run the database seeds.
      */
     public $cities = [];
+    public $on_cities = ["Екатеринбург", "Миасс", "Челябинск", "Магнитогорск", "Златоуст", "Тюмень", "Южно-Сахалинск"];
+
     public function run(): void
     {
         if(Storage::disk('local')->exists('migrations/cities_backup.json'))
@@ -39,6 +41,8 @@ class CitySeeder extends Seeder
             $city["name"] = $name;
             City::create($city);
         }
+
+        City::whereIn('name', $this->on_cities)->update(['is_on' => 1]);
     }
 
     public function saveBackup()
