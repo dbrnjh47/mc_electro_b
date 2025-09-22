@@ -1,7 +1,7 @@
 import "/resources/scss/layout/location.scss";
 import "/resources/js/ajax/layout/city.js";
 
-let city_select = $('#city_select select');
+let city_select = $('#city_select select, #burger_city_select select');
 
 $(document).ready(function () {
     let d = window.getDataSelect2();

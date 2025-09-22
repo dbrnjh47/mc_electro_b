@@ -16,3 +16,6 @@ import "./menu_categories.js";
 import "/resources/js/custom/mini_alert/index.js";
 
 import "/resources/js/ajax/layout/cookies.js";
+
+import "/resources/js/layout/location.js";
+import "/resources/js/ajax/layout/currency.js";

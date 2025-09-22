@@ -61,4 +61,3 @@
     window.routes["category"] = "{{ route('category') }}";
 </script>
 @vite('resources/js/layout/layout.js')
-@vite('resources/js/layout/location.js')

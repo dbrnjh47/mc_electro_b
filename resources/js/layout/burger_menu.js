@@ -41,29 +41,7 @@ function burgerMenuCloseNavigations()
 
 //
 
-$(".burger_menu__main .setting_item_select").click(function (e) {
-    var isActiv = $(this).hasClass("active");
-
-    burgerMenuCloseSettingItems()
-
-    if (!isActiv) {
-        $(this)
-            .addClass("active")
-            .closest(".setting_items_wrapper")
-            .find(".setting_items")
-            .slideDown();
-    }
-});
-
-var burger_menu_setting_items = $(".burger_menu__main .setting_items");
-
-function burgerMenuCloseSettingItems()
-{
-    burger_menu_setting_items.slideUp().closest(".setting_items_wrapper").find(".setting_item_select").removeClass("active");
-}
-
-$(document).click(function(event) {
-  if (!$(event.target).closest('.burger_menu__main__settings').length) {
-    burgerMenuCloseSettingItems();
-  }
+let currency_select = $('#burger_currency_select select');
+currency_select.on('change', function() {
+    setСurrency($(this).val());
 });

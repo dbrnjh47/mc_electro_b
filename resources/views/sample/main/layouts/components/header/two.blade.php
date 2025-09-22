@@ -2,11 +2,8 @@
     <div class="header_two">
         <ul class="header_two__menu" itemscope itemtype="https://schema.org/SiteNavigationElement">
             <li id="city_select">
-                <script>
-                    window.routes["cities"] = "{{ route('cities') }}";
-                </script>
                 <select class="" data-placholder="Введите название города"
-                    data-dropdown-parent="#city_select" data-minimum-results-for-search="1" name="state">
+                    data-dropdown-parent="#city_select" data-minimum-results-for-search="1">
                     @if($user_city)
                         <option value="{{$user_city->id}}" selected>{{$user_city->name}}</option>
                     @else

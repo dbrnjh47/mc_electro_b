@@ -168,7 +168,7 @@
                         <div class="header__world_dropdown__menu_items">
                             @foreach ($currencies as $currency)
                                 <a href="{{ route("currency.set", ["id" => $currency->id]) }}" class="header__world_dropdown__menu_item @if($user_currency->id == $currency->id) active @endif">
-                                    {{$currency->icon}}
+                                    {{$currency->abbreviation}}
                                 </a>
                             @endforeach
                         </div>
