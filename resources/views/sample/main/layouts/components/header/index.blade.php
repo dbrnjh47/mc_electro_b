@@ -6,9 +6,9 @@
 <header class="header_wrapper" itemscope itemtype="https://schema.org/WPHeader">
     <div class="header header__container">
         <a href="/" itemprop="url" class="header__logo">
-            <span class="header__logo_icon">{{$settings->abbreviation}}</span>
+            <span class="header__logo_icon">{{ $settings->abbreviation }}</span>
             <div class="header__logo_content">
-                <span class="header__logo_name" itemprop="name">{{$settings->name}}</span>
+                <span class="header__logo_name" itemprop="name">{{ $settings->name }}</span>
                 <span class="header__logo_title" itemprop="headline">электротовары здесь</span>
             </div>
         </a>
@@ -51,14 +51,18 @@
 
         </div>
 
-        <button class="header__catalog__button" onclick="getCategories();">
-            <img src="/temple/images/layout/icon/burger.svg" alt="burger" loading="lazy" decoding="async">
+        <button class="btn" onclick="getCategories();">
+            <svg width="12" height="12" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                <rect width="12" height="2" />
+                <rect y="5" width="12" height="2" />
+                <rect y="10" width="12" height="2" />
+            </svg>
             Каталог</button>
 
-        <a href="#" class="header__button">Свяжитесь с нами</a>
+        <button class="btn btn_upend">Свяжитесь с нами</button>
 
         <div class="header__actions">
-            <a href="{{route('wishlist')}}" itemprop="url" class="header__action header__action_hover">
+            <a href="{{ route('wishlist') }}" itemprop="url" class="header__action header__action_hover">
                 <!-- public\temple\images\layout\icon\favorite.svg -->
                 <svg width="18" height="21" viewBox="0 0 18 21" xmlns="http://www.w3.org/2000/svg">
                     <path
@@ -81,38 +85,38 @@
             </a>
 
             @auth
-            <div class="header__user_wrapper">
-                <div class="header__user">
-                    <p>12,000₽</p>
-                    <div class="header__user_avatar">
-                        <img src="/assets/user/avatar/defult.svg" alt="user" loading="lazy" decoding="async">
+                <div class="header__user_wrapper">
+                    <div class="header__user">
+                        <p>12,000₽</p>
+                        <div class="header__user_avatar">
+                            <img src="/assets/user/avatar/defult.svg" alt="user" loading="lazy" decoding="async">
+                        </div>
+                    </div>
+                    <div class="header__user_drop_menu">
+                        <div class="header__user_drop_menu_role">
+                            <a href="#" class="activ">Физ. лицо</a>
+                            <a href="#">Юр. лицо</a>
+                        </div>
+                        <ul>
+                            <li><a href="#">Профиль</a></li>
+                            <li><a href="#">Список заказов</a></li>
+                            <li><a href="#">Пополнить баланс</a></li>
+                            <li><a href="{{ route('logout') }}">Выйти</a></li>
+                        </ul>
                     </div>
                 </div>
-                <div class="header__user_drop_menu">
-                    <div class="header__user_drop_menu_role">
-                        <a href="#" class="activ">Физ. лицо</a>
-                        <a href="#">Юр. лицо</a>
-                    </div>
-                    <ul>
-                        <li><a href="#">Профиль</a></li>
-                        <li><a href="#">Список заказов</a></li>
-                        <li><a href="#">Пополнить баланс</a></li>
-                        <li><a href="{{route('logout')}}">Выйти</a></li>
-                    </ul>
-                </div>
-            </div>
             @else
-            <a class="header__action header__action_hover" onclick="modal('#modal_login');">
-                <!-- public\temple\images\layout\icon\user.svg -->
-                <svg width="17" height="21" viewBox="0 0 17 21" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M13.5158 4.96201C13.5158 7.70246 11.2464 9.92402 8.44688 9.92402C5.64738 9.92402 3.37794 7.70246 3.37794 4.96201C3.37794 2.22157 5.64738 0 8.44688 0C11.2464 0 13.5158 2.22157 13.5158 4.96201Z" />
-                    <path
-                        d="M0 17.0447C0 13.9773 2.5402 11.4906 5.6737 11.4906H12.1429C14.8254 11.4906 17 13.6194 17 16.2453V21H0V17.0447Z" />
-                </svg>
+                <a class="header__action header__action_hover" onclick="modal('#modal_login');">
+                    <!-- public\temple\images\layout\icon\user.svg -->
+                    <svg width="17" height="21" viewBox="0 0 17 21" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.5158 4.96201C13.5158 7.70246 11.2464 9.92402 8.44688 9.92402C5.64738 9.92402 3.37794 7.70246 3.37794 4.96201C3.37794 2.22157 5.64738 0 8.44688 0C11.2464 0 13.5158 2.22157 13.5158 4.96201Z" />
+                        <path
+                            d="M0 17.0447C0 13.9773 2.5402 11.4906 5.6737 11.4906H12.1429C14.8254 11.4906 17 13.6194 17 16.2453V21H0V17.0447Z" />
+                    </svg>
 
-                Войти
-            </a>
+                    Войти
+                </a>
             @endauth
 
 
@@ -159,7 +163,7 @@
                     <div class="header__world_dropdown__menu_items_wrapper">
                         {{-- <div class="header__world_dropdown__menu_items">
                             @foreach ($locales as $locale)
-                            <a href="{{$locale->getUrl()}}" class="header__world_dropdown__menu_item @if($user_local->id == $locale->id) active @endif">
+                            <a href="{{$locale->getUrl()}}" class="header__world_dropdown__menu_item @if ($user_local->id == $locale->id) active @endif">
                                 <img src="{{$locale->icon_path}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
                                 {{$locale->text}}
                             </a>
@@ -167,8 +171,9 @@
                         </div> --}}
                         <div class="header__world_dropdown__menu_items">
                             @foreach ($currencies as $currency)
-                                <a href="{{ route("currency.set", ["id" => $currency->id]) }}" class="header__world_dropdown__menu_item @if($user_currency->id == $currency->id) active @endif">
-                                    {{$currency->abbreviation}}
+                                <a href="{{ route('currency.set', ['id' => $currency->id]) }}"
+                                    class="header__world_dropdown__menu_item @if ($user_currency->id == $currency->id) active @endif">
+                                    {{ $currency->abbreviation }}
                                 </a>
                             @endforeach
                         </div>

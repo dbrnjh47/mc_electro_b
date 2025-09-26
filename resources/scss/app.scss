@@ -442,32 +442,45 @@ li {
 //
 
 .btn {
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  padding: 10px 15px;
-  background: #de002b;
-  border-radius: 6px;
-  color: #fff;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: all 0.4s;
-  &:hover {
-    color: #de002b;
-    border-color: rgb(222, 0, 43);
-    background: transparent;
-  }
-  &.btn_upend {
-    color: #de002b;
-    border-color: rgb(222, 0, 43);
-    background: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    padding: 10px 15px;
+    background: #de002b;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.4s;
+    svg{
+      transition: all 0.4s;
+      fill: #fff;
+    }
     &:hover {
-      color: #fff;
-      background: #de002b;
-      border-color: transparent;
+      color: #de002b;
+      border-color: rgb(222, 0, 43);
+      background: transparent;
+      svg{
+        fill: #de002b;
+      }
+    }
+    &.btn_upend {
+      color: #de002b;
+      border-color: rgb(222, 0, 43);
+      background: transparent;
+      svg{
+        fill: #de002b;
+      }
+      &:hover {
+        color: #fff;
+        background: #de002b;
+        border-color: transparent;
+        svg{
+          fill: #fff;
+        }
+      }
     }
   }
-}
 
 .input {
   background: #e8eaf3;
@@ -487,6 +500,7 @@ li {
   color: #cc222e;
   font-weight: 400;
   transition: all 0.4s;
+  cursor: pointer;
   &:hover {
     color: #000;
   }

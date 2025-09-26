@@ -464,13 +464,12 @@
                     </div>
                     <div class="product_result_processing">
                         <div class="input_count">
-                            <button class="input_count__btn" id="input_count_reduce">
-                                <img src="{{ Vite::asset('resources/js/custom/input_count/icon/arrow.svg') }}" alt="arrow">
+                            <button class="input_count__btn input_count_reduce">
+                                -
                             </button>
-                            <input type="text" val="1" placeholder="1" class="input_count__input"
-                                id="input_count">
-                            <button class="input_count__btn revers" id="input_count_add">
-                                <img src="{{ Vite::asset('resources/js/custom/input_count/icon/arrow.svg') }}" alt="arrow">
+                            <input type="text" val="1" placeholder="1" class="input_count__input">
+                            <button class="input_count__btn revers input_count_add">
+                                +
                             </button>
                         </div>
                         <div class="product_result_processing__actions">
