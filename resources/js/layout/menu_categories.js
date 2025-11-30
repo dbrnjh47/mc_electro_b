@@ -18,12 +18,21 @@ window.startMenuCategories = function()
     `;
 
     window.dataCategories.forEach((c, i) => {
-        h += `
+        if(c["relation_childrens"].length === 0)
+        {
+            h += `
+            <a href="`+window.routes["category"]+"/"+c["slug"]+`" class="menu_categories__list_basic menu_categories__item">
+                <p>`+c["name"]+` <span>(0000)</span></p>
+            </a>
+        `;
+        } else {
+            h += `
             <div class="menu_categories__list_basic menu_categories__item" data-id="`+i+`">
                 <p>`+c["name"]+` <span>(0000)</span></p>
                 <img src="/temple/images/layout/menu_categories/str.svg" alt="str" loading="lazy" decoding="async">
             </div>
         `;
+        }
     });
 
     h += `
@@ -70,6 +79,13 @@ function setCategory(obj) {
     $(obj).addClass("activ");
 
     let categoriesId = $(obj).data("id");
+
+    if(!categoriesId)
+    {
+        closeMenuSecendCategories();
+        return;
+    }
+
     let category = dataCategories[categoriesId];
     let href = window.routes["category"]+"/"+category["slug"];
     console.log(category);

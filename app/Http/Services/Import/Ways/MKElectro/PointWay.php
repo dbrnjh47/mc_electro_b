@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\ImportMKElectro\Seeders;
+namespace App\Http\Services\Import\Ways\MKElectro;
 
 use App\Http\API\MKElectroApi;
 use App\Http\Services\MediaService;
@@ -12,10 +12,12 @@ use App\Models\Point\PointPhone;
 use App\Models\Point\PointPhoto;
 use Illuminate\Support\Facades\Storage;
 
-class PointSeeder extends MKElectroApi
+class PointWay extends MKElectroApi
 {
     public function start()
     {
+        dump("Создание точек МКЭлектро");
+
         $points = $this->getPoints();
 
         foreach ($points as $point) {

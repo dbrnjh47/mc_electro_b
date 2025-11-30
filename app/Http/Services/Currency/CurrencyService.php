@@ -6,6 +6,7 @@ use App\Http\API\ExchangerateApi;
 use Illuminate\Support\Facades\Cookie;
 
 use App\Http\Services\Models\CurrencyModelService;
+use Illuminate\Support\Facades\Session;
 
 class CurrencyService
 {
@@ -25,7 +26,7 @@ class CurrencyService
 
     public function get()
     {
-        $currency_id = Cookie::get('user_currency');
+        $currency_id = Session::get('user_currency');
         $currency = (new CurrencyModelService)->find($currency_id);
 
         if(!$currency)
@@ -40,7 +41,8 @@ class CurrencyService
     public function set($id)
     {
         // Cookie::queue('user_currency', $id, (60 * 24 * 7));
-        setcookie("user_currency", $id, time()+(525600*60), "/", $_SERVER['HTTP_HOST']);
+        Session::put('user_currency', $id);
+        // setcookie("user_currency", $id, time()+(525600*60), "/", $_SERVER['HTTP_HOST']);
         return;
     }
 

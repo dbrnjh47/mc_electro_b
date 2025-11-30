@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\ImportMKElectro\Seeders;
+namespace App\Http\Services\Import\Ways\MKElectro;
 
 use App\Http\API\MKElectroApi;
 use App\Http\Services\MediaService;
@@ -10,10 +10,12 @@ use App\Models\Category\Category;
 use App\Models\Category\Subcategory;
 use Illuminate\Support\Facades\Storage;
 
-class CategorySeeder extends MKElectroApi
+class CategoryWay extends MKElectroApi
 {
     public function start()
     {
+        dump("Создание категорий МКЭлектро");
+
         $categories = $this->getCategories();
         for($i = 0; $i < count($categories); $i++)
         {

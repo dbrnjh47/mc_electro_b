@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Services\ImportMKElectro\Seeders;
+namespace App\Http\Services\Import\Ways\MKElectro;
 
 use App\Http\API\MKElectroApi;
 use App\Http\Services\MediaService;
@@ -10,12 +10,13 @@ use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductMedia;
 use Illuminate\Support\Facades\Storage;
 
-class ProductSeeder extends MKElectroApi
+class ProductWay extends MKElectroApi
 {
     public $limit = 100;
     public $offset = 0;
     public function start()
     {
+        dump("Создание товаров МКЭлектро");
         while (true) {
             $products = $this->getProducts($this->limit, $this->offset);
 

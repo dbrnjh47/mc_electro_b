@@ -22,6 +22,9 @@ a {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+label{
+    transition: all 0.4s;
+  }
 table {
   border-spacing: 0px;
 }
@@ -100,6 +103,16 @@ li {
   &:hover {
     opacity: 0.7;
   }
+}
+
+.green{
+  color: #008000 !important;
+}
+.red{
+  color: red !important;
+}
+.orange{
+  color: orange !important;
 }
 
 .main_wrapper {

@@ -109,16 +109,8 @@
         fill: #fff;
         transform: rotate(180deg);
       }
-    }
 
-    &_items {
-      display: grid;
-      gap: 15px;
-      margin-top: 15px;
-    //   max-height: 240px;
-      transition: all 0.4s;
-      overflow: hidden;
-      & > div {
+      &.menu_categories__item{
         background: transparent;
         p {
           color: #16161f;
@@ -142,6 +134,18 @@
             transform: translateX(0) rotate(-90deg);
           }
         }
+      }
+    }
+
+    &_items {
+      display: grid;
+      gap: 15px;
+      margin-top: 15px;
+    //   max-height: 240px;
+      transition: all 0.4s;
+      overflow: hidden;
+      & > div {
+
       }
       &_wrapper {
         display: none;
