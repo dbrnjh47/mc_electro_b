@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductModelService extends ControllerModelService
 {
-    public $pagination = 9, $slug, $select_list;
+    public $pagination = 8, $slug, $select_list;
     public function __construct($slug = null, $select_list = null, $model = null)
     {
         $this->slug = $slug;

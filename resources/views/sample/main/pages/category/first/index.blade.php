@@ -13,13 +13,14 @@
         </div>
         <div class="dop_menu_mob__sort">
             <div id="select2_sort_mob" class="select2_sample_nude select2_sample_nude_white">
-                <select class="select2_custom" name="lang" data-minimum-results-for-search="5"
+                <select class="select2_custom" name="product_sort" data-minimum-results-for-search="5"
                     data-dropdown-parent="#select2_sort_mob">
-                    <option value="1" selected="">Сначала новые</option>
-                    <option value="10">1</option>
-                    <option value="2">Сначала старые</option>
-                    <option value="3">Сначала дорогие</option>
-                    <option value="3">Сначала дешевые</option>
+                    {{-- <option value="">По наличию</option> --}}
+                    <option value="name_asc">По названию</option>
+                    <option value="create_desc" selected="">Сначала новые</option>
+                    <option value="create_asc">Сначала старые</option>
+                    <option value="price_desc">По убыванию цены</option>
+                    <option value="price_asc">По возрастанию цены</option>
                 </select>
             </div>
         </div>
@@ -257,407 +258,26 @@
                         <div>Любая скидка</div>
                     </div>
                     <div id="select2_sort" class="select2_sample_nude">
-                        <select class="select2_custom" name="lang" data-minimum-results-for-search="5"
+                        <select class="select2_custom" name="product_sort" data-minimum-results-for-search="5"
                             data-dropdown-parent="#select2_sort">
-                            <option value="1" selected="">Сначала новые</option>
-                            <option value="10">1</option>
-                            <option value="2">Сначала старые</option>
-                            <option value="3">Сначала дорогие</option>
-                            <option value="3">Сначала дешевые</option>
+                            {{-- <option value="">По наличию</option> --}}
+                            <option value="name_asc">По названию</option>
+                            <option value="create_desc" selected="">Сначала новые</option>
+                            <option value="create_asc">Сначала старые</option>
+                            <option value="price_desc">По убыванию цены</option>
+                            <option value="price_asc">По возрастанию цены</option>
                         </select>
                     </div>
                 </div>
                 <section class="products_list">
-                    <div class="product_card">
-                        <div class="product_card__buttons">
+                    @for($i = 0; $i < 12; $i++)
+                    <div class="product_card skeleton">
 
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
                     </div>
-                    <div class="product_card">
-                        <div class="product_card__buttons">
-
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card__buttons">
-
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card__buttons">
-
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card__buttons">
-
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card__buttons">
-
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card__buttons">
-
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="product_card">
-                        <div class="product_card__buttons">
-
-                            <button class="btn">Подробнее</button>
-                            <button class="btn btn_upend">Купить в один клик</button>
-
-                        </div>
-
-                        <button class="product_card__favorite">
-                            <!-- <img src="/temple/images/component/product/favorite.svg" alt="icon"> -->
-                            <svg width="20" height="23" viewBox="0 0 20 23" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0 1.63434C0 0.731719 0.765325 0 1.7094 0H18.2906C19.2347 0 20 0.731719 20 1.63434V22.3998C20 22.8703 19.4589 23.1572 19.0414 22.9082L10.3318 17.7126C10.1287 17.5915 9.87127 17.5915 9.66822 17.7126L0.958564 22.9082C0.541081 23.1572 0 22.8703 0 22.3998V1.63434Z" />
-                            </svg>
-                        </button>
-
-                        <div class="product_card__head">
-                            <div class="product_card__head_tips">
-                                <span>Хит</span>
-                                <span class="recommend">Советуем</span>
-                            </div>
-
-                            <h4 class="product_card__head_name">Lorem, ipsum.</h4>
-                            <p class="product_card__head_description">Lorem ipsum</p>
-                        </div>
-
-                        <div class="product_card__img">
-                            <img src="/assets/product/miniature/test.png" alt="img">
-                        </div>
-
-                        <div class="product_card__info">
-                            <div class="product_card__info_price">
-                                <span>Цена</span>
-                                <p>250 ₽</p>
-                            </div>
-                            <div class="product_card__info_price">
-                                <span>Кол-во (шт.)</span>
-                                <p>12</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form_cart">
-                        <h6>Не нашли интерисующую модель?</h6>
-                        <p class="form_cart__sub_title">Заполните форму и с вами свяжется мэнеджер</p>
-
-                        <div class="form_cart__inputs">
-                            <input class="input" type="text" placeholder="Что вас интересует">
-                            <input class="input" type="text" placeholder="Телефон">
-                        </div>
-
-                        <button class="btn">Отправить</button>
-                        <p class="form_cart__agreement">Нажимая кнопку "Отправить", Вы даёте согласие на <a
-                                href="#">обработку персональных данных</a></p>
-                    </div>
+                    @endfor
                 </section>
-                <section class="pagination">
-                    <div class="pagination__container">
-                        <p>Показано 10 из 84</p>
-                        <div class="pagination__items">
-                            <a class="pagination__arrow" href="#" title="">
-                                <img src="/temple/images/component/pagination/arrow.svg" alt="arrow">
-                            </a>
+                <section class="pagination skeleton">
 
-                            <span class="page">
-                                <a href="#" title="1">
-                                    1
-                                </a>
-                            </span>
-
-                            <p class="pagination__activ">2</p>
-
-                            <span class="page">
-                                <a href="#" title="1">
-                                    1
-                                </a>
-                            </span>
-                            <span class="page">
-                                <a href="#" title="1">
-                                    1
-                                </a>
-                            </span>
-                            <span class="page">
-                                <a href="#" title="1">
-                                    1
-                                </a>
-                            </span>
-                            <span class="page">
-                                <a href="#" title="1">
-                                    1
-                                </a>
-                            </span>
-                            <span class="page">
-                                <a href="#" title="1">
-                                    1
-                                </a>
-                            </span>
-
-                            <a class="pagination__arrow right" href="#" title="">
-                                <img src="/temple/images/component/pagination/arrow.svg" alt="arrow">
-                            </a>
-                        </div>
-                    </div>
                 </section>
             </div>
         </div>
@@ -670,5 +290,17 @@
     <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
+
+    @php
+        $category_ids = $category->children_ids;
+        $category_ids[] = $category->id;
+    @endphp
+
+    <script>
+        window.routes["product.filter"] = "{{ route('product.filter') }}";
+
+        let category_ids = @json($category_ids);
+    </script>
+
     @vite('resources/js/category/index.js')
 @endsection

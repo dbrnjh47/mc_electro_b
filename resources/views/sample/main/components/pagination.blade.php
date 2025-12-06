@@ -4,7 +4,7 @@
             <p>Показано {{ $paginator->lastItem() }} из {{ $paginator->total() }}</p>
             <div class="pagination__items">
                 @if (!$paginator->onFirstPage())
-                    <a class="pagination__arrow" href="{{ $paginator->previousPageUrl() }}" title="first">
+                    <a class="pagination__arrow" href="{{ $paginator->previousPageUrl() }}" title="{{ $paginator->currentPage() - 1 }}">
                         <img src="/temple/images/component/pagination/arrow.svg" alt="arrow">
                     </a>
                 @endif
@@ -30,7 +30,7 @@
                 @endforeach
 
                 @if ($paginator->hasMorePages())
-                    <a class="pagination__arrow right" href="{{ $paginator->nextPageUrl() }}" title="last">
+                    <a class="pagination__arrow right" href="{{ $paginator->nextPageUrl() }}" title="{{ $paginator->currentPage() + 1 }}">
                         <img src="/temple/images/component/pagination/arrow.svg" alt="arrow">
                     </a>
                 @endif

@@ -1,7 +1,7 @@
 let contacts_wrapper = $(".contacts");
 let contacts_search = contacts_wrapper.find("#contacts_search");
 let contacts_timer;
-let contacts_filter = contacts_wrapper.find('select[name="city_id"]');
+let contacts_city_select = contacts_wrapper.find('select[name="city_id"]');
 
 
 contacts_search.on('input', function() {
@@ -9,7 +9,7 @@ contacts_search.on('input', function() {
     contacts_timer = setTimeout(updateContacts, 500);
 });
 
-contacts_filter.on('change', function() {
+contacts_city_select.on('change', function() {
     clearTimeout(contacts_timer);
     updateContacts();
 });
@@ -17,7 +17,7 @@ contacts_filter.on('change', function() {
 function getDataContacts() {
     return {
         "search": contacts_search.val(),
-        "city_id": contacts_filter.val()
+        "city_id": contacts_city_select.val()
     };
 }
 
@@ -38,7 +38,7 @@ function updateContacts() {
         data: data,
         success: function (results) {
             console.log(results);
-            $(".contacts__content").replaceWith(results[0]);
+            $(".contacts__content").html(results[0]);
             $(".pagination").html(results[1]);
 
             setURL(data);

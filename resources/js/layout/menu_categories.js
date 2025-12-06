@@ -79,8 +79,8 @@ function setCategory(obj) {
     $(obj).addClass("activ");
 
     let categoriesId = $(obj).data("id");
-
-    if(!categoriesId)
+    // console.log(categoriesId);
+    if(categoriesId === undefined)
     {
         closeMenuSecendCategories();
         return;
@@ -88,7 +88,7 @@ function setCategory(obj) {
 
     let category = dataCategories[categoriesId];
     let href = window.routes["category"]+"/"+category["slug"];
-    console.log(category);
+    // console.log(category);
 
     menuCategoriesSecond.css("display", "block");
     setTimeout(function() {
@@ -102,7 +102,7 @@ function setCategory(obj) {
         h += `<a href="`+(href+"/"+c["category"]["slug"])+`" class="menu_categories__second_item">`+c["category"]["name"]+`</a>`;
     });
     menuCategoriesSecond.find(".menu_categories__second_list").html(h);
-    console.log(dataCategories);
+    // console.log(dataCategories);
 }
 
 //

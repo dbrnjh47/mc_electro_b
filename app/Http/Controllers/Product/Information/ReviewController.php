@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Product\Information;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\Information\Review\GetRequest;
 use App\Models\Product\Review\ProductReview;
+use App\View\Components\Sample\Main\Product\Information\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
@@ -56,11 +57,7 @@ class ReviewController extends Controller
 
         foreach($reviews as $review)
         {
-            $html .= Blade::render('
-                <x-sample.main.product.information.review
-                    :review="$review"
-                />
-            ', ['review' => $review]);
+            $html .= Blade::renderComponent(new Review($review));
         }
         return $html;
     }

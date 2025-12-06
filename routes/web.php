@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Category\IndexController as CategoryController;
+use App\Http\Controllers\Category\ProductController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CookieController;
@@ -101,6 +102,8 @@ Route::prefix('product')->group(function () {
         });
 
     });
+
+    Route::post('/filter', [ProductController::class, 'list'])->name('product.filter');
 
 
     //

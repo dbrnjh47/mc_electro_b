@@ -7,7 +7,9 @@ use App\Http\Requests\Сontact\AllRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CityModelService;
 use App\Http\Services\Models\PointModelService;
+use App\View\Components\Sample\Main\Point\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Blade;
 
 class СontactController extends Controller
 {
@@ -58,7 +60,12 @@ class СontactController extends Controller
     public function block(AllRequest $request)
     {
         $points = $this->getPoints($request);
-        $html = view('sample.main.pages.сontact.components.cards', compact("points"))->render();
+        $html = "";
+        foreach($points as $point)
+        {
+            $html .= Blade::renderComponent(new Card($point));
+        }
+
         $pagination = $points->appends(request()->input())->onEachSide(1)->links()->render();
 
         return [$html, $pagination];

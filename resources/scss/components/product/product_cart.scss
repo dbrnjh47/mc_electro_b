@@ -9,6 +9,10 @@
     position: relative;
     overflow: hidden;
 
+    &.skeleton{
+        min-height: 270px;
+      }
+
     &__buttons {
         position: absolute;
         top: 0;

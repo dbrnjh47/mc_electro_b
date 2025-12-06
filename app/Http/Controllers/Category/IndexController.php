@@ -75,6 +75,7 @@ class IndexController extends Controller
         //
 
         $category->childrens(1);
+        $category->childrens(only_ids:1);
 
         return view('sample.main.pages.category.first.index', [
             'title' => $category->name,

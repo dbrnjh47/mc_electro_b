@@ -52,19 +52,17 @@ class Category extends Model
         return $this->hasMany(Subcategory::class, 'category_parent_id', 'id');
     }
 
-    public function childrens($max_level = null)
+    public function childrenIds()
     {
-        if (isset($this->children_on)) {
-            return $this->childrens;
+        if (isset($this->children_ids)) {
+            return $this->children_ids;
         }
-        $childrens = DB::table(DB::raw("
+
+        $children_ids = DB::table(DB::raw("
         (WITH RECURSIVE subcategories AS (
             SELECT
                 category_child_id,
-                category_parent_id,
-                0 AS level,
-                CAST(SUBSTRING(categories.slug, 1, 255) AS CHAR(255)) AS path
-                -- categories.slug AS path
+                category_parent_id
             FROM " . (new Subcategory())->getTable() . " as c
             LEFT JOIN categories ON c.category_child_id = categories.id
             WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
@@ -73,26 +71,89 @@ class Category extends Model
 
             SELECT
                 c.category_child_id,
-                c.category_parent_id,
+                c.category_parent_id
+            FROM " . (new Subcategory())->getTable() . " c
+            INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
+            LEFT JOIN categories ON c.category_child_id = categories.id
+            WHERE categories.is_on = 1
+        )
+        SELECT category_child_id FROM subcategories as cp) as subquery
+        "))->pluck("category_child_id");
+
+        $this->children_ids = $children_ids;
+        return $this->children_ids;
+    }
+
+    public function childrens($max_level = null, $only_ids = 0)
+    {
+        if (!$only_ids && isset($this->children_on)) {
+            return $this->childrens;
+        }
+        if($only_ids && isset($this->children_ids)){
+            return $this->children_ids;
+        }
+
+        //
+        $sql = "
+        (WITH RECURSIVE subcategories AS (
+            SELECT
+                category_child_id,
+                category_parent_id";
+
+        if(!$only_ids)
+        {
+            $sql .= ",
+            0 AS level,
+                CAST(SUBSTRING(categories.slug, 1, 255) AS CHAR(255)) AS path
+                -- categories.slug AS path";
+        }
+
+        $sql .= "
+        FROM " . (new Subcategory())->getTable() . " as c
+            LEFT JOIN categories ON c.category_child_id = categories.id
+            WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
+        UNION ALL
+
+        SELECT
+            c.category_child_id,
+            c.category_parent_id
+        ";
+
+        if(!$only_ids)
+        {
+            $sql .= ",
                 s.level + 1,
                 CAST(SUBSTRING(CONCAT(s.path, '/', categories.slug), 1, 255) AS CHAR(255)) AS path
-                -- CONCAT(s.path, '/', categories.slug ) AS path
-            FROM " . (new Subcategory())->getTable() . " c
+                -- CONCAT(s.path, '/', categories.slug ) AS path";
+        }
+
+        $sql .= "
+        FROM " . (new Subcategory())->getTable() . " c
             INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
             LEFT JOIN categories ON c.category_child_id = categories.id
             WHERE categories.is_on = 1
             " . ($max_level ? "AND s.level < {$max_level}" : "") . "
         )
-        SELECT * FROM subcategories as cp) as subquery
-        "))->get();
+        SELECT ".($only_ids ? 'category_child_id' : '*')." FROM subcategories as cp) as subquery
+        ";
 
-        $childrens = $this->addInfo($childrens, is_child: 1);
+        //
 
-        $childrens = $this->buildTreeChildren($childrens);
+        $childrens = DB::table(DB::raw($sql));
 
-        $this->childrens = $childrens;
-        $this->children_on = 1;
-        return $childrens;
+        if(!$only_ids)
+        {
+            $childrens = $childrens->get();
+            $childrens = $this->addInfo($childrens, is_child: 1);
+            $childrens = $this->buildTreeChildren($childrens);
+
+            $this->childrens = $childrens;
+            $this->children_on = 1;
+            return $childrens;
+        } else {
+            $this->children_ids = $childrens->pluck("category_child_id")->toArray();
+            return $this->children_ids;
+        }
     }
 
 
