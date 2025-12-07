@@ -9,10 +9,13 @@ window.getProuctFilter = function()
         type: "POST",
         data: getDataProducts(),
         success: function (result) {
-            $(".products_list").html(result["products"]);
+            $(".products_list").find(".product_card").remove();
+            $(".products_list").prepend(result["products"]);
             $(".pagination").replaceWith(result["paginate"]);
 
+            $(".product_feedback_card").removeClass("skeleton");
             setEventProductPaginate();
+            window.setWishlistEvent();
         },
         error: function (msg) {
             // is_get_product_review = 0;
@@ -25,7 +28,8 @@ function getDataProducts() {
     return {
         "page": product_page,
         "category_ids": category_ids,
-        "sort" : product_sort_select.val()
+        "sort" : product_sort_select.val(),
+        "category_slug": category_slug
     };
 }
 

@@ -26,7 +26,7 @@ function updateContacts() {
     // let louder = getLouder();
     // $(".contacts__content").append(louder);
     $(".contacts__content>*").addClass("skeleton");
-    contacts_wrapper.find(".pagination__container").addClass("skeleton");
+    contacts_wrapper.find(".pagination__wrapper").addClass("skeleton");
     //
 
     let data = getDataContacts();
@@ -39,12 +39,12 @@ function updateContacts() {
         success: function (results) {
             console.log(results);
             $(".contacts__content").html(results[0]);
-            $(".pagination").html(results[1]);
+            $(".pagination__wrapper").html(results[1]);
 
             setURL(data);
             // distroyLouder();
             startSliderContact();
-            $(".contacts__content>*").removeClass("skeleton");
+            $(".contacts__container>*").removeClass("skeleton");
         },
         error: function (msg) {
 

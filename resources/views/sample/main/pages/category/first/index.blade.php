@@ -270,11 +270,13 @@
                     </div>
                 </div>
                 <section class="products_list">
-                    @for($i = 0; $i < 12; $i++)
+                    @for($i = 0; $i < 11; $i++)
                     <div class="product_card skeleton">
 
                     </div>
                     @endfor
+
+                    <x-sample.main.product.feedback-card></x-sample.main.product.feedback-card>
                 </section>
                 <section class="pagination skeleton">
 
@@ -300,7 +302,10 @@
         window.routes["product.filter"] = "{{ route('product.filter') }}";
 
         let category_ids = @json($category_ids);
+        let category_slug = "{{ $category->slug }}";
     </script>
 
+    @include("sample.main.components.wishlist_action")
     @vite('resources/js/category/index.js')
+
 @endsection

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 class ProductStandard extends AbstractStandard
 {
     public const WISHLIST = 'wishlist';
-    public const SLUG = 'slug';
     public const PREVIEW = 'preview';
     public const IS_ON = 'is_on';
 
@@ -16,7 +15,6 @@ class ProductStandard extends AbstractStandard
     {
         return [
             self::WISHLIST => [$this, 'wishlist'],
-            self::SLUG => [$this, 'slug'],
             self::PREVIEW => [$this, 'preview'],
             self::IS_ON => [$this, 'isOn'],
         ];
@@ -48,11 +46,6 @@ class ProductStandard extends AbstractStandard
         }
 
         // $builder->where("id", 1);
-    }
-
-    public function slug(Builder $builder, $value)
-    {
-        $builder->where("slug", $value);
     }
 
     public function wishlist(Builder $builder, $wishlist_id)

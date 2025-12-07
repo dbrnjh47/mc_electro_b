@@ -268,7 +268,10 @@ class Category extends Model
             ->unique()
             ->values()
             ->toArray();
-
+        if(!$parent_ids)
+        {
+            return $result;
+        }
         $categories = (new CategoryModelService(["id", "is_on", "slug", "name", "preview"], on_check: 0))->getIn($parent_ids);
 
         foreach ($categories as $category) {

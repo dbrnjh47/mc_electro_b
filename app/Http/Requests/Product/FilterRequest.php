@@ -26,6 +26,7 @@ class FilterRequest extends FormRequest
         return [
             "page" => ['required', 'integer'],
 
+            "category_slug" => ['string'],
             "category_ids" => ['required', 'array', 'min:1'],
             "category_ids.*" => ['integer'],
 

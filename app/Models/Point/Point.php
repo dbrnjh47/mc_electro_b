@@ -4,6 +4,8 @@ namespace App\Models\Point;
 
 use App\Models\City\City;
 use App\Models\Point\Link\PointLink;
+use App\Models\Traits\Filterable;
+use App\Models\Traits\Standardable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +13,8 @@ class Point extends Model
 {
     /** @use HasFactory<\Database\Factories\PointFactory> */
     use HasFactory;
+    use Filterable;
+    use Standardable;
 
     protected $guarded = false;
 

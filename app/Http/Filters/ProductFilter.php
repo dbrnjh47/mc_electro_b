@@ -8,16 +8,23 @@ class ProductFilter extends AbstractFilter
 {
     public const CATEGORY_IDS = 'category_ids';
     public const SORT = 'sort';
+    public const SLUG = 'slug';
 
     protected function getCallbacks(): array
     {
         return [
-            self::CATEGORY_IDS => [$this, 'category_ids'],
+            self::CATEGORY_IDS => [$this, 'categoryIds'],
             self::SORT => [$this, 'sort'],
+            self::SLUG => [$this, 'slug'],
         ];
     }
 
-    public function category_ids(Builder $builder, $value)
+    public function slug(Builder $builder, $value)
+    {
+        $builder->where("slug", $value);
+    }
+
+    public function categoryIds(Builder $builder, $value)
     {
         $builder->whereHas('categories', function ($query) use ($value) {
             $query->whereIn('category_id', $value);

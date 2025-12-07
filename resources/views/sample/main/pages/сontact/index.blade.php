@@ -23,21 +23,24 @@
                             data-search-input-placeholder="Введите город">
                             <option value="" selected="">Все города</option>
                             @foreach ($cities as $city)
-                                <option value="{{$city->id}}" @if($city_id == $city->id) selected="" @endif>{{$city->name}}</option>
+                                <option value="{{$city->id}}" @if(request()->query('city_id') == $city->id) selected="" @endif>{{$city->name}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="app__search">
-                        <input type="text" placeholder="Введите адресс" id="contacts_search">
+                        <input type="text" value="{{request()->query('search') }}" placeholder="Введите адресс" id="contacts_search">
                     </div>
                 </div>
 
             </div>
 
             @include('sample.main.pages.сontact.components.cards')
-
+            <div class="pagination__wrapper">
+                {{ $points->appends(request()->input())->onEachSide(1)->links() }}
+            </div>
         </div>
-        {{ $points->appends(request()->input())->onEachSide(1)->links() }}
+
+
 
     </section>
 @endsection

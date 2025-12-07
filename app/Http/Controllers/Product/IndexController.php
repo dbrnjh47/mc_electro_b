@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Product;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Product\Information\ReviewController;
+use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\ShowRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
@@ -22,16 +23,21 @@ class IndexController extends Controller
     {
         $wishlist_id = (new WishListService(0))->getID();
 
+        $productFilter = app()->make(ProductFilter::class, [
+            'params' => [
+                "slug" => $request->slug,
+            ]
+        ]);
         $productStandard = app()->make(ProductStandard::class, [
             'params' => [
                 "is_on" => 1,
                 "wishlist" => $wishlist_id,
-                "slug" => $request->slug,
                 "preview" => 1
             ],
         ]);
 
         $product = Product::standard($productStandard)
+            ->filter($productFilter)
             ->select([
                 "id",
                 "name",
@@ -111,32 +117,21 @@ class IndexController extends Controller
 
         $category = null;
         // нужно узнать подходящую категорию
+
         foreach($product->categories as $c)
         {
-            $c->category->parents(on_check: 0);
-            if(!empty($c->category->parents_paths))
+            if(!isset($request->category_slug) || $c->category->slug == $request->category_slug)
             {
-                $category = $c->category;
+                $c->category->parents(on_check: 0);
+                if(!empty($c->category->parents_paths))
+                {
+                    $category = $c->category;
+                }
             }
         }
         if(!$category){$this->notFound();}
 
-        foreach($category->parents_paths as $parents_path)
-        {
-            if(isset($request->category_slug))
-            {
-                $parts = explode('/', $parents_path);
-                $is_included = in_array($request->category_slug, $parts, true);
-                if($is_included)
-                {
-                    $category->parent_slugs = $parts;
-                    break;
-                }
-            } else {
-                $category->parent_slugs = explode("/", $parents_path);
-                break;
-            }
-        }
+        $category->parent_slugs = explode("/", $category->parents_paths[0]);
 
         if(!isset($category->parent_slugs)){$this->notFound();}
 

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\PointFilter;
 use App\Http\Requests\Сontact\FindRequest;
 use App\Http\Requests\Сontact\AllRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CityModelService;
-use App\Http\Services\Models\PointModelService;
+use App\Http\Standards\PointStandard;
+use App\Models\Point\Point;
 use App\View\Components\Sample\Main\Point\Card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
@@ -23,14 +25,17 @@ class СontactController extends Controller
 
     public function getPoints($request)
     {
-        $points = (new PointModelService(search:$request->search));
+        $point_standard = app()->make(PointStandard::class, ['params' => [
+            "is_on" => 1,
+        ]]);
+        $point_filter = app()->make(PointFilter::class, ['params' => array_filter($request->all())]);
+        $points = Point::standard($point_standard)
+            ->filter($point_filter)
+            ->with('links.category')
+            ->with('phones')
+            ->with('photos')
+            ->paginate(9, page:$request->page);
 
-        if(isset($request->city_id))
-        {
-            $points->where("city_id", $request->city_id);
-        }
-
-        $points = $points->pagination($request->page);
         return $points;
     }
 
@@ -48,13 +53,14 @@ class СontactController extends Controller
         $cities = (new CityModelService(select_list:["id", "name"]))
             ->getModel()
             ->whereHas('points', function ($q) {
-                $q = PointModelService::whereOn($q);
+                $point_standard = app()->make(PointStandard::class, ['params' => [
+                    "is_on" => 1,
+                ]]);
+                $q = $q->standard($point_standard);
             })
             ->get();
 
-        $city_id = ($request->city_id ?? null);
-
-        return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs", "cities", "city_id"));
+        return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs", "cities"));
     }
 
     public function block(AllRequest $request)
@@ -73,7 +79,15 @@ class СontactController extends Controller
 
     public function show(FindRequest $request)
     {
-        $point = (new PointModelService)->find($request->id);
+        $point_standard = app()->make(PointStandard::class, ['params' => [
+            "is_on" => 1,
+        ]]);
+
+        $point = Point::standard($point_standard)
+            ->with('links.category')
+            ->with('phones')
+            ->with('photos')
+            ->findOrFail($request->id);
 
         //
 

@@ -1,7 +1,14 @@
+@php
+    $href = route('product', ['slug' => $product->slug]);
+    if($category_slug)
+    {
+        $href .= "?category_slug={$category_slug}";
+    }
+@endphp
 <div class="product_card">
     <div class="product_card__buttons">
 
-        <a href="{{route('product', ['slug' => $product->slug])}}" alt="{{$product->name}}" class="btn">Подробнее</a>
+        <a href="{{$href}}" alt="{{$product->name}}" class="btn">Подробнее</a>
         <button class="btn btn_upend">Добавить в корзину</button>
 
     </div>
