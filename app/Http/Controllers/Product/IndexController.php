@@ -9,8 +9,9 @@ use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 
-use App\Http\Services\Models\Product\ProductModelService;
 use App\Http\Services\User\WishListService;
+use App\Http\Standards\ProductStandard;
+use App\Models\Product\Product;
 use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,41 +22,33 @@ class IndexController extends Controller
     {
         $wishlist_id = (new WishListService(0))->getID();
 
-        $product = (new ProductModelService(slug: $request->slug, select_list: [
-            "id",
-            "name",
-            "short_desc",
-            "desc",
-            "uuid",
-            "company_id",
-            "article",
-            "slug",
-            "weight",
-            "length",
-            "width",
-            "height",
-            "step"
-        ]));
+        $productStandard = app()->make(ProductStandard::class, [
+            'params' => [
+                "is_on" => 1,
+                "wishlist" => $wishlist_id,
+                "slug" => $request->slug,
+                "preview" => 1
+            ],
+        ]);
 
-        $product->wishlist($wishlist_id);
-
-        $product = $product->getModel()
-            ->where(function($query) {
-                $query->whereNull('company_id')
-                      ->orWhereHas('company', function($q) {
-                          $q->where('is_on', 1);
-                      });
-            })
+        $product = Product::standard($productStandard)
+            ->select([
+                "id",
+                "name",
+                "short_desc",
+                "desc",
+                "uuid",
+                "company_id",
+                "article",
+                "slug",
+                "weight",
+                "length",
+                "width",
+                "height",
+                "step"
+            ])
             ->with([
-                'categories' => function ($q) {
-                    $q = $q->whereHas('category', function ($q2) {
-                        $q2 = CategoryModelService::whereOn($q2);
-                    });
-                },
                 'categories.category' => function ($q) {
-                },
-                'medias' => function ($q) {
-                    $q->select(['name', 'product_id']);
                 },
                 'documents' => function ($q) {
                     $q = $q->select(['title', 'name', 'product_id']);
@@ -107,15 +100,12 @@ class IndexController extends Controller
                         // },
                     ]);
             }])
-            ->whereHas('categories.category', function ($q) {
-                $q = CategoryModelService::whereOn($q);
-            })
             ->withCount(['reviews' => function (Builder $q) {
                 $q->where("is_on", 1);
             },])
-            ->withSum('reviews', 'quantity');
+            ->withSum('reviews', 'quantity')
+            ->firstOrFail();
 
-        $product = $product->firstOrFail();
         // dd($product);
         //
 

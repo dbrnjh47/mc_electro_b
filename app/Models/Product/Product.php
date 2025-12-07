@@ -8,6 +8,7 @@ use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
 use App\Models\Product\Review\ProductReview;
 use App\Models\Traits\Filterable;
+use App\Models\Traits\Standardable;
 use App\Models\User\Wishlist\WishlistProduct;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,7 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\Product\ProductFactory> */
     use HasFactory;
     use Filterable;
+    use Standardable;
 
     public function categories()
     {

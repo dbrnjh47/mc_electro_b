@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\User;
 
-use App\Http\Services\Models\Product\ProductModelService;
+use App\Http\Standards\ProductStandard;
 use App\Models\User\Wishlist\Wishlist;
 use App\Models\User\Wishlist\WishlistProduct;
 use Illuminate\Support\Facades\Auth;
@@ -56,31 +56,16 @@ class WishListService
 
         // получаю список и возвращаю
         return WishlistProduct::where("wishlist_id", $this->wishlist->id)
-            ->with([
-                'product' => function ($q) {
-                    $q = (new ProductModelService(select_list: ['id', 'mrp', 'slug', 'step', 'name', 'article', DB::raw('1 as wishlist_products_count')], model: $q))
-                        ->getModel()
-                        ->with([
-                            'medias' => function ($q2) {
-                                $q2->select(['name', 'product_id'])->limit(1);
-                            },
-                        ])
-                        ->where(function ($q2) {
-                            $q2->whereNull('company_id')
-                                ->orWhereHas('company', function ($q3) {
-                                    $q3->where('is_on', 1);
-                                });
-                        });
-                },
-            ])
-            ->whereHas('product', function ($q) {
-                $q = $q
-                    ->where(function ($q2) {
-                        $q2->whereNull('company_id')
-                            ->orWhereHas('company', function ($q3) {
-                                $q3->where('is_on', 1);
-                            });
-                    });
+            ->withWhereHas('product', function ($q) {
+                $productStandard = app()->make(ProductStandard::class, [
+                    'params' => [
+                        "is_on" => 1,
+                        "preview" => 1
+                    ]
+                ]);
+
+                $q->standard($productStandard)
+                    ->select(['id', 'mrp', 'slug', 'step', 'name', 'article', DB::raw('1 as wishlist_products_count')]);
             })
             ->paginate($this->limit);
     }

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Services\Models\BannerModelService;
 use App\Http\Services\Models\CategoryModelService;
 
-use App\Http\Services\Models\Product\ProductModelService;
 use App\Http\Services\User\WishListService;
+use App\Http\Standards\ProductStandard;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
@@ -54,36 +54,21 @@ class PageController extends Controller
 
         //
 
-        $products = (new ProductModelService(select_list: ['id', 'mrp', 'slug', 'step', 'name', 'article']));
+        $productStandard = app()->make(ProductStandard::class, [
+            'params' => [
+                "is_on" => 1,
+                "wishlist" => $wishlist_id,
+                "preview" => 1
+            ],
+        ]);
 
-        $products->wishlist($wishlist_id);
-
-        $products = $products->getModel()
-            ->with([
-                'medias' => function ($q) {
-                    $q->select(['name', 'product_id'])->limit(1);
-                },
-            ])
-            ->with([
-                'categories' => function ($q) {
-                    $q = $q->whereHas('category', function ($q2) {
-                        $q2 = CategoryModelService::whereOn($q2);
-                    });
-                },
-            ])
-            ->where(function($query) {
-                $query->whereNull('company_id')
-                      ->orWhereHas('company', function($q) {
-                          $q->where('is_on', 1);
-                      });
-            })
-            // ->whereHas('categories.category', function ($q) {
-            //     $q = CategoryModelService::whereOn($q);
-            // })
+        $products = Product::standard($productStandard)
+            ->select(['id', 'mrp', 'slug', 'step', 'name', 'article'])
             ->inRandomOrder()
             ->limit(8)
             ->get();
-            // dd( $products);
+
+        // dd( $products);
 
         //
 

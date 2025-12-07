@@ -1,18 +1,18 @@
 <?php
 
 
-namespace App\Http\Filters;
+namespace App\Http\Standards;
 
 
 use Illuminate\Database\Eloquent\Builder;
 
-abstract class AbstractFilter implements FilterInterface
+abstract class AbstractStandard implements StandardInterface
 {
     /** @var array */
     private $params = [];
 
     /**
-     * AbstractFilter constructor.
+     * AbstractStandard constructor.
      *
      * @param array $params
      */
@@ -39,6 +39,7 @@ abstract class AbstractFilter implements FilterInterface
      */
     protected function before(Builder $builder)
     {
+        $this->default($builder);
     }
 
     /**
@@ -55,7 +56,7 @@ abstract class AbstractFilter implements FilterInterface
     /**
      * @param string[] $keys
      *
-     * @return AbstractFilter
+     * @return AbstractStandard
      */
     protected function removeQueryParam(string ...$keys)
     {

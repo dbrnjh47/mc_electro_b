@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Product\FilterRequest;
+use App\Http\Standards\ProductStandard;
 use App\Models\Product\Product;
 use App\Http\Filters\ProductFilter;
-use App\Http\Services\Models\Product\ProductModelService;
+use App\Http\Services\Models\CategoryModelService;
 use App\Models\Category\Category;
 use App\View\Components\Sample\Main\Product\Card;
 use App\View\Components\Sample\Main\Product\FeedbackCard;
@@ -22,9 +23,14 @@ class ProductController extends Controller
         // $category_ids->id = $request->category_id;
         // $category_ids = $category_ids->childrens(only_ids:1);
 
-        $productFilter = app()->make(ProductFilter::class, ['queryParams' => array_filter($request->all())]);
-        $products = (new ProductModelService(model:Product::filter($productFilter)))->pagination($request->page);
-        // dd($products);
+        $productStandard = app()->make(ProductStandard::class, ['params' => [
+            "is_on" => ["category"],
+            "preview" => 1
+        ]]);
+        $productFilter = app()->make(ProductFilter::class, ['params' => array_filter($request->all())]);
+        $products = Product::standard($productStandard)
+            ->filter($productFilter)
+            ->paginate(8, page:$request->page);
 
         $products_html = "";
         foreach($products as $product)
