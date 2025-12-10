@@ -9,6 +9,7 @@ class ProductFilter extends AbstractFilter
     public const CATEGORY_IDS = 'category_ids';
     public const SORT = 'sort';
     public const SLUG = 'slug';
+    public const SEARCH = 'search';
 
     protected function getCallbacks(): array
     {
@@ -16,7 +17,17 @@ class ProductFilter extends AbstractFilter
             self::CATEGORY_IDS => [$this, 'categoryIds'],
             self::SORT => [$this, 'sort'],
             self::SLUG => [$this, 'slug'],
+            self::SEARCH => [$this, 'search'],
         ];
+    }
+
+    public function search(Builder $builder, $value)
+    {
+        $builder->where(function ($q) use ($value) {
+            $q->where("name", 'like', "%{$value}%")
+                ->orWhere("article", 'like', "%{$value}%")
+                ->orWhere("uuid", 'like', "%{$value}%");
+        });
     }
 
     public function slug(Builder $builder, $value)

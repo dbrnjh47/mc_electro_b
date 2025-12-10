@@ -1,9 +1,10 @@
 let product_page = 1;
-let product_sort_select = $('select[name="product_sort"]');
+let sort_select = $('select[name="product_sort"]');
+let search_input = $('.filter input[name="search"]');
 
 window.getProuctFilter = function()
 {
-    $(".pagination, .product_card, .product_feedback_card").addClass("skeleton");
+    $(".pagination__wrapper, .product_card, .product_feedback_card").addClass("skeleton");
     $.ajax({
         url: window.routes["product.filter"],
         type: "POST",
@@ -11,9 +12,9 @@ window.getProuctFilter = function()
         success: function (result) {
             $(".products_list").find(".product_card").remove();
             $(".products_list").prepend(result["products"]);
-            $(".pagination").replaceWith(result["paginate"]);
+            $(".pagination__wrapper").html(result["paginate"]);
 
-            $(".product_feedback_card").removeClass("skeleton");
+            $(".product_feedback_card, .pagination__wrapper").removeClass("skeleton");
             setEventProductPaginate();
             window.setWishlistEvent();
         },
@@ -28,14 +29,15 @@ function getDataProducts() {
     return {
         "page": product_page,
         "category_ids": category_ids,
-        "sort" : product_sort_select.val(),
-        "category_slug": category_slug
+        "sort" : sort_select.val(),
+        "category_slug": category_slug,
+        "search": search_input.val()
     };
 }
 
 function setEventProductPaginate()
 {
-    $(".pagination a").on('click', function(e) {
+    $(".pagination__wrapper a").on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
 
@@ -49,6 +51,12 @@ function setEventProductPaginate()
 
 //
 
-product_sort_select.on('change', function() {
+sort_select.on('change', function() {
+    window.getProuctFilter();
+});
+
+
+search_input.change(function() {
+    product_page = 1;
     window.getProuctFilter();
 });

@@ -116,7 +116,7 @@
                         </svg>
                     </div>
 
-                    <input type="text" name="search" placeholder="Поиск" class="input">
+                    <input type="text" name="search" value="{{request()->query('search') }}" placeholder="Поиск" class="input">
 
                     <div class="filter__item open">
                         <div class="filter__header">
@@ -278,7 +278,7 @@
 
                     <x-sample.main.product.feedback-card></x-sample.main.product.feedback-card>
                 </section>
-                <section class="pagination skeleton">
+                <section class="pagination__wrapper skeleton">
 
                 </section>
             </div>

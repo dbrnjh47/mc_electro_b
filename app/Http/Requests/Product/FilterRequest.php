@@ -25,10 +25,11 @@ class FilterRequest extends FormRequest
     {
         return [
             "page" => ['required', 'integer'],
+            "search" => ['nullable', 'string', 'max:128'],
 
-            "category_slug" => ['string'],
+            "category_slug" => ['nullable', 'string', 'max:128'],
             "category_ids" => ['required', 'array', 'min:1'],
-            "category_ids.*" => ['integer'],
+            "category_ids.*" => ['required', 'integer'],
 
             "sort" => ['required', 'string', 'in:name_asc,create_desc,create_asc,price_desc,price_asc'],
         ];
