@@ -208,7 +208,7 @@
                         <div class="filter__body select2_more select2_sample_more">
                             <select class="select2_custom" name="lang" data-minimum-results-for-search="5"
                                 data-dropdown-css-class="select2-filter">
-                                <option value="" selected=""></option>
+                                <option value="" selected="">Все</option>
                                 <option value="1">Руский</option>
                                 <option value="2">Китайский</option>
                                 <option value="3">Английский</option>
@@ -230,7 +230,7 @@
                         <div class="filter__body select2_sample_more">
                             <select class="select2_custom" name="lang" data-minimum-results-for-search="5"
                                 data-dropdown-css-class="select2-filter">
-                                <option value="" selected=""></option>
+                                <option value="" selected="">Все</option>
                                 <option value="1">Руский</option>
                                 <option value="2">Китайский</option>
                                 <option value="3">Английский</option>

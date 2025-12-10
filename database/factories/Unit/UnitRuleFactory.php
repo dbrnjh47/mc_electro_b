@@ -18,10 +18,7 @@ class UnitRuleFactory extends Factory
      */
     public function definition(): array
     {
-        $unit_id = Unit::inRandomOrder()->first()->id;
         return [
-            "unit_id" => $unit_id,
-            "to_unit_id" => Unit::where("id", "!=", $unit_id)->inRandomOrder()->first()->id,
             "value" => 1000,
             "action" => $this->actions[array_rand($this->actions)]
         ];

@@ -52,37 +52,37 @@ class Category extends Model
         return $this->hasMany(Subcategory::class, 'category_parent_id', 'id');
     }
 
-    public function childrenIds()
-    {
-        if (isset($this->children_ids)) {
-            return $this->children_ids;
-        }
+    // public function childrenIds()
+    // {
+    //     if (isset($this->children_ids)) {
+    //         return $this->children_ids;
+    //     }
 
-        $children_ids = DB::table(DB::raw("
-        (WITH RECURSIVE subcategories AS (
-            SELECT
-                category_child_id,
-                category_parent_id
-            FROM " . (new Subcategory())->getTable() . " as c
-            LEFT JOIN categories ON c.category_child_id = categories.id
-            WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
+    //     $children_ids = DB::table(DB::raw("
+    //     (WITH RECURSIVE subcategories AS (
+    //         SELECT
+    //             category_child_id,
+    //             category_parent_id
+    //         FROM " . (new Subcategory())->getTable() . " as c
+    //         LEFT JOIN categories ON c.category_child_id = categories.id
+    //         WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
 
-            UNION ALL
+    //         UNION ALL
 
-            SELECT
-                c.category_child_id,
-                c.category_parent_id
-            FROM " . (new Subcategory())->getTable() . " c
-            INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
-            LEFT JOIN categories ON c.category_child_id = categories.id
-            WHERE categories.is_on = 1
-        )
-        SELECT category_child_id FROM subcategories as cp) as subquery
-        "))->pluck("category_child_id");
+    //         SELECT
+    //             c.category_child_id,
+    //             c.category_parent_id
+    //         FROM " . (new Subcategory())->getTable() . " c
+    //         INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
+    //         LEFT JOIN categories ON c.category_child_id = categories.id
+    //         WHERE categories.is_on = 1
+    //     )
+    //     SELECT category_child_id FROM subcategories as cp) as subquery
+    //     "))->pluck("category_child_id");
 
-        $this->children_ids = $children_ids;
-        return $this->children_ids;
-    }
+    //     $this->children_ids = $children_ids;
+    //     return $this->children_ids;
+    // }
 
     public function childrens($max_level = null, $only_ids = 0)
     {

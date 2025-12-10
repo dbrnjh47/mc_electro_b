@@ -2,13 +2,12 @@
 
 namespace Database\Factories\Product;
 
-use App\Models\Category\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product\ProductCategory>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product\ProductProperty>
  */
-class ProductCategoryFactory extends Factory
+class ProductPropertyFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,7 +17,7 @@ class ProductCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-
+            //
         ];
     }
 }

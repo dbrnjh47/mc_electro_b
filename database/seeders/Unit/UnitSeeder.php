@@ -10,7 +10,7 @@ class UnitSeeder extends Seeder
 {
 
     public $data = [
-        "В", "кВт", "м³", "л/ч"
+        "В", "кВт", "м³", "л/ч", "мм", "мм²", "Гц", "°C", "Ra", "км", "дБА", "шт",
     ];
     /**
      * Run the database seeds.

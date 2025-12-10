@@ -45,7 +45,7 @@ class ProductStandard extends AbstractStandard
             });
         }
 
-        // $builder->where("id", 1);
+        $builder->where("is_on", 1);
     }
 
     public function wishlist(Builder $builder, $wishlist_id)

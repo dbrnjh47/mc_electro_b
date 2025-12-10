@@ -3,9 +3,12 @@
 namespace Database\Seeders\Product;
 
 use App\Models\Category\Category;
+use App\Models\Point\Point;
 use App\Models\Product\Label\ProductLabel;
+use App\Models\Product\Label\ProductLabelOption;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
+use App\Models\Product\ProductPoint;
 use Database\Seeders\Product\ProductCharacteristic\ProductCharacteristicSeeder;
 use Database\Seeders\Product\ProductLabel\ProductLabelOptionSeeder;
 use Database\Seeders\Product\ProductReview\ProductReviewSeeder;
@@ -23,31 +26,60 @@ class ProductSeeder extends Seeder
         $this->call(ProductLabelOptionSeeder::class);
 
         foreach ($categories as $category) {
-            Product::factory(rand(1, 30))->has(
-                ProductLabel::factory(rand(1, 2))
-                    ->state(function (array $attributes, Product $product)  {
-                        return [
+            Product::factory(rand(1, 10))
+                ->afterCreating(function (Product $product) {
+                    $count = rand(1, 2);
+
+                    for ($i = 0; $i < $count; $i++) {
+                        ProductLabel::insertOrIgnore([
                             'product_id' => $product->id,
-                        ];
-                    }),
-                'labels'
-            )->has(
-                ProductCategory::factory(rand(1, 3))
-                    ->state(function (array $attributes, Product $product)  {
-                        return [
+                            'product_label_option_id' => ProductLabelOption::inRandomOrder()
+                                ->first()->id,
+                        ]);
+                    }
+                })
+                ->afterCreating(function (Product $product) {
+                    $count = rand(0, 3);
+
+                    for ($i = 0; $i < $count; $i++) {
+                        ProductCategory::insertOrIgnore([
                             'product_id' => $product->id,
-                        ];
-                    }),
-                'categories'
-            )->create();
+                            'category_id' => Category::inRandomOrder()
+                                ->first()->id,
+                        ]);
+                    }
+                })
+                ->afterCreating(function (Product $product) {
+                    $count = rand(0, 2);
+
+                    for ($i = 0; $i < $count; $i++) {
+                        // Находим опцию, которая еще не привязана к этому продукту
+                        $existingOptionIds = ProductPoint::where('product_id', $product->id)
+                            ->pluck('point_id');
+
+                        $option = Point::whereNotIn('id', $existingOptionIds)
+                            ->inRandomOrder()
+                            ->first();
+
+                        if ($option) {
+                            // Создаем связь
+                            ProductPoint::factory(1)->create([
+                                'product_id' => $product->id,
+                                'point_id' => $option->id,
+                            ]);
+                        }
+                    }
+                })
+                ->create();
         }
 
         $this->call(ProductMediaSeeder::class);
         $this->call(ProductDocumentSeeder::class);
-        $this->call(ProductCharacteristicSeeder::class);
+        // $this->call(ProductCharacteristicSeeder::class);
         $this->call(ProductReviewSeeder::class);
-        $this->call(ProductPointSeeder::class);
 
-        ProductLabel::where("product_id", 1)->delete();
+        $this->call(ProductPropertySeeder::class);
+
+        ProductPoint::where("product_id", 1)->delete();
     }
 }

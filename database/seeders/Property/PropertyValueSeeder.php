@@ -1,19 +1,18 @@
 <?php
 
-namespace Database\Seeders\Product;
+namespace Database\Seeders\Property;
 
-use App\Models\Product\Product;
-use App\Models\Product\ProductPoint;
+use App\Models\Property\PropertyValue;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductPointSeeder extends Seeder
+class PropertyValueSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-
+        PropertyValue::factory(120)->create();
     }
 }

@@ -318,7 +318,7 @@ li {
   label {
     font-size: 14px;
     font-weight: 400;
-    color: #8e95a6;
+    color: #53555c;
     position: relative;
     line-height: 18px;
     cursor: pointer;
@@ -326,10 +326,11 @@ li {
     word-break: break-all;
     display: flex;
     sup{
-      font-size: 10px;
-      top: 0;
-      margin-left: 3px;
-      word-break: keep-all;
+        font-size: 9px;
+        margin-left: 3px;
+        margin-top: -3px;
+        word-break: keep-all;
+        color: #de002b8a;
     }
   }
   input + label::before {
@@ -341,7 +342,7 @@ li {
     min-width: 16px;
     height: 16px;
     background-color: #fff;
-    border: 1px solid #8e95a6;
+    border: 1px solid #53555c;
     border-radius: 2px;
     box-shadow: none;
     cursor: pointer;
@@ -383,7 +384,7 @@ li {
     display: contents;
     transition: all 0.4s;
     &:hover {
-      color: #8e95a6;
+      color: #53555c;
     }
   }
 }
@@ -397,7 +398,7 @@ li {
   label {
     font-size: 14px;
     font-weight: 400;
-    color: #8e95a6;
+    color: #53555c;
     position: relative;
     line-height: 18px;
     cursor: pointer;
@@ -413,7 +414,7 @@ li {
     width: 15px;
     height: 15px;
     background-color: #fff;
-    border: 1px solid #8e95a6;
+    border: 1px solid #53555c;
     border-radius: 100%;
     box-shadow: none;
     cursor: pointer;
@@ -447,7 +448,7 @@ li {
     display: contents;
     transition: all 0.4s;
     &:hover {
-      color: #8e95a6;
+      color: #53555c;
     }
   }
 }
@@ -504,7 +505,7 @@ li {
   color: #000;
   width: 100%;
   &::placeholder {
-    color: #8e95a6;
+    color: #53555c;
   }
 }
 

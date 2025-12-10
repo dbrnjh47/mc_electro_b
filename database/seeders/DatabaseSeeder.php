@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 use Database\Seeders\Company\CompanySeeder;
 use Database\Seeders\Product\ProductSeeder;
+use Database\Seeders\Property\PropertySeeder;
 use Database\Seeders\Unit\UnitSeeder;
 use Database\Seeders\User\WishlistSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -47,6 +48,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorySeeder::class);
 
         $this->call(CompanySeeder::class);
+        $this->call(PropertySeeder::class);
         $this->call(ProductSeeder::class);
 
         // user

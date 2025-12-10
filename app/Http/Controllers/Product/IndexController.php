@@ -54,8 +54,7 @@ class IndexController extends Controller
                 "step"
             ])
             ->with([
-                'categories.category' => function ($q) {
-                },
+                'categories.category' => function ($q) {},
                 'documents' => function ($q) {
                     $q = $q->select(['title', 'name', 'product_id']);
                 },
@@ -117,23 +116,37 @@ class IndexController extends Controller
 
         $category = null;
         // нужно узнать подходящую категорию
+        foreach ($product->categories as $c) {
+            $c->category->parents(on_check: 0);
 
-        foreach($product->categories as $c)
-        {
-            if(!isset($request->category_slug) || $c->category->slug == $request->category_slug)
-            {
-                $c->category->parents(on_check: 0);
-                if(!empty($c->category->parents_paths))
+            if (!empty($c->category->parents_paths)) {
+
+                if(isset($request->category_slug))
                 {
+                    foreach($c->category->parents_paths as $parents_path)
+                    {
+                        $parts = explode('/', $parents_path);
+                        $is_included = in_array($request->category_slug, $parts, true);
+                        if($is_included)
+                        {
+                            $category = $c->category;
+                        }
+                    }
+
+                } else {
                     $category = $c->category;
                 }
             }
         }
-        if(!$category){$this->notFound();}
+        if (!$category) {
+            $this->notFound();
+        }
 
         $category->parent_slugs = explode("/", $category->parents_paths[0]);
 
-        if(!isset($category->parent_slugs)){$this->notFound();}
+        if (!isset($category->parent_slugs)) {
+            $this->notFound();
+        }
 
         $category->setCurrentParentPath();
 
@@ -163,17 +176,16 @@ class IndexController extends Controller
 
         //
 
-        if($product->reviews_count)
-        {
+        if ($product->reviews_count) {
             $review_statistics = ProductReview::select('quantity')
-            ->selectRaw('COUNT(*) as count')
-            ->where([
-                ["product_id", $product->id],
-                ["is_on", 1]
-            ])
-            ->groupBy('quantity')
-            ->orderBy('quantity', 'desc')
-            ->get();
+                ->selectRaw('COUNT(*) as count')
+                ->where([
+                    ["product_id", $product->id],
+                    ["is_on", 1]
+                ])
+                ->groupBy('quantity')
+                ->orderBy('quantity', 'desc')
+                ->get();
         } else {
             $review_statistics = null;
         }

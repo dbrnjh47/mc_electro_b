@@ -22,6 +22,9 @@ return new class extends Migration
 
             $table->foreign('unit_id')->references('id')->on('units')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->foreign('to_unit_id')->references('id')->on('units')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
+
+            $table->unique(['unit_id', 'to_unit_id'], 'unit_rule_unique');
+
             $table->timestamps();
         });
     }

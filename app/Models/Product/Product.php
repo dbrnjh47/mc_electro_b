@@ -7,6 +7,8 @@ use App\Models\Product\Characteristic\ProductCharacteristic;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
 use App\Models\Product\Review\ProductReview;
+use App\Models\Property\Property;
+use App\Models\Property\PropertyValue;
 use App\Models\Traits\Filterable;
 use App\Models\Traits\Standardable;
 use App\Models\User\Wishlist\WishlistProduct;
@@ -64,4 +66,22 @@ class Product extends Model
     {
         return $this->hasMany(WishlistProduct::class, 'product_id', 'id');
     }
+
+    public function properties()
+    {
+        return $this->belongsToMany(Property::class, "product_properties")
+            ->using(ProductProperty::class)  // Указываем pivot модель
+            ->withPivot('property_value_id') // Добавляем pivot поле
+            ->withTimestamps();
+    }
+
+    public function propertyValues()
+    {
+        return $this->belongsToMany(PropertyValue::class, "product_properties")
+            ->using(ProductProperty::class)
+            ->withPivot('property_id')
+            ->withTimestamps();
+    }
+
+    // $product = Product::with(['productProperties.property', 'productProperties.value'])->find(1);
 }

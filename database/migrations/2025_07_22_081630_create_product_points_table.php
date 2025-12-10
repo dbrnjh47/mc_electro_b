@@ -20,6 +20,9 @@ return new class extends Migration
 
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->foreign('point_id')->references('id')->on('points')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
+
+            $table->unique(['point_id', 'product_id'], 'product_point_unique');
+
             $table->timestamps();
         });
     }

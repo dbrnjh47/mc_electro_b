@@ -14,26 +14,26 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 0; $i < 45; $i++) {
-            $c = Category::create([
-                "is_on" => rand(0,1),
-                "preview" => (rand(0,10) > 7 ? null : "1.png"),
-                // "slug" => str_replace('.', '', str_replace(' ', '_', strtolower(fake()->unique()->sentence(rand(1, 3))))),
-                "name" => fake()->unique()->sentence(rand(1, 3)),
-                "description" => fake()->text(rand(10, 35)),
-            ]);
+        $categories = Category::factory(30)->create();
 
-            if($i != 0 && rand(0,1))
+        foreach($categories as $category)
+        {
+            if($category->id < 25)
             {
-                for($count = 1; $count <= rand(1,3); $count++)
+                $count = rand(1, 3);
+                $sub_categories = $categories->filter(function ($item) use ($category) {
+                    return $item->id > $category->id;
+                })->shuffle()->take($count);
+
+                foreach($sub_categories as $sub_category)
                 {
                     Subcategory::factory(1)->create([
-                        "category_parent_id" => $c->id,
-                        "category_child_id" => rand(1, $i)
+                        'category_child_id' => $sub_category->id,
+                        'category_parent_id' => $category->id,
                     ]);
                 }
+
             }
         }
-
     }
 }

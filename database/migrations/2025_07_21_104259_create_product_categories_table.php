@@ -19,6 +19,9 @@ return new class extends Migration
 
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->foreign('category_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
+
+            $table->unique(['category_id', 'product_id'], 'product_category_unique');
+
             $table->timestamps();
         });
     }

@@ -19,6 +19,9 @@ return new class extends Migration
 
             $table->foreign('category_parent_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('category_child_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unique(['category_parent_id', 'category_child_id'], 'categories_sub_unique');
+
             $table->timestamps();
         });
     }

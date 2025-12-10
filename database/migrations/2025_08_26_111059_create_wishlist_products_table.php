@@ -19,6 +19,9 @@ return new class extends Migration
 
             $table->foreign('wishlist_id')->references('id')->on('wishlists')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
+
+            $table->unique(['wishlist_id', 'product_id'], 'wishlist_product_unique');
+
             $table->timestamps();
         });
     }
