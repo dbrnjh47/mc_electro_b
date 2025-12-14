@@ -27,7 +27,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title', 128);
-            $table->decimal('ordering', 5, 2)->default(10);
+            $table->decimal('ordering', 5, 2)->default(100);
             $table->boolean('is_on')->default(1);
 
             $table->unsignedBigInteger('property_type_id')->nullable();
@@ -48,6 +48,9 @@ return new class extends Migration
             $table->string('value')->nullable();
             $table->decimal('number', 30, 15)->nullable();
             $table->enum('type', ['text', 'float']);
+
+            $table->unique(['value'], 'property_value_unique');
+            $table->unique(['number'], 'property_value_number_unique');
 
             $table->timestamps();
         });

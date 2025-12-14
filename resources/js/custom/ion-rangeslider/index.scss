@@ -3,13 +3,13 @@
 }
 
 .irs--flat .irs-handle{
-    width: 9px;
+    width: 16px;
     height: 9px;
 }
 
 .irs--flat .irs-handle>i:first-child{
     width: 100%;
-    border-radius: 100%;
+    // border-radius: 100%;
     background-color: #DE002B;
     left: calc(50% - 3.5px);
 }

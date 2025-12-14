@@ -2,17 +2,22 @@
 
 namespace App\Models\Property;
 
+use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductProperty;
 use App\Models\Unit\Unit;
 use App\Models\Unit\UnitRule;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\Filterable;
+use App\Models\Traits\Standardable;
 
 class Property extends Model
 {
     /** @use HasFactory<\Database\Factories\Property\PropertyFactory> */
     use HasFactory;
+    use Filterable;
+    use Standardable;
 
     public function propertyType()
     {
@@ -26,12 +31,15 @@ class Property extends Model
 
     public function categories()
     {
-        return $this->hasMany(PropertyCategory::class, 'property_id', 'id');
+        return $this->belongsToMany(Category::class, (new PropertyCategory())->getTable());
     }
 
-    public function productProperties()
+    public function values()
     {
-        return $this->hasMany(ProductProperty::class, 'property_id', 'id');
+        return $this->belongsToMany(
+            PropertyValue::class,
+            (new ProductProperty())->getTable()
+        )->orderBy('number', 'asc');
     }
 
     public function products()
@@ -52,6 +60,13 @@ class Property extends Model
 
     public function unitRules()
     {
-        return $this->hasMany(UnitRule::class, 'unit_id', 'unit_id');
+        return $this->hasOne(UnitRule::class, 'unit_id', 'unit_id');
+    }
+
+    public function getFullTitle()
+    {
+        if($this->toUnit){return "{$this->title}({$this->toUnit->text})";}
+        if($this->unit){return "{$this->title}({$this->unit->text})";}
+        return $this->title;
     }
 }

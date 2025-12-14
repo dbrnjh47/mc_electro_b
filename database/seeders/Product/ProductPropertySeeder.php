@@ -23,7 +23,7 @@ class ProductPropertySeeder extends Seeder
         {
             $products = Product::with("categories")->inRandomOrder()->limit(15)->get();
             $category_ids = $products->pluck('categories.*.category_id')->flatten()->unique()->values();
-            $type = (($property->unit_id && rand(0, 100) > 70) ? "float" : "text");
+            $type = (($property->unit_id) ? "float" : "text");
 
             $property_values = PropertyValue::where("type", $type)->inRandomOrder()->limit(10)->pluck("id");
 

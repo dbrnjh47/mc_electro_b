@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductFilter extends AbstractFilter
 {
-    public const CATEGORY_IDS = 'category_ids';
+    public const CATEGORY_ID = 'category_id';
     public const SORT = 'sort';
     public const SLUG = 'slug';
     public const SEARCH = 'search';
@@ -14,11 +14,15 @@ class ProductFilter extends AbstractFilter
     protected function getCallbacks(): array
     {
         return [
-            self::CATEGORY_IDS => [$this, 'categoryIds'],
+            self::CATEGORY_ID => [$this, 'categoryId'],
             self::SORT => [$this, 'sort'],
             self::SLUG => [$this, 'slug'],
             self::SEARCH => [$this, 'search'],
         ];
+    }
+
+    public function default(Builder $builder)
+    {
     }
 
     public function search(Builder $builder, $value)
@@ -35,10 +39,11 @@ class ProductFilter extends AbstractFilter
         $builder->where("slug", $value);
     }
 
-    public function categoryIds(Builder $builder, $value)
+    public function categoryId(Builder $builder, $value)
     {
         $builder->whereHas('categories', function ($query) use ($value) {
-            $query->whereIn('category_id', $value);
+            $query->where('category_id', $value);
+            // $query->whereIn('category_id', $value);
         });
     }
 
@@ -61,6 +66,5 @@ class ProductFilter extends AbstractFilter
                 $builder->orderBy('mrp', 'asc');
                 break;
         }
-
     }
 }

@@ -78,14 +78,23 @@ class IndexController extends Controller
         $category->childrens(only_ids:1);
 
         // фильтры
+        $category_ids = $category->children_ids;
+        $category_ids[] = $category->id;
 
+        $request->merge([
+            "category_id" => $category->id,
+            "category_ids" => $category_ids
+        ]);
+        $propertis = (new PropertyController)->get($request);
 
         return view('sample.main.pages.category.first.index', [
             'title' => $category->name,
             'description' => "",
             "breadcrumbs" => $breadcrumbs,
             "category" => $category,
-            "path_slugs" => $path_slugs
+            "path_slugs" => $path_slugs,
+            "category_ids" => $category_ids,
+            "propertis" => $propertis
         ]);
     }
 }

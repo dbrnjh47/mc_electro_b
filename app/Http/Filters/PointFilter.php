@@ -17,6 +17,10 @@ class PointFilter extends AbstractFilter
         ];
     }
 
+    public function default(Builder $builder)
+    {
+    }
+
     public function search(Builder $builder, $value)
     {
         $builder->where(function ($q) use ($value) {

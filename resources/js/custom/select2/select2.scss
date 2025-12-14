@@ -114,3 +114,18 @@
 .select2-container--default .select2-results__option--disabled{
     text-align: left;
   }
+
+  .select2-results sup{
+    font-size: 9px;
+    margin-left: 3px;
+    margin-top: -3px;
+    word-break: keep-all;
+    color: #de002b8a;
+    transition: all 0.3s;
+  }
+
+  .select2-container--default
+  .select2-results__option--highlighted.select2-results__option--selectable sup,
+.select2-container--default .select2-results__option--selected sup{
+    color: #fff;
+}

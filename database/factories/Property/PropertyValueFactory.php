@@ -20,7 +20,7 @@ class PropertyValueFactory extends Factory
         $type = $this->types[array_rand($this->types)];
         return [
             "value" => ($type == 'text' ? $this->faker->unique()->words(rand(1,2), true) : null),
-            "number" => ($type == 'float' ? $this->faker->randomFloat(15, 0.0000000001, 10000) : null),
+            "number" => ($type == 'float' ? $this->faker->unique()->randomFloat(15, 0.0000000001, 10000) : null),
             "type" => $type,
         ];
     }

@@ -4,6 +4,7 @@ namespace Database\Factories\Property;
 
 use App\Models\Property\PropertySection;
 use App\Models\Property\PropertyType;
+use App\Models\Unit\Unit;
 use App\Models\Unit\UnitRule;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class PropertyFactory extends Factory
      */
     public function definition(): array
     {
-        $unit_rule = (rand(0, 100) > 50 ? UnitRule::first() : null);
+        $unit_rule = (rand(0, 100) > 50 ? UnitRule::inRandomOrder()->first() : null);
 
         return [
             "title" => $this->faker->text(rand(10, 20)),
@@ -29,9 +30,9 @@ class PropertyFactory extends Factory
                 999         // максимальное значение
             ),
             "is_on" => rand(0, 1),
-            "property_type_id" => (rand(0, 100) > 50 ? PropertyType::inRandomOrder()->first()->id: null),
+            "property_type_id" => (rand(0, 100) > 50 ? PropertyType::whereIn("type", ["checkbox", "select", "range"])->inRandomOrder()->first()->id: null),
             "property_section_id" => (rand(0, 100) > 50 ? PropertySection::inRandomOrder()->first()->id : null),
-            "unit_id" => ($unit_rule ? $unit_rule->unit_id : null),
+            "unit_id" => ($unit_rule ? $unit_rule->unit_id : (rand(0, 100) > 50 ? Unit::inRandomOrder()->first()->id : null)),
             "to_unit_id" => ($unit_rule ? $unit_rule->to_unit_id : null),
         ];
     }

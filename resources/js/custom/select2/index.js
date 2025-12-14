@@ -9,7 +9,7 @@ $.fn.select2.defaults.set("minimumResultsForSearch", "Infinity");
 $.fn.select2.defaults.set("width", "element");
 
 $(document).ready(function () {
-    readySelect2($('.select2_custom'));
+    readySelect2($('.select2_custom:not(.off_select2)'));
 });
 
 window.readySelect2 = function (obj, d = null) {

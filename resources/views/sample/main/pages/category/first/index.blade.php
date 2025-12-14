@@ -8,9 +8,13 @@
 
 @section('content')
     <section class="dop_menu_mob dop_menu_mob__container">
+        @if($propertis->isNotEmpty())
         <div class="dop_menu_mob__button">
             <img src="{{ Vite::asset('resources/js/custom/dop_menu/mob/img/filter.svg') }}" alt="filter"> Фильтры
         </div>
+        @else
+        <div></div>
+        @endif
         <div class="dop_menu_mob__sort">
             <div id="select2_sort_mob" class="select2_sample_nude select2_sample_nude_white">
                 <select class="select2_custom" name="product_sort" data-minimum-results-for-search="5"
@@ -104,6 +108,7 @@
     <section class="category__container">
         <div class="category">
             <div class="dop_menu__bg dop_menu__close"></div>
+            @if($propertis->isNotEmpty())
             <div id="sticky_aside1" class="filter__wrapper dop_menu">
                 <div class="filter">
                     <div class="filter__title">
@@ -118,126 +123,9 @@
 
                     <input type="text" name="search" value="{{request()->query('search') }}" placeholder="Поиск" class="input">
 
-                    <div class="filter__item open">
-                        <div class="filter__header">
-                            <p>Цена</p>
-                            <img src="/temple/images/category/str.svg" alt="str">
-                        </div>
-                        <button class="filter__clear">Очистить</button>
-                        <div class="filter__body ion_rangeslider__body">
-                            <div class="filter__range_inputs">
-                                <input type="number" name="min" placeholder="0000" class="input">
-                                <span>–</span>
-                                <input type="number" name="max" placeholder="0000" class="input">
-                            </div>
-                            <div class="filter__range">
-                                <input class="ion_rangeslider" type="text" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter__item">
-                        <div class="filter__header">
-                            <p>Наличие товара</p>
-                            <img src="/temple/images/category/str.svg" alt="str">
-                        </div>
-                        <button class="filter__clear">Очистить</button>
-
-                        <div class="filter__body">
-                            <div class="filter__checkbox">
-                                <div class="checkbox">
-                                    <input name="agreement" id="filter_name_1" type="checkbox">
-                                    <label for="filter_name_1">
-                                        Товары по акции<sup>22222</sup>
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <input name="agreement" id="filter_name_2" type="checkbox">
-                                    <label for="filter_name_2">
-                                        Товары по акции<sup>22222</sup>
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <input name="agreement" id="filter_name_3" type="checkbox">
-                                    <label for="filter_name_3">
-                                        Товары по акции<sup>22222</sup>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter__item">
-                        <div class="filter__header">
-                            <p>Товары со скидкой</p>
-                            <img src="/temple/images/category/str.svg" alt="str">
-                        </div>
-                        <button class="filter__clear">Очистить</button>
-
-                        <div class="filter__body">
-                            <div class="filter__radio">
-                                <div class="radio">
-                                    <input name="agreement" id="filter_name2_1" name="name_filter" type="radio">
-                                    <label for="filter_name2_1">
-                                        Любой
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <input name="agreement" id="filter_name2_2" name="name_filter" type="radio">
-                                    <label for="filter_name2_2">
-                                        5% и больше
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <input name="agreement" id="filter_name2_3" name="name_filter" type="radio">
-                                    <label for="filter_name2_3">
-                                        15% и больше
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter__item">
-                        <div class="filter__header">
-                            <p>Список</p>
-                            <img src="/temple/images/category/str.svg" alt="str">
-                        </div>
-                        <button class="filter__clear">Очистить</button>
-
-                        <div class="filter__body select2_more select2_sample_more">
-                            <select class="select2_custom" name="lang" data-minimum-results-for-search="5"
-                                data-dropdown-css-class="select2-filter">
-                                <option value="" selected="">Все</option>
-                                <option value="1">Руский</option>
-                                <option value="2">Китайский</option>
-                                <option value="3">Английский</option>
-
-                            </select>
-                            <div class="select2_more__list">
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="filter__item">
-                        <div class="filter__header">
-                            <p>Обычный силект</p>
-                            <img src="/temple/images/category/str.svg" alt="str">
-                        </div>
-                        <button class="filter__clear">Очистить</button>
-
-                        <div class="filter__body select2_sample_more">
-                            <select class="select2_custom" name="lang" data-minimum-results-for-search="5"
-                                data-dropdown-css-class="select2-filter">
-                                <option value="" selected="">Все</option>
-                                <option value="1">Руский</option>
-                                <option value="2">Китайский</option>
-                                <option value="3">Английский</option>
-
-                            </select>
-                        </div>
-                    </div>
+                    @foreach ($propertis as $property)
+                        @include("sample.main.pages.category.first.filter.{$property->propertyType->type}")
+                    @endforeach
 
                     <div class="filter__actions">
                         <button class="btn">Искать</button>
@@ -245,17 +133,18 @@
                     </div>
                 </div>
             </div>
+            @endif
 
             <div class="products__wrapper" id="sticky_article">
                 <div class="products__header">
                     <div class="products__tips">
+                        {{-- <div>Любая скидка</div>
                         <div>Любая скидка</div>
                         <div>Любая скидка</div>
                         <div>Любая скидка</div>
                         <div>Любая скидка</div>
                         <div>Любая скидка</div>
-                        <div>Любая скидка</div>
-                        <div>Любая скидка</div>
+                        <div>Любая скидка</div> --}}
                     </div>
                     <div id="select2_sort" class="select2_sample_nude">
                         <select class="select2_custom" name="product_sort" data-minimum-results-for-search="5"
@@ -292,11 +181,6 @@
     <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
-
-    @php
-        $category_ids = $category->children_ids;
-        $category_ids[] = $category->id;
-    @endphp
 
     <script>
         window.routes["product.filter"] = "{{ route('product.filter') }}";
