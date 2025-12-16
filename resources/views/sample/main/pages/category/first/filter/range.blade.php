@@ -1,3 +1,12 @@
+@php
+    $propertyValueModel = new \App\Models\Property\PropertyValue();
+    $propertyValueModel->number = $property->min_value;
+    $min = $propertyValueModel->proccessUnit($property->unitRules);
+
+    $propertyValueModel->number = $property->max_value;
+    $max = $propertyValueModel->proccessUnit($property->unitRules);
+@endphp
+
 <div class="filter__item open">
     <div class="filter__header">
         <p>{{ $property->getFullTitle() }}</p>
@@ -6,12 +15,12 @@
     <button class="filter__clear">Очистить</button>
     <div class="filter__body ion_rangeslider__body" data-property-id="{{ $property->id }}">
         <div class="filter__range_inputs">
-            <input type="number" name="min" placeholder="0000" class="input">
+            <input type="text" name="min" placeholder="От {{ $min }}" class="input">
             <span>–</span>
-            <input type="number" name="max" placeholder="0000" class="input">
+            <input type="text" name="max" placeholder="До {{ $max }}" class="input">
         </div>
         <div class="filter__range">
-            <input class="ion_rangeslider" type="text" />
+            <input class="ion_rangeslider" type="text" data-step="1" data-min="{{ $min }}" data-max="{{$max}}" />
         </div>
     </div>
 </div>
