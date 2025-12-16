@@ -24,7 +24,7 @@ class PropertyController
         $propertyFilter = app()->make(PropertyFilter::class, [
             'params' => array_filter($request->all())
         ]);
-
+        // dd($request->all());
         //
         $request->offsetUnset('category_id');
         $productStandard = app()->make(ProductStandard::class, ['params' => [

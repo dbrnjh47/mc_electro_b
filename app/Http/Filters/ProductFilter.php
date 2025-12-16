@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductFilter extends AbstractFilter
 {
+    public const CATEGORY_IDS = 'category_ids';
     public const CATEGORY_ID = 'category_id';
     public const SORT = 'sort';
     public const SLUG = 'slug';
@@ -14,6 +15,7 @@ class ProductFilter extends AbstractFilter
     protected function getCallbacks(): array
     {
         return [
+            self::CATEGORY_IDS => [$this, 'categoryIds'],
             self::CATEGORY_ID => [$this, 'categoryId'],
             self::SORT => [$this, 'sort'],
             self::SLUG => [$this, 'slug'],
@@ -43,7 +45,13 @@ class ProductFilter extends AbstractFilter
     {
         $builder->whereHas('categories', function ($query) use ($value) {
             $query->where('category_id', $value);
-            // $query->whereIn('category_id', $value);
+        });
+    }
+
+    public function categoryIds(Builder $builder, $value)
+    {
+        $builder->whereHas('categories', function ($query) use ($value) {
+            $query->whereIn('category_id', $value);
         });
     }
 
