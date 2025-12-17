@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Schedule;
 //     $this->comment(Inspiring::quote());
 // })->purpose('Display an inspiring quote');
 
-Schedule::call(function () {
-    // Log::debug("test log");
-    Artisan::call('app:update-currencies-сommand');
-})
-    ->name('Обновление курсов')
-    ->everyMinute();
-    // ->hourly();
+// Schedule::call(function () {
+//     // Log::debug("test log");
+//     Artisan::call('app:update-currencies-сommand');
+// })
+//     ->name('Обновление курсов')
+//     ->everyMinute();
+//     // ->hourly();
