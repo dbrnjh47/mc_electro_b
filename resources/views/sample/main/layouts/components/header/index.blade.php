@@ -120,7 +120,7 @@
             @endauth
 
 
-            <div class="header__world_dropdown header__action_hover">
+            {{-- <div class="header__world_dropdown header__action_hover">
 
                 <!-- public\temple\images\layout\icon\world.svg -->
                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -161,14 +161,14 @@
 
                 <div class="header__world_dropdown__menu">
                     <div class="header__world_dropdown__menu_items_wrapper">
-                        {{-- <div class="header__world_dropdown__menu_items">
+                         <div class="header__world_dropdown__menu_items">
                             @foreach ($locales as $locale)
                             <a href="{{$locale->getUrl()}}" class="header__world_dropdown__menu_item @if ($user_local->id == $locale->id) active @endif">
                                 <img src="{{$locale->icon_path}}" loading="lazy" decoding="async" alt="{{$locale->slug}}">
                                 {{$locale->text}}
                             </a>
                             @endforeach
-                        </div> --}}
+                        </div>
                         <div class="header__world_dropdown__menu_items">
                             @foreach ($currencies as $currency)
                                 <a href="{{ route('currency.set', ['id' => $currency->id]) }}"
@@ -180,7 +180,7 @@
                     </div>
                 </div>
 
-            </div>
+            </div> --}}
         </div>
 
         <div class="header__burger_menu">

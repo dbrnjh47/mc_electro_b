@@ -87,7 +87,7 @@
                     </select>
                 </div>
 
-                <div class="burger_menu__main__setting" id="burger_currency_select">
+                {{-- <div class="burger_menu__main__setting" id="burger_currency_select">
                     <h3>Валюта</h3>
                     <select class="select2_custom" data-dropdown-parent="#burger_currency_select"
                         data-minimum-results-for-search="10">
@@ -96,7 +96,7 @@
                             <option value="{{$currency->id}}" @if ($user_currency->id == $currency->id) selected @endif>{{ $currency->abbreviation }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
             </div>
 
             <div class="burger_menu__main__contact">

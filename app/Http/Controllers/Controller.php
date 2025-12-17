@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\City\IndexService as CityService;
-use App\Http\Services\Currency\CurrencyService;
+// use App\Http\Services\Currency\CurrencyService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
@@ -53,11 +53,11 @@ class Controller extends BaseController
             return $next($request);
         });
 
-        $user_currency = (new CurrencyService)->get();
-        view()->share('user_currency', $user_currency);
-        app()->singleton('user_currency', function ($app) use ($user_currency) {
-            return $user_currency;
-        });
+        // $user_currency = (new CurrencyService)->get();
+        // view()->share('user_currency', $user_currency);
+        // app()->singleton('user_currency', function ($app) use ($user_currency) {
+        //     return $user_currency;
+        // });
 
         //
 

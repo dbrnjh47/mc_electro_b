@@ -62,6 +62,6 @@ class CurrencySeeder extends Seeder
 
         //
 
-        Artisan::call('app:update-currencies-сommand');
+        // Artisan::call('app:update-currencies-сommand');
     }
 }

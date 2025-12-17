@@ -32,8 +32,11 @@
         <script>
             window.routes["city.set"] = "{{ route('city.set') }}";
             window.routes["cities"] = "{{ route('cities') }}";
-            window.routes["currency.set"] = "{{ route('currency.set') }}";
         </script>
+
+        {{-- <script>
+            window.routes["currency.set"] = "{{ route('currency.set') }}";
+        </script> --}}
 
         <main class="main">
             @yield('content')

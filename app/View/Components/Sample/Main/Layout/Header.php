@@ -30,7 +30,7 @@ class Header extends Component
         }
 
         //
-        $currencies = (new CurrencyModelService)->all();
-        return view('sample.main.layouts.components.header.index', compact( "currencies"));
+        // $currencies = (new CurrencyModelService)->all();
+        return view('sample.main.layouts.components.header.index');
     }
 }
