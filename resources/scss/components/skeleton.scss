@@ -22,7 +22,7 @@
         top: 0;
         left: 0;
         right: 0;
-        z-index: 1;
+        z-index: 9;
         height: 100%;
         width: calc(100% + var(--skeleton-gradient-width, 300px));
         background-image: linear-gradient(

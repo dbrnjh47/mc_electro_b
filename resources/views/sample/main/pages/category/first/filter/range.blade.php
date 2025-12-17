@@ -20,7 +20,7 @@
             <input type="text" name="max" placeholder="До {{ $max }}" class="input">
         </div>
         <div class="filter__range">
-            <input class="ion_rangeslider" type="text" data-step="1" data-min="{{ $min }}" data-max="{{$max}}" />
+            <input class="ion_rangeslider" type="text" data-step="0.1" data-min="{{ $min }}" data-max="{{$max}}" />
         </div>
     </div>
 </div>

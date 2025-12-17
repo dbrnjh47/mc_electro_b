@@ -9,7 +9,7 @@
         <div class="filter__checkbox">
             @foreach ($property->values as $value)
             <div class="checkbox">
-                <input name="" id="filter_{{ $property->id }}_{{ $value->id }}" value="{{ $value->id }}" type="checkbox">
+                <input name="filter_" id="filter_{{ $property->id }}_{{ $value->id }}" value="{{ $value->id }}" type="checkbox">
                 <label for="filter_{{ $property->id }}_{{ $value->id }}">
                     {{ $value->getVal($property) }}<sup>{{ $value->product_count }}</sup>
                 </label>

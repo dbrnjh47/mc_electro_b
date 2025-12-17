@@ -2,9 +2,11 @@ let product_page = 1;
 let sort_select = $('select[name="product_sort"]');
 let search_input = $('.filter input[name="search"]');
 
-window.getProuctFilter = function()
+window.getProuctFilter = function(page = null)
 {
-    $(".pagination__wrapper, .product_card, .product_feedback_card").addClass("skeleton");
+    if(page != null){product_page = page;}
+    $(".pagination__wrapper, .product_card, .product_feedback_card, .filter").addClass("skeleton");
+
     $.ajax({
         url: window.routes["product.filter"],
         type: "POST",
@@ -15,8 +17,12 @@ window.getProuctFilter = function()
             $(".pagination__wrapper").html(result["paginate"]);
 
             $(".product_feedback_card, .pagination__wrapper").removeClass("skeleton");
+
             setEventProductPaginate();
             window.setWishlistEvent();
+
+            //
+            window.updateFilter();
         },
         error: function (msg) {
             // is_get_product_review = 0;
@@ -26,12 +32,17 @@ window.getProuctFilter = function()
 }
 
 function getDataProducts() {
+    let filters = window.getFilter();
+    let rang_filters = window.getRangFilter();
+
     return {
         "page": product_page,
         "category_ids": category_ids,
         "sort" : sort_select.val(),
         "category_slug": category_slug,
-        "search": search_input.val()
+        "search": search_input.val(),
+        "filters": filters,
+        "rang_filters": rang_filters
     };
 }
 
@@ -41,8 +52,7 @@ function setEventProductPaginate()
         e.preventDefault();
         e.stopPropagation();
 
-        product_page = $(this).attr("title");
-        window.getProuctFilter();
+        window.getProuctFilter($(this).attr("title"));
 
         return false; // Альтернатива preventDefault + stopPropagation
     });
@@ -57,6 +67,5 @@ sort_select.on('change', function() {
 
 
 search_input.change(function() {
-    product_page = 1;
-    window.getProuctFilter();
+    window.getProuctFilter(1);
 });

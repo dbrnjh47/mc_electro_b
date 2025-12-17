@@ -31,6 +31,14 @@ class FilterRequest extends FormRequest
             "category_ids" => ['required', 'array', 'min:1'],
             "category_ids.*" => ['required', 'integer'],
 
+            "filters" => ['nullable', 'array', 'min:1'],
+            "filters.*" => ['required', 'array', 'min:1'],
+            "filters.*.*" => ['required', 'integer', 'min:1'],
+
+            "rang_filters" => ['nullable', 'array', 'min:1'],
+            "rang_filters.*" => ['required', 'array', 'min:1'],
+            "rang_filters.*.*" => ['required', 'numeric', 'min:1'],
+
             "sort" => ['required', 'string', 'in:name_asc,create_desc,create_asc,price_desc,price_asc'],
         ];
     }
