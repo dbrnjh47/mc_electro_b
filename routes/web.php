@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Category\IndexController as CategoryController;
 use App\Http\Controllers\Category\ProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CookieController;
@@ -28,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 // Route::group(['prefix' => '{locale?}', 'where' => ['locale' => '[a-zA-Z]{2}']], function () {
 Route::get('/', [PageController::class, 'index'])->name('home');
-
+Route::get('/search', [SearchController::class, 'show'])->name('search');
 // Route::get('/currency/set/{id?}', [CurrencyController::class, 'set'])->name('currency.set');
 //
 Route::prefix('profile')->group(function () {

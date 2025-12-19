@@ -23,4 +23,8 @@ document.body.addEventListener('scroll', startSticky, false);
 
 //
 
-window.getProuctFilter();
+if(window.isStopStartFilter == undefined)
+{
+    window.getProuctFilter();
+}
+

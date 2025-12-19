@@ -28,7 +28,7 @@ class ProductController
         $productFilter = app()->make(ProductFilter::class, ['params' => array_filter($request->all())]);
         $products = Product::standard($productStandard)
             ->filter($productFilter)
-            ->paginate(8, page:$request->page);
+            ->paginate(8, page:(isset($request->page) ? $request->page : 1));
 
         $products_html = "";
         foreach($products as $product)

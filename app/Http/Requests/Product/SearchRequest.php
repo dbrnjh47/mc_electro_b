@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Category;
+namespace App\Http\Requests\Product;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Illuminate\Contracts\Validation\Validator as ValidatorContract;
 
-class FilterRequest extends FormRequest
+class SearchRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,22 +24,7 @@ class FilterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "page" => ['nullable', 'integer', 'min:1'],
-            "search" => ['nullable', 'string', 'min:1', 'max:128'],
-
-            "category_slug" => ['nullable', 'string', 'max:128'],
-            "category_ids" => ['nullable', 'array', 'min:1'],
-            "category_ids.*" => ['required', 'integer'],
-
-            "filters" => ['nullable', 'array', 'min:1'],
-            "filters.*" => ['required', 'array', 'min:1'],
-            "filters.*.*" => ['required', 'integer', 'min:1'],
-
-            "rang_filters" => ['nullable', 'array', 'min:1'],
-            "rang_filters.*" => ['required', 'array', 'min:1'],
-            "rang_filters.*.*" => ['required', 'numeric', 'min:1'],
-
-            "sort" => ['required', 'string', 'in:name_asc,create_desc,create_asc,price_desc,price_asc'],
+            "search" => ['required', 'string', 'min:2', 'max:128'],
         ];
     }
 

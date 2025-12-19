@@ -15,7 +15,7 @@
 
         <div class="header__search">
             <div class="header__search_input" itemscope itemtype="https://schema.org/SearchAction">
-                <input type="text" placeholder="" itemprop="query-input">
+                <input type="text" name="search" value="{{ request()->query('search') }}" placeholder="" itemprop="query-input">
 
                 <!-- public\temple\images\layout\icon\search.svg -->
                 <svg class="header__search_input_icon" width="20" height="20" viewBox="0 0 20 20"
@@ -27,7 +27,7 @@
 
             </div>
 
-            <div class="header__search_dropdown">
+            {{-- <div class="header__search_dropdown">
                 <div class="header__search_dropdown_wrapper">
                     <div class="header__search_lookings">
                         <div class="header__search__lookings_title">Ранее искали</div>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <button class="header__search_dropdown__button">Показать все результаты поиска</button>
-            </div>
+            </div> --}}
 
         </div>
 

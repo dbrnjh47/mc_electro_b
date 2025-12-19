@@ -1,6 +1,7 @@
 let product_page = 1;
 let sort_select = $('select[name="product_sort"]');
 let search_input = $('.filter input[name="search"]');
+if(search_input.length == 0){ search_input = $('input[name="search"]');}
 
 window.getProuctFilter = function(page = null)
 {
@@ -41,9 +42,9 @@ function getDataProducts() {
 
     return {
         "page": product_page,
-        "category_ids": category_ids,
+        "category_ids": (typeof category_ids != 'undefined' ? category_ids : null),
         "sort" : sort_select.val(),
-        "category_slug": category_slug,
+        "category_slug": (typeof category_slug != 'undefined' ? category_slug : null),
         "search": search_input.val(),
         "filters": filters,
         "rang_filters": rang_filters
@@ -66,6 +67,7 @@ function setEventProductPaginate()
 //
 
 sort_select.on('change', function() {
+    sort_select.not(this).val($(this).val());
     window.getProuctFilter();
 });
 
