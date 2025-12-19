@@ -6,8 +6,54 @@ import '/resources/js/custom/dop_menu/index.js';
 
 let filter = $(".filter");
 let timer = null;
-let element_ignore = null;
+let ignore_property_id = null;
 let is_stop = 0;
+let btn_clear = $(".filter__actions_btn_clear");
+
+btn_clear.click(function () {
+    window.clearFilters();
+});
+
+window.clearFilters = function()
+{
+    filter.find('input, select').each(function () {
+        let obj = $(this);
+
+        // if (!obj.attr("name") || !obj.attr("name").startsWith("filter_")) {
+        //     return true;
+        // }
+        //
+
+        if (obj.attr("type") == "radio" && obj.is(':checked') || obj.attr("type") == "checkbox") {
+            obj.prop('checked', false);
+        }
+
+        if (obj.attr("type") == "text") {
+            obj.val("");
+        }
+
+        if (obj.is('select')) {
+            obj.val(null).trigger('change.select2');
+        }
+
+        if (obj.hasClass("ion_rangeslider")) {
+            // let range = obj.data("ionRangeSlider").result;
+            let min = obj.data("min");
+            let max = obj.data("max");
+            obj.data("ionRangeSlider").update({
+                min: min,
+                max: max,
+                from: min,
+                to: max,
+            });
+            obj.closest(".ion_rangeslider__body").find("input").val("");
+            obj.closest(".ion_rangeslider__body").find('input[name="min"]').attr("placeholder", "От " + min);
+            obj.closest(".ion_rangeslider__body").find('input[name="max"]').attr("placeholder", "До " + max);
+        }
+    });
+
+    setTimer();
+}
 
 $(".filter__header").click(function () {
     let filter__item = $(this).closest(".filter__item");
@@ -67,7 +113,7 @@ filter.find('input, select').change(function () {
 });
 
 function setTimer(obj = null) {
-    element_ignore = obj;
+    ignore_property_id = (obj ? obj.closest(".filter__body").data("property-id") : null);
     clearTimeout(timer);
     timer = setTimeout(start, 500);
 }
@@ -76,8 +122,70 @@ function start() {
     window.getProuctFilter(1);
 }
 
-window.updateFilter = function (data) {
+window.updateFilter = function (properties) {
+    // console.log(properties);
     filter.removeClass("skeleton");
+
+    let filter_wrappers = filter.find(".filter__body:not(.ion_rangeslider__body)");
+    filter_wrappers.each(function(index, filter_wrapper) {
+        filter_wrapper = $(filter_wrapper);
+        let property_id = filter_wrapper.data("property-id");
+        if(property_id == ignore_property_id){return true;}
+        // console.log(ignore_property_id);
+        // console.log("property_id - "+property_id);
+        let info = properties.find(item => item.id === property_id);
+        // console.log(info);
+
+        // input
+        filter_wrapper.find("input").each(function() {
+            let filter_input = $(this);
+            if(!info){filter_input.prop('disabled', true); return 1;}
+            // console.log(info, filter_input.val());
+            let info_value = info["values"].find(item => item.id === parseInt(filter_input.val()));
+            // console.log(info_value);
+            if(info_value)
+            {
+                filter_input.prop('disabled', false);
+            } else {
+                filter_input.prop('disabled', true);
+            }
+        });
+
+        // select
+        filter_wrapper.find("select.select2_custom").each(function() {
+            let obj = $(this);
+
+            obj.find('option').each(function () {
+                let option = $(this);
+                if (option.val() == "") { return true; }
+
+                if(!info)
+                {
+                    option.data("count", 0).prop('disabled', true);
+                    return 1;
+                }
+
+                let info_value = info["values"].find(item => item.id === parseInt(option.val()));
+                // console.log("option", info_value);
+                if(info_value) {
+                    option.data("count", info_value["product_count"]).prop('disabled', false);
+                } else {
+                    option.data("count", 0).prop('disabled', true);
+                }
+            });
+
+            obj.trigger('change.select2');
+
+
+            // // console.log(info_value);
+            // if(info_value)
+            // {
+            //     filter_input.prop('disabled', false);
+            // } else {
+            //     filter_input.prop('disabled', true);
+            // }
+        });
+    });
 }
 
 window.getFilter = function () {

@@ -22,9 +22,11 @@ window.getProuctFilter = function(page = null)
             window.setWishlistEvent();
 
             //
-            window.updateFilter();
+            window.updateFilter(result["properties"]);
 
             window.startSticky();
+
+            //
         },
         error: function (msg) {
             // is_get_product_review = 0;

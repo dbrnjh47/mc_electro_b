@@ -105,10 +105,10 @@ class IndexController extends Controller
     {
         $result = (new ProductController)->list($request);
 
-        if (isset($request->filters) || isset($request->rang_filters)) {
+        // if (isset($request->filters) || isset($request->rang_filters)) {
             $properties = (new PropertyController($request, is_short: 1))->process();
             $result["properties"] = $properties;
-        }
+        // }
 
         return $result;
     }
