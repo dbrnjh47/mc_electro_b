@@ -128,7 +128,7 @@
                     @endforeach
 
                     <div class="filter__actions">
-                        <button class="btn">Искать</button>
+                        <button class="btn filter__actions_btn_start">Искать</button>
                         <button class="btn filter__actions_btn_clear">Очистить фильтры</button>
                     </div>
                 </div>

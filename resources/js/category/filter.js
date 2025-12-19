@@ -8,10 +8,15 @@ let filter = $(".filter");
 let timer = null;
 let ignore_property_id = null;
 let is_stop = 0;
+let btn_start = $(".filter__actions_btn_start");
 let btn_clear = $(".filter__actions_btn_clear");
 
 btn_clear.click(function () {
     window.clearFilters();
+});
+
+btn_start.click(function () {
+    setTimer();
 });
 
 window.clearFilters = function()
