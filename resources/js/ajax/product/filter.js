@@ -8,7 +8,7 @@ window.getProuctFilter = function(page = null)
     $(".pagination__wrapper, .product_card, .product_feedback_card, .filter").addClass("skeleton");
 
     $.ajax({
-        url: window.routes["product.filter"],
+        url: window.routes["category.filter"],
         type: "POST",
         data: getDataProducts(),
         success: function (result) {

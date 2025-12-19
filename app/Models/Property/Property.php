@@ -42,6 +42,11 @@ class Property extends Model
         )->orderBy('number', 'asc');
     }
 
+    public function productValues()
+    {
+        return $this->hasMany(ProductProperty::class, 'property_id', 'id');
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class);

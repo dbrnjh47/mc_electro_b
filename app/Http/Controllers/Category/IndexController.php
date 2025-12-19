@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Product\IndexController as ProductIndexController;
+use App\Http\Requests\Category\FilterRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 use App\Models\Category\Category;
@@ -59,14 +60,16 @@ class IndexController extends Controller
         $slugs = explode('/', $request->slugs);
         $category = (new CategoryModelService)->firstBySlug(end($slugs));
 
-        if(!$category || !$category->is_on){
+        if (!$category || !$category->is_on) {
             $this->notFound();
         }
 
         $category->parent_slugs = $slugs;
         $category->parents();
         // dump($category->parents_paths);
-        if(!in_array(implode('/', $slugs), $category->parents_paths)){$this->notFound();}
+        if (!in_array(implode('/', $slugs), $category->parents_paths)) {
+            $this->notFound();
+        }
 
         //
 
@@ -75,7 +78,7 @@ class IndexController extends Controller
         //
 
         $category->childrens(1);
-        $category->childrens(only_ids:1);
+        $category->childrens(only_ids: 1);
 
         // фильтры
         $category_ids = $category->children_ids;
@@ -85,7 +88,7 @@ class IndexController extends Controller
             "category_id" => $category->id,
             "category_ids" => $category_ids
         ]);
-        $propertis = (new PropertyController)->get($request);
+        $properties = (new PropertyController($request))->process();
 
         return view('sample.main.pages.category.first.index', [
             'title' => $category->name,
@@ -94,7 +97,19 @@ class IndexController extends Controller
             "category" => $category,
             "path_slugs" => $path_slugs,
             "category_ids" => $category_ids,
-            "propertis" => $propertis
+            "properties" => $properties
         ]);
+    }
+
+    public function filter(FilterRequest $request)
+    {
+        $result = (new ProductController)->list($request);
+
+        if (isset($request->filters) || isset($request->rang_filters)) {
+            $properties = (new PropertyController($request, is_short: 1))->process();
+            $result["properties"] = $properties;
+        }
+
+        return $result;
     }
 }

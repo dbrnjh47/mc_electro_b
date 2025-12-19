@@ -83,5 +83,10 @@ class Product extends Model
             ->withTimestamps();
     }
 
+    public function productProperties()
+    {
+        return $this->hasMany(ProductProperty::class, 'product_id', 'id');
+    }
+
     // $product = Product::with(['productProperties.property', 'productProperties.value'])->find(1);
 }

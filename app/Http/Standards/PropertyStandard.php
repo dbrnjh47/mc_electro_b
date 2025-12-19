@@ -20,6 +20,11 @@ class PropertyStandard extends AbstractStandard
 
     public function default(Builder $builder)
     {
+
+    }
+
+    public function unit(Builder $builder, $value)
+    {
         $builder->with([
             'unit' => function ($q2) {
                 $q2->select(['id', 'text']);

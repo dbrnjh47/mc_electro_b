@@ -89,6 +89,8 @@ Route::prefix('categories')->group(function () {
 });
 
 Route::prefix('category')->group(function () {
+    Route::post('/filter', [CategoryController::class, 'filter'])->name('category.filter');
+
     Route::get('/{slugs?}', [CategoryController::class, 'show'])->where('slugs', '.*')->name('category');
 });
 
@@ -102,9 +104,6 @@ Route::prefix('product')->group(function () {
         });
 
     });
-
-    Route::post('/filter', [ProductController::class, 'list'])->name('product.filter');
-
 
     //
 

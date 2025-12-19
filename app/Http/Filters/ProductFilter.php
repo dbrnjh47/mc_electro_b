@@ -11,6 +11,7 @@ class ProductFilter extends AbstractFilter
     public const SORT = 'sort';
     public const SLUG = 'slug';
     public const SEARCH = 'search';
+    public const FILTERS = 'filters';
 
     protected function getCallbacks(): array
     {
@@ -20,11 +21,24 @@ class ProductFilter extends AbstractFilter
             self::SORT => [$this, 'sort'],
             self::SLUG => [$this, 'slug'],
             self::SEARCH => [$this, 'search'],
+            self::FILTERS => [$this, 'filters'],
         ];
     }
 
     public function default(Builder $builder)
     {
+    }
+
+    public function filters(Builder $builder, $list)
+    {
+        $builder->where(function ($query) use ($list) {
+            foreach ($list as $propertyId => $values) {
+                $query->whereHas('productProperties', function ($q) use ($propertyId, $values) {
+                    $q->where('property_id', $propertyId)
+                      ->whereIn('property_value_id', $values);
+                });
+            }
+        });
     }
 
     public function search(Builder $builder, $value)

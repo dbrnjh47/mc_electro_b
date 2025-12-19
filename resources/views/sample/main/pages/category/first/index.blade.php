@@ -8,7 +8,7 @@
 
 @section('content')
     <section class="dop_menu_mob dop_menu_mob__container">
-        @if($propertis->isNotEmpty())
+        @if($properties->isNotEmpty())
         <div class="dop_menu_mob__button">
             <img src="{{ Vite::asset('resources/js/custom/dop_menu/mob/img/filter.svg') }}" alt="filter"> Фильтры
         </div>
@@ -108,7 +108,7 @@
     <section class="category__container">
         <div class="category">
             <div class="dop_menu__bg dop_menu__close"></div>
-            @if($propertis->isNotEmpty())
+            @if($properties->isNotEmpty())
             <div id="sticky_aside1" class="filter__wrapper dop_menu">
                 <div class="filter">
                     <div class="filter__title">
@@ -123,7 +123,7 @@
 
                     <input type="text" name="search" value="{{request()->query('search') }}" placeholder="Поиск" class="input">
 
-                    @foreach ($propertis as $property)
+                    @foreach ($properties as $property)
                         @include("sample.main.pages.category.first.filter.{$property->propertyType->type}")
                     @endforeach
 
@@ -183,7 +183,7 @@
     <x-sample.main.support></x-sample.main.support>
 
     <script>
-        window.routes["product.filter"] = "{{ route('product.filter') }}";
+        window.routes["category.filter"] = "{{ route('category.filter') }}";
 
         let category_ids = @json($category_ids);
         let category_slug = "{{ $category->slug }}";

@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers\Category;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Product\FilterRequest;
 use App\Http\Standards\ProductStandard;
 use App\Models\Product\Product;
 use App\Http\Filters\ProductFilter;
-use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\User\WishListService;
-use App\Models\Category\Category;
 use App\View\Components\Sample\Main\Product\Card;
-use App\View\Components\Sample\Main\Product\FeedbackCard;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
-class ProductController extends Controller
+class ProductController
 {
-    public function list(FilterRequest $request)
+    public function list($request)
     {
         // старое получение айдишников дочерних категорий
         // $category_ids = new Category();

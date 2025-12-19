@@ -22,8 +22,8 @@ class ProductProperty extends Model
     //     return $this->belongsTo(Property::class);
     // }
 
-    // public function propertyValue()
-    // {
-    //     return $this->belongsTo(PropertyValue::class);
-    // }
+    public function value()
+    {
+        return $this->hasOne(PropertyValue::class, "id", "property_value_id");
+    }
 }
