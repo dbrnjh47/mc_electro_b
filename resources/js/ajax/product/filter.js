@@ -23,6 +23,8 @@ window.getProuctFilter = function(page = null)
 
             //
             window.updateFilter();
+
+            window.startSticky();
         },
         error: function (msg) {
             // is_get_product_review = 0;

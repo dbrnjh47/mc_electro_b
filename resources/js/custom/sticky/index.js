@@ -85,6 +85,11 @@ window.Ascroll = function (bottom) {
         window.addEventListener('resize', function () {
             a.children[0].style.width = getComputedStyle(a, '').width
         }, false);
+    } else {
+        a.style.height = "fit-content";
+        if (b != null) {
+            b.style.top = '0px';
+        }
     }
 
     // setEvent
