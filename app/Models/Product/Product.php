@@ -3,7 +3,6 @@
 namespace App\Models\Product;
 
 use App\Models\Company\Company;
-use App\Models\Product\Characteristic\ProductCharacteristic;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
 use App\Models\Product\Review\ProductReview;
@@ -42,11 +41,6 @@ class Product extends Model
         return $this->hasMany(ProductDocument::class, 'product_id', 'id');
     }
 
-    public function characteristics()
-    {
-        return $this->hasMany(ProductCharacteristic::class, 'product_id', 'id');
-    }
-
     public function labels()
     {
         return $this->hasMany(ProductLabel::class, 'product_id', 'id');
@@ -67,26 +61,8 @@ class Product extends Model
         return $this->hasMany(WishlistProduct::class, 'product_id', 'id');
     }
 
-    public function properties()
-    {
-        return $this->belongsToMany(Property::class, "product_properties")
-            ->using(ProductProperty::class)  // Указываем pivot модель
-            ->withPivot('property_value_id') // Добавляем pivot поле
-            ->withTimestamps();
-    }
-
-    public function propertyValues()
-    {
-        return $this->belongsToMany(PropertyValue::class, "product_properties")
-            ->using(ProductProperty::class)
-            ->withPivot('property_id')
-            ->withTimestamps();
-    }
-
     public function productProperties()
     {
         return $this->hasMany(ProductProperty::class, 'product_id', 'id');
     }
-
-    // $product = Product::with(['productProperties.property', 'productProperties.value'])->find(1);
 }

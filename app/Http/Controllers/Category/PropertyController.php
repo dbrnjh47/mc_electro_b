@@ -29,7 +29,7 @@ class PropertyController
 
         if (!$is_short) {
             $propertyStandardArray['params']['unit'] = 1;
-            $propertyStandardArray['params']['property_type'] = 1;
+            $propertyStandardArray['params']['type'] = 1;
         }
 
         $this->propertyStandard = app()->make(PropertyStandard::class, $propertyStandardArray);
@@ -64,7 +64,7 @@ class PropertyController
         $properties = Property::standard($this->propertyStandard)
             ->filter($this->propertyFilter);
         if ($this->is_short) {$properties = $properties->select("id");}
-        $properties = $properties->whereDoesntHave('propertyType', function ($query) {
+        $properties = $properties->whereDoesntHave('type', function ($query) {
             $query->where('type', 'range');
         })
             ->with(['productValues' => function ($query) {
@@ -104,11 +104,10 @@ class PropertyController
     {
         $rangeProperties = Property::standard($this->propertyStandard)
             ->filter($this->propertyFilter)
-            ->whereHas('propertyType', function ($query) {
+            ->whereHas('type', function ($query) {
                 $query->where('type', 'range');
             })
             ->addSelect([
-                'properties.*',
                 'min_value' => PropertyValue::query()
                     ->selectRaw("MIN({$this->propertyValueModel->qualifyColumn('number')})")
                     ->join(

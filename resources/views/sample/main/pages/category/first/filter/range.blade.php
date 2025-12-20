@@ -1,10 +1,10 @@
 @php
     $propertyValueModel = new \App\Models\Property\PropertyValue();
     $propertyValueModel->number = $property->min_value;
-    $min = $propertyValueModel->proccessUnit($property->unitRules);
+    $min = $propertyValueModel->proccessUnit($property->unit_rule_value, $property->unit_rule_action);
 
     $propertyValueModel->number = $property->max_value;
-    $max = $propertyValueModel->proccessUnit($property->unitRules);
+    $max = $propertyValueModel->proccessUnit($property->unit_rule_value, $property->unit_rule_action);
 @endphp
 
 <div class="filter__item open">

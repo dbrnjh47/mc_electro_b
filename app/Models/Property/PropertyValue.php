@@ -17,10 +17,10 @@ class PropertyValue extends Model
 
     public function getVal($property)
     {
-        if($property->unitRules){
+        if($property->unit_rule_id){
             return (isset($this->valueProccess)
                 ? $this->format($this->valueProccess)." ".$property->toUnit->text
-                : $this->format($this->proccessUnit($property->unitRules))." ".$property->toUnit->text
+                : $this->format($this->proccessUnit($property->unit_rule_value, $property->unit_rule_action))." ".$property->toUnit->text
             );
         }
         if($property->toUnit){
@@ -32,15 +32,14 @@ class PropertyValue extends Model
         return ($this->value ? $this->value : $this->format($this->number));
     }
 
-    public function proccessUnit($unitRule)
+    public function proccessUnit($value, $action)
     {
-        if(!$unitRule){return $this->number;}
-        switch ($unitRule->action) {
+        switch ($action) {
             case "/":
-                $this->valueProccess = ($this->number / $unitRule->value);
+                $this->valueProccess = ($this->number / $value);
                 break;
             case "*":
-                $this->valueProccess = ($this->number * $unitRule->value);
+                $this->valueProccess = ($this->number * $value);
                 break;
         }
 

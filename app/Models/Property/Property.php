@@ -19,12 +19,12 @@ class Property extends Model
     use Filterable;
     use Standardable;
 
-    public function propertyType()
+    public function type()
     {
         return $this->hasOne(PropertyType::class, 'id', 'property_type_id');
     }
 
-    public function propertySection()
+    public function section()
     {
         return $this->hasOne(PropertySection::class, 'id', 'property_section_id');
     }
@@ -61,11 +61,6 @@ class Property extends Model
     public function toUnit()
     {
         return $this->hasOne(Unit::class, 'id', 'to_unit_id');
-    }
-
-    public function unitRules()
-    {
-        return $this->hasOne(UnitRule::class, 'unit_id', 'unit_id');
     }
 
     public function getFullTitle()

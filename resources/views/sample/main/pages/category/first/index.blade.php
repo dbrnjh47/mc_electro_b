@@ -124,7 +124,7 @@
                     <input type="text" name="search" value="{{request()->query('search') }}" placeholder="Поиск" class="input">
 
                     @foreach ($properties as $property)
-                        @include("sample.main.pages.category.first.filter.{$property->propertyType->type}")
+                        @include("sample.main.pages.category.first.filter.{$property->type->type}")
                     @endforeach
 
                     <div class="filter__actions">

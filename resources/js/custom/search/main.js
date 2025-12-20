@@ -50,7 +50,7 @@ const typed = new Typed('.header__search_input input', {
 
 input.find("input").change(function() {
     let val = $(this).val();
-    if(val != "")
+    if(val != "" && val.length > 1)
     {
         window.location.href = window.routes["search"]+"?search="+val;
     }

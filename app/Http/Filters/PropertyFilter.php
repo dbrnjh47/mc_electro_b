@@ -16,23 +16,12 @@ class PropertyFilter extends AbstractFilter
             self::SEARCH => [$this, 'search'],
         ];
     }
-
     public function default(Builder $builder)
     {
-        // из-за range придётся вручную рассортировывать
-        // $builder->orderBy('ordering', 'asc');
     }
-
     public function search(Builder $builder, $value)
     {
-        // $builder->where(function ($q) use ($value) {
-        //     $q->where("name", 'like', "%{$value}%")
-        //         ->orWhere("article", 'like', "%{$value}%")
-        //         ->orWhere("uuid", 'like', "%{$value}%");
-        // });
     }
-
-
     public function categoryId(Builder $builder, $value)
     {
         $builder->whereHas('categories', function ($query) use ($value) {

@@ -8,10 +8,10 @@ use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\ShowRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
-use App\Http\Services\Models\Product\ProductCharacteristic\ProductCharacteristicModelService;
 
 use App\Http\Services\User\WishListService;
 use App\Http\Standards\ProductStandard;
+use App\Http\Standards\PropertyStandard;
 use App\Models\Product\Product;
 use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
@@ -35,6 +35,13 @@ class IndexController extends Controller
                 "preview" => 1
             ],
         ]);
+
+        $propertyStandard = app()->make(PropertyStandard::class, ['params' => [
+            "is_on" => 1,
+            "unit" => 1,
+            "section" => 1,
+            "sort" => 1
+        ]]);
 
         $product = Product::standard($productStandard)
             ->filter($productFilter)
@@ -80,38 +87,26 @@ class IndexController extends Controller
                 'reviews.user' => function ($q) {
                     $q->select(['id', 'name']);
                 },
-            ])
-            ->with(['characteristics' => function ($query) {
-                $query->select(['text', 'id'])->where(function ($q) {
-                    $q->whereNotNull('value');
-                })
-                    ->with([
-                        'title' => function ($q) {
-                            $q->select(['id', 'product_characteristic_category_id', 'text', 'unit_id', 'to_unit_id']);
-                        },
-                        'title.category' => function ($q) {
-                            $q->select(['id', 'title']);
-                        },
-                        //
-                        'title.unit' => function ($q) {
-                            $q->select(['id', 'text']);
-                        },
-                        'title.toUnit' => function ($q) {
-                            $q->select(['id', 'text']);
-                        },
 
-                        // 'title.unitRules' => function ($q) {
-                        //     $q->select(['unit_id', 'to_unit_id', 'value', 'action']);
-                        // },
+                //
+                'productProperties' => function ($q) use ($propertyStandard) {
+                    $q->whereHas('property', function ($q2) use ($propertyStandard) {
+                        $q2->standard($propertyStandard);
+                    })
+                    ->with([
+                        'value',
+                        'property' => function ($q2) use ($propertyStandard) {
+                            $q2->standard($propertyStandard);
+                        }
                     ]);
-            }])
+                },
+            ])
             ->withCount(['reviews' => function (Builder $q) {
                 $q->where("is_on", 1);
             },])
             ->withSum('reviews', 'quantity')
             ->firstOrFail();
 
-        // dd($product);
         //
 
         $category = null;
@@ -152,22 +147,22 @@ class IndexController extends Controller
 
         //
 
-        $product->characteristics = (new ProductCharacteristicModelService)->setUnitRules($product->characteristics);
-        // dd($product->characteristics);
-
-        $product->characteristics = $product->characteristics->groupBy(function ($char) {
-            return $char->title->category ? $char->title->category->id : 'other';
+        // отсортируем по секциям характеристики
+        $product->propertySections = $product->productProperties->groupBy(function ($char) {
+            return $char->property->section ? $char->property->section->id : 'other';
         })->map(function ($chars, $key) {
             return [
-                'category' => $key === 'other' ?
+                'section' =>
+                    $key === 'other' ?
                     (object)['id' => null, "title" => 'Другое'] :
-                    $chars->first()->title->category,
+                    $chars->first()->property->section,
                 'items' => $chars
             ];
         })->sortBy(function ($group) {
-            return $group['category']->id === null ? 9999 : $group['category']->id;
+            return $group['section']->id === null ? 9999 : $group['section']->id;
         })->values();
-
+        unset($product->productProperties);
+        // dd($product);
         //
         // dump($category);
         [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);

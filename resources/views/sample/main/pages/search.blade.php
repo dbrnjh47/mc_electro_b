@@ -63,7 +63,7 @@
                             class="input">
 
                         @foreach ($properties as $property)
-                            @include("sample.main.pages.category.first.filter.{$property->propertyType->type}")
+                            @include("sample.main.pages.category.first.filter.{$property->type->type}")
                         @endforeach
 
                         <div class="filter__actions">

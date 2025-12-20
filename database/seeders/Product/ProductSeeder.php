@@ -9,7 +9,6 @@ use App\Models\Product\Label\ProductLabelOption;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductPoint;
-use Database\Seeders\Product\ProductCharacteristic\ProductCharacteristicSeeder;
 use Database\Seeders\Product\ProductLabel\ProductLabelOptionSeeder;
 use Database\Seeders\Product\ProductReview\ProductReviewSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -75,7 +74,6 @@ class ProductSeeder extends Seeder
 
         $this->call(ProductMediaSeeder::class);
         $this->call(ProductDocumentSeeder::class);
-        // $this->call(ProductCharacteristicSeeder::class);
         $this->call(ProductReviewSeeder::class);
 
         $this->call(ProductPropertySeeder::class);
