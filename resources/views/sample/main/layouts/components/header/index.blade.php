@@ -3,9 +3,13 @@
 @include('sample.main.layouts.components.header.burger')
 @include('sample.main.layouts.components.header.categories')
 
+<script>
+    window.search_strings = @json($search_strings);
+</script>
+
 <header class="header_wrapper" itemscope itemtype="https://schema.org/WPHeader">
     <div class="header header__container">
-        <a href="/" itemprop="url" class="header__logo">
+        <a href="{{ route("home") }}" itemprop="url" class="header__logo">
             <span class="header__logo_icon">{{ $settings->abbreviation }}</span>
             <div class="header__logo_content">
                 <span class="header__logo_name" itemprop="name">{{ $settings->name }}</span>

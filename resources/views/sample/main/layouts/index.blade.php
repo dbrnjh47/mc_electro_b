@@ -32,6 +32,7 @@
         <script>
             window.routes["city.set"] = "{{ route('city.set') }}";
             window.routes["cities"] = "{{ route('cities') }}";
+            window.routes["search"] = "{{ route('search') }}";
         </script>
 
         {{-- <script>

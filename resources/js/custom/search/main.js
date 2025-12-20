@@ -32,14 +32,14 @@ function close() {
         if(window.innerWidth > 1050){
             hideElement.show();
         }
-        
+
     }, 400);
 }
 
 // https://github.com/mattboldt/typed.js
 if(window.innerWidth > 550){
 const typed = new Typed('.header__search_input input', {
-    strings: ['Тест продукт', 'Болт анкерный с кольцом 10х60', 'Шайба увеличенная C5 DIN 9021 оцинкованная'],
+    strings: window.search_strings,
     typeSpeed: 50,
     backSpeed: 50,
     attr: 'placeholder',
@@ -47,3 +47,11 @@ const typed = new Typed('.header__search_input input', {
     loop: true
 });
 }
+
+input.find("input").change(function() {
+    let val = $(this).val();
+    if(val != "")
+    {
+        window.location.href = window.routes["search"]+"?search="+val;
+    }
+});
