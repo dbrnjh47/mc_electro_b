@@ -34,6 +34,7 @@ class PropertyValue extends Model
 
     public function proccessUnit($value, $action)
     {
+        if(!$action){return $this->number;}
         switch ($action) {
             case "/":
                 $this->valueProccess = ($this->number / $value);
