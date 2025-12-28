@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Schedule;
 //     ->name('Обновление курсов')
 //     ->everyMinute();
 //     // ->hourly();
+
+Schedule::call(function () {
+    Artisan::call('app:check-category-status-command');
+})
+    ->daily();

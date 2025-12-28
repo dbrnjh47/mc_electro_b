@@ -22,9 +22,36 @@ return new class extends Migration
 
             $table->text('description')->nullable();
 
+            $table->unsignedBigInteger('category_parent_id')->nullable();
+
+            $table->foreign('category_parent_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
 
+        Schema::create('categories_sub', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('category_child_id');
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('category_child_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+
+            $table->unique(['category_id', 'category_child_id'], 'categories_sub_unique');
+
+            $table->timestamps();
+        });
+
+        Schema::create('category_paths', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('category_id'); // последняя категория
+            $table->string('path')->index()->unique();
+            $table->string('category_ids')->index()->unique();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -32,6 +59,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('category_paths');
+        Schema::dropIfExists('categories_sub');
         Schema::dropIfExists('categories');
     }
 };

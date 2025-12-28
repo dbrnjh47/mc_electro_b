@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Http\Controllers\Controller;
+use App\Http\Services\Category\CategoryPathService;
+use App\Observers\CategoryObserver;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+
+#[ObservedBy([CategoryObserver::class])]
 class Category extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
@@ -20,6 +25,11 @@ class Category extends Model
     const PATH = "/assets/categories/previews/";
 
     protected $appends = ['preview_path'];
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_parent_id');
+    }
 
     public function sluggable(): array
     {
@@ -41,303 +51,102 @@ class Category extends Model
     {
         return ($this->preview ? Controller::photoAccessor($this->preview, self::PATH) : null);
     }
-
-    public function relation_parent()
+    public function getСhildrenIds()
     {
-        return $this->hasOne(Subcategory::class, 'category_child_id', 'id');
-    }
-
-    public function relation_childrens()
-    {
-        return $this->hasMany(Subcategory::class, 'category_parent_id', 'id');
-    }
-
-    // public function childrenIds()
-    // {
-    //     if (isset($this->children_ids)) {
-    //         return $this->children_ids;
-    //     }
-
-    //     $children_ids = DB::table(DB::raw("
-    //     (WITH RECURSIVE subcategories AS (
-    //         SELECT
-    //             category_child_id,
-    //             category_parent_id
-    //         FROM " . (new Subcategory())->getTable() . " as c
-    //         LEFT JOIN categories ON c.category_child_id = categories.id
-    //         WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
-
-    //         UNION ALL
-
-    //         SELECT
-    //             c.category_child_id,
-    //             c.category_parent_id
-    //         FROM " . (new Subcategory())->getTable() . " c
-    //         INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
-    //         LEFT JOIN categories ON c.category_child_id = categories.id
-    //         WHERE categories.is_on = 1
-    //     )
-    //     SELECT category_child_id FROM subcategories as cp) as subquery
-    //     "))->pluck("category_child_id");
-
-    //     $this->children_ids = $children_ids;
-    //     return $this->children_ids;
-    // }
-
-    public function childrens($max_level = null, $only_ids = 0)
-    {
-        if (!$only_ids && isset($this->children_on)) {
-            return $this->childrens;
-        }
-        if($only_ids && isset($this->children_ids)){
+        if (isset($this->children_ids)) {
             return $this->children_ids;
         }
 
-        //
-        $sql = "
-        (WITH RECURSIVE subcategories AS (
-            SELECT
-                category_child_id,
-                category_parent_id";
-
-        if(!$only_ids)
-        {
-            $sql .= ",
-            0 AS level,
-                CAST(SUBSTRING(categories.slug, 1, 255) AS CHAR(255)) AS path
-                -- categories.slug AS path";
-        }
-
-        $sql .= "
-        FROM " . (new Subcategory())->getTable() . " as c
-            LEFT JOIN categories ON c.category_child_id = categories.id
-            WHERE c.category_parent_id = {$this->id} AND categories.is_on = 1
-        UNION ALL
-
-        SELECT
-            c.category_child_id,
-            c.category_parent_id
-        ";
-
-        if(!$only_ids)
-        {
-            $sql .= ",
-                s.level + 1,
-                CAST(SUBSTRING(CONCAT(s.path, '/', categories.slug), 1, 255) AS CHAR(255)) AS path
-                -- CONCAT(s.path, '/', categories.slug ) AS path";
-        }
-
-        $sql .= "
-        FROM " . (new Subcategory())->getTable() . " c
-            INNER JOIN subcategories s ON s.category_child_id = c.category_parent_id
-            LEFT JOIN categories ON c.category_child_id = categories.id
-            WHERE categories.is_on = 1
-            " . ($max_level ? "AND s.level < {$max_level}" : "") . "
-        )
-        SELECT ".($only_ids ? 'category_child_id' : '*')." FROM subcategories as cp) as subquery
-        ";
-
-        //
-
-        $childrens = DB::table(DB::raw($sql));
-
-        if(!$only_ids)
-        {
-            $childrens = $childrens->get();
-            $childrens = $this->addInfo($childrens, is_child: 1);
-            $childrens = $this->buildTreeChildren($childrens);
-
-            $this->childrens = $childrens;
-            $this->children_on = 1;
-            return $childrens;
-        } else {
-            $this->children_ids = $childrens->pluck("category_child_id")->toArray();
-            return $this->children_ids;
-        }
-    }
-
-
-    public function parents($max_level = null, $on_check = 1)
-    {
-        if (isset($this->parents_on)) {
-            return $this->parents;
-        }
-        $parents = DB::table(DB::raw("
+        $category_table = $this->getTable();
+        $this->children_ids = DB::table(DB::raw("
             (WITH RECURSIVE CategoryPath AS (
                 SELECT
+                    id,
                     category_parent_id,
-                    category_child_id,
                     0 AS level
                 FROM
-                    " . (new Subcategory())->getTable() . "
-                LEFT JOIN
-                    categories ON " . (new Subcategory())->getTable() . ".category_parent_id = categories.id
+                    {$category_table}
                 WHERE
-                    category_child_id = {$this->id} ".($on_check ? "AND categories.is_on = 1" : "")."
+                    category_parent_id = {$this->id}
                 UNION ALL
                 SELECT
+                    c.id,
                     c.category_parent_id,
-                    c.category_child_id,
                     cp.level + 1 AS level
                 FROM
-                    " . (new Subcategory())->getTable() . " AS c
+                    {$category_table} AS c
                 INNER JOIN
-                    CategoryPath cp ON c.category_child_id = cp.category_parent_id
-                LEFT JOIN
-                    categories ON c.category_parent_id = categories.id
-                ".($on_check ? "WHERE categories.is_on = 1" : "")."
-                " . ($max_level ? (($on_check ? "AND" : "WHERE")." cp.level < {$max_level}") : "") . "
+                    CategoryPath cp ON c.category_parent_id = cp.id
             )
             SELECT * FROM CategoryPath as cp) as subquery
         "))->get();
-        // dump($this->id);
-        // dump($parents);
-        // dump("__________________");
-        $this->parents_array = $this->addInfo($parents);
-        // dd($parents);
-        $this->setCurrentParentPath();
 
-        $parents = $this->buildTree($this->parents_array);
-        $this->parents = $parents;
-        $this->parents_paths = $this->getParentsPath($this->parents, $this->slug);
-        $this->parents_on = 1;
+        return $this->children_ids;
+    }
+    public function getParentIds()
+    {
+        if (isset($this->parent_ids)) {
+            return $this->parent_ids;
+        }
 
-        return $parents;
+        $category_table = $this->getTable();
+        $this->parent_ids = DB::table(DB::raw("
+            (WITH RECURSIVE CategoryPath AS (
+                SELECT
+                    id,
+                    category_parent_id,
+                    0 AS level
+                FROM
+                    {$category_table}
+                WHERE
+                    id = {$this->id}
+                UNION ALL
+                SELECT
+                    c.id,
+                    c.category_parent_id,
+                    cp.level + 1 AS level
+                FROM
+                    {$category_table} AS c
+                INNER JOIN
+                    CategoryPath cp ON c.id = cp.category_parent_id
+                WHERE c.category_parent_id IS NOT NULL
+            )
+            SELECT * FROM CategoryPath as cp) as subquery
+        "))->get();
+
+        return $this->parent_ids;
     }
 
-    public function setCurrentParentPath($parents = null)
+    public function deleteSubCategory()
     {
-        if(!$parents)
-        {
-            $parents = $this->parents_array;
-        }
-        if(!isset($this->parent_slugs)){
-            $this->parent_list = null;
-            return;
-        }
-
-        $path = $this->slug;
-        $parent_list = [];
-        foreach($this->parent_slugs as $slug)
-        {
-            foreach($parents as $parent)
-            {
-                if($parent->slug == $slug)
-                {
-                    $path = $parent->url."/".$path;
-                    $parent->url = $path;
-                    $parent_list[] = $parent;
-                    break;
-                }
-            }
-        }
-        $this->parent_list = $parent_list;
-        return;
+        Subcategory::where("category_child_id", $this->id)->delete();
     }
 
-    private function getParentsPath($items, $parent_path = '')
+    public function createSubCategory()
     {
-        $paths = [];
+        if ($this->category_parent_id) {
+            $parent_ids = $this->getParentIds();
 
-        if (!$items) {
-            $paths[] = $parent_path;
-        } else {
-            foreach ($items as $item) {
-                $current_path = $parent_path ? $item->slug . '/' .  $parent_path : $item->slug;
-                if($item->is_on)
-                {
-                    if (!empty($item->parents)) {
-                        $childPaths = $this->getParentsPath($item->parents, $current_path);
-                        $paths = array_merge($paths, $childPaths);
-                    } else {
-                        $paths[] = $current_path;
-                    }
-                }
-
+            $data = [];
+            foreach ($parent_ids as $parent_id) {
+                $data[] = [
+                    'category_id' => $parent_id->category_parent_id,
+                    'category_child_id' => $this->id,
+                ];
             }
-        }
 
-        return $paths;
+            Subcategory::upsert(
+                $data,
+                ['category_id', 'category_child_id'], // Уникальные ключи
+                [] // Поля для обновления (пусто = не обновлять)
+            );
+        }
     }
 
-    private function addInfo($result, $is_child = 0)
+    public function createCategoryPath()
     {
-        $parent_ids = $result->flatMap(function ($item) {
-            return [$item->category_parent_id, $item->category_child_id];
-        })
-            ->unique()
-            ->values()
-            ->toArray();
-        if(!$parent_ids)
-        {
-            return $result;
-        }
-        $categories = (new CategoryModelService(["id", "is_on", "slug", "name", "preview"], on_check: 0))->getIn($parent_ids);
-
-        foreach ($categories as $category) {
-            foreach ($result as $key => $parent) {
-                if (!$is_child && $parent->category_parent_id == $category->id) {
-                    $category->category_parent_id = $result[$key]->category_parent_id;
-                    $category->category_child_id = $result[$key]->category_child_id;
-                    $category->level = $result[$key]->level;
-                    $result[$key] = $category;
-                } else if ($is_child && $parent->category_child_id == $category->id) {
-                    $category->category_parent_id = $result[$key]->category_parent_id;
-                    $category->category_child_id = $result[$key]->category_child_id;
-                    $category->level = $result[$key]->level;
-                    $category->path = $result[$key]->path;
-                    $result[$key] = $category;
-                    // $result[$key] = (object)array_merge((array)$category, (array)$result[$key]);
-                }
-            }
-        }
-
-        return $result;
-    }
-
-    private function buildTree($list, $level = 0, $id = null)
-    {
-        $tree = [];
-
-        foreach ($list as $item) {
-            if ($level != $item->level) {
-                continue;
-            }
-            if ($id != null && $item->category_child_id != $id) {
-                continue;
-            } else {
-                $item->parents = $this->buildTree($list, $item->level + 1, $item->category_parent_id);
-            }
-
-            $tree[] = $item;
-        }
-        if (empty($tree)) {
-            return null;
-        }
-
-        return $tree;
-    }
-
-    private function buildTreeChildren($list, $level = 0, $id = null)
-    {
-
-        $tree = [];
-
-        foreach ($list as $item) {
-            if ($level != $item->level) {
-                continue;
-            }
-            if ($id != null && $item->category_parent_id != $id) {
-                continue;
-            }
-            $item->childrens = $this->buildTreeChildren($list, $item->level + 1, $item->category_child_id);
-
-
-            $tree[] = $item;
-        }
-        if (empty($tree)) {
-            return null;
-        }
-        return $tree;
+        $categoryPathService = (new CategoryPathService($this));
+        $categoryPathService->delete();
+        $categoryPathService->createAll();
     }
 }

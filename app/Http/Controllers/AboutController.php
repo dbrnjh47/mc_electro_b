@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\BreadcrumbService;
-use App\Http\Services\Models\CategoryModelService;
 use App\Http\Services\User\WishListService;
-use App\Models\Company\Company;
 use App\Http\Standards\ProductStandard;
 use App\Models\Product\Product;
 
