@@ -25,7 +25,7 @@ class ProductSeeder extends Seeder
         $this->call(ProductLabelOptionSeeder::class);
 
         foreach ($categories as $category) {
-            Product::factory(rand(1, 10))
+            Product::factory(rand(10, 30))
                 ->afterCreating(function (Product $product) {
                     $count = rand(1, 2);
 

@@ -13,11 +13,6 @@ class ProductController
 {
     public function list($request)
     {
-        // старое получение айдишников дочерних категорий
-        // $category_ids = new Category();
-        // $category_ids->id = $request->category_id;
-        // $category_ids = $category_ids->childrens(only_ids:1);
-
         $wishlist_id = (new WishListService(0))->getID();
 
         $productStandard = app()->make(ProductStandard::class, ['params' => [

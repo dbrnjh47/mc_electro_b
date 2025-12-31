@@ -38,7 +38,6 @@ class PropertyController
             'params' => array_filter($request->all())
         ]);
 
-        $request->offsetUnset('category_id');
         $this->productStandard = app()->make(ProductStandard::class, ['params' => [
             "is_on" => ["category"],
         ]]);
@@ -97,6 +96,7 @@ class PropertyController
 
                 unset($property->productValues);
             });
+
         return $properties;
     }
 

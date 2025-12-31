@@ -21,7 +21,7 @@ class ProductPropertySeeder extends Seeder
 
         foreach($propertis as $property)
         {
-            $products = Product::inRandomOrder()->limit(15)->get();
+            $products = Product::inRandomOrder()->limit(40)->get();
             $type = (($property->unit_id || $property->property_type_id == 3) ? "float" : "text");
 
             $property_values = PropertyValue::where("type", $type)->inRandomOrder()->limit(10)->pluck("id");

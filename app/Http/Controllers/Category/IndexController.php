@@ -121,25 +121,11 @@ class IndexController extends Controller
         //
 
         // фильтры
-        $categoryStandard = app()->make(CategoryStandard::class, [
-            'params' => [
-                "is_on" => 1,
-            ],
-        ]);
-
-        $category_ids = Subcategory::where("category_id", $category->id)
-            ->whereHas('category', function ($q) use ($categoryStandard) {
-                $q->standard($categoryStandard);
-            })
-            ->pluck("category_child_id");
-        $category_ids[] = $category->id;
 
         $request->merge([
             "category_id" => $category->id,
-            "category_ids" => $category_ids
         ]);
         $properties = (new PropertyController($request))->process();
-        // $properties = Property::where("id", -5)->get();
 
         return view('sample.main.pages.category.first.index', [
             'title' => $category->name,
