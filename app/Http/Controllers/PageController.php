@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\Models\BannerModelService;
-use App\Http\Services\Models\CategoryModelService;
 
 use App\Http\Services\User\WishListService;
+use App\Http\Standards\CategoryStandard;
 use App\Http\Standards\ProductStandard;
+use App\Models\Category\Category;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
@@ -16,41 +17,27 @@ class PageController extends Controller
 {
     public function index(Request $request)
     {
-        // $r = (new WishListService())->get();
-        // dd($r);
-
-        // $r = (new WishListService())->count();
-        // dd($r);
-
-        // (new WishListService)->add(413);
-        // (new WishListService)->delite(2);
-
-        // (new WishListService(0))->clear();
-
-
-        // $products = Product::with(['medias', 'documents'])->limit(5)->get();
-        // dd($products[1]->documents[0]->path);
-        // dump($products);
-        // end test
-
         $wishlist_id = (new WishListService(0))->getID();
 
         //
 
-        $service_categories = (new CategoryModelService);
-        $categories = $service_categories
-            ->model
-            ->with(['relation_childrens' => function ($query) {
-                $query->whereHas('category', function ($q) {
-                    $q = CategoryModelService::whereOn($q);
-                })->with('category'); // Дополнительно подгружаем категорию, если нужно
-            }])
-            ->doesntHave('relation_parent')
-            ->inRandomOrder()
-            ->limit(4);
+        $categoryStandard = app()->make(CategoryStandard::class, [
+            'params' => [
+                "is_on" => 1,
+                "product_count" => 1,
+            ],
+        ]);
 
-        $categories = $categories->get();
-        // dd($categories);
+        $categories = Category::select(["id", "name", "slug", "category_parent_id"])
+            ->standard($categoryStandard)
+            ->whereNull("category_parent_id")
+            ->with(['child_categories' => function ($q) use ($categoryStandard){
+                $q->select(["id", "name", "slug", "category_parent_id"])
+                    ->standard($categoryStandard);
+            }])
+            ->inRandomOrder()
+            ->limit(4)
+            ->get();
 
         //
 

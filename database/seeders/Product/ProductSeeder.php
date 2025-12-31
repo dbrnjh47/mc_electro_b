@@ -41,11 +41,21 @@ class ProductSeeder extends Seeder
                     $count = rand(0, 3);
 
                     for ($i = 0; $i < $count; $i++) {
-                        ProductCategory::insertOrIgnore([
-                            'product_id' => $product->id,
-                            'category_id' => Category::inRandomOrder()
-                                ->first()->id,
+                        $category_id = Category::inRandomOrder()->first()->id;
+                        ProductCategory::firstOrCreate([
+                            "category_id" => $category_id,
+                            "product_id" => $product->id,
+                        ],
+                        [
+                            "category_id" => $category_id,
+                            "product_id" => $product->id,
                         ]);
+
+                        // ProductCategory::insertOrIgnore([
+                        //     'product_id' => $product->id,
+                        //     'category_id' => Category::inRandomOrder()
+                        //         ->first()->id,
+                        // ]);
                     }
                 })
                 ->afterCreating(function (Product $product) {

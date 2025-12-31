@@ -5,7 +5,6 @@ namespace App\Http\Services\Import\Ways\MKElectro;
 use App\Http\API\MKElectroApi;
 use App\Http\Services\MediaService;
 
-use App\Http\Services\Models\CategoryModelService;
 use App\Models\Category\Category;
 use App\Models\Category\Subcategory;
 use Illuminate\Support\Facades\Storage;
@@ -41,8 +40,8 @@ class CategoryWay extends MKElectroApi
 
         $category_sub = new Subcategory();
 
-        $category_sub->category_parent_id = (new CategoryModelService(select_list:["id"], on_check: 0))->firstBySlug($category_sub_api["slug_parent"])->id;
-        $category_sub->category_child_id = (new CategoryModelService(select_list:["id"], on_check: 0))->firstBySlug($category_sub_api["slug_child"])->id;
+        $category_sub->category_parent_id = Category::select(["id"])->where("slug", $category_sub_api["slug_parent"])->first()->id;
+        $category_sub->category_child_id = Category::select(["id"])->where("slug", $category_sub_api["slug_child"])->first()->id;
 
         $category_sub->save();
     }

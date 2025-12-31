@@ -4,7 +4,7 @@ namespace App\Http\Services\Import\Ways\MKElectro;
 
 use App\Http\API\MKElectroApi;
 use App\Http\Services\MediaService;
-use App\Http\Services\Models\CategoryModelService;
+use App\Models\Category\Category;
 use App\Models\Product\Product;
 use App\Models\Product\ProductCategory;
 use App\Models\Product\ProductMedia;
@@ -67,7 +67,7 @@ class ProductWay extends MKElectroApi
         $product_media = new ProductCategory();
 
         $product_media->product_id = $product_id;
-        $product_media->category_id = (new CategoryModelService(select_list:["id"], on_check: 0))->firstBySlug($category_slug)->id;
+        $product_media->category_id = Category::select(["id"])->where("slug", $category_slug)->first()->id;
 
         $product_media->save();
     }

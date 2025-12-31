@@ -7,45 +7,79 @@ use App\Http\Controllers\Product\IndexController as ProductIndexController;
 use App\Http\Requests\Category\FilterRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
+use App\Http\Standards\CategoryStandard;
 use App\Models\Category\Category;
+use App\Models\Category\CategoryPath;
+use App\Models\Category\Subcategory;
+use App\Models\Property\Property;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
+    public static function breadcrumb($path = null)
+    {
+        $breadcrumbs = (new BreadcrumbService);
+        $breadcrumbs->add("Каталог", route("categories"));
 
+        if($path)
+        {
+            $category_ids = explode(',', $path->category_ids);
+            $categories = Category::select(["id", "name", "slug"])->whereIn("id", $category_ids)->get()->keyBy('id');
+
+            $slugs = [];
+            foreach($category_ids as $category_id)
+            {
+                $slugs[] = $categories[$category_id]->slug;
+                $breadcrumbs->add(
+                    $categories[$category_id]->name,
+                    route("category", ["slugs" => implode('/', $slugs)])
+                );
+            }
+        }
+
+        return $breadcrumbs;
+    }
     public function list()
     {
-        $categories = (new CategoryModelService(["id", "name", "slug"]))
-            ->model
-            ->with(['relation_childrens' => function ($query) {
-                $query->whereHas('category', function ($q) {
-                    $q = CategoryModelService::whereOn($q);
-                })->with('category', function ($q) {
-                    $q = (new CategoryModelService(["id", "name", "slug"], $q));
-                }); // Дополнительно подгружаем категорию, если нужно
+        $categoryStandard = app()->make(CategoryStandard::class, [
+            'params' => [
+                "is_on" => 1,
+                "product_count" => 1,
+            ],
+        ]);
+
+        $categories = Category::select(["id", "name", "slug", "category_parent_id"])
+            ->standard($categoryStandard)
+            ->whereNull("category_parent_id")
+            ->with(['child_categories' => function ($q) use ($categoryStandard){
+                $q->select(["id", "name", "slug", "category_parent_id"])
+                    ->standard($categoryStandard);
             }])
-            ->doesntHave('relation_parent')
             ->get();
 
         return $categories;
     }
     public function all()
     {
-        $category_service = (new CategoryModelService);
-        $categories = $category_service
-            ->model
-            ->with(['relation_childrens' => function ($query) {
-                $query->whereHas('category', function ($q) {
-                    $q = CategoryModelService::whereOn($q);
-                })->with('category'); // Дополнительно подгружаем категорию, если нужно
+        $categoryStandard = app()->make(CategoryStandard::class, [
+            'params' => [
+                "is_on" => 1,
+                "product_count" => 1,
+            ],
+        ]);
+
+        $categories = Category::select(["id", "name", "slug", "category_parent_id"])
+            ->standard($categoryStandard)
+            ->whereNull("category_parent_id")
+            ->with(['child_categories' => function ($q) use ($categoryStandard){
+                $q->select(["id", "name", "slug", "category_parent_id"])
+                    ->standard($categoryStandard);
             }])
-            ->doesntHave('relation_parent');
-        $category_service->model = $categories;
-        $categories = $category_service->pagination();
-        // dd($categories);
+            ->paginate(9);
+
         //
 
-        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory();
+        $breadcrumbs = self::breadcrumb();
 
         return view('sample.main.pages.category.all.index', [
             'title' => "Каталог",
@@ -57,31 +91,47 @@ class IndexController extends Controller
 
     public function show(Request $request)
     {
-        $slugs = explode('/', $request->slugs);
-        $category = (new CategoryModelService)->firstBySlug(end($slugs));
+        $path = CategoryPath::where("path", $request->slugs)->firstOrFail();
 
-        if (!$category || !$category->is_on) {
-            $this->notFound();
-        }
+        $categoryStandard = app()->make(CategoryStandard::class, [
+            'params' => [
+                "is_on" => 1,
+                "product_count" => 1,
+            ],
+        ]);
 
-        $category->parent_slugs = $slugs;
-        $category->parents();
-        // dump($category->parents_paths);
-        if (!in_array(implode('/', $slugs), $category->parents_paths)) {
-            $this->notFound();
-        }
-
-        //
-
-        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
+        $category = Category::standard($categoryStandard)
+            ->where("id", $path->category_id)
+            ->firstOrFail();
 
         //
 
-        $category->childrens(1);
-        $category->childrens(only_ids: 1);
+        $breadcrumbs = self::breadcrumb($path);
+
+        //
+
+        $categories = Category::standard($categoryStandard)
+            ->where("category_parent_id", $category->id)
+            ->with(['child_categories' => function ($q) use ($categoryStandard){
+                $q->select(["id", "name", "slug", "category_parent_id"])
+                    ->standard($categoryStandard);
+            }])
+            ->get();
+
+        //
 
         // фильтры
-        $category_ids = $category->children_ids;
+        $categoryStandard = app()->make(CategoryStandard::class, [
+            'params' => [
+                "is_on" => 1,
+            ],
+        ]);
+
+        $category_ids = Subcategory::where("category_id", $category->id)
+            ->whereHas('category', function ($q) use ($categoryStandard) {
+                $q->standard($categoryStandard);
+            })
+            ->pluck("category_child_id");
         $category_ids[] = $category->id;
 
         $request->merge([
@@ -89,14 +139,16 @@ class IndexController extends Controller
             "category_ids" => $category_ids
         ]);
         $properties = (new PropertyController($request))->process();
+        // $properties = Property::where("id", -5)->get();
 
         return view('sample.main.pages.category.first.index', [
             'title' => $category->name,
             'description' => "",
             "breadcrumbs" => $breadcrumbs,
             "category" => $category,
-            "path_slugs" => $path_slugs,
-            "category_ids" => $category_ids,
+            "categories" => $categories,
+            "path" => route("category", ["slugs" => $path->path]),
+            "path_id" => $path->id,
             "properties" => $properties
         ]);
     }

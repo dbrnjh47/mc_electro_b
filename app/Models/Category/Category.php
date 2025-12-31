@@ -2,7 +2,6 @@
 
 namespace App\Models\Category;
 
-use App\Http\Services\Models\CategoryModelService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -10,9 +9,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use App\Http\Controllers\Controller;
 use App\Http\Services\Category\CategoryPathService;
+use App\Models\Product\Product;
+use App\Models\Product\ProductCategory;
 use App\Observers\CategoryObserver;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use App\Models\Traits\Standardable;
 
 #[ObservedBy([CategoryObserver::class])]
 class Category extends Model
@@ -20,7 +22,7 @@ class Category extends Model
     /** @use HasFactory<\Database\Factories\CategoryFactory> */
     use HasFactory;
     use Sluggable;
-
+    use Standardable;
     protected $guarded = false;
     const PATH = "/assets/categories/previews/";
 
@@ -29,6 +31,19 @@ class Category extends Model
     public function category()
     {
         return $this->hasOne(Category::class, 'id', 'category_parent_id');
+    }
+
+    public function child_categories()
+    {
+        return $this->hasMany(Category::class, 'category_parent_id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(
+            Product::class,          // Целевая модель
+            (new ProductCategory())->getTable(),     // Промежуточная таблица
+        );
     }
 
     public function sluggable(): array

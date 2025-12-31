@@ -2,7 +2,6 @@
 
 namespace App\Http\Standards;
 
-use App\Http\Services\Models\CategoryModelService;
 use Illuminate\Database\Eloquent\Builder;
 
 class ProductStandard extends AbstractStandard
@@ -30,8 +29,14 @@ class ProductStandard extends AbstractStandard
 
         if($is_check || !in_array("category", $exclusion_list))
         {
-            $builder->whereHas('categories.category', function ($q) {
-                $q = CategoryModelService::whereOn($q);
+            $categoryStandard = app()->make(CategoryStandard::class, [
+                'params' => [
+                    "is_on" => 1,
+                ],
+            ]);
+
+            $builder->whereHas('categories.category', function ($q) use ($categoryStandard) {
+                $q->standard($categoryStandard);
             });
         }
 

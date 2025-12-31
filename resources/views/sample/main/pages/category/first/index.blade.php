@@ -36,56 +36,59 @@
         <div class="categories__container">
             <div class="app__title">
                 <div class="app__title_wrapper">
-                    <h2 class="app__title_text">{{$category->name}} <span>(19)</span></h2>
+                    <h2 class="app__title_text">{{$category->name}} <span>{{(isset($category->products_count) && $category->products_count ? "({$category->products_count})" : "")}} </span></h2>
                     @if($category->description)
                         <p class="app__title_description">{{$category->description}}</p>
                     @endif
                 </div>
             </div>
 
-            @if($category->childrens)
-            @php
-                $path_slugs = route("category", ["slugs" => implode('/', $path_slugs)]);
-            @endphp
+            @if($categories->isNotEmpty())
+
             <div class="categories__lists">
-                @foreach ($category->childrens as $category_children)
+                @foreach ($categories as $category_children)
                     @php
-                        $category_children->full_path = $path_slugs."/".$category_children->path;
+                        $category_children->full_path = $path."/".$category_children->slug;
                     @endphp
-                    @if(!$category_children->childrens) <a href="{{$category_children->full_path}}" @else <div @endif class="categories__item @if($category_children->childrens && count($category_children->childrens) <= 3) activ @endif ">
-                    @if($category_children->childrens)
-                    <div class="categories__hover">
-                        <div class="categories__hover_items">
-                            <a href="{{$category_children->full_path}}" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title bold">{{$category_children->name}}</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            @foreach ($category_children->childrens as $c)
-                            <a href="{{$path_slugs."/".$c->path}}" class="categories__hover_item">
-                                <h4 class="categories__hover_item_title">{{$c->name}}</h4>
-                                <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
-                            </a>
-                            @endforeach
+                    @if($category_children->child_categories->isEmpty())
+                        <a href="{{$category_children->full_path}}" class="categories__item">
+                    @else
+                        <div class="categories__item @if($category_children->child_categories->isNotEmpty() && $category_children->child_categories->count() <= 3) activ @endif ">
+                    @endif
+
+                        @if($category_children->child_categories->isNotEmpty())
+                        <div class="categories__hover">
+                            <div class="categories__hover_items">
+                                <a href="{{$category_children->full_path}}" class="categories__hover_item">
+                                    <h4 class="categories__hover_item_title bold">{{$category_children->name}}</h4>
+                                    <div class="categories__hover_item_line"></div>
+                                    <p class="categories__hover_item_count">{{(isset($category_children->products_count) && $category_children->products_count ? $category_children->products_count : "")}}</p>
+                                </a>
+                                @foreach ($category_children->child_categories as $c)
+                                <a href="{{$category_children->full_path."/".$c->slug}}" class="categories__hover_item">
+                                    <h4 class="categories__hover_item_title">{{$c->name}}</h4>
+                                    <div class="categories__hover_item_line"></div>
+                                    <p class="categories__hover_item_count">{{(isset($c->products_count) && $c->products_count ? $c->products_count : "")}}</p>
+                                </a>
+                                @endforeach
+                            </div>
+
+                            @if(($category_children->child_categories->count() - 3) > 0)
+                            <button class="categories__hover_item_btn">Еще {{$category_children->child_categories->count() - 3}}</button>
+                            @endif
                         </div>
-
-                        @if((count($category_children->childrens) - 3) > 0)
-                        <button class="categories__hover_item_btn">Еще {{count($category_children->childrens) - 3}}</button>
                         @endif
-                    </div>
-                    @endif
 
-                    <div class="categories__item_title">{{$category_children->name}}</div>
-                    @if($category_children->description)
-                        <div class="categories__item_description">{{$category_children->description}}</div>
-                    @endif
+                        <div class="categories__item_title">{{$category_children->name}}</div>
+                        @if($category_children->description)
+                            <div class="categories__item_description">{{$category_children->description}}</div>
+                        @endif
 
-                    @if ($category_children->preview)
-                        <img class="categories__item_bg" src="{{$category_children->preview_path}}" loading="lazy"
-                            decoding="async" alt="{{$category_children->name}}">
-                    @endif
-                @if(!$category_children->childrens) </a> @else </div> @endif
+                        @if ($category_children->preview)
+                            <img class="categories__item_bg" src="{{$category_children->preview_path}}" loading="lazy"
+                                decoding="async" alt="{{$category_children->name}}">
+                        @endif
+                    @if($category_children->child_categories->isEmpty()) </a> @else </div> @endif
                 @endforeach
 
                 <div class="categories__item categories__item_last">
@@ -95,7 +98,7 @@
 
             </div>
 
-            @if(count($category->childrens) > 5)
+            @if($categories->count() > 5)
             <div class="categories__btn">
                 <button class="btn">Показать еще</button>
             </div>
@@ -185,8 +188,8 @@
     <script>
         window.routes["category.filter"] = "{{ route('category.filter') }}";
 
-        let category_ids = @json($category_ids);
-        let category_slug = "{{ $category->slug }}";
+        let category_id = {{ $category->id }};
+        let path_id = {{ $path_id }};
     </script>
 
     @include("sample.main.components.wishlist_action")

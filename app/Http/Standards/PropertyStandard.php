@@ -2,7 +2,6 @@
 
 namespace App\Http\Standards;
 
-use App\Http\Services\Models\CategoryModelService;
 use Illuminate\Database\Eloquent\Builder;
 
 class PropertyStandard extends AbstractStandard

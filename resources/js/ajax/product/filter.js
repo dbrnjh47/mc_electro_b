@@ -42,9 +42,9 @@ function getDataProducts() {
 
     return {
         "page": product_page,
-        "category_ids": (typeof category_ids != 'undefined' ? category_ids : null),
+        "category_id": (typeof category_id != 'undefined' ? category_id : null),
         "sort" : sort_select.val(),
-        "category_slug": (typeof category_slug != 'undefined' ? category_slug : null),
+        "path_id": (typeof path_id != 'undefined' ? path_id : null),
         "search": search_input.val(),
         "filters": filters,
         "rang_filters": rang_filters

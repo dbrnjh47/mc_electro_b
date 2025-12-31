@@ -24,7 +24,7 @@ class CityModelService extends ControllerModelService
 
         if($this->on_check)
         {
-            $this->model = CategoryModelService::whereOn($this->model);
+            $this->model = self::whereOn($this->model);
         }
 
         return $this->model;

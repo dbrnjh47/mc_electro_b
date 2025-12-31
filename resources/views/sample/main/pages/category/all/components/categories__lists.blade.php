@@ -5,32 +5,29 @@
             $path_slugs = [$category->slug];
             $path = route('category', ['slugs' => implode('/', $path_slugs)]);
         @endphp
-        @if($category->relation_childrens->isEmpty()) <a href="{{$path}}" @else <div @endif class="categories__item">
-            @if (!$category->relation_childrens->isEmpty())
+        @if($category->child_categories->isEmpty()) <a href="{{$path}}" @else <div @endif class="categories__item">
+            @if (!$category->child_categories->isEmpty())
                 <div class="categories__hover">
                     <div class="categories__hover_items">
                         <a href="{{$path}}" class="categories__hover_item">
                             <h4 class="categories__hover_item_title bold">{{ $category->name }}</h4>
                             <div class="categories__hover_item_line"></div>
-                            <p class="categories__hover_item_count">5</p>
+                            <p class="categories__hover_item_count">{{ (isset($category->products_count) && $category->products_count ? $category->products_count : "") }}</p>
                         </a>
 
-                        @foreach ($category->relation_childrens as $c)
-                            @php
-                                $c = $c->category;
-                            @endphp
+                        @foreach ($category->child_categories as $c)
                             <a href="{{$path}}/{{$c->slug}}" class="categories__hover_item">
                                 <h4 class="categories__hover_item_title">{{ $c->name }}</h4>
                                 <div class="categories__hover_item_line"></div>
-                                <p class="categories__hover_item_count">5</p>
+                                <p class="categories__hover_item_count">{{ (isset($c->products_count) && $c->products_count ? $c->products_count : "") }}</p>
                             </a>
                         @endforeach
                     </div>
 
 
-                    @if (count($category->relation_childrens) - 3 > 0)
+                    @if ($category->child_categories->count() - 3 > 0)
                         <button class="categories__hover_item_btn">Еще
-                            {{ count($category->relation_childrens) - 3 }}</button>
+                            {{ $category->child_categories->count() - 3 }}</button>
                     @endif
                 </div>
             @endif
@@ -46,7 +43,7 @@
                     decoding="async" alt="{{ $category->name }}">
             @endif
 
-        @if($category->relation_childrens->isEmpty()) </a> @else </div> @endif
+        @if($category->child_categories->isEmpty()) </a> @else </div> @endif
     @endforeach
 
 

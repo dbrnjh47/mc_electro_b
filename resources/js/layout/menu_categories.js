@@ -18,17 +18,17 @@ window.startMenuCategories = function()
     `;
 
     window.dataCategories.forEach((c, i) => {
-        if(c["relation_childrens"].length === 0)
+        if(c["child_categories"].length === 0)
         {
             h += `
             <a href="`+window.routes["category"]+"/"+c["slug"]+`" class="menu_categories__list_basic menu_categories__item">
-                <p>`+c["name"]+` <span>(0000)</span></p>
+                <p>`+c["name"]+` <span>`+(c["products_count"] ? "("+c["products_count"]+")" : "")+`</span></p>
             </a>
         `;
         } else {
             h += `
             <div class="menu_categories__list_basic menu_categories__item" data-id="`+i+`">
-                <p>`+c["name"]+` <span>(0000)</span></p>
+                <p>`+c["name"]+` <span>`+(c["products_count"] ? "("+c["products_count"]+")" : "")+`</span></p>
                 <img src="/temple/images/layout/menu_categories/str.svg" alt="str" loading="lazy" decoding="async">
             </div>
         `;
@@ -98,8 +98,8 @@ function setCategory(obj) {
 
     let h = "";
 
-    category["relation_childrens"].forEach(c => {
-        h += `<a href="`+(href+"/"+c["category"]["slug"])+`" class="menu_categories__second_item">`+c["category"]["name"]+`</a>`;
+    category["child_categories"].forEach(c => {
+        h += `<a href="`+(href+"/"+c["slug"])+`" class="menu_categories__second_item">`+c["name"]+` <span>`+(c["products_count"] ? "("+c["products_count"]+")" : "")+`</span></a>`;
     });
     menuCategoriesSecond.find(".menu_categories__second_list").html(h);
     // console.log(dataCategories);
