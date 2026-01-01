@@ -1,8 +1,8 @@
 @php
     $href = route('product', ['slug' => $product->slug]);
-    if($category_slug)
+    if($path_id)
     {
-        $href .= "?category_slug={$category_slug}";
+        $href .= "?path_id={$path_id}";
     }
 @endphp
 <div class="product_card">

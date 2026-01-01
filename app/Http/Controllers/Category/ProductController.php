@@ -28,7 +28,12 @@ class ProductController
         $products_html = "";
         foreach($products as $product)
         {
-            $products_html .= Blade::renderComponent(new Card($product, $request->category_slug));
+            $products_html .= Blade::renderComponent(
+                new Card(
+                    $product,
+                    (isset($request->path_id) ? $request->path_id : null)
+                )
+            );
         }
 
         // $products_html .= Blade::renderComponent(new FeedbackCard());

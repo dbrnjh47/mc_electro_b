@@ -28,8 +28,10 @@ class FilterRequest extends FormRequest
             "search" => ['nullable', 'string', 'min:1', 'max:128'],
 
             "category_slug" => ['nullable', 'string', 'max:128'],
-            "category_ids" => ['nullable', 'array', 'min:1'],
-            "category_ids.*" => ['required', 'integer'],
+            "category_id" => ['nullable', 'integer'],
+            "path_id" => ['nullable', 'integer'],
+            // "category_ids" => ['nullable', 'array', 'min:1'],
+            // "category_ids.*" => ['required', 'integer'],
 
             "filters" => ['nullable', 'array', 'min:1'],
             "filters.*" => ['required', 'array', 'min:1'],

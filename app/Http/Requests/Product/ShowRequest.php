@@ -33,7 +33,7 @@ class ShowRequest extends FormRequest
     {
         return [
             "slug" => ['required', 'string'],
-            "category_slug" => ['string'],
+            "path_id" => ['nullable', 'integer'],
         ];
     }
 

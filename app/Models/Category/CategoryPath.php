@@ -9,4 +9,9 @@ class CategoryPath extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoryPathFactory> */
     use HasFactory;
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Product;
 
+use App\Http\Controllers\Category\IndexController as CategoryIndexController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Product\Information\ReviewController;
 use App\Http\Filters\ProductFilter;
@@ -10,8 +11,11 @@ use App\Http\Services\BreadcrumbService;
 use App\Http\Services\Models\CategoryModelService;
 
 use App\Http\Services\User\WishListService;
+use App\Http\Standards\CategoryStandard;
 use App\Http\Standards\ProductStandard;
 use App\Http\Standards\PropertyStandard;
+use App\Models\Category\Category;
+use App\Models\Category\CategoryPath;
 use App\Models\Product\Product;
 use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
@@ -19,15 +23,77 @@ use Illuminate\Database\Eloquent\Builder;
 
 class IndexController extends Controller
 {
+    public $categoryStandard, $propertyStandard, $productFilter;
+    public function __construct() {
+        parent::__construct();
+        $this->categoryStandard = app()->make(CategoryStandard::class, [
+            'params' => [
+                "is_on" => 1,
+            ],
+        ]);
+
+        $this->propertyStandard = app()->make(PropertyStandard::class, ['params' => [
+            "is_on" => 1,
+            "unit" => 1,
+            "section" => 1,
+            "sort" => 1
+        ]]);
+    }
+
+    public function getPath($path_id = null)
+    {
+        $path = null;
+        if ($path_id) {
+            $path = CategoryPath::whereHas(
+                'category',
+                function ($q) {
+                    $q = $q->standard($this->categoryStandard)
+                    ->whereHas(
+                        'products',
+                        function ($q)  {
+                            $q = $q->filter($this->productFilter);
+                        });
+                })
+                ->find($path_id);
+        }
+
+        if (!$path) {
+            // определим нужный путь
+            $path = CategoryPath::whereHas(
+                'category',
+                function ($q)  {
+                    $q = $q->standard($this->categoryStandard)
+                        ->whereHas(
+                            'products',
+                            function ($q)  {
+                                $q = $q->filter($this->productFilter);
+                            });
+                })
+                ->firstOrFail();
+        }
+
+        return $path;
+    }
+
     public function show(ShowRequest $request)
     {
-        $wishlist_id = (new WishListService(0))->getID();
-
-        $productFilter = app()->make(ProductFilter::class, [
+        $this->productFilter = app()->make(ProductFilter::class, [
             'params' => [
                 "slug" => $request->slug,
             ]
         ]);
+        $path = $this->getPath((
+            isset($request->path_id) && $request->path_id
+            ? $request->path_id
+            : null)
+        );
+
+        $breadcrumbs = CategoryIndexController::breadcrumb($path);
+
+        //
+
+        $wishlist_id = (new WishListService(0))->getID();
+
         $productStandard = app()->make(ProductStandard::class, [
             'params' => [
                 "is_on" => 1,
@@ -36,15 +102,8 @@ class IndexController extends Controller
             ],
         ]);
 
-        $propertyStandard = app()->make(PropertyStandard::class, ['params' => [
-            "is_on" => 1,
-            "unit" => 1,
-            "section" => 1,
-            "sort" => 1
-        ]]);
-
         $product = Product::standard($productStandard)
-            ->filter($productFilter)
+            ->filter($this->productFilter)
             ->select([
                 "id",
                 "name",
@@ -61,7 +120,6 @@ class IndexController extends Controller
                 "step"
             ])
             ->with([
-                'categories.category' => function ($q) {},
                 'documents' => function ($q) {
                     $q = $q->select(['title', 'name', 'product_id']);
                 },
@@ -89,16 +147,16 @@ class IndexController extends Controller
                 },
 
                 //
-                'productProperties' => function ($q) use ($propertyStandard) {
-                    $q->whereHas('property', function ($q2) use ($propertyStandard) {
-                        $q2->standard($propertyStandard);
+                'productProperties' => function ($q) {
+                    $q->whereHas('property', function ($q2) {
+                        $q2->standard($this->propertyStandard);
                     })
-                    ->with([
-                        'value',
-                        'property' => function ($q2) use ($propertyStandard) {
-                            $q2->standard($propertyStandard);
-                        }
-                    ]);
+                        ->with([
+                            'value',
+                            'property' => function ($q2) {
+                                $q2->standard($this->propertyStandard);
+                            }
+                        ]);
                 },
             ])
             ->withCount(['reviews' => function (Builder $q) {
@@ -109,51 +167,13 @@ class IndexController extends Controller
 
         //
 
-        $category = null;
-        // нужно узнать подходящую категорию
-        foreach ($product->categories as $c) {
-            $c->category->parents(on_check: 0);
-
-            if (!empty($c->category->parents_paths)) {
-
-                if(isset($request->category_slug))
-                {
-                    foreach($c->category->parents_paths as $parents_path)
-                    {
-                        $parts = explode('/', $parents_path);
-                        $is_included = in_array($request->category_slug, $parts, true);
-                        if($is_included)
-                        {
-                            $category = $c->category;
-                        }
-                    }
-
-                } else {
-                    $category = $c->category;
-                }
-            }
-        }
-        if (!$category) {
-            $this->notFound();
-        }
-
-        $category->parent_slugs = explode("/", $category->parents_paths[0]);
-
-        if (!isset($category->parent_slugs)) {
-            $this->notFound();
-        }
-
-        $category->setCurrentParentPath();
-
-        //
-
         // отсортируем по секциям характеристики
         $product->propertySections = $product->productProperties->groupBy(function ($char) {
             return $char->property->section ? $char->property->section->id : 'other';
         })->map(function ($chars, $key) {
             return [
                 'section' =>
-                    $key === 'other' ?
+                $key === 'other' ?
                     (object)['id' => null, "title" => 'Другое'] :
                     $chars->first()->property->section,
                 'items' => $chars
@@ -162,13 +182,6 @@ class IndexController extends Controller
             return $group['section']->id === null ? 9999 : $group['section']->id;
         })->values();
         unset($product->productProperties);
-        // dd($product);
-        //
-        // dump($category);
-        [$path_slugs, $breadcrumbs] = BreadcrumbService::getForCategory($category);
-
-        $breadcrumbs->add($product->name, "#");
-
         //
 
         if ($product->reviews_count) {
@@ -185,7 +198,11 @@ class IndexController extends Controller
             $review_statistics = null;
         }
 
-        // dd($breadcrumbs);
+        $breadcrumbs->add(
+            $product->name,
+            ""
+        );
+
         // dd($review_statistics);
         return view('sample.main.pages.product.index', [
             'title' => $product->name,
