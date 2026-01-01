@@ -102,23 +102,23 @@ class IndexController extends Controller
             ],
         ]);
 
-        $product = Product::standard($productStandard)
+        $product = Product::select([
+            "id",
+            "name",
+            "short_desc",
+            "desc",
+            "uuid",
+            "company_id",
+            "article",
+            "slug",
+            "weight",
+            "length",
+            "width",
+            "height",
+            "step"
+        ])
+            ->standard($productStandard)
             ->filter($this->productFilter)
-            ->select([
-                "id",
-                "name",
-                "short_desc",
-                "desc",
-                "uuid",
-                "company_id",
-                "article",
-                "slug",
-                "weight",
-                "length",
-                "width",
-                "height",
-                "step"
-            ])
             ->with([
                 'documents' => function ($q) {
                     $q = $q->select(['title', 'name', 'product_id']);
