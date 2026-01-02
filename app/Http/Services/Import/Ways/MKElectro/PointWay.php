@@ -4,7 +4,7 @@ namespace App\Http\Services\Import\Ways\MKElectro;
 
 use App\Http\API\MKElectroApi;
 use App\Http\Services\MediaService;
-use App\Http\Services\Models\CityModelService;
+use App\Models\City\City;
 use App\Models\Point\Link\PointLink;
 use App\Models\Point\Link\PointLinkCategory;
 use App\Models\Point\Point;
@@ -32,7 +32,7 @@ class PointWay extends MKElectroApi
             $p->yandex_widget_href = $point["comment"];
             $p->yandex_widget_href =  ($point["yandex_widget_href"] ?? null);
             $p->description = null;
-            $p->city_id = (new CityModelService(["id"]))->first($point["city"])->id;
+            $p->city_id = City::where("name", $point["city"])->first()->id;
             $p->save();
 
             if (isset($point["phones"])) {

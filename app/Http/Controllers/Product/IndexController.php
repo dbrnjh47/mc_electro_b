@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Product\Information\ReviewController;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\ShowRequest;
-use App\Http\Services\BreadcrumbService;
-use App\Http\Services\Models\CategoryModelService;
 
 use App\Http\Services\User\WishListService;
 use App\Http\Standards\CategoryStandard;

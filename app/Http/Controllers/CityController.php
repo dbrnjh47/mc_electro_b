@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Filters\CityFilter;
 use App\Http\Requests\City\GetRequest;
 use App\Http\Requests\City\SetRequest;
 use App\Http\Services\City\IndexService as CityService;
-use App\Http\Services\Currency\CurrencyService;
-use App\Http\Services\Models\CityModelService;
-use Illuminate\Http\Request;
+use App\Http\Standards\CityStandard;
+use App\Models\City\City;
 
 class CityController
 {
@@ -15,13 +15,18 @@ class CityController
     {
         $page = $request->get('page', 1);
 
-        $q = (new CityModelService(["id", "name as text"]));
+        $cityStandard = app()->make(CityStandard::class, [
+            'params' => [
+                "is_on" => 1,
+            ],
+        ]);
 
-        if ($request->search && $request->search != "") {
-            $q->where('name', 'like', "%{$request->search}%");
-        }
+        $cityilter = app()->make(CityFilter::class, ['params' => array_filter($request->all())]);
 
-        $cities = $q->paginate($page);
+        $cities = City::standard($cityStandard)
+            ->filter($cityilter)
+            ->select(["id", "name as text"])
+            ->paginate(10, page:$page);
 
         return response()->json([
             'results' => $cities->items(),

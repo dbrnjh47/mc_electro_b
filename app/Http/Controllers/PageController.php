@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Services\Models\BannerModelService;
+use App\Http\Filters\BannerFilter;
 
 use App\Http\Services\User\WishListService;
+use App\Http\Standards\BannerStandard;
 use App\Http\Standards\CategoryStandard;
 use App\Http\Standards\ProductStandard;
+use App\Models\Banner;
 use App\Models\Category\Category;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
@@ -58,8 +60,21 @@ class PageController extends Controller
         // dd( $products);
 
         //
+        $bannerStandard = app()->make(BannerStandard::class, [
+            'params' => [
+                "is_on" => 1,
+            ],
+        ]);
 
-        $banners = (new BannerModelService)->getByKey("home");
+        $bannerFilter = app()->make(BannerFilter::class, [
+            'params' => [
+                "key" => "home",
+            ]
+        ]);
+        $banners = Banner::standard($bannerStandard)
+            ->filter($bannerFilter)
+            ->get();
+
         $title = app()->settings->abbreviation." ".app()->settings->name;
         $description = "";
         return view('sample.main.pages.index', compact(

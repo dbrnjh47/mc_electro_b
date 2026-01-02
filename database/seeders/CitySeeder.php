@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Http\API\Delivery\CDEKDeliveryApi;
-use App\Http\Services\Models\CountryModelService;
+use App\Http\Filters\CountryFilter;
 use App\Models\City\City;
+use App\Models\Country\Country;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -71,7 +72,16 @@ class CitySeeder extends Seeder
 
     public function getCountris($country_cca2_list)
     {
-        $countris = (new CountryModelService(["id", "cca2"]))->getIn("cca2", $country_cca2_list);
+        $countryFilter = app()->make(CountryFilter::class, [
+            'params' => [
+                "cca2_list" => $country_cca2_list,
+            ]
+        ]);
+
+        $countris = Country::filter($countryFilter)
+            ->select(["id", "cca2"])
+            ->get();
+
         $results = [];
         foreach($countris as $country)
         {

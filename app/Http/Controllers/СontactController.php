@@ -6,8 +6,9 @@ use App\Http\Filters\PointFilter;
 use App\Http\Requests\Сontact\FindRequest;
 use App\Http\Requests\Сontact\AllRequest;
 use App\Http\Services\BreadcrumbService;
-use App\Http\Services\Models\CityModelService;
+use App\Http\Standards\CityStandard;
 use App\Http\Standards\PointStandard;
+use App\Models\City\City;
 use App\Models\Point\Point;
 use App\View\Components\Sample\Main\Point\Card;
 use Illuminate\Http\Request;
@@ -50,14 +51,17 @@ class СontactController extends Controller
 
         $breadcrumbs = $this->getBreadcrumbs();
 
-        $cities = (new CityModelService(select_list:["id", "name"]))
-            ->getModel()
-            ->whereHas('points', function ($q) {
-                $point_standard = app()->make(PointStandard::class, ['params' => [
-                    "is_on" => 1,
-                ]]);
-                $q = $q->standard($point_standard);
-            })
+        //
+
+        $cityStandard = app()->make(CityStandard::class, [
+            'params' => [
+                "is_on" => 1,
+                "points" => 1
+            ],
+        ]);
+
+        $cities = City::standard($cityStandard)
+            ->select(["id", "name"])
             ->get();
 
         return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs", "cities"));

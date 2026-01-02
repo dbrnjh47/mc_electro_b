@@ -6,6 +6,8 @@ use App\Models\Point\Point;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use App\Models\Traits\Filterable;
+use App\Models\Traits\Standardable;
 
 // use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 // use App\Observers\CityObserver;
@@ -16,6 +18,8 @@ class City extends Model
     /** @use HasFactory<\Database\Factories\CountryFactory> */
     use HasFactory;
     use Sluggable;
+    use Filterable;
+    use Standardable;
 
     protected $guarded = false;
 

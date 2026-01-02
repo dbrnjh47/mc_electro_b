@@ -2,8 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Filters\CityFilter;
 use App\Http\Services\City\IndexService as CityService;
-use App\Http\Services\Models\CityModelService;
+use App\Http\Standards\CityStandard;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +20,22 @@ class CityMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $part = $request->segment(1);
-        $city = (new CityModelService)->firstBySlug($part);
+        if(!$part){return $next($request);}
+
+        $cityStandard = app()->make(CityStandard::class, [
+            'params' => [
+                "is_on" => 1,
+            ],
+        ]);
+
+        $cityilter = app()->make(CityFilter::class, ['params' => [
+            "slug" => $part
+        ]]);
+
+        $city = City::standard($cityStandard)
+            ->filter($cityilter)
+            ->select(["id"])
+            ->first();
 
         if($city)
         {

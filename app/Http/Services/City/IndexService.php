@@ -2,19 +2,24 @@
 // off
 namespace App\Http\Services\City;
 
-use App\Http\Services\Models\CityModelService;
-use App\Http\Services\Models\LocaleModelService;
-use Illuminate\Support\Facades\App;
+use App\Http\Filters\CityFilter;
+use App\Http\Standards\CityStandard;
+use App\Models\City\City;
 use Illuminate\Support\Facades\Cookie;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Torann\GeoIP\Facades\GeoIP;
-use Illuminate\Support\Facades\Request;
 class IndexService
 {
     public $key = "city_id", $life_time = (60 * 24 * 7);
     public function get()
     {
         $city_id = Cookie::get($this->key);
+
+        $cityStandard = app()->make(CityStandard::class, [
+            'params' => [
+                "is_on" => 1,
+            ],
+        ]);
+
         // dd($city_id);
         // dump($city_id);
         if(!$city_id || ($city_id != "all" && !is_numeric($city_id)))
@@ -25,7 +30,14 @@ class IndexService
 
             if($location->city)
             {
-                $city = (new CityModelService(["id"]))->first($location->city);
+                $cityilter = app()->make(CityFilter::class, ['params' => [
+                    "name" => $location->city
+                ]]);
+                $city = City::standard($cityStandard)
+                    ->filter($cityilter)
+                    ->select(["id"])
+                    ->first();
+
                 $city_id = ($city ? $city->id : $city_id);
             }
 
@@ -34,7 +46,8 @@ class IndexService
 
         $city = (!$city_id || $city_id == "all"
             ? null
-            : (new CityModelService())->find($city_id)
+            : City::standard($cityStandard)
+                ->find($city_id)
         );
 
         return $city;

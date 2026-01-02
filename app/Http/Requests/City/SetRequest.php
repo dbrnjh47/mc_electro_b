@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests\City;
 
-use App\Http\Services\Models\CityModelService;
+use App\Http\Standards\CityStandard;
+use App\Models\City\City;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
 
@@ -36,7 +37,16 @@ class SetRequest extends FormRequest
                 {
                     $data = $validator->getData();
 
-                    $city = (new CityModelService())->getModel()->where("id", $data["id"])->count();
+                    $cityStandard = app()->make(CityStandard::class, [
+                        'params' => [
+                            "is_on" => 1,
+                        ],
+                    ]);
+
+                    $city = City::standard($cityStandard)
+                        ->select(["id"])
+                        ->find($data["id"]);
+
                     if (!$city) {
                         $validator->errors()->add('id', 'Город не найден');
                     }

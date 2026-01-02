@@ -3,7 +3,7 @@
 namespace App\Http\Services\Models;
 
 use InvalidArgumentException;
-
+// Более не используется
 class ControllerModelService
 {
     public $model = null;

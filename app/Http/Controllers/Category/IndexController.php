@@ -3,15 +3,11 @@
 namespace App\Http\Controllers\Category;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Product\IndexController as ProductIndexController;
 use App\Http\Requests\Category\FilterRequest;
 use App\Http\Services\BreadcrumbService;
-use App\Http\Services\Models\CategoryModelService;
 use App\Http\Standards\CategoryStandard;
 use App\Models\Category\Category;
 use App\Models\Category\CategoryPath;
-use App\Models\Category\Subcategory;
-use App\Models\Property\Property;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
