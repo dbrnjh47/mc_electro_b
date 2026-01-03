@@ -54,17 +54,7 @@ class CleanupManager extends CleanupService
         usleep(200000); // 0.3 секунды
         $this->nextAdvance(message: 'Сброс проекта');
 
-        Artisan::call('config:clear');
-        Artisan::call('cache:clear');
-        Artisan::call('route:clear');
-        Artisan::call('view:clear');
-        Artisan::call('clear-compiled');
-
-        if (array_key_exists('event:clear', Artisan::all())) {
-            Artisan::call('event:clear');
-        }
-
-        // очистка сессий?
+        Artisan::call('optimize:clear');
 
         // кеширование по новой
         if (app()->environment('production')) {
