@@ -9,7 +9,7 @@
 
 @section('content')
 
-@if(!empty($banners))
+@if(!$banners->isEmpty())
 <section class="banners">
     <div class="banners__container">
         <div class="banner-block">

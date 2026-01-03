@@ -13,16 +13,4 @@ class ImportService
     {
         (new IndexWay)->start();
     }
-
-    public function cleaning()
-    {
-        dump("Очистка контактов");
-        Point::query()->delete();
-
-        dump("Очистка категорий");
-        Category::query()->delete();
-
-        dump("Очистка товаров");
-        Product::query()->delete();
-    }
 }

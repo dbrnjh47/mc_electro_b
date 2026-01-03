@@ -12,7 +12,7 @@ class ProductDocument extends Model
     use HasFactory;
     protected $guarded = false;
     protected $appends = ['path'];
-
+    const TEST_FILES = ["test.pdf"];
     const PATH = "/assets/product/document/";
 
     public function getPathAttribute()

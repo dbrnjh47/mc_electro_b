@@ -29,6 +29,7 @@
             </div>
         </div>
         <div class="cards__container">
+            @if(!$products->isEmpty() && $products->count() == 6)
             <div class="cards">
                 <x-sample.main.product.card :product="$products[0]"></x-sample.main.product.card>
                 <x-sample.main.product.card :product="$products[1]"></x-sample.main.product.card>
@@ -39,6 +40,7 @@
                 <x-sample.main.product.card :product="$products[4]"></x-sample.main.product.card>
                 <x-sample.main.product.card :product="$products[5]"></x-sample.main.product.card>
             </div>
+            @endif
         </div>
         <div class="slider__container">
             <div class="slider swiper">
@@ -158,6 +160,7 @@
                 </div>
             </div>
         </div>
+
         <section class="companies">
             <div class="companies__container">
                 <div class="app__title">

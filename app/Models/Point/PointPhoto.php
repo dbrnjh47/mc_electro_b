@@ -18,6 +18,8 @@ class PointPhoto extends Model
     protected $guarded = false;
     protected $appends = ['img_path'];
 
+    const TEST_FILES = ["1.png", "2.png", "default.jpg"];
+
     public function getIMGPathAttribute()
     {
         return ($this->img ? Controller::photoAccessor($this->img, self::PATH) : null);

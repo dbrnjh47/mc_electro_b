@@ -13,7 +13,7 @@ class ProductReviewMedia extends Model
     use HasFactory;
 
     const PATH = "/assets/product/review/";
-
+    const TEST_FILES = ["test.mp4", "test.webp"];
     protected $appends = ['path', 'miniature'];
 
     public function getPathAttribute()

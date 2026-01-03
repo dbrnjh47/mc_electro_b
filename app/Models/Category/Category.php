@@ -25,7 +25,7 @@ class Category extends Model
     use Standardable;
     protected $guarded = false;
     const PATH = "/assets/categories/previews/";
-
+    const TEST_FILES = ["1.png", "2.png", "3.png"];
     protected $appends = ['preview_path'];
 
     public function category()

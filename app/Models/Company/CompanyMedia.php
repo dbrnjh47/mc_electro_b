@@ -9,4 +9,7 @@ class CompanyMedia extends Model
 {
     /** @use HasFactory<\Database\Factories\Company\CompanyMediaFactory> */
     use HasFactory;
+
+    const PATH = "/assets/companies/media/";
+    const TEST_FILES = ["1.png"];
 }

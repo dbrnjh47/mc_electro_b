@@ -13,6 +13,7 @@ class ProductMedia extends Model
     use HasFactory;
 
     const PATH = "/assets/product/";
+    const TEST_FILES = ["default.jpg", "test.png"];
     const DEFAULT = "default.jpg";
     protected $guarded = false;
     protected $appends = ['path', 'miniature'];

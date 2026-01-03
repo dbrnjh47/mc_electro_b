@@ -2,31 +2,33 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Services\Import\ImportService;
+use App\Http\Services\Cleanup\CleanupManager;
 use Illuminate\Console\Command;
 
-class ImportCommand extends Command
+class CleanupCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:import-db-command';
+    protected $signature = 'app:cleaning';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Интеграция данных';
+    protected $description = 'Очистка проекта ';
 
     /**
      * Execute the console command.
      */
     public function handle()
     {
-        dump("Запуск интеграций");
-        (new ImportService())->start();
+        $this->output->write("\033[2J\033[;H");
+        dump("Запуск очистки");
+
+        (new CleanupManager($this->output))->all();
     }
 }

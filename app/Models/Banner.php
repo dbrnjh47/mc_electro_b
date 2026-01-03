@@ -17,6 +17,7 @@ class Banner extends Model
     use Standardable;
 
     const PATH = "/assets/banners/";
+    const TEST_FILES = ["1.webp", "2.webp", "3.webp"];
     protected $appends = ['img_path'];
     public function getIMGPathAttribute()
     {
