@@ -27,7 +27,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title', 128);
-            $table->decimal('ordering', 5, 2)->default(100);
+            $table->decimal('ordering', 5, 2)->unsigned()->default(100);
             $table->boolean('is_on')->default(1);
 
             $table->unsignedBigInteger('property_type_id')->nullable();

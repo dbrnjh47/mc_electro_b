@@ -10,6 +10,7 @@ class MKElectroImportService extends CommandService
     public $api = null;
     public function __construct()
     {
+        parent::__construct();
         $this->api = (new MKElectroApi());
     }
 }

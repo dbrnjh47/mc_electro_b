@@ -23,6 +23,10 @@ class MKElectroImportManager extends CommandService
         $this->nextAdvance('Точки');
         (new PointImportService())->start();
 
+        usleep(200000); // 0.3 секунды
+        $this->nextAdvance('Категории');
+        (new CategoryImportService())->start();
+
         if($this->bar)
         {
             $this->bar->finish();

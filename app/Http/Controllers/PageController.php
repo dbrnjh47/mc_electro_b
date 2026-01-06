@@ -30,7 +30,7 @@ class PageController extends Controller
             ],
         ]);
 
-        $categories = Category::select(["id", "name", "slug", "category_parent_id"])
+        $categories = Category::select(["id", "name", "slug", "category_parent_id","preview"])
             ->standard($categoryStandard)
             ->whereNull("category_parent_id")
             ->with(['child_categories' => function ($q) use ($categoryStandard){

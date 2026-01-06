@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('points', function (Blueprint $table) {
             $table->id();
-
+            $table->string('uuid')->unique()->nullable();
             $table->string('title');
 
             $table->string('email')->nullable();

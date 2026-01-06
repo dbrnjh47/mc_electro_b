@@ -20,6 +20,8 @@ return new class extends Migration
             $table->boolean('is_on')->default(1);
             $table->string('preview')->nullable();
 
+            $table->decimal('ordering', 5, 1)->unsigned()->default(10);
+
             $table->text('description')->nullable();
 
             $table->unsignedBigInteger('category_parent_id')->nullable();

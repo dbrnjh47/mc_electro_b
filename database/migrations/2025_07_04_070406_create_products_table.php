@@ -25,10 +25,10 @@ return new class extends Migration
 
             $table->decimal('mrp', 10, 2)->unsigned()->default(0)->comment("мрц");
 
-            $table->decimal('weight', 10, 4)->comment("кг"); // кг, может в граммы?
-            $table->decimal('length', 10, 4)->comment("мм"); // мм
-            $table->decimal('width', 10, 4)->comment("мм"); // мм
-            $table->decimal('height', 10, 4)->comment("мм"); // мм
+            $table->decimal('weight', 10, 4)->unsigned()->comment("кг"); // кг, может в граммы?
+            $table->decimal('length', 10, 4)->unsigned()->comment("мм"); // мм
+            $table->decimal('width', 10, 4)->unsigned()->comment("мм"); // мм
+            $table->decimal('height', 10, 4)->unsigned()->comment("мм"); // мм
 
             $table->boolean('is_on')->default(1);
 

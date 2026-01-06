@@ -12,7 +12,7 @@ class PointPhone extends Model
 {
     /** @use HasFactory<\Database\Factories\Point\PointPhoneFactory> */
     use HasFactory;
-
+    protected $guarded = false;
     protected function phone(): Attribute
     {
         return Attribute::make(
