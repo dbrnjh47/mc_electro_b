@@ -76,6 +76,7 @@ class PointWay extends MKElectroApi
                 }
             }
         }
+
         return;
     }
 }

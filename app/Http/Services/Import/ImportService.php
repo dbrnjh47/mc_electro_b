@@ -2,15 +2,9 @@
 
 namespace App\Http\Services\Import;
 
-use App\Http\Services\Import\Ways\MKElectro\IndexWay;
-use App\Models\Category\Category;
-use App\Models\Point\Point;
-use App\Models\Product\Product;
+use App\Http\Services\CommandService;
 
-class ImportService
+class ImportService extends CommandService
 {
-    public function start()
-    {
-        (new IndexWay)->start();
-    }
+
 }

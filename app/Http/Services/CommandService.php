@@ -3,12 +3,16 @@
 namespace App\Http\Services;
 
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 class CommandService
 {
-    public function __construct(public ?OutputInterface $output = null)
+    public ?OutputInterface $output = null;
+    public function __construct()
     {
-
+        if (app()->runningInConsole()) {
+            $this->output = new ConsoleOutput();
+        }
     }
 
     public function success(string $message): void

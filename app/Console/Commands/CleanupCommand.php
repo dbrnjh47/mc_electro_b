@@ -12,7 +12,7 @@ class CleanupCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'app:cleaning';
+    protected $signature = 'app:cleaning-command';
 
     /**
      * The console command description.
@@ -29,6 +29,6 @@ class CleanupCommand extends Command
         $this->output->write("\033[2J\033[;H");
         dump("Запуск очистки");
 
-        (new CleanupManager($this->output))->all();
+        (new CleanupManager())->all();
     }
 }

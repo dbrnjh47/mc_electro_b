@@ -64,7 +64,7 @@ class MKElectroApi
                 )
             );
             $res = $response->getBody()->getContents();
-            dump($res);
+            // dump($res);
             $responseJSON = json_decode($res, true);
             return $responseJSON;
         } catch (RequestException $e) {

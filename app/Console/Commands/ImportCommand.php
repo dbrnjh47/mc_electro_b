@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Services\Import\ImportService;
+use App\Http\Services\Import\ImportManager;
 use Illuminate\Console\Command;
 
 class ImportCommand extends Command
@@ -26,7 +26,8 @@ class ImportCommand extends Command
      */
     public function handle()
     {
+        $this->output->write("\033[2J\033[;H");
         dump("Запуск интеграций");
-        (new ImportService())->start();
+        (new ImportManager())->all();
     }
 }

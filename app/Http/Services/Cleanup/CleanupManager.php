@@ -3,6 +3,7 @@
 namespace App\Http\Services\Cleanup;
 
 use Illuminate\Support\Facades\Artisan;
+use Symfony\Component\Console\Helper\ProgressBar;
 
 class CleanupManager extends CleanupService
 {
@@ -12,42 +13,42 @@ class CleanupManager extends CleanupService
     {
         if($this->output)
         {
-            $this->bar = $this->output->createProgressBar(9);
+            $this->bar = new ProgressBar($this->output, 9);
             $this->bar->setFormat('%current%/%max% [%bar%] %message%');
         }
 
         //
 
         $this->nextAdvance('Точки');
-        (new PointCleanupService($this->output))->start();
+        (new PointCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Банеры');
-        (new BannerCleanupService($this->output))->start();
+        (new BannerCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Категории');
-        (new CategoryCleanupService($this->output))->start();
+        (new CategoryCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Компании');
-        (new CompanyCleanupService($this->output))->start();
+        (new CompanyCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Корзины');
-        (new CartCleanupService($this->output))->start();
+        (new CartCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Избранные');
-        (new WishlistCleanupService($this->output))->start();
+        (new WishlistCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Товары');
-        (new ProductCleanupService($this->output))->start();
+        (new ProductCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Характеристики');
-        (new PropertyCleanupService($this->output))->start();
+        (new PropertyCleanupService())->start();
 
         //
 
