@@ -27,6 +27,7 @@ class PageController extends Controller
             'params' => [
                 "is_on" => 1,
                 "product_count" => 1,
+                "sort" => 1,
             ],
         ]);
 
@@ -37,7 +38,7 @@ class PageController extends Controller
                 $q->select(["id", "name", "slug", "category_parent_id"])
                     ->standard($categoryStandard);
             }])
-            ->inRandomOrder()
+            // ->inRandomOrder()
             ->limit(4)
             ->get();
 

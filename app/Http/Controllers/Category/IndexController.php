@@ -41,6 +41,7 @@ class IndexController extends Controller
             'params' => [
                 "is_on" => 1,
                 "product_count" => 1,
+                "sort" => 1,
             ],
         ]);
 
@@ -61,6 +62,7 @@ class IndexController extends Controller
             'params' => [
                 "is_on" => 1,
                 "product_count" => 1,
+                "sort" => 1,
             ],
         ]);
 
@@ -93,6 +95,7 @@ class IndexController extends Controller
             'params' => [
                 "is_on" => 1,
                 "product_count" => 1,
+                "sort" => 1,
             ],
         ]);
 
