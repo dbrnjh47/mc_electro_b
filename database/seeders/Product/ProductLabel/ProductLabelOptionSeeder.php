@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 
 class ProductLabelOptionSeeder extends Seeder
 {
-    public $labels = ["Распродажа", "Топ"];
+    public $labels = ["Распродажа", "Топ", "Советуем"];
     /**
      * Run the database seeds.
      */

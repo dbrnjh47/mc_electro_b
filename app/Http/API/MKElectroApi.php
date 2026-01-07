@@ -17,6 +17,13 @@ class MKElectroApi
         ]);
     }
 
+    public function getBanners()
+    {
+        return $this->request("post", "", [
+            "type" => "get_banners"
+        ]);
+    }
+
     public function getCategories()
     {
         return $this->request("post", "", [
@@ -35,6 +42,15 @@ class MKElectroApi
     {
         return $this->request("post", "", [
             "type" => "get_products",
+            "limit" => $limit,
+            "offset" => $offset,
+        ]);
+    }
+
+    public function getCompanies($limit, $offset)
+    {
+        return $this->request("post", "", [
+            "type" => "get_companies",
             "limit" => $limit,
             "offset" => $offset,
         ]);

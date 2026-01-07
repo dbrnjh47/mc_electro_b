@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Banner;
+use App\Models\Banner\Banner;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 

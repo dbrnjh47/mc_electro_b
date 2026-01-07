@@ -13,19 +13,31 @@ class MKElectroImportManager extends CommandService
     {
         if($this->output)
         {
-            $this->bar = new ProgressBar($this->output, 9);
+            $this->bar = new ProgressBar($this->output, 5);
             $this->bar->setFormat('%current%/%max% [%bar%] %message%');
         }
 
         //
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Точки');
-        (new PointImportService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Банеры');
+        // (new BannerImportService())->start();
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Категории');
-        (new CategoryImportService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Точки');
+        // (new PointImportService())->start();
+
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Категории');
+        // (new CategoryImportService())->start();
+
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Компании');
+        // (new CompanyImportService())->start();
+
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Товары');
+        // (new ProductImportService())->start();
 
         if($this->bar)
         {

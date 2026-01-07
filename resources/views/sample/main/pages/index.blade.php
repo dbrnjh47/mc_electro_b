@@ -19,7 +19,7 @@
                     @foreach ($banners as $banner)
                         <div class="swiper-slide">
                             <a @if($banner->href) href="{{$banner->href}}" @endif>
-                                <img src="{{$banner->img_path}}" alt="{{$banner->img}}" loading="lazy"
+                                <img src="{{$banner->img_path}}" alt="{{$banner->label}}" loading="lazy"
                                 decoding="async" />
                             </a>
                         </div>

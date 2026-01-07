@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('count_reviews')->default(0)->unsigned();
             $table->decimal('grade_review', 4, 1)->default(0)->unsigned();
 
-            $table->string('description', 600)->nullable();
+            $table->string('description', 2400)->nullable();
             $table->string('short', 60)->nullable();
 
             $table->timestamps();

@@ -8,7 +8,7 @@ use App\Http\Services\User\WishListService;
 use App\Http\Standards\BannerStandard;
 use App\Http\Standards\CategoryStandard;
 use App\Http\Standards\ProductStandard;
-use App\Models\Banner;
+use App\Models\Banner\Banner;
 use App\Models\Category\Category;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
@@ -64,12 +64,14 @@ class PageController extends Controller
         $bannerStandard = app()->make(BannerStandard::class, [
             'params' => [
                 "is_on" => 1,
+                "sort" => 1
             ],
         ]);
 
         $bannerFilter = app()->make(BannerFilter::class, [
             'params' => [
                 "key" => "home",
+                "city_id" => (app()->user_city ? app()->user_city->id : null)
             ]
         ]);
         $banners = Banner::standard($bannerStandard)

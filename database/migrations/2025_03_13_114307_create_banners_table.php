@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->string('href')->nullable()->comment("/");
-            $table->string('key')->comment("home");
+            $table->string('key')->comment("home")->default("home");
+            $table->string('label', 64)->nullable();
             $table->string('img');
             $table->boolean('is_on')->default(1);
+            $table->decimal('ordering', 5, 1)->unsigned()->default(10);
 
             $table->timestamps();
         });

@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\Cleanup;
 
-use App\Models\Banner;
+use App\Models\Banner\Banner;
 use Illuminate\Support\Facades\DB;
 
 class BannerCleanupService extends CleanupService

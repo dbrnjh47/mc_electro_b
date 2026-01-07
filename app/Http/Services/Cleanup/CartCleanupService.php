@@ -2,7 +2,6 @@
 
 namespace App\Http\Services\Cleanup;
 
-use App\Models\Banner;
 use App\Models\Cart\Cart;
 use Illuminate\Support\Facades\DB;
 

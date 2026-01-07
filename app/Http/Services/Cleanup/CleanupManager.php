@@ -19,20 +19,20 @@ class CleanupManager extends CleanupService
 
         //
 
-        $this->nextAdvance('Точки');
-        (new PointCleanupService())->start();
+        // $this->nextAdvance('Точки');
+        // (new PointCleanupService())->start();
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Банеры');
-        (new BannerCleanupService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Банеры');
+        // (new BannerCleanupService())->start();
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Категории');
-        (new CategoryCleanupService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Категории');
+        // (new CategoryCleanupService())->start();
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Компании');
-        (new CompanyCleanupService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Компании');
+        // (new CompanyCleanupService())->start();
 
         usleep(200000); // 0.3 секунды
         $this->nextAdvance('Корзины');

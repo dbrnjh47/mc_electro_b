@@ -3,6 +3,7 @@
 namespace App\Http\Services\Cleanup;
 
 use App\Models\Product\Document\ProductDocument;
+use App\Models\Product\Label\ProductLabelOption;
 use App\Models\Product\Product;
 use App\Models\Product\ProductMedia;
 use App\Models\Product\Review\ProductReviewMedia;
@@ -18,6 +19,7 @@ class ProductCleanupService extends CleanupService
         DB::beginTransaction();
         try {
             Product::query()->delete();
+            // ProductLabelOption::query()->delete();
 
             $this->deleteFiles(ProductMedia::PATH."miniature", ProductMedia::TEST_FILES);
             $this->deleteFiles(ProductMedia::PATH."photo", ProductMedia::TEST_FILES);
