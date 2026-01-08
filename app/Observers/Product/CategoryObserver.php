@@ -12,7 +12,7 @@ class CategoryObserver
     {
         $category_ids = Subcategory::where("category_child_id", $productCategory->category_id)->pluck("category_id");
         $category_ids->push($productCategory->category_id);
-        dump($category_ids);
+        // dump($category_ids);
 
         // Распростанение товара на родительские категории
         $data = [];
@@ -31,7 +31,7 @@ class CategoryObserver
 
         // создание PropertyCategory
         $property_ids = $productCategory->product->productProperties->pluck("property_id");
-        dump($property_ids);
+        // dump($property_ids);
 
         $data = [];
         foreach ($category_ids as $category_id) {

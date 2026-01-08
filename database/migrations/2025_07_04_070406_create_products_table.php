@@ -31,6 +31,7 @@ return new class extends Migration
             $table->decimal('height', 10, 4)->unsigned()->comment("мм"); // мм
 
             $table->boolean('is_on')->default(1);
+            $table->boolean('is_archive')->default(0);
 
             $table->integer('step')->default(1);
 

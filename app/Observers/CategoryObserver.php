@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Http\Services\Product\ProductCategoryService;
 use App\Models\Category\Category;
 use App\Models\Category\Subcategory;
 use Illuminate\Support\Facades\Artisan;
@@ -12,6 +13,8 @@ class CategoryObserver
     {
         $category->createSubCategory();
         $category->createCategoryPath();
+        (new ProductCategoryService)->update($category->id, $category->category_parent_id);
+
         Artisan::call('app:check-category-status-command');
     }
 
@@ -21,6 +24,7 @@ class CategoryObserver
             $category->deleteSubCategory();
             $category->createSubCategory();
             $category->createCategoryPath();
+            (new ProductCategoryService)->update($category->id, $category->category_parent_id, $category->getOriginal('category_parent_id'));
 
             Artisan::call('app:check-category-status-command');
         }

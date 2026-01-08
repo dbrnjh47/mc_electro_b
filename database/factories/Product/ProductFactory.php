@@ -31,6 +31,7 @@ class ProductFactory extends Factory
 
             "name" => fake()->text(rand(5, 20)),
             "is_on" => rand(0, 1),
+            "is_archive" => rand(0, 1),
 
             "short_desc" => (rand(0, 100) > 50 ? fake()->text(rand(50, 255)) : null),
             "desc" => (rand(0, 100) > 50 ? fake()->text(rand(100, 1000)) : null),

@@ -5,6 +5,7 @@ namespace App\Models\Product;
 use App\Models\Company\Company;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
+use App\Models\Product\Label\ProductLabelOption;
 use App\Models\Product\Review\ProductReview;
 use App\Models\Property\Property;
 use App\Models\Property\PropertyValue;
@@ -20,6 +21,8 @@ class Product extends Model
     use HasFactory;
     use Filterable;
     use Standardable;
+
+    protected $guarded = false;
 
     public function categories()
     {
@@ -43,7 +46,10 @@ class Product extends Model
 
     public function labels()
     {
-        return $this->hasMany(ProductLabel::class, 'product_id', 'id');
+        return $this->belongsToMany(
+            ProductLabelOption::class,          // Целевая модель
+            (new ProductLabel())->getTable(),     // Промежуточная таблица
+        );
     }
 
     public function company()
