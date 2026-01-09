@@ -141,6 +141,7 @@ class Category extends Model
     {
         if ($this->category_parent_id) {
             $parent_ids = $this->getParentIds();
+            $child_ids = $this->getСhildrenIds();
 
             $data = [];
             foreach ($parent_ids as $parent_id) {
@@ -148,6 +149,12 @@ class Category extends Model
                     'category_id' => $parent_id->category_parent_id,
                     'category_child_id' => $this->id,
                 ];
+                foreach ($child_ids as $child_id) {
+                    $data[] = [
+                        'category_id' => $parent_id->category_parent_id,
+                        'category_child_id' => $child_id->id,
+                    ];
+                }
             }
 
             Subcategory::upsert(

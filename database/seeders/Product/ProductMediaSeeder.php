@@ -14,8 +14,21 @@ class ProductMediaSeeder extends Seeder
      */
     public function run(): void
     {
-        $product_count = Product::count();
-        ProductMedia::factory(($product_count * rand(1, 3)))
-            ->create();
+        $total = Product::count();
+        if($total < 1000){
+            $total = $total * rand(1, 2);
+        }
+        $batchSize = 300;
+
+        for ($i = 0; $i < $total; $i += $batchSize) {
+            $currentBatchSize = min($batchSize, $total - $i);
+
+            ProductMedia::factory($currentBatchSize)->create();
+
+            // Сбрасываем соединение чтобы избежать таймаута
+            // if ($i % 50000 == 0) {
+            //     DB::reconnect();
+            // }
+        }
     }
 }
