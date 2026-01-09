@@ -134,7 +134,17 @@ class Category extends Model
 
     public function deleteSubCategory()
     {
-        Subcategory::where("category_child_id", $this->id)->delete();
+        //$category->getOriginal('category_parent_id')
+        $child_ids = $this->getСhildrenIds()->pluck("id");
+        $child_ids[] = $this->id;
+
+        $parent_ids = Subcategory::where("category_child_id", $this->getOriginal('category_parent_id'))
+            ->pluck("category_id");
+        $parent_ids[] = $this->getOriginal('category_parent_id');
+        // dd([$parent_ids, $child_ids]);
+        Subcategory::whereIn("category_id", $parent_ids)
+            ->whereIn("category_child_id", $child_ids)
+            ->delete();
     }
 
     public function createSubCategory()
