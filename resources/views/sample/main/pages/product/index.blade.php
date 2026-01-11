@@ -65,10 +65,13 @@
                     @endif
 
                     <div class="swiper product_basic_slider" id="product_basic_slider">
+                        @if(!$product->labels->isEmpty())
                         <div class="product_info__tips">
-                            <span>Хит</span>
-                            <span class="recommend">Советуем</span>
+                            @foreach ($product->labels as $label)
+                                <span class="product_tip product_tip_{{$label->key}}">{{$label->title}}</span>
+                            @endforeach
                         </div>
+                        @endif
 
                         <div class="swiper-wrapper">
                             @if($product->medias->isEmpty())

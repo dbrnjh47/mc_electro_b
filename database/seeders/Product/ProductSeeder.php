@@ -27,6 +27,8 @@ class ProductSeeder extends Seeder
         foreach ($categories as $category) {
             Product::factory(rand(10, 30))
                 ->afterCreating(function (Product $product) {
+                    if(rand(0, 100) > 50){return;}
+
                     $count = rand(1, 2);
 
                     for ($i = 0; $i < $count; $i++) {

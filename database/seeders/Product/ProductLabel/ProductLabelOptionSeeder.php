@@ -8,7 +8,20 @@ use Illuminate\Database\Seeder;
 
 class ProductLabelOptionSeeder extends Seeder
 {
-    public $labels = ["Распродажа", "Топ", "Советуем"];
+    public $labels = [
+        [
+            "title" => "Распродажа",
+            "key" => "sale",
+        ],
+        [
+            "title" => "Хит",
+            "key" => "top",
+        ],
+        [
+            "title" => "Советуем",
+            "key" => "recommend",
+        ],
+    ];
     /**
      * Run the database seeds.
      */
@@ -16,9 +29,7 @@ class ProductLabelOptionSeeder extends Seeder
     {
         foreach($this->labels as $label)
         {
-            ProductLabelOption::factory(1)->create([
-                'title' => $label,
-            ]);
+            ProductLabelOption::factory(1)->create($label);
         }
     }
 }

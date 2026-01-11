@@ -9,13 +9,14 @@ class ProductStandard extends AbstractStandard
     public const WISHLIST = 'wishlist';
     public const PREVIEW = 'preview';
     public const IS_ON = 'is_on';
-
+    public const LABELS = 'labels';
     protected function getCallbacks(): array
     {
         return [
             self::WISHLIST => [$this, 'wishlist'],
             self::PREVIEW => [$this, 'preview'],
             self::IS_ON => [$this, 'isOn'],
+            self::LABELS => [$this, 'labels'],
         ];
     }
 
@@ -68,5 +69,10 @@ class ProductStandard extends AbstractStandard
                 $q2->select(['name', 'product_id'])->limit(1);
             },
         ]);
+    }
+
+    public function labels(Builder $builder, $value)
+    {
+        $builder->with('labels');
     }
 }

@@ -75,14 +75,14 @@ class ProductImportService extends MKElectroImportService
 
                     $labels = [];
                     if($product["is_sale"]){
-                        $labels[] = 1;
+                        $labels[] = "sale";
                     }
                     if($product["product_special"]){
-                        $labels[] = 2;
+                        $labels[] = "recommend";
                     }
                     if(!empty($labels))
                     {
-                        // $labels = ProductLabelOption::select(["id"])->whereIn('title', $labels)->get();
+                        $labels = ProductLabelOption::whereIn('key', $labels)->pluck("id");
                         // $p->labels()->saveMany($labels);
                         $p->labels()->attach($labels);
                     }

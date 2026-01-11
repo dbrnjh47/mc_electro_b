@@ -60,7 +60,8 @@ class WishListService
                 $productStandard = app()->make(ProductStandard::class, [
                     'params' => [
                         "is_on" => 1,
-                        "preview" => 1
+                        "preview" => 1,
+                        "labels" => 1
                     ]
                 ]);
 

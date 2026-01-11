@@ -22,11 +22,13 @@
     </button>
 
     <div class="product_card__head">
+        @if(!$product->labels->isEmpty())
         <div class="product_card__head_tips">
-            <span>Хит</span>
-            <span class="recommend">Советуем</span>
+            @foreach ($product->labels as $label)
+                <span class="product_tip product_tip_{{$label->key}}">{{$label->title}}</span>
+            @endforeach
         </div>
-
+        @endif
         <h4 class="product_card__head_name">{{$product->name}}</h4>
         <p class="product_card__head_description">{{$product->article}}</p>
     </div>

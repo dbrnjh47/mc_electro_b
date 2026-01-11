@@ -96,7 +96,8 @@ class IndexController extends Controller
             'params' => [
                 "is_on" => 1,
                 "wishlist" => $wishlist_id,
-                "preview" => 1
+                "preview" => 1,
+                "labels" => 1
             ],
         ]);
 

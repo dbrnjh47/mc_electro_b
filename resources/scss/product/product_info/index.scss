@@ -1,3 +1,5 @@
+@use "/resources/scss/components/product/product_tip.scss";
+
 .product_info {
   border-radius: 12px;
   border: 1px solid #dfe3ee;
@@ -12,17 +14,6 @@
     max-width: 100%;
     gap: 5px;
     flex-wrap: wrap;
-    span{
-        border-radius: 4px;
-        background: #de002b;
-        color: #fff;
-        font-size: 14px;
-        font-weight: 600;
-        padding: 3px 10px;
-        &.recommend {
-            background: #f1a935;
-        }
-    }
   }
   *[class*=__container] {
     margin: 0 30px;

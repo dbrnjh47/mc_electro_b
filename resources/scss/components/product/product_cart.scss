@@ -1,3 +1,5 @@
+@use "product_tip.scss";
+
 .product_card {
     padding: 20px;
     border-radius: 10px;
@@ -74,17 +76,6 @@
             margin-bottom: 13px;
             width: calc(100% - 25px);
             flex-wrap: wrap;
-            span {
-                border-radius: 4px;
-                background: #de002b;
-                color: #fff;
-                font-size: 14px;
-                font-weight: 600;
-                padding: 3px 10px;
-                &.recommend {
-                    background: #f1a935;
-                }
-            }
         }
         &_name {
             color: #16161f;
