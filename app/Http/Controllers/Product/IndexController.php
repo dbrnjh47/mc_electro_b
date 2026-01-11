@@ -18,6 +18,7 @@ use App\Models\Product\Product;
 use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\URL;
 
 class IndexController extends Controller
 {
@@ -41,6 +42,7 @@ class IndexController extends Controller
     public function getPath($path_id = null)
     {
         $path = null;
+        // dd($path_id);
         if ($path_id) {
             $path = CategoryPath::whereHas(
                 'category',
@@ -53,6 +55,9 @@ class IndexController extends Controller
                         });
                 })
                 ->find($path_id);
+            if (!$path) {
+                return "redirect";
+            }
         }
 
         if (!$path) {
@@ -85,6 +90,15 @@ class IndexController extends Controller
             ? $request->path_id
             : null)
         );
+        if($path == "redirect"){
+            $queryParams = $request->query();
+            unset($queryParams['path_id']);
+            unset($queryParams['slug']);
+
+            $new_url = URL::current() . ($queryParams ? '?' . http_build_query($queryParams) : '');
+
+            return redirect()->away($new_url, 301);
+        }
 
         $breadcrumbs = CategoryIndexController::breadcrumb($path);
 
