@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\Import\MKElectro;
 
-use App\Http\Services\MediaService;
+use App\Http\Services\Media\Base64MediaService;
 use App\Models\City\City;
 use App\Models\Point\Link\PointLink;
 use App\Models\Point\Link\PointLinkCategory;
@@ -17,6 +17,12 @@ class PointImportService extends MKElectroImportService
     {
         $this->write("");
         $this->write("Создание контактов/точек");
+
+        $mediaService = (new Base64MediaService);
+        $mediaService->maxWidth = PointPhoto::MAX_WIDTH;
+        $mediaService->maxHeight = PointPhoto::MAX_HEIGHT;
+
+        //
 
         $points = $this->api->getPoints();
 
@@ -74,8 +80,7 @@ class PointImportService extends MKElectroImportService
                 if (isset($point["photos"])) {
                     foreach ($point["photos"] as $name => $d) {
                         // создание файла
-                        $path = PointPhoto::PATH . $name;
-                        $name = (new MediaService)->createImgBase64($path, $d);
+                        $name = $mediaService->create(PointPhoto::PATH, $d);
 
                         if ($name) {
                             $p->photos()->create([

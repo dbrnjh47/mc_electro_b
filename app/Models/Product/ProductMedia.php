@@ -15,6 +15,10 @@ class ProductMedia extends Model
     const PATH = "/assets/product/";
     const TEST_FILES = ["default.jpg", "test.png"];
     const DEFAULT = "default.jpg";
+    const MAX_WIDTH = 550;
+    const MAX_HEIGHT = 550;
+    const MINIATURE_MAX_WIDTH = 140;
+    const MINIATURE_MAX_HEIGHT = 140;
     protected $guarded = false;
     protected $appends = ['path', 'miniature'];
 

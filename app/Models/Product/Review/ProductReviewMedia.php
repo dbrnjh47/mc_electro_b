@@ -3,7 +3,7 @@
 namespace App\Models\Product\Review;
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\MediaService;
+use App\Http\Services\Media\MediaService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

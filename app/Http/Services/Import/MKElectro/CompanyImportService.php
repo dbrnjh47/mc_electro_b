@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\Import\MKElectro;
 
-use App\Http\Services\MediaService;
+use App\Http\Services\Media\Base64MediaService;
 use App\Models\Company\Company;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +14,10 @@ class CompanyImportService extends MKElectroImportService
     {
         $this->write("");
         $this->write("Создание компаний");
+
+        $mediaService = (new Base64MediaService);
+        $mediaService->maxWidth = Company::MAX_WIDTH;
+        $mediaService->maxHeight = Company::MAX_HEIGHT;
 
         //
 
@@ -45,7 +49,7 @@ class CompanyImportService extends MKElectroImportService
                     $c->save();
 
                     if (isset($company["file_name"]) || isset($company["file"])) {
-                        $name = (new MediaService)->createImgBase64(Company::PATH_PREVIEW . $company["file_name"], $company["file"]);
+                        $name = $mediaService->create(Company::PATH_PREVIEW, $company["file"]);
                         if ($name) {
                             $c->preview = $name;
                             $c->save();

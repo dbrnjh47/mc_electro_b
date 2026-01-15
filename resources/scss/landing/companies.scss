@@ -35,5 +35,9 @@
         align-items: center;
         margin-bottom: 5px;
         transition: all 0.4s;
+        img{
+            max-width: calc(100% - 15px);
+            max-height: calc(100% - 15px);
+        }
     }
 }

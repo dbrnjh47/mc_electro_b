@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\Import\MKElectro;
 
-use App\Http\Services\MediaService;
+use App\Http\Services\Media\Base64MediaService;
 use App\Models\Banner\Banner;
 use App\Models\Category\Category;
 use App\Models\City\City;
@@ -15,6 +15,13 @@ class BannerImportService extends MKElectroImportService
         $this->write("");
         $this->write("Создание банеров");
 
+
+        $mediaService = (new Base64MediaService);
+        $mediaService->maxWidth = Banner::MAX_WIDTH;
+        $mediaService->maxHeight = Banner::MAX_HEIGHT;
+
+        //
+
         $banners = $this->api->getBanners();
         // dd($banners);
         foreach ($banners as $banner) {
@@ -24,8 +31,8 @@ class BannerImportService extends MKElectroImportService
                     throw new \Exception("Не найдены важные данные");
                 }
 
-                $name = (new MediaService)->createImgBase64(Banner::PATH . $banner["file_name"], $banner["file"]);
-
+                $name = $mediaService->create(Banner::PATH, $banner["file"]);
+                if(!$name){continue;}
                 $b = new Banner();
                 $b->fill([
                     'label' => $banner["label"],

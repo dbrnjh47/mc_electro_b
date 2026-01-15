@@ -24,6 +24,8 @@ class Category extends Model
     use Sluggable;
     use Standardable;
     protected $guarded = false;
+    const MAX_WIDTH = 100;
+    const MAX_HEIGHT = 100;
     const PATH = "/assets/categories/previews/";
     const TEST_FILES = ["1.png", "2.png", "3.png"];
     protected $appends = ['preview_path'];

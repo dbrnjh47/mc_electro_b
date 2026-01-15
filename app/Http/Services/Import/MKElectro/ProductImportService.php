@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\Import\MKElectro;
 
-use App\Http\Services\MediaService;
+use App\Http\Services\Media\Base64MediaService;
 use App\Models\Category\Category;
 use App\Models\Company\Company;
 use App\Models\Product\Label\ProductLabelOption;
@@ -14,10 +14,13 @@ class ProductImportService extends MKElectroImportService
 {
     public $limit = 10;
     public $offset = 0;
+    public $mediaService = null;
     public function start()
     {
         $this->write("");
         $this->write("Создание товаров");
+
+        $this->mediaService = (new Base64MediaService);
 
         //
 
@@ -38,10 +41,11 @@ class ProductImportService extends MKElectroImportService
                     }
 
                     $company_id = null;
-                    if(isset($product["manufacturers_slug"]) && $product["manufacturers_slug"] != "")
-                    {
+                    if (isset($product["manufacturers_slug"]) && $product["manufacturers_slug"] != "") {
                         $company = Company::select(["id"])->where("slug", $product["manufacturers_slug"])->first();
-                        if($company){$company_id = $company->id;}
+                        if ($company) {
+                            $company_id = $company->id;
+                        }
                         unset($company);
                     }
 
@@ -74,14 +78,13 @@ class ProductImportService extends MKElectroImportService
                     //
 
                     $labels = [];
-                    if($product["is_sale"]){
+                    if ($product["is_sale"]) {
                         $labels[] = "sale";
                     }
-                    if($product["product_special"]){
+                    if ($product["product_special"]) {
                         $labels[] = "recommend";
                     }
-                    if(!empty($labels))
-                    {
+                    if (!empty($labels)) {
                         $labels = ProductLabelOption::whereIn('key', $labels)->pluck("id");
                         // $p->labels()->saveMany($labels);
                         $p->labels()->attach($labels);
@@ -89,8 +92,7 @@ class ProductImportService extends MKElectroImportService
 
                     //
 
-                    if(isset($product["relationships"]) && !empty($product["relationships"]))
-                    {
+                    if (isset($product["relationships"]) && !empty($product["relationships"])) {
                         $this->relationships($product["relationships"], $p);
                     }
 
@@ -107,11 +109,9 @@ class ProductImportService extends MKElectroImportService
             $this->offset += $this->limit;
             exit();
         }
-
-
     }
 
-    public function relationships($relationships, $product)
+    private function relationships($relationships, $product)
     {
         if (isset($relationships["categories"]) && !empty($relationships["categories"])) {
             $category_ids = Category::whereIn("slug", $relationships["categories"])->pluck("id");
@@ -126,14 +126,31 @@ class ProductImportService extends MKElectroImportService
         if (isset($relationships["medias"])) {
             $names = [];
             foreach ($relationships["medias"] as $name => $media) {
-                $names[] = (new MediaService)->createImgBase64(ProductMedia::PATH ."photo/".$name, $media);
-            }
+                $this->mediaService->maxWidth = ProductMedia::MAX_WIDTH;
+                $this->mediaService->maxHeight = ProductMedia::MAX_HEIGHT;
 
-            $product->medias()->createMany(
-                collect($names)->map(fn($name) => [
-                    'name' => $name
-                ])->toArray()
-            );
+                $name = $this->mediaService->create(ProductMedia::PATH . "photo/", $media);
+
+                //
+                if ($name) {
+                    $this->mediaService->maxWidth = ProductMedia::MINIATURE_MAX_WIDTH;
+                    $this->mediaService->maxHeight = ProductMedia::MINIATURE_MAX_HEIGHT;
+
+                    $result = $this->mediaService->createMiniature(
+                        ProductMedia::PATH . "miniature/",
+                        (ProductMedia::PATH . "photo/" . $name)
+                    );
+
+                    $names[] = $name;
+                }
+            }
+            if (!empty($names)) {
+                $product->medias()->createMany(
+                    collect($names)->map(fn($name) => [
+                        'name' => $name
+                    ])->toArray()
+                );
+            }
         }
     }
 }

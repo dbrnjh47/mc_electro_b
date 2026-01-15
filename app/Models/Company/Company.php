@@ -13,6 +13,8 @@ class Company extends Model
     use HasFactory;
     const PATH_PREVIEW = "/assets/companies/logo/";
     const DEFAULT = "default.jpg";
+    const MAX_WIDTH = 140;
+    const MAX_HEIGHT = 100;
     const TEST_FILES = ["default.jpg", "1.svg", "2.svg", "3.svg", "4.svg", "5.svg", "6.svg", "7.svg", "8.svg", "9.svg", "10.svg"];
     protected $appends = ['path_preview'];
     protected $guarded = false;

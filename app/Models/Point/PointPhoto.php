@@ -15,6 +15,8 @@ class PointPhoto extends Model
 
     const PATH = "/assets/contacts/photo/";
     const DEFULT_PREVIEW_PATH = "/temple/images/contact/default.jpg";
+    const MAX_WIDTH = 365;
+    const MAX_HEIGHT = 240;
     protected $guarded = false;
     protected $appends = ['img_path'];
 

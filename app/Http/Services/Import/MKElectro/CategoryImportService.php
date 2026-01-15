@@ -2,7 +2,7 @@
 
 namespace App\Http\Services\Import\MKElectro;
 
-use App\Http\Services\MediaService;
+use App\Http\Services\Media\Base64MediaService;
 use App\Models\Category\Category;
 use Illuminate\Support\Facades\DB;
 
@@ -12,6 +12,12 @@ class CategoryImportService extends MKElectroImportService
     {
         $this->write("");
         $this->write("Создание категорий");
+
+        $mediaService = (new Base64MediaService);
+        $mediaService->maxWidth = Category::MAX_WIDTH;
+        $mediaService->maxHeight = Category::MAX_HEIGHT;
+
+        //
 
         $categories = $this->api->getCategories();
 
@@ -36,7 +42,7 @@ class CategoryImportService extends MKElectroImportService
                 $c->save();
 
                 if (isset($category["file_name"]) || isset($category["file"])) {
-                    $name = (new MediaService)->createImgBase64(Category::PATH . $category["file_name"], $category["file"]);
+                    $name = $mediaService->create(Category::PATH, $category["file"]);
                     if ($name) {
                         $c->preview = $name;
                         $c->save();
