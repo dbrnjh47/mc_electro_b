@@ -43,7 +43,7 @@ class Base64MediaService extends MediaService
             // Очищаем память
             $imagick->destroy();
 
-            return basename($filename);
+            return $filename;
         } catch (ImagickException $e) {
             \Log::error('Image processing failed: ' . $e->getMessage());
             return null;

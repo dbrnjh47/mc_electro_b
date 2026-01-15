@@ -14,7 +14,7 @@ class MediaService
     public int $maxWidth = 550;
     public int $maxHeight = 550;
     public int $maxSizeKb = 100;
-    public int $defaultQuality = 75;
+    public int $defaultQuality = 85;
 
     public function is_video($name)
     {

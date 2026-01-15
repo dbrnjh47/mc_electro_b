@@ -17,8 +17,8 @@ class Banner extends Model
     use Filterable;
     use Standardable;
     protected $guarded = false;
-    const MAX_WIDTH = 230;
-    const MAX_HEIGHT = 550;
+    const MAX_WIDTH = 550;
+    const MAX_HEIGHT = 230;
     const PATH = "/assets/banners/";
     const TEST_FILES = ["1.webp", "2.webp", "3.webp"];
     protected $appends = ['img_path'];
