@@ -23,6 +23,10 @@ class Product extends Model
     use Standardable;
 
     protected $guarded = false;
+    public function points()
+    {
+        return $this->hasMany(ProductPoint::class, 'product_id', 'id');
+    }
 
     public function categories()
     {

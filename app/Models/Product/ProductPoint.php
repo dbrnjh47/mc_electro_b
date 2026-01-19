@@ -9,4 +9,5 @@ class ProductPoint extends Model
 {
     /** @use HasFactory<\Database\Factories\Product\ProductPointFactory> */
     use HasFactory;
+    protected $guarded = false;
 }

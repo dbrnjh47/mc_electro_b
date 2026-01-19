@@ -24,9 +24,9 @@ class MKElectroImportManager extends CommandService
         // $this->nextAdvance('Банеры');
         // (new BannerImportService())->start();
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Точки');
-        (new PointImportService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Точки');
+        // (new PointImportService())->start();
 
         // usleep(200000); // 0.3 секунды
         // $this->nextAdvance('Категории');
@@ -40,9 +40,9 @@ class MKElectroImportManager extends CommandService
         // $this->nextAdvance('Характеристики');
         // (new PropertyImportService())->start();
 
-        // usleep(200000); // 0.3 секунды
-        // $this->nextAdvance('Товары');
-        // (new ProductImportService())->start();
+        usleep(200000); // 0.3 секунды
+        $this->nextAdvance('Товары');
+        (new ProductImportService())->start();
 
         if($this->bar)
         {

@@ -70,11 +70,12 @@
     }
 
     &__head {
+        width: calc(100% - 25px);
         &_tips {
             display: flex;
             gap: 5px;
             margin-bottom: 13px;
-            width: calc(100% - 25px);
+            // width: calc(100% - 25px);
             flex-wrap: wrap;
         }
         &_name {

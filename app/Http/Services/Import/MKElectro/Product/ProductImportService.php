@@ -6,6 +6,7 @@ use App\Http\Services\Import\MKElectro\MKElectroImportService;
 use App\Http\Services\Media\Base64MediaService;
 use App\Models\Category\Category;
 use App\Models\Company\Company;
+use App\Models\Point\Point;
 use App\Models\Product\Label\ProductLabelOption;
 use App\Models\Product\Product;
 use App\Models\Product\ProductMedia;
@@ -13,33 +14,43 @@ use Illuminate\Support\Facades\DB;
 
 class ProductImportService extends MKElectroImportService
 {
-    public $limit = 10;
-    public $offset = 0;
+    public $limit = 200;
+    public $offset = 10000;
     public $mediaService = null;
+    public $sklads = null;
+    public $product_label_options = null;
+
     public function start()
     {
         $this->write("");
         $this->write("Создание товаров");
 
         $this->mediaService = (new Base64MediaService);
-
+        $this->sklads = Point::pluck('id', 'uuid')
+            ->toArray();
+        $this->product_label_options = ProductLabelOption::pluck('id', 'key')
+            ->toArray();
         //
 
         while (true) {
             $products = $this->api->getProducts($this->limit, $this->offset);
-            dd($products);
+            // dd($products);
             if (!$products) {
                 dump("Не удалось получить товары");
                 break;
             }
 
             foreach ($products as $product) {
-                dump($product);
+                // dump($product);
                 DB::beginTransaction();
                 try {
                     if (!isset($product["product_sku"]) || !isset($product["slug"])) {
                         throw new \Exception("Не найдены важные данные");
                     }
+                    if (Product::where('slug', $product["slug"])->exists()) {
+                        throw new \Exception("Уже существует {$product["slug"]}");
+                    }
+                    $this->info("Создание {$product["slug"]}");
 
                     $company_id = null;
                     if (isset($product["manufacturers_slug"]) && $product["manufacturers_slug"] != "") {
@@ -80,14 +91,12 @@ class ProductImportService extends MKElectroImportService
 
                     $labels = [];
                     if ($product["is_sale"]) {
-                        $labels[] = "sale";
+                        $labels[] = $this->product_label_options["sale"];
                     }
                     if ($product["product_special"]) {
-                        $labels[] = "recommend";
+                        $labels[] = $this->product_label_options["recommend"];
                     }
                     if (!empty($labels)) {
-                        $labels = ProductLabelOption::whereIn('key', $labels)->pluck("id");
-                        // $p->labels()->saveMany($labels);
                         $p->labels()->attach($labels);
                     }
 
@@ -101,6 +110,7 @@ class ProductImportService extends MKElectroImportService
                 } catch (\Exception $e) {
                     DB::rollBack();
                     $this->error($e->getMessage());
+                    // exit();
                 }
             }
 
@@ -108,7 +118,7 @@ class ProductImportService extends MKElectroImportService
 
 
             $this->offset += $this->limit;
-            return;
+            // return;
         }
     }
 
@@ -117,10 +127,30 @@ class ProductImportService extends MKElectroImportService
         if (isset($relationships["categories"]) && !empty($relationships["categories"])) {
             $category_ids = Category::whereIn("slug", $relationships["categories"])->pluck("id");
 
-            $product->categories()->createMany(
-                $category_ids->map(fn($id) => [
-                    'category_id' => $id
-                ])->toArray()
+            foreach ($category_ids as $category_id) {
+                $product->categories()->firstOrCreate([
+                    'category_id' => $category_id
+                ]);
+            }
+
+            // $product->categories()->createMany(
+            //     $category_ids->map(fn($id) => [
+            //         'category_id' => $id
+            //     ])->toArray()
+            // );
+        }
+
+        if (isset($relationships["sklads"]) && !empty($relationships["sklads"])) {
+            $productSkladsToInsert = [];
+            foreach ($relationships["sklads"] as $sklad) {
+                $productSkladsToInsert[] = [
+                    'point_id' => $this->sklads[$sklad['uuid']],
+                    'count' => $sklad["quantity"]
+                ];
+            }
+
+            $product->points()->createMany(
+                $productSkladsToInsert
             );
         }
 
