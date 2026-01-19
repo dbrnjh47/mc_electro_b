@@ -21,6 +21,6 @@ class Card extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('sample.main.pages.сontact.components.card');
+        return view('sample.main.pages.contact.components.card');
     }
 }

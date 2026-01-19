@@ -68,7 +68,7 @@ class Category extends Model
     {
         return ($this->preview ? Controller::photoAccessor($this->preview, self::PATH) : null);
     }
-    public function getСhildrenIds()
+    public function getChildrenIds()
     {
         if (isset($this->children_ids)) {
             return $this->children_ids;
@@ -137,7 +137,7 @@ class Category extends Model
     public function deleteSubCategory()
     {
         //$category->getOriginal('category_parent_id')
-        $child_ids = $this->getСhildrenIds()->pluck("id");
+        $child_ids = $this->getChildrenIds()->pluck("id");
         $child_ids[] = $this->id;
 
         $parent_ids = Subcategory::where("category_child_id", $this->getOriginal('category_parent_id'))
@@ -153,7 +153,7 @@ class Category extends Model
     {
         if ($this->category_parent_id) {
             $parent_ids = $this->getParentIds();
-            $child_ids = $this->getСhildrenIds();
+            $child_ids = $this->getChildrenIds();
 
             $data = [];
             foreach ($parent_ids as $parent_id) {

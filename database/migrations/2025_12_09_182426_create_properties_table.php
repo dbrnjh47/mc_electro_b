@@ -26,7 +26,7 @@ return new class extends Migration
         Schema::create('properties', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title', 128);
+            $table->string('title', 128)->unique();
             $table->decimal('ordering', 5, 2)->unsigned()->default(100);
             $table->boolean('is_on')->default(1);
 
@@ -39,6 +39,7 @@ return new class extends Migration
             $table->foreign('property_section_id')->references('id')->on('property_sections')->onUpdate('cascade'); // ->onDelete('cascade')
             $table->foreign('unit_id')->references('id')->on('units')->onUpdate('cascade'); // ->onDelete('cascade')
             $table->foreign('to_unit_id')->references('id')->on('units')->onUpdate('cascade'); // ->onDelete('cascade')
+
             $table->timestamps();
         });
 

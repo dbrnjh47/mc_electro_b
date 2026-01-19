@@ -34,7 +34,7 @@
         window.routes["restore.reset"] = "{{ route('restore.reset') }}";
     </script>
     {{-- <x-sample.main.layout.footer></x-sample.main.layout.footer> --}}
-    <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
+    <x-sample.main.layout.cookie></x-sample.main.layout.cookie>
     {{-- <x-sample.main.layout.go-top></x-sample.main.layout.go-top> --}}
     <x-sample.main.support></x-sample.main.support>
     @vite('resources/js/auth/reset/index.js')

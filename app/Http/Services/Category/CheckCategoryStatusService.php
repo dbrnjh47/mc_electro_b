@@ -4,7 +4,7 @@ namespace App\Http\Services\Category;
 
 use App\Models\Category\Category;
 
-class СheckCategoryStatusService
+class CheckCategoryStatusService
 {
     public function process()
     {

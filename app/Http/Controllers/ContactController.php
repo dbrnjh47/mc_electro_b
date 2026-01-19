@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Filters\PointFilter;
-use App\Http\Requests\Сontact\FindRequest;
-use App\Http\Requests\Сontact\AllRequest;
+use App\Http\Requests\Contact\FindRequest;
+use App\Http\Requests\Contact\AllRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Standards\CityStandard;
 use App\Http\Standards\PointStandard;
@@ -14,7 +14,7 @@ use App\View\Components\Sample\Main\Point\Card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Blade;
 
-class СontactController extends Controller
+class ContactController extends Controller
 {
     public function getBreadcrumbs()
     {
@@ -28,6 +28,7 @@ class СontactController extends Controller
     {
         $point_standard = app()->make(PointStandard::class, ['params' => [
             "is_on" => 1,
+            "is_pickup" => 1
         ]]);
         $point_filter = app()->make(PointFilter::class, ['params' => array_filter($request->all())]);
         $points = Point::standard($point_standard)
@@ -64,7 +65,7 @@ class СontactController extends Controller
             ->select(["id", "name"])
             ->get();
 
-        return view('sample.main.pages.сontact.index', compact("title", "description", "points", "breadcrumbs", "cities"));
+        return view('sample.main.pages.contact.index', compact("title", "description", "points", "breadcrumbs", "cities"));
     }
 
     public function block(AllRequest $request)
@@ -85,6 +86,7 @@ class СontactController extends Controller
     {
         $point_standard = app()->make(PointStandard::class, ['params' => [
             "is_on" => 1,
+            "is_pickup" => 1
         ]]);
 
         $point = Point::standard($point_standard)
@@ -102,6 +104,6 @@ class СontactController extends Controller
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs->add($point->title);
 
-        return view('sample.main.pages.сontact.one', compact("title", "description", "breadcrumbs", "point"));
+        return view('sample.main.pages.contact.one', compact("title", "description", "breadcrumbs", "point"));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Сontact;
+namespace App\Http\Requests\Contact;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

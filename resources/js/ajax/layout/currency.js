@@ -1,4 +1,4 @@
-window.setСurrency = function (currency_id) {
+window.setCurrency = function (currency_id) {
     $.ajax({
         url: window.routes["currency.set"]+"/"+currency_id,
         type: "GET",

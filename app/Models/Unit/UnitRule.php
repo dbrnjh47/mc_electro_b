@@ -9,4 +9,5 @@ class UnitRule extends Model
 {
     /** @use HasFactory<\Database\Factories\Unit\UnitRuleFactory> */
     use HasFactory;
+    protected $guarded = false;
 }

@@ -17,6 +17,38 @@ class MKElectroApi
         ]);
     }
 
+    public function getProperties($limit, $offset)
+    {
+        return $this->request("post", "", [
+            "type" => "get_properties",
+            "limit" => $limit,
+            "offset" => $offset,
+        ]);
+    }
+
+    public function getPropertyValue($limit, $offset)
+    {
+        return $this->request("post", "", [
+            "type" => "get_property_values",
+            "limit" => $limit,
+            "offset" => $offset,
+        ]);
+    }
+
+    public function getUnits()
+    {
+        return $this->request("post", "", [
+            "type" => "get_units",
+        ]);
+    }
+
+    public function getUnitRules()
+    {
+        return $this->request("post", "", [
+            "type" => "get_unit_rules",
+        ]);
+    }
+
     public function getBanners()
     {
         return $this->request("post", "", [

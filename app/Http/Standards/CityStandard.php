@@ -33,6 +33,7 @@ class CityStandard extends AbstractStandard
         $builder->whereHas('points', function ($q) {
             $point_standard = app()->make(PointStandard::class, ['params' => [
                 "is_on" => 1,
+                "is_pickup" => 1
             ]]);
             $q = $q->standard($point_standard);
         });

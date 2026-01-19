@@ -34,7 +34,7 @@
 
             </div>
 
-            @include('sample.main.pages.сontact.components.cards')
+            @include('sample.main.pages.contact.components.cards')
             <div class="pagination__wrapper">
                 {{ $points->appends(request()->input())->onEachSide(1)->links() }}
             </div>
@@ -50,7 +50,7 @@
         window.routes["contacts.block"] = "{{ route('contacts.block') }}";
     </script>
     <x-sample.main.layout.footer></x-sample.main.layout.footer>
-    <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
+    <x-sample.main.layout.cookie></x-sample.main.layout.cookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
 

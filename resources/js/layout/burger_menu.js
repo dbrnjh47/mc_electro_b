@@ -43,5 +43,5 @@ function burgerMenuCloseNavigations()
 
 let currency_select = $('#burger_currency_select select');
 currency_select.on('change', function() {
-    setСurrency($(this).val());
+    setCurrency($(this).val());
 });

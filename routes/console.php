@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Schedule;
 
 // Schedule::call(function () {
 //     // Log::debug("test log");
-//     Artisan::call('app:update-currencies-сommand');
+//     Artisan::call('app:update-currencies-command');
 // })
 //     ->name('Обновление курсов')
 //     ->everyMinute();

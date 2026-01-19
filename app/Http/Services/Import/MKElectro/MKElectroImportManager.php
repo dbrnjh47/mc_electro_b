@@ -3,6 +3,7 @@
 namespace App\Http\Services\Import\MKElectro;
 
 use App\Http\Services\CommandService;
+use App\Http\Services\Import\MKElectro\Product\ProductImportService;
 use Symfony\Component\Console\Helper\ProgressBar;
 
 class MKElectroImportManager extends CommandService
@@ -13,19 +14,19 @@ class MKElectroImportManager extends CommandService
     {
         if($this->output)
         {
-            $this->bar = new ProgressBar($this->output, 5);
+            $this->bar = new ProgressBar($this->output, 6);
             $this->bar->setFormat('%current%/%max% [%bar%] %message%');
         }
 
         //
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Банеры');
-        (new BannerImportService())->start();
-
         // usleep(200000); // 0.3 секунды
-        // $this->nextAdvance('Точки');
-        // (new PointImportService())->start();
+        // $this->nextAdvance('Банеры');
+        // (new BannerImportService())->start();
+
+        usleep(200000); // 0.3 секунды
+        $this->nextAdvance('Точки');
+        (new PointImportService())->start();
 
         // usleep(200000); // 0.3 секунды
         // $this->nextAdvance('Категории');
@@ -34,6 +35,10 @@ class MKElectroImportManager extends CommandService
         // usleep(200000); // 0.3 секунды
         // $this->nextAdvance('Компании');
         // (new CompanyImportService())->start();
+
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Характеристики');
+        // (new PropertyImportService())->start();
 
         // usleep(200000); // 0.3 секунды
         // $this->nextAdvance('Товары');

@@ -24,7 +24,7 @@
 @endsection
 
 @section('footer')
-    <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
+    <x-sample.main.layout.cookie></x-sample.main.layout.cookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
     @vite('resources/js/repeating/index.js')

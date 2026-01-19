@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Services\Category\СheckCategoryStatusService;
+use App\Http\Services\Category\CheckCategoryStatusService;
 use Illuminate\Console\Command;
 
-class СheckCategoryStatusCommand extends Command
+class CheckCategoryStatusCommand extends Command
 {
     /**
      * The name and signature of the console command.
@@ -26,6 +26,6 @@ class СheckCategoryStatusCommand extends Command
      */
     public function handle()
     {
-        (new СheckCategoryStatusService)->process();
+        (new CheckCategoryStatusService)->process();
     }
 }

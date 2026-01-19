@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Services\Import\MKElectro;
+namespace App\Http\Services\Import\MKElectro\Product;
 
+use App\Http\Services\Import\MKElectro\MKElectroImportService;
 use App\Http\Services\Media\Base64MediaService;
 use App\Models\Category\Category;
 use App\Models\Company\Company;
@@ -26,7 +27,7 @@ class ProductImportService extends MKElectroImportService
 
         while (true) {
             $products = $this->api->getProducts($this->limit, $this->offset);
-
+            dd($products);
             if (!$products) {
                 dump("Не удалось получить товары");
                 break;

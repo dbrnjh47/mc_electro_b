@@ -8,7 +8,7 @@ use Illuminate\Contracts\Console\Isolatable;
 use DateTimeInterface;
 use DateInterval;
 
-class UpdateCurrenciesСommand extends Command implements Isolatable
+class UpdateCurrenciesCommand extends Command implements Isolatable
 {
     /**
      * Определите, когда истекает срок действия блокировки изоляции для команды.
@@ -23,7 +23,7 @@ class UpdateCurrenciesСommand extends Command implements Isolatable
      *
      * @var string
      */
-    protected $signature = 'app:update-currencies-сommand';
+    protected $signature = 'app:update-currencies-command';
 
     /**
      * The console command description.
@@ -38,7 +38,7 @@ class UpdateCurrenciesСommand extends Command implements Isolatable
     public function handle()
     {
         echo "\n";
-        dump("start - UpdateCurrenciesСommand");
+        dump("start - UpdateCurrenciesCommand");
         (new CurrencyService)->update();
     }
 }

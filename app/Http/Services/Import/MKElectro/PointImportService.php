@@ -29,6 +29,9 @@ class PointImportService extends MKElectroImportService
         foreach ($points as $point) {
             DB::beginTransaction();
             try {
+                if (!isset($point["uuid"]) || !isset($point["type"])) {
+                    throw new \Exception("Не найдена важная информация");
+                }
                 if (Point::where('uuid', $point["uuid"])->exists()) {
                     throw new \Exception("{$point["uuid"]} уже существует");
                 }
@@ -36,16 +39,19 @@ class PointImportService extends MKElectroImportService
                 $p = new Point();
                 $p->fill([
                     'uuid' => $point["uuid"],
-                    'title' => $point["title"],
-                    'email' => ($point["email"] ?? null),
-                    'lon' => $point["lon"],
-                    'lat' => $point["lat"],
-                    'is_on' => $point["is_on"],
-                    'address' => $point["address"],
-                    'comment' => $point["comment"],
+                    'title' => (isset($point["title"]) ? $point["title"] : null),
+                    'email' => (isset($point["email"]) ? $point["email"] : null),
+                    'lon' => (isset($point["lon"]) ? $point["lon"] : null),
+                    'lat' => (isset($point["lat"]) ? $point["lat"] : null),
+                    'is_on' => (isset($point["is_on"]) ? $point["is_on"] : 1),
+                    'address' => (isset($point["address"]) ? $point["address"] : null),
+                    'comment' => (isset($point["comment"]) ? $point["comment"] : null),
+                    'is_pickup' => ($point["type"] == "our" ? 1 : 0),
                     'yandex_widget_href' => ($point["yandex_widget_href"] ?? null),
-                    'description' => null,
-                    'city_id' => City::where("name", $point["city"])->first()->id,
+                    'description' => (isset($point["description"]) ? $point["description"] : null),
+                    'city_id' => (isset($point["city"]) ?
+                        City::where("name", operator: $point["city"])->first()->id
+                        : null),
                 ]);
                 $p->save();
 

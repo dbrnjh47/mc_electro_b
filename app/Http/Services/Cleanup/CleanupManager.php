@@ -19,12 +19,12 @@ class CleanupManager extends CleanupService
 
         //
 
-        // $this->nextAdvance('Точки');
-        // (new PointCleanupService())->start();
+        $this->nextAdvance('Точки');
+        (new PointCleanupService())->start();
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Банеры');
-        (new BannerCleanupService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Банеры');
+        // (new BannerCleanupService())->start();
 
         // usleep(200000); // 0.3 секунды
         // $this->nextAdvance('Категории');
@@ -43,12 +43,12 @@ class CleanupManager extends CleanupService
         (new WishlistCleanupService())->start();
 
         // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Характеристики');
+        // (new PropertyCleanupService())->start();
+
+        // usleep(200000); // 0.3 секунды
         // $this->nextAdvance('Товары');
         // (new ProductCleanupService())->start();
-
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Характеристики');
-        (new PropertyCleanupService())->start();
 
         //
 

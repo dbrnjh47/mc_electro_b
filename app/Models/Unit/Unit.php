@@ -9,4 +9,5 @@ class Unit extends Model
 {
     /** @use HasFactory<\Database\Factories\Unit\UnitFactory> */
     use HasFactory;
+    protected $guarded = false;
 }

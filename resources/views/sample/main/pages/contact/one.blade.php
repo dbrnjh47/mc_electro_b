@@ -21,7 +21,7 @@
             </div>
 
             <div class="contact__block">
-                @include("sample.main.pages.сontact.components.card", ["is_card" => 1])
+                @include("sample.main.pages.contact.components.card", ["is_card" => 1])
 
                 <div class="contact__wrapper">
                     <div class="contact__info">
@@ -60,7 +60,7 @@
 
 @section('footer')
     <x-sample.main.layout.footer></x-sample.main.layout.footer>
-    <x-sample.main.layout.сookie></x-sample.main.layout.сookie>
+    <x-sample.main.layout.cookie></x-sample.main.layout.cookie>
     <x-sample.main.layout.go-top></x-sample.main.layout.go-top>
     <x-sample.main.support></x-sample.main.support>
     @vite('resources/js/contact/index.js')

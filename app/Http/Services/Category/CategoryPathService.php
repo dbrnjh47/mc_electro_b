@@ -58,16 +58,16 @@ class CategoryPathService
 
         // получение остальных дочерних путей
 
-        $children_ids = $this->category->getСhildrenIds();
+        $children_ids = $this->category->getChildrenIds();
         $children_ids = $children_ids->pluck('id')->filter()->toArray();
-        // dump($this->category->getСhildrenIds());
+        // dump($this->category->getChildrenIds());
         // dump($children_ids);
         if (!empty($children_ids)) {
             $map = [];
             $child_paths = [];
 
             // Сначала создаем маппинг
-            foreach ($this->category->getСhildrenIds() as $cat) {
+            foreach ($this->category->getChildrenIds() as $cat) {
                 $map[$cat->id] = [
                     'id' => $cat->id,
                     'parent' => $cat->category_parent_id,

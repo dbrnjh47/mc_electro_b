@@ -23,7 +23,7 @@ use App\Http\Controllers\Profile\WishlistController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\Text\AgreementController;
 use App\Http\Controllers\Text\PolicyController;
-use App\Http\Controllers\СontactController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -65,11 +65,11 @@ Route::prefix('promotion')->group(function () {
 //
 
 Route::prefix('contacts')->group(function () {
-    Route::get('/{page?}', [СontactController::class, 'all'])->where('page', '\d+')->name('contacts');
-    Route::post('/', [СontactController::class, 'block'])->name('contacts.block');
+    Route::get('/{page?}', [ContactController::class, 'all'])->where('page', '\d+')->name('contacts');
+    Route::post('/', [ContactController::class, 'block'])->name('contacts.block');
 });
 Route::prefix('contact')->group(function () {
-    Route::get('/{id}', [СontactController::class, 'show'])->name('contact');
+    Route::get('/{id}', [ContactController::class, 'show'])->name('contact');
 });
 
 //
