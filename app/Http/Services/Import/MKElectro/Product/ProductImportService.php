@@ -34,7 +34,7 @@ class ProductImportService extends MKElectroImportService
 
         while (true) {
             $products = $this->api->getProducts($this->limit, $this->offset);
-            dd($products);
+            // dd($products);
             if (!$products) {
                 dump("Не удалось получить товары");
                 break;
