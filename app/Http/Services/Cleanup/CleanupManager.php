@@ -46,9 +46,9 @@ class CleanupManager extends CleanupService
         // $this->nextAdvance('Характеристики');
         // (new PropertyCleanupService())->start();
 
-        usleep(200000); // 0.3 секунды
-        $this->nextAdvance('Товары');
-        (new ProductCleanupService())->start();
+        // usleep(200000); // 0.3 секунды
+        // $this->nextAdvance('Товары');
+        // (new ProductCleanupService())->start();
 
         //
 

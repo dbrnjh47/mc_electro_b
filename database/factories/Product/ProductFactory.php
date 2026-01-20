@@ -17,13 +17,10 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        $p = [
             "uuid" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 48).'}'),
             "article" => fake()->unique()->regexify('[A-Za-z0-9]{'.rand(10, 48).'}'),
-            "weight" => fake()->randomFloat(4, 1, 100),
-            "length" => fake()->randomFloat(4, 1, 100),
-            "width" => fake()->randomFloat(4, 1, 100),
-            "height" => fake()->randomFloat(4, 1, 100),
+            "weight" => (rand(0, 100) > 50 ? fake()->randomFloat(4, 1, 100) : null),
             "step" => (rand(1, 100) > 50 ? 100 : 1),
             "mrp" => $this->faker->randomFloat(2, 100, 10000),
             "slug" => fake()->unique()->slug(rand(1, 5)),
@@ -36,5 +33,14 @@ class ProductFactory extends Factory
             "short_desc" => (rand(0, 100) > 50 ? fake()->text(rand(50, 255)) : null),
             "desc" => (rand(0, 100) > 50 ? fake()->text(rand(100, 1000)) : null),
         ];
+
+        if(rand(0, 100) > 50)
+        {
+            $p["length"] = fake()->randomFloat(4, 1, 100);
+            $p["width"] = fake()->randomFloat(4, 1, 100);
+            $p["height"] = fake()->randomFloat(4, 1, 100);
+        }
+
+        return $p;
     }
 }

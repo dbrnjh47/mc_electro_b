@@ -110,7 +110,6 @@ class IndexController extends Controller
             'params' => [
                 "is_on" => 1,
                 "wishlist" => $wishlist_id,
-                "preview" => 1,
                 "labels" => 1
             ],
         ]);
@@ -133,6 +132,7 @@ class IndexController extends Controller
             ->standard($productStandard)
             ->filter($this->productFilter)
             ->with([
+                'medias',
                 'documents' => function ($q) {
                     $q = $q->select(['title', 'name', 'product_id']);
                 },

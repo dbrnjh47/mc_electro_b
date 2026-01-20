@@ -10,6 +10,7 @@ class ProductStandard extends AbstractStandard
     public const PREVIEW = 'preview';
     public const IS_ON = 'is_on';
     public const LABELS = 'labels';
+    public const IS_ARCHIVE = 'is_archive';
     protected function getCallbacks(): array
     {
         return [
@@ -17,11 +18,17 @@ class ProductStandard extends AbstractStandard
             self::PREVIEW => [$this, 'preview'],
             self::IS_ON => [$this, 'isOn'],
             self::LABELS => [$this, 'labels'],
+            self::IS_ARCHIVE => [$this, 'isArchive'],
         ];
     }
 
     public function default(Builder $builder)
     {
+    }
+
+    public function isArchive(Builder $builder, $value)
+    {
+        $builder->where("is_archive", $value);
     }
 
     public function isOn(Builder $builder, $exclusion_list)

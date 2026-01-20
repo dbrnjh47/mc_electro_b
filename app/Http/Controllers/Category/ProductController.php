@@ -19,7 +19,8 @@ class ProductController
             "is_on" => ["category"],
             "wishlist" => $wishlist_id,
             "preview" => 1,
-            "labels" => 1
+            "labels" => 1,
+            "is_archive" => 0
         ]]);
         $productFilter = app()->make(ProductFilter::class, ['params' => array_filter($request->all())]);
         $products = Product::standard($productStandard)

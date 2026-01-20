@@ -14,21 +14,21 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name', 128);
+            $table->string('name', 180);
             $table->string('short_desc')->nullable();
             $table->text('desc')->nullable();
 
             $table->string('uuid', 124)->nullable()->index();
             $table->string('article', 124)->nullable()->index();
 
-            $table->string('slug', 128)->unique();
+            $table->string('slug', 192)->unique();
 
             $table->decimal('mrp', 10, 2)->unsigned()->default(0)->comment("мрц");
 
-            $table->decimal('weight', 10, 4)->unsigned()->comment("кг"); // кг, может в граммы?
-            $table->decimal('length', 10, 4)->unsigned()->comment("мм"); // мм
-            $table->decimal('width', 10, 4)->unsigned()->comment("мм"); // мм
-            $table->decimal('height', 10, 4)->unsigned()->comment("мм"); // мм
+            $table->decimal('weight', 10, 4)->nullable()->unsigned()->comment("кг"); // кг, может в граммы?
+            $table->decimal('length', 10, 4)->nullable()->unsigned()->comment("мм"); // мм
+            $table->decimal('width', 10, 4)->nullable()->unsigned()->comment("мм"); // мм
+            $table->decimal('height', 10, 4)->nullable()->unsigned()->comment("мм"); // мм
 
             $table->boolean('is_on')->default(1);
             $table->boolean('is_archive')->default(0);

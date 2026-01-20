@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 import { resolve } from 'path';
-import {  glob ,  globSync ,  globStream ,  globStreamSync ,  Glob  } from 'glob';
+import { glob, globSync, globStream, globStreamSync, Glob } from 'glob';
 
 var files = [];
-files = files.concat(glob.sync('resources/js/**/*.@(js|svg)', {nodir: true}));
+files = files.concat(glob.sync('resources/js/**/*.@(js|svg)', { nodir: true }));
 // console.log(files);
-files = files.concat(glob.sync('resources/scss/**/*.@(css|scss)', {nodir: true}));
-files = files.concat(glob.sync('resources/temple/**/*.@(svg)', {nodir: true}));
+files = files.concat(glob.sync('resources/scss/**/*.@(css|scss)', { nodir: true }));
+files = files.concat(glob.sync('resources/temple/**/*.@(svg)', { nodir: true }));
 
 
 export default defineConfig({
@@ -71,4 +71,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        watch: {
+            ignored: ['**/public/assets/**']
+        }
+    }
 });

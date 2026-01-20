@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\DB;
 
 class ProductImportService extends MKElectroImportService
 {
-    public $limit = 200;
-    public $offset = 10000;
+    public $limit = 300;
+    public $offset = 0;
     public $mediaService = null;
     public $sklads = null;
     public $product_label_options = null;
@@ -34,7 +34,7 @@ class ProductImportService extends MKElectroImportService
 
         while (true) {
             $products = $this->api->getProducts($this->limit, $this->offset);
-            // dd($products);
+            dd($products);
             if (!$products) {
                 dump("Не удалось получить товары");
                 break;
@@ -72,12 +72,12 @@ class ProductImportService extends MKElectroImportService
                         'uuid' => $product["product_sku"],
                         'article' => $product["product_mpn"],
                         'slug' => $product["slug"],
-                        'mrp' => $product["price"],
+                        'mrp' => (isset($product["price"]) && is_numeric($product["price"]) ? $product["price"] : 0),
 
-                        'weight' => $product["product_weight"],
-                        'length' => $product["product_length"],
-                        'width' => $product["product_width"],
-                        'height' => $product["product_height"],
+                        'weight' => (isset($product["product_weight"]) && is_numeric($product["product_weight"]) ? $product["product_weight"] : null),
+                        'length' => (isset($product["product_length"]) && is_numeric($product["product_length"]) ? $product["product_length"] : null),
+                        'width' => (isset($product["product_width"]) && is_numeric($product["product_width"]) ? $product["product_width"] : null),
+                        'height' => (isset($product["product_height"]) && is_numeric($product["product_height"]) ? $product["product_height"] : null),
                         'step' => ((!isset($product["step"]) || !$product["step"] || !is_numeric($product["step"])) ? 1 : $product["step"]),
 
                         'is_on' => $product["published"],

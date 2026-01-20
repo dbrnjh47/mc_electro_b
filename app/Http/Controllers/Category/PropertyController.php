@@ -40,6 +40,7 @@ class PropertyController
 
         $this->productStandard = app()->make(ProductStandard::class, ['params' => [
             "is_on" => ["category"],
+            "is_archive" => 0
         ]]);
         $this->productFilter = app()->make(ProductFilter::class, ['params' => array_filter($request->all())]);
 

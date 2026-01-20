@@ -43,11 +43,13 @@ class CategoryStandard extends AbstractStandard
         $productStandard = app()->make(ProductStandard::class, [
             'params' => [
                 "is_on" => 1,
+                // "is_archive" => 0
             ],
         ]);
 
         $builder->withCount(['products' => function ($query) use ($productStandard) {
             $query->standard($productStandard);
-        }]);
+        }])
+        ->having('products_count', '>', 0);
     }
 }

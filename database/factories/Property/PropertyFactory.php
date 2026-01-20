@@ -23,7 +23,7 @@ class PropertyFactory extends Factory
         $unit_rule = (rand(0, 100) > 50 ? UnitRule::inRandomOrder()->first() : null);
 
         return [
-            "title" => $this->faker->text(rand(10, 20)),
+            "title" => $this->faker->unique()->text(rand(10, 20)),
             "ordering" => $this->faker->randomFloat(
                 2,           // количество знаков после запятой
                 1,           // минимальное значение
