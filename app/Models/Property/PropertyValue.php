@@ -10,6 +10,7 @@ class PropertyValue extends Model
 {
     /** @use HasFactory<\Database\Factories\Property\PropertyValueFactory> */
     use HasFactory;
+    protected $guarded = false;
     public function productProperties()
     {
         return $this->hasMany(ProductProperty::class);
@@ -49,6 +50,13 @@ class PropertyValue extends Model
 
     public function format($number)
     {
-        return number_format($number, 2, '.', ' ');
+        if (is_int($number) || $number == floor($number)) {
+            // Целое число - без десятичных
+            return number_format($number, 0, '', ' ');
+        } else {
+            // Дробное число - с десятичными
+            $formatted = number_format($number, 2, '.', ' ');
+            return rtrim(rtrim($formatted, '0'), '.');
+        }
     }
 }

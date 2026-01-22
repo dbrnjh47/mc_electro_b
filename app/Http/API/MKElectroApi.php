@@ -17,6 +17,15 @@ class MKElectroApi
         ]);
     }
 
+    public function getProductsPropertis($limit, $offset)
+    {
+        return $this->request("post", "", [
+            "type" => "get_products_properties",
+            "limit" => $limit,
+            "offset" => $offset,
+        ]);
+    }
+
     public function getProperties($limit, $offset)
     {
         return $this->request("post", "", [

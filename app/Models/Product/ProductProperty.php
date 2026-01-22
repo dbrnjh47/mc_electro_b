@@ -17,7 +17,7 @@ class ProductProperty extends Model
 {
     /** @use HasFactory<\Database\Factories\Product\ProductPropertyFactory> */
     use HasFactory;
-
+    protected $guarded = false;
     public function product()
     {
         return $this->hasOne(Product::class, "id", "product_id");
