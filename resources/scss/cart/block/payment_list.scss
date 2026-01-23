@@ -1,0 +1,95 @@
+.cart_block_payment_list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-height: 300px;
+  overflow: auto;
+  padding-right: 5px;
+  &__item {
+    position: relative;
+    border: 1px solid #ebebeb;
+    border-width: 2px;
+    border-radius: 12px;
+    transition: all 0.4s;
+    &.activ {
+      border-color: #3caa3c;
+      pointer-events: none;
+    }
+    input {
+      display: none;
+      & + label::after {
+        content: "";
+        display: block;
+        width: 10px;
+        height: 10px;
+        background-color: transparent;
+        box-shadow: none;
+        position: absolute;
+        left: 16px;
+        top: calc(50% - 4px);
+        border-radius: 100%;
+        opacity: 0;
+        transition: all 0.4s;
+      }
+      &:checked + label::after {
+        opacity: 1;
+        background: #3caa3c;
+      }
+      & + label::before {
+        content: "";
+        display: block;
+        width: 18px;
+        height: 18px;
+        background-color: transparent;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #767d83;
+        border-radius: 100%;
+        box-shadow: none;
+        position: absolute;
+        left: 12px;
+        top: calc(50% - 8px);
+        transition: all 0.4s;
+      }
+      &:checked + label::before {
+        border-color: #3caa3c;
+      }
+    }
+    &_content {
+      padding: 15px 10px;
+      height: 100%;
+      box-sizing: border-box !important;
+      padding-left: 40px;
+      position: relative;
+      display: block;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        color: #8e95a6;
+      }
+      h6 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+    }
+    &_photo{
+        display: flex
+        ;margin-left: auto;
+            gap: 2px;
+            flex-wrap: wrap;
+        img {
+        } 
+    }
+  }
+
+  @media (max-width: 1000px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 546px) {
+    grid-template-columns: 1fr;
+  }
+}

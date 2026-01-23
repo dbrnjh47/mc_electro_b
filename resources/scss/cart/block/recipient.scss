@@ -1,0 +1,14 @@
+.cart_block_recipient{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: auto auto;
+    &__wrapper{
+       
+    }
+    @media (max-width: 490px) {
+        &>div:nth-child(2){
+            display: none;
+        }
+        grid-template-columns: 100%;
+    }
+}

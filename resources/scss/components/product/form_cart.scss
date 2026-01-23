@@ -1,0 +1,40 @@
+.form_cart {
+  padding: 20px;
+  border-radius: 10px;
+  background: #f6f8fd;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  h6 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #16161f;
+  }
+  &__sub_title {
+    font-size: 16px;
+    font-weight: 400;
+    color: #8e95a6;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  &__inputs{
+    display: grid;
+    margin-bottom: 15px;
+    gap: 15px;
+    margin-top: auto;
+  }
+  &__agreement {
+    font-size: 10px;
+    font-weight: 400;
+    color: #8e95a6;
+    margin-top: 10px;
+    a {
+      transition: all 0.4s;
+      color: #de002b;
+      &:hover {
+        color: #8e95a6;
+      }
+    }
+  }
+}

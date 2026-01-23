@@ -74,7 +74,7 @@
                 </svg>
                 Избранное
             </a>
-            <a href="#" itemprop="url" class="header__action header__action_hover">
+            <a href="{{ route("cart") }}" itemprop="url" class="header__action header__action_hover">
                 <!-- public\temple\images\layout\icon\basket.svg -->
                 <svg width="23" height="21" viewBox="0 0 23 21" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd"

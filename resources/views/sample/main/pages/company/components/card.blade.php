@@ -12,6 +12,7 @@
             <a class="company_card__name" href="{{$url_company}}" target="_blank">
                 {{$company->name}}
             </a>
+            @if($company->count_reviews)
             <p>
                 <span>
                     <svg class="red" width="18" height="17" viewBox="0 0 18 17"
@@ -29,6 +30,7 @@
                         </path>
                     </svg> {{$company->count_reviews}} отзывов</span>
             </p>
+            @endif
             <p>
                 Кол-во товаров: <span>{{$company->products_count}}</span>
             </p>

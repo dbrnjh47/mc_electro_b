@@ -1,0 +1,42 @@
+.modal_shipping {
+  max-width: 1015px;
+  .modal__body {
+    gap: 15px;
+    display: flex;
+    margin-top: 10px;
+  }
+  .modal__header {
+    margin-bottom: 20px;
+  }
+
+  &__map {
+    position: relative;
+    width: 100%;
+    background: red;
+    border-radius: 0 12px 12px 0;
+    overflow: hidden;
+  }
+  &__info {
+    flex: calc(33.3333% + 8px);
+    min-width: 40%;
+    &_desc {
+      font-size: 12px !important;
+      text-align: left;
+      color: #000;
+      margin: 0 !important;
+      margin-bottom: 10px !important;
+    }
+    .modal__input_wrapper {
+      margin-bottom: 10px;
+    }
+    .btn {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 850px) {
+    &__map {
+      display: none;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+.product_card {
+  &__favorite {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+    cursor: pointer;
+    svg {
+      fill: #8e95a6;
+      transition: all 0.4s;
+      &:hover,
+      &[data-active="1"] {
+        fill: #de002b;
+      }
+      &:hover {
+        box-shadow: 0 0 15px #fff;
+      }
+
+      &[data-active="1"]:hover {
+        fill: #8e95a6;
+      }
+    }
+  }
+}

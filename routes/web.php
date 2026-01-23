@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\IndexController as AuthIndexController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
+use App\Http\Controllers\Cart\CartController;
 use App\Http\Controllers\Category\IndexController as CategoryController;
 use App\Http\Controllers\Category\ProductController;
 use App\Http\Controllers\SearchController;
@@ -31,6 +32,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class, 'show'])->name('search');
 // Route::get('/currency/set/{id?}', [CurrencyController::class, 'set'])->name('currency.set');
+
+Route::get('/cart', [CartController::class, 'show'])->name('cart');
+
 //
 Route::prefix('profile')->group(function () {
     Route::middleware(['auth'])->group(function () {
