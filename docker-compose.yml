@@ -1,0 +1,67 @@
+# version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./.docker/app/Dockerfile
+    container_name: app
+    restart: unless-stopped
+    tty: true
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/${APP_NAME}
+
+  nginx:
+    image: nginx:latest
+    container_name: app_nginx
+    restart: unless-stopped
+    environment:
+        APP_NAME: ${APP_NAME}
+    volumes:
+      - ./:/var/www/${APP_NAME}
+      - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
+    ports:
+      - "8087:80"
+    depends_on:
+      - app
+
+  #MySQL Service
+  db:
+    image: mysql:9.6
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - 8101:${DB_PORT}
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    volumes:
+      - ./tmp/db:/var/lib/mysql/
+      - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
+    # networks:
+    #   - app-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    depends_on:
+      - db
+    ports:
+      - 8181:80
+    environment:
+      PMA_HOST: db
+      MYSQL_USERNAME: ${DB_USERNAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      UPLOAD_LIMIT: 300M
+    # networks:
+    #   - app-network
+
+#Docker Networks
+networks:
+  app-network:
+    driver: bridge

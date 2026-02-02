@@ -122,7 +122,7 @@ return [
     |
     */
 
-    'cache_tags' => ['torann-geoip-location'],
+    'cache_tags' => (env('CACHE_STORE', 'array') === "file" || env('CACHE_STORE', 'array') === "database") ? null : ['torann-geoip-location'],
 
     /*
     |--------------------------------------------------------------------------
