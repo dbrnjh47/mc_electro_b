@@ -72,8 +72,14 @@ export default defineConfig({
         }),
     ],
     server: {
+        host: '0.0.0.0',
+        port: 5173, // или ваш порт
+        hmr: {
+          host: 'localhost',
+          port: 5173
+        },
         watch: {
             ignored: ['**/public/assets/**']
         }
-    }
+      }
 });

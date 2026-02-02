@@ -8,24 +8,29 @@ services:
     container_name: app
     restart: unless-stopped
     tty: true
+    environment:
+        APP_DIR: ${APP_DIR}
     depends_on:
       - db
+      - node
     volumes:
-      - ./:/var/www/${APP_NAME}
+      - ./:/var/www/${APP_DIR}
+    networks:
+      - app-network
 
   nginx:
     image: nginx:latest
     container_name: app_nginx
     restart: unless-stopped
-    environment:
-        APP_NAME: ${APP_NAME}
     volumes:
-      - ./:/var/www/${APP_NAME}
+      - ./:/var/www/${APP_DIR}
       - ./.docker/nginx/conf.d/:/etc/nginx/conf.d/
     ports:
       - "8087:80"
     depends_on:
       - app
+    networks:
+      - app-network
 
   #MySQL Service
   db:
@@ -44,8 +49,8 @@ services:
     volumes:
       - ./tmp/db:/var/lib/mysql/
       - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
-    # networks:
-    #   - app-network
+    networks:
+      - app-network
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -58,8 +63,24 @@ services:
       MYSQL_USERNAME: ${DB_USERNAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       UPLOAD_LIMIT: 300M
-    # networks:
-    #   - app-network
+    networks:
+      - app-network
+
+  node:
+    image: node:25-alpine
+    container_name: app_node
+    restart: unless-stopped
+    working_dir: /var/www/${APP_DIR}
+    volumes:
+      - ./:/var/www/${APP_DIR}
+      # Для кэширования npm пакетов
+      # - ./tmp/node/node_cache:/usr/local/lib/node_modules
+    networks:
+      - app-network
+    tty: true
+    # command: sh -c "npm install"
+    ports:
+      - "5173:5173"
 
 #Docker Networks
 networks:
