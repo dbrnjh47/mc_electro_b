@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./.docker/app/Dockerfile
+      args:
+        - APP_DIR=${APP_DIR}
     container_name: app
     restart: unless-stopped
     tty: true

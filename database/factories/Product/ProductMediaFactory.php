@@ -19,7 +19,7 @@ class ProductMediaFactory extends Factory
     {
         return [
             "name" => "test.png",
-            "product_id" => Product::inRandomOrder()->where("id", "!=", 1)->first()->id,
+            "product_id" => Product::inRandomOrder()->where("id", "!=", 1)->limit(1)->first()->id,
         ];
     }
 }

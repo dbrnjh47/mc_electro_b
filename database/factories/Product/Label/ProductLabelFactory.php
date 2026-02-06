@@ -18,7 +18,7 @@ class ProductLabelFactory extends Factory
     public function definition(): array
     {
         return [
-            "product_label_option_id" => ProductLabelOption::inRandomOrder()->first()->id,
+            "product_label_option_id" => ProductLabelOption::inRandomOrder()->limit(1)->first()->id,
         ];
     }
 }

@@ -27,8 +27,8 @@ class PointLinkFactory extends Factory
 
         return [
             "url" => $this->urls[$random_key],
-            "point_link_category_id" => PointLinkCategory::inRandomOrder()->first()->id,
-            "point_id" => Point::inRandomOrder()->where("id", "!=", 1)->first()->id,
+            "point_link_category_id" => PointLinkCategory::inRandomOrder()->limit(1)->first()->id,
+            "point_id" => Point::inRandomOrder()->where("id", "!=", 1)->limit(1)->first()->id,
         ];
     }
 }

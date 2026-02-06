@@ -20,8 +20,8 @@ class ProductReviewFactory extends Factory
     {
         return [
             "quantity" => rand(1, 5),
-            "user_id" => User::inRandomOrder()->first()->id,
-            // "product_id" => Product::inRandomOrder()->first()->id,
+            "user_id" => User::inRandomOrder()->limit(1)->first()->id,
+            // "product_id" => Product::inRandomOrder()->limit(1)->first()->id,
             "is_on" => rand(0, 1),
             "created_at" => $this->faker->dateTimeBetween('-1 year', 'now')
         ];

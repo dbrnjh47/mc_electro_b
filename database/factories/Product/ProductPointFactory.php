@@ -18,7 +18,7 @@ class ProductPointFactory extends Factory
     public function definition(): array
     {
         return [
-            "point_id" => Point::inRandomOrder()->where("id", "!=", 1)->first()->id,
+            "point_id" => Point::inRandomOrder()->where("id", "!=", 1)->limit(1)->first()->id,
             "count" => rand(1, 1000),
         ];
     }

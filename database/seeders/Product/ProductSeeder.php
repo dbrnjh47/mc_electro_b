@@ -35,7 +35,7 @@ class ProductSeeder extends Seeder
                         ProductLabel::insertOrIgnore([
                             'product_id' => $product->id,
                             'product_label_option_id' => ProductLabelOption::inRandomOrder()
-                                ->first()->id,
+                                ->limit(1)->first()->id,
                         ]);
                     }
                 })
@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
                     $count = rand(0, 3);
 
                     for ($i = 0; $i < $count; $i++) {
-                        $category_id = Category::inRandomOrder()->first()->id;
+                        $category_id = Category::inRandomOrder()->limit(1)->first()->id;
                         ProductCategory::firstOrCreate([
                             "category_id" => $category_id,
                             "product_id" => $product->id,
@@ -56,7 +56,7 @@ class ProductSeeder extends Seeder
                         // ProductCategory::insertOrIgnore([
                         //     'product_id' => $product->id,
                         //     'category_id' => Category::inRandomOrder()
-                        //         ->first()->id,
+                        //         ->limit(1)->first()->id,
                         // ]);
                     }
                 })
@@ -70,6 +70,7 @@ class ProductSeeder extends Seeder
 
                         $option = Point::whereNotIn('id', $existingOptionIds)
                             ->inRandomOrder()
+                            ->limit(1)
                             ->first();
 
                         if ($option) {

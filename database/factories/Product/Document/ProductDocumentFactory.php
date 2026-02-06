@@ -20,7 +20,7 @@ class ProductDocumentFactory extends Factory
         return [
             "title" => fake()->text(10),
             "name" => "test.pdf",
-            "product_id" => Product::inRandomOrder()->where("id", "!=", 1)->first()->id,
+            "product_id" => Product::inRandomOrder()->where("id", "!=", 1)->limit(1)->first()->id,
         ];
     }
 }

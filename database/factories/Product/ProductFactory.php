@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             "step" => (rand(1, 100) > 50 ? 100 : 1),
             "mrp" => $this->faker->randomFloat(2, 100, 10000),
             "slug" => fake()->unique()->slug(rand(1, 5)),
-            "company_id" => (rand(0, 100) > 50 ? Company::inRandomOrder()->where("id", "!=", 1)->first()->id : null),
+            "company_id" => (rand(0, 100) > 50 ? Company::inRandomOrder()->where("id", "!=", 1)->limit(1)->first()->id : null),
 
             "name" => fake()->text(rand(5, 20)),
             "is_on" => rand(0, 1),

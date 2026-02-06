@@ -19,7 +19,7 @@ class PointPhoneFactory extends Factory
     {
         return [
             "phone" => fake()->unique()->e164PhoneNumber(),
-            'point_id' => Point::inRandomOrder()->where("id", "!=", 1)->first()->id,
+            'point_id' => Point::inRandomOrder()->where("id", "!=", 1)->limit(1)->first()->id,
         ];
     }
 }

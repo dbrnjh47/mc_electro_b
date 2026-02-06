@@ -19,8 +19,8 @@ class PropertyCategoryFactory extends Factory
     public function definition(): array
     {
         return [
-            "property_id" => Property::inRandomOrder()->first()->id,
-            "category_id" => Category::inRandomOrder()->first()->id,
+            "property_id" => Property::inRandomOrder()->limit(1)->first()->id,
+            "category_id" => Category::inRandomOrder()->limit(1)->first()->id,
         ];
     }
 }

@@ -20,7 +20,7 @@ class PropertyFactory extends Factory
      */
     public function definition(): array
     {
-        $unit_rule = (rand(0, 100) > 50 ? UnitRule::inRandomOrder()->first() : null);
+        $unit_rule = (rand(0, 100) > 50 ? UnitRule::inRandomOrder()->limit(1)->first() : null);
 
         return [
             "title" => $this->faker->unique()->text(rand(10, 20)),
@@ -33,12 +33,12 @@ class PropertyFactory extends Factory
             "property_type_id" => (rand(0, 100) > 50 ?
                 (
                     rand(0, 100) > 80
-                    ? PropertyType::whereIn("type", ["range"])->inRandomOrder()->first()->id
-                    : PropertyType::whereIn("type", ["checkbox", "select"])->inRandomOrder()->first()->id
+                    ? PropertyType::whereIn("type", ["range"])->inRandomOrder()->limit(1)->first()->id
+                    : PropertyType::whereIn("type", ["checkbox", "select"])->inRandomOrder()->limit(1)->first()->id
                 )
                 : null),
-            "property_section_id" => (rand(0, 100) > 50 ? PropertySection::inRandomOrder()->first()->id : null),
-            "unit_id" => ($unit_rule ? $unit_rule->unit_id : (rand(0, 100) > 50 ? Unit::inRandomOrder()->first()->id : null)),
+            "property_section_id" => (rand(0, 100) > 50 ? PropertySection::inRandomOrder()->limit(1)->first()->id : null),
+            "unit_id" => ($unit_rule ? $unit_rule->unit_id : (rand(0, 100) > 50 ? Unit::inRandomOrder()->limit(1)->first()->id : null)),
             "to_unit_id" => ($unit_rule ? $unit_rule->to_unit_id : null),
         ];
     }

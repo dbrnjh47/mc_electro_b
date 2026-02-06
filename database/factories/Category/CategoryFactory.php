@@ -14,7 +14,7 @@ class CategoryFactory extends Factory
      */
     public function definition(): array
     {
-        $category = (rand(0, 100) > 20 ? Category::where("id", "!=", 1)->inRandomOrder()->first() : null);
+        $category = (rand(0, 100) > 20 ? Category::where("id", "!=", 1)->inRandomOrder()->limit(1)->first() : null);
         return [
             "is_on" => rand(0,1),
             "preview" => (rand(0,10) > 7 ? null : "1.png"),

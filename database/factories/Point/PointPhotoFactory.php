@@ -18,7 +18,7 @@ class PointPhotoFactory extends Factory
     public function definition(): array
     {
         return [
-            'point_id' => Point::inRandomOrder()->where("id", "!=", 1)->first()->id,
+            'point_id' => Point::inRandomOrder()->where("id", "!=", 1)->limit(1)->first()->id,
             'img' => (rand(0,10) > 5 ? "1.png" : "2.png")
         ];
     }

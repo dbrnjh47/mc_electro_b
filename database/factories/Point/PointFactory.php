@@ -21,7 +21,7 @@ class PointFactory extends Factory
             $city_id->where("is_on", 1);
         }
 
-        $city_id = $city_id->inRandomOrder()->first()->id;
+        $city_id = $city_id->inRandomOrder()->limit(1)->first()->id;
         return [
             "city_id" => $city_id,
             "lon" => $this->faker->longitude,
