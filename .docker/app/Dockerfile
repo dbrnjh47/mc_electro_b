@@ -1,4 +1,4 @@
-FROM php:8.3-fpm
+FROM php:8.4-fpm
 
 ARG APP_DIR
 
@@ -23,5 +23,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --filename=composer \
     --install-dir=/usr/local/bin
+
+RUN pecl install redis && docker-php-ext-enable redis
 
 WORKDIR /var/www/${APP_DIR}

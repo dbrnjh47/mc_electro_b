@@ -12,8 +12,6 @@ use App\Models\Category\Category;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-
 class PageController extends Controller
 {
     public function index(Request $request)
