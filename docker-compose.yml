@@ -46,11 +46,12 @@ services:
       MYSQL_HOST: localhost
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_DATABASE: mc_electro
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     volumes:
       - ./tmp/db:/var/lib/mysql/
       - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./.docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
 

@@ -8,8 +8,6 @@ use GuzzleHttp\Exception\RequestException;
 
 class MKElectroApi
 {
-    const ENDPOINT_PUBLIC = "http://mc-api";
-
     public function getCategorySub()
     {
         return $this->request("post", "", [
@@ -103,7 +101,7 @@ class MKElectroApi
             $client = new \GuzzleHttp\Client();
             $response = $client->request(
                 $method,
-                self::ENDPOINT_PUBLIC . "/" . $url,
+                env("MK_ELECTRO_URL") . "/" . $url,
                 ($method == "get" ?
                     [
                         'headers' => [

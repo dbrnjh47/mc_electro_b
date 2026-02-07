@@ -23,7 +23,7 @@ class CompanyImportService extends MKElectroImportService
 
         while (true) {
             $companies = $this->api->getCompanies($this->limit, $this->offset);
-            dump($companies);
+            // dump($companies);
             if (!$companies) {
                 dump("Не удалось получить компании");
                 break;
