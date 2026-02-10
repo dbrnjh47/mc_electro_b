@@ -10,6 +10,7 @@ services:
     container_name: app
     restart: unless-stopped
     tty: true
+    user: "1000:1000"
     environment:
         APP_DIR: ${APP_DIR}
     depends_on:

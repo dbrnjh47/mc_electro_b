@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Database\Seeders\Company\CompanySeeder;
+use Database\Seeders\Order\DeliveryMethod\DeliveryMethodSeeder;
+use Database\Seeders\Order\Payment\PaymentSeeder;
 use Database\Seeders\Product\ProductSeeder;
 use Database\Seeders\Property\PropertySeeder;
 use Database\Seeders\Unit\UnitSeeder;
+use Database\Seeders\User\PersonSeeder;
 use Database\Seeders\User\WishlistSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -53,6 +56,12 @@ class DatabaseSeeder extends Seeder
 
         // user
         $this->call(WishlistSeeder::class);
+        $this->call(PersonSeeder::class);
+
+        // order and cart
+        $this->call(PaymentSeeder::class);
+        $this->call(DeliveryMethodSeeder::class);
+
         $this->call(CartSeeder::class);
     }
 }
