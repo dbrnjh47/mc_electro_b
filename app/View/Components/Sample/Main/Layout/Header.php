@@ -4,6 +4,7 @@ namespace App\View\Components\Sample\Main\Layout;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Models\CurrencyModelService;
+use App\Http\Services\User\WishListService;
 use App\Models\Product\Product;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -35,6 +36,11 @@ class Header extends Component
             ->toArray();
         //
         // $currencies = (new CurrencyModelService)->all();
-        return view('sample.main.layouts.components.header.index', compact("search_strings"));
+        $wishlist_count = (new WishListService)->count();
+
+        return view('sample.main.layouts.components.header.index', compact(
+            "search_strings",
+            "wishlist_count"
+        ));
     }
 }

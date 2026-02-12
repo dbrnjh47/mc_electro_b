@@ -73,6 +73,7 @@
                         d="M0 1.49222C0 0.668092 0.688793 0 1.53846 0H16.4615C17.3112 0 18 0.668091 18 1.49222V20.452C18 20.8815 17.513 21.1436 17.1373 20.9162L9.29861 16.1724C9.11586 16.0618 8.88414 16.0618 8.70139 16.1724L0.862708 20.9162C0.486973 21.1436 0 20.8815 0 20.452V1.49222Z" />
                 </svg>
                 Избранное
+                <sup class="wishlist_count" @if(!$wishlist_count) style="display: none;" @endif>{{ $wishlist_count }}</sup>
             </a>
             <a href="{{ route("cart") }}" itemprop="url" class="header__action header__action_hover">
                 <!-- public\temple\images\layout\icon\basket.svg -->
@@ -194,3 +195,7 @@
         </div>
     </div>
 </header>
+
+<script>
+    window.wishlist_count = {{ $wishlist_count }};
+</script>

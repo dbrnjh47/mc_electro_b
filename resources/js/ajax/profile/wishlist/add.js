@@ -4,6 +4,8 @@ window.wishListAdd = function(product_id) {
         type: "POST",
         success: function () {
             miniAlert("Товар успешно добавлен в избранное");
+            window.wishlist_count++;
+            window.updateWishlistCountElements();
         },
         error: function (msg) {
 

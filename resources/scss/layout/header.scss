@@ -240,8 +240,21 @@
         cursor: pointer;
         transition: all 0.4s;
         justify-content: space-between;
+        position: relative;
         svg {
             fill: #16161f;
+        }
+        sup{
+            position: absolute;
+            right: 2px;
+            top: 5px;
+            background: #de002b;
+            border-radius: 50%;
+            padding: 7px 7px 6px 7px;
+            color: #fff;
+            min-width: 22px;
+            text-align: center;
+            font-size: 10px;
         }
     }
     &__world_dropdown {

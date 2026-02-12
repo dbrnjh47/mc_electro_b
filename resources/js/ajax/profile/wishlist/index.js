@@ -1,6 +1,8 @@
 import "./delete.js";
 import "./add.js";
 
+let wishlist_count_elements = $(".wishlist_count");
+
 window.setWishlistEvent = function(obj = ".wishlist_action")
 {
     $(obj).click(function (e) {
@@ -16,6 +18,16 @@ window.setWishlistEvent = function(obj = ".wishlist_action")
             obj.attr("data-active", 1).find("span").text("В избранном");
         }
     });
+}
+
+window.updateWishlistCountElements = function()
+{
+    if(window.wishlist_count)
+    {
+        wishlist_count_elements.text(window.wishlist_count).show();
+    } else {
+        wishlist_count_elements.hide();
+    }
 }
 
 window.setWishlistEvent();
