@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Services\BreadcrumbService;
+use App\Http\Services\User\CartService;
 use App\Http\Services\User\WishListService;
 use App\Http\Standards\ProductStandard;
 use App\Models\Product\Product;
@@ -12,19 +13,21 @@ class AboutController extends Controller
     public function show()
     {
         $wishlist_id = (new WishListService(0))->getID();
+        $cart_id = (new CartService(0))->getID();
 
         $productStandard = app()->make(ProductStandard::class, [
             'params' => [
                 "is_on" => 1,
                 "wishlist" => $wishlist_id,
+                "cart" => $cart_id,
                 "preview" => 1,
                 "labels" => 1,
                 "is_archive" => 0
             ],
         ]);
 
-        $products = Product::standard($productStandard)
-            ->select(['id', 'mrp', 'slug', 'step', 'name', 'article'])
+        $products = Product::select(['id', 'mrp', 'slug', 'step', 'name', 'uuid'])
+            ->standard($productStandard)
             ->inRandomOrder()
             ->limit(6)
             ->get();

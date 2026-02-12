@@ -9,7 +9,9 @@
     <div class="product_card__buttons">
 
         <a href="{{$href}}" alt="{{$product->name}}" class="btn">Подробнее</a>
-        <button class="btn btn_upend">Добавить в корзину</button>
+        <button class="btn btn_upend cart_action" data-product-id="{{$product->id}}" data-active="{{($product->cart_products_count ? 1 : 0)}}">
+            @if($product->cart_products_count) Удалить из корзины @else Добавить в корзину @endif
+        </button>
 
     </div>
 
@@ -30,27 +32,17 @@
         </div>
         @endif
         <h4 class="product_card__head_name">{{$product->name}}</h4>
-        <p class="product_card__head_description">{{$product->article}}</p>
+        <p class="product_card__head_description">{{$product->uuid}}</p>
     </div>
 
     <div class="product_card__img">
-        @php
-            if($product->medias->isEmpty())
-            {
-                $defult_media = \App\Models\Product\ProductMedia::getDefult();
-                $path = $defult_media->path;
-            } else
-            {
-                $path = $product->medias[0]->miniature;
-            }
-        @endphp
-        <img src="{{$path}}" alt="{{$product->name}}" loading="lazy" decoding="async">
+        <img src="{{$product->getPreview()}}" alt="{{$product->name}}" loading="lazy" decoding="async">
     </div>
 
     <div class="product_card__info">
         <div class="product_card__info_price">
             <span>Цена</span>
-            <p>{{$product->mrp}} ₽</p>
+            <p>{{ $product->getPriceText() }} ₽</p>
         </div>
         <div class="product_card__info_price">
             <span>Кол-во (шт.)</span>

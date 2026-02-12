@@ -253,5 +253,6 @@
     @vite('resources/js/landing/index.js')
 
     @include("sample.main.components.wishlist_action")
+    @include("sample.main.components.cart_action")
 
 @endsection

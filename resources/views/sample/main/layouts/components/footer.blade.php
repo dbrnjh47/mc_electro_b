@@ -85,7 +85,7 @@
 
         <div class="footer__bottom">
             <meta itemprop="copyrightYear" content="{{date("Y")}}">
-            <p>© 2012-{{date("Y")}} {{$settings->abbreviation}} {{$settings->name}}.</p>
+            <p>© {{$settings->start_year}}-{{date("Y")}} {{$settings->abbreviation}} {{$settings->name}}.</p>
         </div>
     </div>
 </footer>

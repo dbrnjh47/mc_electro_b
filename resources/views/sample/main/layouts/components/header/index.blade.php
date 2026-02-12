@@ -87,6 +87,7 @@
                 </svg>
 
                 Корзина
+                <sup class="cart_count" @if(!$cart_count) style="display: none;" @endif>{{ $cart_count }}</sup>
             </a>
 
             @auth
@@ -198,4 +199,5 @@
 
 <script>
     window.wishlist_count = {{ $wishlist_count }};
+    window.cart_count = {{ $cart_count }};
 </script>

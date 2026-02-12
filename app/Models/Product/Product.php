@@ -2,6 +2,7 @@
 
 namespace App\Models\Product;
 
+use App\Models\Cart\CartProduct;
 use App\Models\Company\Company;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
@@ -71,8 +72,33 @@ class Product extends Model
         return $this->hasMany(WishlistProduct::class, 'product_id', 'id');
     }
 
+    public function cart_products()
+    {
+        return $this->hasMany(CartProduct::class, 'product_id', 'id');
+    }
+
     public function productProperties()
     {
         return $this->hasMany(ProductProperty::class, 'product_id', 'id');
+    }
+
+    public function getPreview()
+    {
+        if ($this->medias->isEmpty()) {
+            $defult_media = \App\Models\Product\ProductMedia::getDefult();
+            return $defult_media->path;
+        } else {
+            return $this->medias[0]->miniature;
+        }
+    }
+
+    public function getPriceText($price = 0)
+    {
+        if(!$price)
+        {
+            $price = $this->mrp;
+        }
+
+        return number_format($price, 2, ',', ' ')." руб.";
     }
 }

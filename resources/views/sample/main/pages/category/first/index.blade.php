@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+
     <section class="dop_menu_mob dop_menu_mob__container">
         @if($properties->isNotEmpty())
         <div class="dop_menu_mob__button">
@@ -193,6 +194,7 @@
     </script>
 
     @include("sample.main.components.wishlist_action")
+    @include("sample.main.components.cart_action")
     @vite('resources/js/category/index.js')
 
 @endsection

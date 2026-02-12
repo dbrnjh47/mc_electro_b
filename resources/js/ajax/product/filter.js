@@ -21,6 +21,7 @@ window.getProuctFilter = function(page = null)
 
             setEventProductPaginate();
             window.setWishlistEvent();
+            window.setCartEvent();
 
             //
             window.updateFilter(result["properties"]);

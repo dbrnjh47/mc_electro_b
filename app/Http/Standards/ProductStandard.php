@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 class ProductStandard extends AbstractStandard
 {
     public const WISHLIST = 'wishlist';
+    public const CART = 'cart';
     public const PREVIEW = 'preview';
     public const IS_ON = 'is_on';
     public const LABELS = 'labels';
@@ -15,6 +16,7 @@ class ProductStandard extends AbstractStandard
     {
         return [
             self::WISHLIST => [$this, 'wishlist'],
+            self::CART => [$this, 'cart'],
             self::PREVIEW => [$this, 'preview'],
             self::IS_ON => [$this, 'isOn'],
             self::LABELS => [$this, 'labels'],
@@ -59,6 +61,14 @@ class ProductStandard extends AbstractStandard
         }
 
         $builder->where("is_on", 1);
+    }
+
+    public function cart(Builder $builder, $cart_id)
+    {
+        $builder->withCount(['cart_products' => function (Builder $q) use ($cart_id) {
+                $q->where("cart_id", $cart_id)->limit(1);
+            },
+        ]);
     }
 
     public function wishlist(Builder $builder, $wishlist_id)

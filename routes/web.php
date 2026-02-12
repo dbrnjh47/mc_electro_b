@@ -33,8 +33,13 @@ Route::get('/', [PageController::class, 'index'])->name('home');
 Route::get('/search', [SearchController::class, 'show'])->name('search');
 // Route::get('/currency/set/{id?}', [CurrencyController::class, 'set'])->name('currency.set');
 
-Route::get('/cart', [CartController::class, 'show'])->name('cart');
+Route::prefix('cart')->group(function () {
+    Route::get('/', [CartController::class, 'show'])->name('cart');
+    Route::post('/clear', [CartController::class, 'clear'])->name('cart.clear');
 
+    Route::post('/', [CartController::class, 'add'])->name('cart.add');
+    Route::delete('/{product_id?}', [CartController::class, 'delete'])->name('cart.delete');
+});
 //
 Route::prefix('profile')->group(function () {
     Route::middleware(['auth'])->group(function () {

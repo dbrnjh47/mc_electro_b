@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('yt')->comment("https://www.youtube.com/")->nullable();
             $table->string('tg')->comment("https://t.me/")->nullable();
 
+            $table->smallInteger('start_year')->default(2012);
             $table->string('address')->nullable();
 
             $table->boolean('teh_works')->default(0);

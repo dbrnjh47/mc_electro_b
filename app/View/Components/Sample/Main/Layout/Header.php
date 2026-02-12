@@ -4,6 +4,7 @@ namespace App\View\Components\Sample\Main\Layout;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\Models\CurrencyModelService;
+use App\Http\Services\User\CartService;
 use App\Http\Services\User\WishListService;
 use App\Models\Product\Product;
 use Closure;
@@ -37,10 +38,12 @@ class Header extends Component
         //
         // $currencies = (new CurrencyModelService)->all();
         $wishlist_count = (new WishListService)->count();
+        $cart_count = (new CartService)->count();
 
         return view('sample.main.layouts.components.header.index', compact(
             "search_strings",
-            "wishlist_count"
+            "wishlist_count",
+            "cart_count",
         ));
     }
 }

@@ -134,6 +134,7 @@
             window.isStopStartFilter = 1;
         </script>
     @endif
-    @include('sample.main.components.wishlist_action')
+    @include("sample.main.components.wishlist_action")
+    @include("sample.main.components.cart_action")
     @vite('resources/js/category/index.js')
 @endsection

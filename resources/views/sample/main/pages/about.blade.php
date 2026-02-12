@@ -15,7 +15,7 @@
                 <div class="app__title">
                     <div class="app__title_wrapper">
                         <h2 class="app__title_text"><span>{{$settings->abbreviation}}</span> {{$settings->name}} - Компания
-                            основаная в 2005 году</h2>
+                            основаная в {{$settings->start_year}} году</h2>
                     </div>
                 </div>
                 <p class="top_text">
@@ -188,4 +188,5 @@
     @vite('resources/js/about/index.js')
 
     @include("sample.main.components.wishlist_action")
+    @include("sample.main.components.cart_action")
 @endsection

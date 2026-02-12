@@ -42,3 +42,13 @@ document.body.addEventListener('scroll', startSticky, false);
 // ajax
 
 import "/resources/js/ajax/product/product_menu_block/reviews/get.js";
+
+//
+
+$("#product_buy").click(function (e) {
+    let obj = $(this);
+    let wrapper = obj.closest(".product_result_processing");
+    let count = wrapper.find(".input_count__input").val();
+    if(!(!isNaN(parseFloat(count)) && isFinite(count))){count = 1;}
+    window.cartAdd(wrapper.data("product-id"), count, 0);
+});

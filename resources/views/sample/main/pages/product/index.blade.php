@@ -416,7 +416,9 @@
 
                 <section class="product_result">
                     <div class="product_result__price_wrapper">
-                        <p class="product_result__price">₽ 999 <span>2000</span></p>
+                        <p class="product_result__price">₽ {{ $product->getPriceText() }}
+                            {{-- <span>2000</span> --}}
+                        </p>
                         <div class="product_result__top_actions">
                             <button class="btn wishlist_action" data-product-id="{{$product->id}}" data-active="{{($product->wishlist_products_count ? 1 : 0)}}" >
                                 <svg width="14" height="17" viewBox="0 0 14 17"
@@ -461,7 +463,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="product_result_processing">
+                    <div class="product_result_processing" data-product-id="{{$product->id}}">
                         <div class="input_count">
                             <button class="input_count__btn input_count_reduce">
                                 -
@@ -472,7 +474,7 @@
                             </button>
                         </div>
                         <div class="product_result_processing__actions">
-                            <button class="btn">Купить</button>
+                            <button class="btn" id="product_buy">Купить</button>
                             <button class="btn btn_upend" onclick="getProductPhone();">Позвонить</button>
                             <div class="product_result_processing__actions_phone copy_button" data-copy-text="+7 900 000 00 00">
                                 <!-- temple\images\product\icon\phone.svg -->
@@ -614,4 +616,5 @@
     @vite('resources/js/product/index.js')
 
     @include("sample.main.components.wishlist_action")
+    @include("sample.main.components.cart_action")
 @endsection

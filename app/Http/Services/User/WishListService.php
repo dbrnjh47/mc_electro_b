@@ -57,16 +57,18 @@ class WishListService
         // получаю список и возвращаю
         return WishlistProduct::where("wishlist_id", $this->wishlist->id)
             ->withWhereHas('product', function ($q) {
+                $cart_id = (new CartService(0))->getID();
                 $productStandard = app()->make(ProductStandard::class, [
                     'params' => [
+                        "cart" => $cart_id,
                         "is_on" => 1,
                         "preview" => 1,
                         "labels" => 1
                     ]
                 ]);
 
-                $q->standard($productStandard)
-                    ->select(['id', 'mrp', 'slug', 'step', 'name', 'article', DB::raw('1 as wishlist_products_count')]);
+                $q->select(['id', 'mrp', 'slug', 'step', 'name', 'uuid', DB::raw('1 as wishlist_products_count')])
+                    ->standard($productStandard);
             })
             ->paginate($this->limit);
     }
