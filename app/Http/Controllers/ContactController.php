@@ -26,12 +26,12 @@ class ContactController extends Controller
 
     public function getPoints($request)
     {
-        $point_standard = app()->make(PointStandard::class, ['params' => [
+        $pointStandard = app()->make(PointStandard::class, ['params' => [
             "is_on" => 1,
             "is_pickup" => 1
         ]]);
         $point_filter = app()->make(PointFilter::class, ['params' => array_filter($request->all())]);
-        $points = Point::standard($point_standard)
+        $points = Point::standard($pointStandard)
             ->filter($point_filter)
             ->with('links.category')
             ->with('phones')

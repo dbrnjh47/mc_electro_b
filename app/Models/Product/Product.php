@@ -4,6 +4,7 @@ namespace App\Models\Product;
 
 use App\Models\Cart\CartProduct;
 use App\Models\Company\Company;
+use App\Models\Point\Point;
 use App\Models\Product\Document\ProductDocument;
 use App\Models\Product\Label\ProductLabel;
 use App\Models\Product\Label\ProductLabelOption;
@@ -25,6 +26,13 @@ class Product extends Model
 
     protected $guarded = false;
     public function points()
+    {
+        return $this->belongsToMany(
+            Point::class,          // Целевая модель
+            (new ProductPoint())->getTable(),     // Промежуточная таблица
+        )->withPivot('count');
+    }
+    public function product_points()
     {
         return $this->hasMany(ProductPoint::class, 'product_id', 'id');
     }
@@ -92,13 +100,13 @@ class Product extends Model
         }
     }
 
-    public function getPriceText($price = 0)
+    public function getLowestPrice()
     {
-        if(!$price)
-        {
-            $price = $this->mrp;
-        }
+        return $this->mrp;
+    }
 
-        return number_format($price, 2, ',', ' ')." руб.";
+    static public function getPriceText($price = 0)
+    {
+        return number_format($price, 2, ',', ' ');
     }
 }

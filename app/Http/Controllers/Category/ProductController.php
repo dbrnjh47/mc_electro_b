@@ -23,8 +23,11 @@ class ProductController
             "cart" => $cart_id,
             "preview" => 1,
             "labels" => 1,
-            "is_archive" => 0
+            "is_archive" => 0,
+            "city_point_count" => (app()->user_city ? app()->user_city->id : 0),
+            "point_count" => (app()->user_city ? app()->user_city->id : 0),
         ]]);
+
         $productFilter = app()->make(ProductFilter::class, ['params' => array_filter($request->all())]);
         $products = Product::standard($productStandard)
             ->filter($productFilter)

@@ -63,7 +63,9 @@ class WishListService
                         "cart" => $cart_id,
                         "is_on" => 1,
                         "preview" => 1,
-                        "labels" => 1
+                        "labels" => 1,
+                        "city_point_count" => (app()->user_city ? app()->user_city->id : 0),
+                        "point_count" => (app()->user_city ? app()->user_city->id : 0),
                     ]
                 ]);
 

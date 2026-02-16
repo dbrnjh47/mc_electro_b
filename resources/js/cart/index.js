@@ -5,6 +5,7 @@ import "/resources/js/custom/copy_button/index.js";
 
 //
 import "/resources/js/custom/sticky/index.js";
+import "./map.js";
 
 window.startSticky = function () {
     let bottom = 0;
@@ -19,3 +20,7 @@ window.startSticky = function () {
 
 window.addEventListener('scroll', startSticky, false);
 document.body.addEventListener('scroll', startSticky, false);
+
+//
+
+

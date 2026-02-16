@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Product;
 use App\Http\Controllers\Category\IndexController as CategoryIndexController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Product\Information\ReviewController;
+use App\Http\Filters\PointFilter;
 use App\Http\Filters\ProductFilter;
 use App\Http\Requests\Product\ShowRequest;
 
 use App\Http\Services\User\WishListService;
 use App\Http\Standards\CategoryStandard;
+use App\Http\Standards\PointStandard;
 use App\Http\Standards\ProductStandard;
 use App\Http\Standards\PropertyStandard;
 use App\Models\Category\Category;
 use App\Models\Category\CategoryPath;
+use App\Models\Point\Point;
 use App\Models\Product\Product;
 use App\Models\Product\Review\ProductReview;
 use Illuminate\Http\Request;
@@ -110,7 +113,9 @@ class IndexController extends Controller
             'params' => [
                 "is_on" => 1,
                 "wishlist" => $wishlist_id,
-                "labels" => 1
+                "labels" => 1,
+                // "city_point_count" => (app()->user_city ? app()->user_city->id : 0),
+                "point_count" => (app()->user_city ? app()->user_city->id : 0),
             ],
         ]);
 
@@ -123,6 +128,7 @@ class IndexController extends Controller
             "company_id",
             "article",
             "slug",
+            "mrp",
             "weight",
             "length",
             "width",
@@ -133,12 +139,26 @@ class IndexController extends Controller
             ->filter($this->productFilter)
             ->with([
                 'medias',
+                'points' => function ($q) {
+                    $pointStandard = app()->make(PointStandard::class, ['params' => [
+                        "is_on" => 1,
+                        "is_pickup" => 1
+                    ]]);
+
+                    $pointFilter = app()->make(PointFilter::class, ['params' => [
+                        "city_id" => (app()->user_city ? app()->user_city->id : 0)
+                    ]]);
+
+                    $q->select((new Point())->getTable().".id", "address")
+                        ->standard($pointStandard)
+                        ->filter($pointFilter);
+                },
                 'documents' => function ($q) {
-                    $q = $q->select(['title', 'name', 'product_id']);
+                    $q->select(['title', 'name', 'product_id']);
                 },
                 'company' => function ($q) {
-                    $q = $q->select(['id', 'preview', 'name', 'short', 'slug', 'count_reviews', 'grade_review']);
-                    $q = $q->withCount(['products']);
+                    $q->select(['id', 'preview', 'name', 'short', 'slug', 'count_reviews', 'grade_review']);
+                    $q->withCount(['products']);
                 },
 
                 //
@@ -179,6 +199,7 @@ class IndexController extends Controller
             ->firstOrFail();
 
         //
+            // dd($product);
 
         // отсортируем по секциям характеристики
         $product->propertySections = $product->productProperties->groupBy(function ($char) {

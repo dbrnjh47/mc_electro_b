@@ -149,7 +149,7 @@ class ProductImportService extends MKElectroImportService
                 ];
             }
 
-            $product->points()->createMany(
+            $product->product_points()->createMany(
                 $productSkladsToInsert
             );
         }

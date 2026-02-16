@@ -62,7 +62,8 @@ class CartService
                 "is_on" => 1,
                 "wishlist" => $wishlist_id,
                 "preview" => 1,
-                "labels" => 1
+                "labels" => 1,
+                "point_count" => 0,
             ]
         ]);
 

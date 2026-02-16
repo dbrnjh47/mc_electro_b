@@ -1,5 +1,6 @@
 .product_result_count {
   margin-bottom: 20px;
+  margin-top: 20px;
   &__select {
     display: flex;
     border: 1px solid #dfe3ee;
@@ -7,7 +8,7 @@
     padding: 10px 15px;
     border-radius: 6px;
     font-size: 16px;
-    margin-top: 20px;
+    margin-top: 10px;
     font-weight: 500;
     justify-content: space-between;
     gap: 10px;

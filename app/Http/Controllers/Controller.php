@@ -62,6 +62,7 @@ class Controller extends BaseController
         //
 
         $user_city = (new CityService)->get();
+
         view()->share('user_city', $user_city);
         app()->singleton('user_city', function ($app) use ($user_city) {
             return $user_city;

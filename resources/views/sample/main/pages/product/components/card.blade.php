@@ -42,11 +42,19 @@
     <div class="product_card__info">
         <div class="product_card__info_price">
             <span>Цена</span>
-            <p>{{ $product->getPriceText() }} ₽</p>
+            <p>{{ \App\Models\Product\Product::getPriceText($product->getLowestPrice()) }} ₽</p>
         </div>
+        @if($product->city_point_count)
         <div class="product_card__info_price">
             <span>Кол-во (шт.)</span>
-            <p>12</p>
+            <p>{{ $product->city_point_count }}</p>
         </div>
+        @endif
+        @if($product->point_count)
+        <div class="product_card__info_price">
+            <span>Кол-во на удалённом складе (шт.)</span>
+            <p>{{ $product->point_count }}</p>
+        </div>
+        @endif
     </div>
 </div>

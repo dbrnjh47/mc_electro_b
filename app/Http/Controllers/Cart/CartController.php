@@ -7,6 +7,7 @@ use App\Http\Requests\Cart\AddRequest;
 use App\Http\Requests\Cart\DeleteRequest;
 use App\Http\Requests\Cart\ShowRequest;
 use App\Http\Services\BreadcrumbService;
+use App\Http\Services\DeliveryMethod\DeliveryMethodService;
 use App\Http\Services\User\CartService;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,7 @@ class CartController extends Controller
     public function show(ShowRequest $request)
     {
         $cart = (new CartService)->get();
-
+        $delivery_methods = (new DeliveryMethodService)->get();
         //
 
         $breadcrumbs = (new BreadcrumbService);
@@ -33,7 +34,8 @@ class CartController extends Controller
             "breadcrumbs",
             "title",
             "description",
-            "cart"
+            "cart",
+            "delivery_methods"
         ));
     }
 

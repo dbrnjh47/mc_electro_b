@@ -22,7 +22,9 @@ class AboutController extends Controller
                 "cart" => $cart_id,
                 "preview" => 1,
                 "labels" => 1,
-                "is_archive" => 0
+                "is_archive" => 0,
+                "city_point_count" => (app()->user_city ? app()->user_city->id : 0),
+                "point_count" => (app()->user_city ? app()->user_city->id : 0),
             ],
         ]);
 
