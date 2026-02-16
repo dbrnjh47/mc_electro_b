@@ -9,6 +9,8 @@ use App\Http\Requests\Cart\ShowRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\DeliveryMethod\DeliveryMethodService;
 use App\Http\Services\User\CartService;
+use App\Http\Standards\PaymentStandard;
+use App\Models\Order\Payment\Payment;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
@@ -16,7 +18,16 @@ class CartController extends Controller
     public function show(ShowRequest $request)
     {
         $cart = (new CartService)->get();
-        $delivery_methods = (new DeliveryMethodService)->get();
+        $delivery_methods = (new DeliveryMethodService)->get()->keyBy('id');
+
+        //
+        $paymentStandard = app()->make(PaymentStandard::class, [
+            'params' => [
+                "is_on" => 1,
+            ]
+        ]);
+
+        $payments = Payment::standard($paymentStandard)->get()->keyBy('id');
         //
 
         $breadcrumbs = (new BreadcrumbService);
@@ -27,6 +38,9 @@ class CartController extends Controller
         $breadcrumbs->add("Корзина", route("cart"));
 
         //
+        $cart_array = $cart->formatToBasket();
+        $delivery_methods_array = (new DeliveryMethodService)->format($delivery_methods);
+
 
         $title = "Корзина";
         $description = "";
@@ -35,7 +49,10 @@ class CartController extends Controller
             "title",
             "description",
             "cart",
-            "delivery_methods"
+            "cart_array",
+            "delivery_methods",
+            "delivery_methods_array",
+            "payments"
         ));
     }
 

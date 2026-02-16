@@ -14,7 +14,6 @@
     @php
         dump($cart);
         dump($cart->products[0]);
-        $cart->product_sum = 0;
     @endphp
     <button onclick="modal('#modal_shipping');">shipping-points</button>
     <button onclick="">shipping-courier</button>
@@ -47,66 +46,7 @@
 
                 @include("sample.main.pages.cart.components.blocks.delivery_methods.index")
 
-                <div class="cart_block_payment_list__wrapper cart__item_wrapper">
-                    <h3>Выберите способ оплаты</h3>
-                    <div class="cart_block_payment_list">
-                        <div class="cart_block_payment_list__item activ">
-                            <input type="checkbox" value="1" checked id="payment_id_5">
-                            <label for="payment_id_5" class="cart_block_payment_list__item_content">
-                                <div>
-                                    <h6>Наличными при получении</h6>
-                                    <p>Краткое описание</p>
-                                </div>
-                                <div class="cart_block_payment_list__item_photo">
-                                    <img src="/temple/images/cart/payments/card.png" alt="">
-                                </div>
-                            </label>
-                        </div>
-
-                        <div class="cart_block_payment_list__item">
-                            <input type="checkbox" value="1" id="payment_id_4">
-                            <label for="payment_id_4" class="cart_block_payment_list__item_content">
-                                <div>
-                                    <h6>Наличными при получении</h6>
-                                    <p>Краткое описание</p>
-                                </div>
-                                <div class="cart_block_payment_list__item_photo">
-                                    <img src="/temple/images/cart/payments/sbp.png" alt="">
-                                </div>
-                            </label>
-                        </div>
-
-                        <div class="cart_block_payment_list__item">
-                            <input type="checkbox" value="1" id="payment_id_3">
-                            <label for="payment_id_3" class="cart_block_payment_list__item_content">
-                                <div>
-                                    <h6>Наличными при получении</h6>
-                                </div>
-
-                            </label>
-                        </div>
-
-                        <div class="cart_block_payment_list__item">
-                            <input type="checkbox" value="1" id="payment_id_3">
-                            <label for="payment_id_3" class="cart_block_payment_list__item_content">
-                                <div>
-                                    <h6>Наличными при получении</h6>
-                                </div>
-
-                            </label>
-                        </div>
-
-                        <div class="cart_block_payment_list__item">
-                            <input type="checkbox" value="1" id="payment_id_3">
-                            <label for="payment_id_3" class="cart_block_payment_list__item_content">
-                                <div>
-                                    <h6>Наличными при получении</h6>
-                                </div>
-
-                            </label>
-                        </div>
-                    </div>
-                </div>
+                @include("sample.main.pages.cart.components.blocks.payments")
 
             </section>
 
@@ -182,9 +122,9 @@
 
 @section('footer')
     <script>
-        window.cart = {
-            "sum": {{ $cart->product_sum }},
-        };
+        window.cart = @json($cart_array);
+        window.delivery_methods = @json($delivery_methods_array);
+        window.payments = @json($payments);
     </script>
     <x-sample.main.layout.footer></x-sample.main.layout.footer>
     <x-sample.main.layout.cookie></x-sample.main.layout.cookie>

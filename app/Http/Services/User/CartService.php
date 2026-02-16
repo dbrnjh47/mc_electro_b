@@ -68,7 +68,7 @@ class CartService
         ]);
 
         $this->cart = Cart::with(['products' => function ($q) use ($productStandard, $productModel) {
-                $q->select([$productModel->getTable().'.id', 'mrp', 'slug', 'step', 'name', 'uuid', DB::raw('1 as cart_products_count')])
+                $q->select([$productModel->getTable().'.id', 'mrp', 'slug', 'step', 'name', 'weight', 'uuid', DB::raw('1 as cart_products_count')])
                     ->standard($productStandard);
             }])
             ->find($this->cart->id);

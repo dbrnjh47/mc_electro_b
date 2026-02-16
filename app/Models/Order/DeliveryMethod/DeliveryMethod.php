@@ -17,6 +17,11 @@ class DeliveryMethod extends Model
     use Filterable;
     use Standardable;
 
+    public function delivery_payments()
+    {
+        return $this->hasMany(DeliveryMethodPayment::class, 'delivery_method_id', 'id');
+    }
+
     public function payments()
     {
         return $this->belongsToMany(

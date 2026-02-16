@@ -9,7 +9,6 @@
         @foreach ($cart->products as $product)
             @php
                 $href = route('product', ['slug' => $product->slug]);
-                $cart->product_sum += $product->mrp * $product->pivot->count;
             @endphp
             <div class="cart_block_product_list__item">
 
@@ -118,7 +117,7 @@
     </div>
 
     <div class="cart_block_product_list__result">
-        <p>Итог: <span>{{ \App\Models\Product\Product::getPriceText($cart->product_sum) }} руб.</span></p>
+        <p>Итог: <span>{{ \App\Models\Product\Product::getPriceText($cart_array['product_price_sum']) }} руб.</span></p>
     </div>
 
 </div>
