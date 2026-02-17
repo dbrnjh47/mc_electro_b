@@ -33,6 +33,7 @@ class PointFactory extends Factory
 
             'title' => fake()->text(10),
             'address' => fake()->address,
+            'operating_mode' => (rand(0, 100) > 50 ? "пн-пт 9:00-18:00, сб-вс 9:00-17:00" : null),
             // 'district' => fake()->streetName,
             'comment' => (rand(0,10) > 7 ? fake()->text(5) : null),
             'description' => (rand(0, 10) > 3 ? fake()->text(rand(50, 100)) : null)

@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\Cart\DeliveryMethodController;
 use App\Http\Controllers\Category\IndexController as CategoryController;
 use App\Http\Controllers\Category\ProductController;
 use App\Http\Controllers\SearchController;
@@ -39,6 +40,10 @@ Route::prefix('cart')->group(function () {
 
     Route::post('/', [CartController::class, 'add'])->name('cart.add');
     Route::delete('/{product_id?}', [CartController::class, 'delete'])->name('cart.delete');
+
+    Route::prefix('delivery_method')->group(function () {
+        Route::get('/modal/{delivery_method_id?}', [DeliveryMethodController::class, 'showModal'])->name('cart.delivery_method.modal');
+    });
 });
 //
 Route::prefix('profile')->group(function () {

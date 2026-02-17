@@ -11,24 +11,28 @@ class PaymentSeeder extends Seeder
     public $payments = [
         [
             "title" => "Наличными при получении",
+            "description" => null,
             "slug" => "nal",
             "img" => null,
             "is_on" => 1,
         ],
         [
             "title" => "Банковской картой при получении",
+            "description" => null,
             "slug" => "karta-terminal",
             "img" => null,
             "is_on" => 1
         ],
         [
             "title" => "Оплата по счёту",
+            "description" => null,
             "slug" => "beznal",
             "img" => null,
             "is_on" => 1
         ],
         [
             "title" => "Картой на сайте",
+            "description" => null,
             "slug" => "tinkoff",
             "img" => "card.png", // /temple/images/cart/payments/card.png
             "is_on" => 1

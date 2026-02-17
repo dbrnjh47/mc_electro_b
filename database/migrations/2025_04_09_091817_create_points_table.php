@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_on')->default(1);
             $table->boolean('is_pickup')->comment("Не удалённый склад")->default(0);
 
+            $table->string('operating_mode')->nullable();
             $table->string('address')->nullable();
             // $table->string('district');
             $table->string('comment')->nullable();

@@ -41,7 +41,7 @@ function init() {
     window.myMap = new ymaps.Map("cart_map", {
         center: [customerLocation.lat, customerLocation.lon],
         // Коэффициент масштабирования (чем больше, тем ближе)
-        zoom: 10,
+        zoom: 14,
         // Дополнительные опции
         controls: ['zoomControl', 'typeSelector'], // элементы управления
     }, {

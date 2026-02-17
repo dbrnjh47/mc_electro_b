@@ -15,7 +15,6 @@ class ProductStandard extends AbstractStandard
     public const IS_ARCHIVE = 'is_archive';
     public const POINT_COUNT = 'point_count';
     public const CITY_POINT_COUNT = 'city_point_count';
-
     protected function getCallbacks(): array
     {
         return [

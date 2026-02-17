@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 class CartService
 {
     public $id = null, $type = "cart", $cart = null;
-    // public $limit = 10;
+
     public function __construct($is_start = 1)
     {
         if($is_start)
@@ -73,6 +73,11 @@ class CartService
             }])
             ->find($this->cart->id);
 
+        return $this->cart;
+    }
+
+    public function getOnlyCart()
+    {
         return $this->cart;
     }
 

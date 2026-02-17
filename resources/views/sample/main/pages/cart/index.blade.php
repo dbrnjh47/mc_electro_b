@@ -1,23 +1,20 @@
 @extends('sample.main.layouts.index', ['title' => $title, 'description' => $description])
 @section('head')
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=191ddfe2-fb7e-4f2f-86ae-24a528d48803&suggest_apikey=7ec2ec86-048e-4638-809c-0fe8b086f977" type="text/javascript"></script>
-
-
+    <script
+        src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=191ddfe2-fb7e-4f2f-86ae-24a528d48803&suggest_apikey=7ec2ec86-048e-4638-809c-0fe8b086f977"
+        type="text/javascript"></script>
 @endsection
 
 @section('header')
+    <script>
+        window.routes["cart.delivery_method.modal"] = "{{ route('cart.delivery_method.modal') }}";
+    </script>
     <x-sample.main.layout.header></x-sample.main.layout.header>
-    @include('sample.main.pages.cart.components.modal.point')
+    {{-- @include('sample.main.pages.cart.components.modal.point') --}}
+    <div id="cart_modal_wrapper"></div>
 @endsection
 
 @section('content')
-    @php
-        dump($cart);
-        dump($cart->products[0]);
-    @endphp
-    <button onclick="modal('#modal_shipping');">shipping-points</button>
-    <button onclick="">shipping-courier</button>
-
     <x-sample.main.breadcrumb :breadcrumbs="$breadcrumbs"></x-sample.main.breadcrumb>
 
     <section class="cart cart__container">
@@ -40,13 +37,13 @@
                     </div>
                 @endguest
 
-                @include("sample.main.pages.cart.components.blocks.products")
+                @include('sample.main.pages.cart.components.blocks.products')
 
-                @include("sample.main.pages.cart.components.blocks.user")
+                @include('sample.main.pages.cart.components.blocks.user')
 
-                @include("sample.main.pages.cart.components.blocks.delivery_methods.index")
+                @include('sample.main.pages.cart.components.blocks.delivery_methods.index')
 
-                @include("sample.main.pages.cart.components.blocks.payments")
+                @include('sample.main.pages.cart.components.blocks.payments')
 
             </section>
 

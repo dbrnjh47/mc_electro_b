@@ -1,6 +1,12 @@
 .modal_courier {
   .modal__body {
     max-height: 70vh;
+    p{
+        line-height: 15px;
+    }
+  }
+  .modal__header{
+    margin-bottom: 5px;
   }
   .modal__input {
     margin-bottom: 5px;

@@ -20,10 +20,13 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable()->unique();
             $table->unsignedBigInteger('payment_id')->nullable();
             $table->unsignedBigInteger('delivery_method_id')->nullable();
+            $table->unsignedBigInteger('point_id')->nullable();
+            $table->string('address')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade'); // ->onDelete('cascade')
             $table->foreign('payment_id')->references('id')->on('payments')->onUpdate('cascade'); // ->onDelete('cascade')
             $table->foreign('delivery_method_id')->references('id')->on('delivery_methods')->onUpdate('cascade'); // ->onDelete('cascade')
+            $table->foreign('point_id')->references('id')->on('points')->onUpdate('cascade'); // ->onDelete('cascade')
 
             $table->timestamps();
         });

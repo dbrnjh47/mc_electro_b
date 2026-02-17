@@ -44,11 +44,12 @@
                 </p>
             @endif
 
+            @if($point->operating_mode)
             <p class="contact_card__item">
-                <span class="contact_card__item_bold">Режим работы склада:</span>
-                пн-пт <br />
-                9:00-18:00, сб-вс 9:00-17:00
+                <span class="contact_card__item_bold">Режим работы:</span>
+                {{ $point->operating_mode }}
             </p>
+            @endif
 
             @if (!$point->phones->isEmpty())
             <p class="contact_card__item">

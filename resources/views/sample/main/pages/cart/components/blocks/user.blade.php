@@ -16,8 +16,8 @@
             <div>
                 <label for="cart_phone">Номер телефона</label>
             </div>
-            <input type="text" id="cart_phone" class="modal__input __mask_int __mask_add_symbol" data-add-symbol="+" name="p"
-                @auth value="{{ $u->phone }}" @endauth
+            <input type="text" id="cart_phone" class="modal__input __mask_int __mask_add_symbol" data-add-symbol="+"
+                value="{{ $cart->phone }}"
                 placeholder="Введите номер телефона">
         </div>
 
@@ -25,8 +25,8 @@
             <div>
                 <label for="cart_name">Имя и фамилия</label>
             </div>
-            <input type="text" id="cart_name" class="modal__input" name="p"
-                @auth value="{{ $u->name }}" @endauth
+            <input type="text" id="cart_name" class="modal__input"
+                value="{{ $cart->full_name }}"
                 placeholder="Введите имя и фамилия">
         </div>
     </div>

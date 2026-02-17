@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('title', 64);
+            $table->string('description', 128)->nullable();
             $table->string('slug', 64)->unique()->index();
 
             $table->string('img')->nullable();

@@ -20,7 +20,7 @@ class Payment extends Model
     public function getImgUrlAttribute()
     {
         return $this->img
-            ? Controller::photoAccessor($this->img, self::PATH."photo/")
+            ? Controller::photoAccessor($this->img, self::PATH)
             : null;
     }
 }

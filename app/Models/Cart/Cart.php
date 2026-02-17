@@ -2,6 +2,8 @@
 
 namespace App\Models\Cart;
 
+use App\Models\Cart\DeliveryMethod\CartCourier;
+use App\Models\Point\Point;
 use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +20,16 @@ class Cart extends Model
             (new CartProduct())->getTable(),     // Промежуточная таблица
         )->withPivot('count')
         ->orderByPivot('updated_at', 'desc');
+    }
+
+    public function courier()
+    {
+        return $this->hasOne(CartCourier::class, 'cart_id', 'id');
+    }
+
+    public function point()
+    {
+        return $this->hasOne(Point::class, 'id', 'point_id');
     }
 
     public function formatToBasket()

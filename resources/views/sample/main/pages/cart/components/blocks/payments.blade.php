@@ -1,17 +1,29 @@
-<div class="cart_block_payment_list__wrapper cart__item_wrapper">
+<div class="cart_block_payment_list__wrapper cart__item_wrapper" @if(!$current_delivery) style="display: none;" @endif>
     <h3>Выберите способ оплаты</h3>
     <div class="cart_block_payment_list">
-        {{-- <div class="cart_block_payment_list__item activ">
-            <input type="checkbox" value="1" checked id="payment_id_5">
-            <label for="payment_id_5" class="cart_block_payment_list__item_content">
-                <div>
-                    <h6>Наличными при получении</h6>
-                    <p>Краткое описание</p>
-                </div>
-                <div class="cart_block_payment_list__item_photo">
-                    <img src="/temple/images/cart/payments/card.png" alt="">
-                </div>
-            </label>
-        </div> --}}
+        @if($current_delivery)
+            @foreach ($current_delivery->transform_delivery_payments[((0 && $cart->pupupu) ? "legal" : "individual")] as $payment_id)
+            @php
+                $payment = $payments[$payment_id];
+            @endphp
+
+            {{-- activ --}}
+            <div class="cart_block_payment_list__item @if($cart->payment_id == $payment->id) activ @endif">
+                <input type="checkbox" value="{{ $payment->id }}" @if($cart->payment_id == $payment->id) checked @endif id="payment_id_{{ $payment->id }}">
+                <label for="payment_id_{{ $payment->id }}" class="cart_block_payment_list__item_content">
+                    <div>
+                        <h6>{{ $payment->title }}</h6>
+                        <p>{{ $payment->description }}</p>
+                    </div>
+
+                    @if($payment->img)
+                    <div class="cart_block_payment_list__item_photo">
+                        <img src="{{ $payment->img_url }}" alt="{{$payment->title}}">
+                    </div>
+                    @endif
+                </label>
+            </div>
+            @endforeach
+        @endif
     </div>
 </div>
