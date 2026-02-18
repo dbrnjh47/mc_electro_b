@@ -43,7 +43,7 @@ class CategoryStandard extends AbstractStandard
         $productStandard = app()->make(ProductStandard::class, [
             'params' => [
                 "is_on" => 1,
-                // "is_archive" => 0
+                "is_archive" => 0
             ],
         ]);
 

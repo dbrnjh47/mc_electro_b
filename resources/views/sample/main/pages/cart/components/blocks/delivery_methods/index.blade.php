@@ -26,20 +26,20 @@
                             <h4>Выбранный пункт самовывоза</h4>
                             <p>{{ $current_delivery->default_point->address }}</p>
                             <span>{{ $current_delivery->default_point->operating_mode }}</span>
-                            <button class="btn" data-delivery-id="{{ $current_delivery->id }}" onclick="window.getDeliveryModal(this.dataset.deliveryId);">Изменить точку</button>
+                            <button class="btn">Изменить точку</button>
                         @break
                         @case('courier')
                             <h4>Выбранный адресс</h4>
                             <p>{{ $cart->address }}</p>
                             <span></span>
-                            <button class="btn" data-delivery-id="{{ $current_delivery->id }}" onclick="window.getDeliveryModal(this.dataset.deliveryId);">Изменить адресс</button>
+                            <button class="btn">Изменить адресс</button>
                         @break
                     @endswitch
                 @else
                     <h4></h4>
                     <p></p>
                     <span></span>
-                    <button class="btn" style="display: none" onclick="window.getDeliveryModal(this.dataset.deliveryId);"></button>
+                    <button class="btn" style="display: none"></button>
                 @endif
             </div>
         </div>

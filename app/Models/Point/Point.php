@@ -4,6 +4,8 @@ namespace App\Models\Point;
 
 use App\Models\City\City;
 use App\Models\Point\Link\PointLink;
+use App\Models\Product\Product;
+use App\Models\Product\ProductPoint;
 use App\Models\Traits\Filterable;
 use App\Models\Traits\Standardable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,5 +38,19 @@ class Point extends Model
     public function links()
     {
         return $this->hasMany(PointLink::class, 'point_id', 'id');
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(
+            Product::class,          // Целевая модель
+            (new ProductPoint())->getTable(),     // Промежуточная таблица
+        )->withPivot('count')
+        ->orderByPivot('updated_at', 'desc');
+    }
+
+    public function product_point()
+    {
+        return $this->hasOne(ProductPoint::class, 'point_id', 'id');
     }
 }

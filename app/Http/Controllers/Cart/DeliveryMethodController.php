@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Cart;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Cart\DeliveryMethod\GetPointRequest;
 use App\Http\Requests\Cart\DeliveryMethod\ShowRequest;
+use App\Http\Services\DeliveryMethod\Modal\PickupModal;
 use App\Http\Services\User\CartService;
 use App\Http\Standards\DeliveryMethodStandard;
 use App\Models\Order\DeliveryMethod\DeliveryMethod;
@@ -36,5 +38,12 @@ class DeliveryMethodController extends Controller
         }
 
         return $modal_html;
+    }
+
+    public function getPoints(GetPointRequest $request)
+    {
+        $cart = (new CartService)->getOnlyCart();
+        $html = (new PickupModal)->getHtmlPoints($cart, $request);
+        return $html;
     }
 }

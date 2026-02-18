@@ -1,15 +1,25 @@
 import "./index.scss";
-var a = document.querySelector('#sticky_aside1'), b = null, K = null, Z = 0, P = 90, N = 80;  // если у P ноль заменить на число, то блок будет прилипать до того, как верхний край окна браузера дойдёт до верхнего края элемента, если у N — нижний край дойдёт до нижнего края элемента. Может быть отрицательным числом
+var a = document.querySelector('#sticky_aside1'),
+    b = null,
+    K = null,
+    Z = 0,
+    P = 90,
+    N = 80;
 
-// http://shpargalkablog.ru/2013/09/scroll-block.html
 window.stickyTargetHeight = 0;
 window.stickyTargetArticle = null;
-window.stickyTargetAside = null;
 
 window.Ascroll = function (bottom) {
+    if (!a) return;
     N = bottom;
-    var Ra = a.getBoundingClientRect(),
-        R1bottom = document.querySelector('#sticky_article').getBoundingClientRect().bottom;
+
+    var Ra = a.getBoundingClientRect();
+    var targetArticle = document.querySelector('#sticky_article');
+    if (!targetArticle) return;
+
+    var R1bottom = targetArticle.getBoundingClientRect().bottom;
+
+    // Инициализация внутреннего контейнера b
     if (Ra.bottom < R1bottom) {
         if (b == null) {
             var Sa = getComputedStyle(a, ''), s = '';
@@ -30,15 +40,17 @@ window.Ascroll = function (bottom) {
             a.style.padding = '0';
             a.style.border = '0';
         }
+
         var Rb = b.getBoundingClientRect(),
             Rh = Ra.top + Rb.height,
             W = document.documentElement.clientHeight,
             R1 = Math.round(Rh - R1bottom),
             R2 = Math.round(Rh - W);
+
         if (Rb.height > W) {
-            if (Ra.top < K) {  // скролл вниз
-                if (R2 + N > R1) {  // не дойти до низа
-                    if (Rb.bottom - W + N <= 0) {  // подцепиться
+            if (Ra.top < K) { // Скролл вниз
+                if (R2 + N > R1) {
+                    if (Rb.bottom - W + N <= 0) {
                         b.className = 'sticky';
                         b.style.top = W - Rb.height - N + 'px';
                         Z = N + Ra.top + Rb.height - W;
@@ -51,9 +63,9 @@ window.Ascroll = function (bottom) {
                     b.style.top = - R1 + 'px';
                     Z = R1;
                 }
-            } else {  // скролл вверх
-                if (Ra.top - P < 0) {  // не дойти до верха
-                    if (Rb.top - P >= 0) {  // подцепиться
+            } else { // Скролл вверх
+                if (Ra.top - P < 0) {
+                    if (Rb.top - P >= 0) {
                         b.className = 'sticky';
                         b.style.top = P + 'px';
                         Z = Ra.top - P;
@@ -69,6 +81,7 @@ window.Ascroll = function (bottom) {
             }
             K = Ra.top;
         } else {
+            // Логика для короткого сайдбара (меньше экрана)
             if ((Ra.top - P) <= 0) {
                 if ((Ra.top - P) <= R1) {
                     b.className = 'sticky_stop';
@@ -82,36 +95,53 @@ window.Ascroll = function (bottom) {
                 b.style.top = '';
             }
         }
-        window.addEventListener('resize', function () {
-            a.children[0].style.width = getComputedStyle(a, '').width
-        }, false);
     } else {
         a.style.height = "fit-content";
         if (b != null) {
             b.style.top = '0px';
+            b.className = '';
         }
     }
 
-    // setEvent
-    if (!stickyTargetArticle) {
-        stickyTargetArticle = document.getElementById('sticky_article');
-        stickyTargetAside = document.querySelector('#sticky_aside1 > div');
-        // console.log(stickyTargetAside);
+    // Инициализация ResizeObserver (выполняется один раз)
+    if (!window.stickyTargetArticle) {
+        window.stickyTargetArticle = targetArticle;
+
         let stickyResizeObserver = new ResizeObserver(entries => {
             for (let entry of entries) {
-                if (window.stickyTargetHeight != entry.contentRect.height) {
-                    // console.log('была высота:', window.stickyTargetHeight);
+                if (window.stickyTargetHeight !== entry.contentRect.height) {
                     window.stickyTargetHeight = entry.contentRect.height;
-                    // console.log('Высота блока изменилась!');
-                    // console.log('Новая высота:', entry.contentRect.height);
-                    startSticky();
-                }
 
-                // Здесь ваш код, который нужно выполнить
+                    // СБРОС СОСТОЯНИЯ для корректного пересчета
+                    if (b) {
+                        // Обновляем высоту родителя под новый контент b
+                        a.style.height = b.scrollHeight + 'px';
+                        // Сбрасываем K и Z, чтобы Ascroll пересчитал позицию без учета старого скролла
+                        K = null;
+                        Z = 0;
+                    }
+
+                    // Принудительный вызов пересчета
+                    window.Ascroll(N);
+                }
             }
         });
 
-        stickyResizeObserver.observe(stickyTargetArticle);
-        stickyResizeObserver.observe(stickyTargetAside);
+        stickyResizeObserver.observe(window.stickyTargetArticle);
+        // Также следим за самим контентом сайдбара
+        if (b) stickyResizeObserver.observe(b);
+        else stickyResizeObserver.observe(a);
     }
-}
+};
+
+// Инициализация при скролле
+window.addEventListener('scroll', function() {
+    window.Ascroll(N);
+});
+
+// Обновление ширины при изменении окна
+window.addEventListener('resize', function () {
+    if (a && a.children[0]) {
+        a.children[0].style.width = getComputedStyle(a, '').width;
+    }
+}, false);

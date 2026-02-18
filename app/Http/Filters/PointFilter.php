@@ -25,6 +25,7 @@ class PointFilter extends AbstractFilter
 
     public function search(Builder $builder, $value)
     {
+        if(!$value || $value == ""){return;}
         $builder->where(function ($q) use ($value) {
             $q->where("title", 'like', "%{$value}%")
                   ->orWhere("address", 'like', "%{$value}%");

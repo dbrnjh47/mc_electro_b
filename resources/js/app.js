@@ -1,5 +1,5 @@
 import '/resources/js/custom/loader/index.js';
-
+import '/resources/js/custom/loader/modal_loding.js';
 //
 
 window.getInfo = function ($wrapper)

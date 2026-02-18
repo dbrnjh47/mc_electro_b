@@ -3,6 +3,7 @@
 namespace App\Models\Cart;
 
 use App\Models\Cart\DeliveryMethod\CartCourier;
+use App\Models\Order\DeliveryMethod\DeliveryMethod;
 use App\Models\Point\Point;
 use App\Models\Product\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,7 +13,7 @@ class Cart extends Model
 {
     /** @use HasFactory<\Database\Factories\Cart\CartFactory> */
     use HasFactory;
-
+    protected $guarded = ['user_id'];
     public function products()
     {
         return $this->belongsToMany(
@@ -30,6 +31,11 @@ class Cart extends Model
     public function point()
     {
         return $this->hasOne(Point::class, 'id', 'point_id');
+    }
+
+    public function delivery_method()
+    {
+        return $this->hasOne(DeliveryMethod::class, 'id', 'delivery_method_id');
     }
 
     public function formatToBasket()

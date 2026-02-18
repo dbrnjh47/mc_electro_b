@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Cart\AddRequest;
 use App\Http\Requests\Cart\DeleteRequest;
 use App\Http\Requests\Cart\ShowRequest;
+use App\Http\Requests\Cart\UpdateRequest;
 use App\Http\Services\BreadcrumbService;
 use App\Http\Services\DeliveryMethod\DeliveryMethodService;
 use App\Http\Services\User\CartService;
@@ -99,6 +100,28 @@ class CartController extends Controller
         $title = "Корзина";
         $description = "";
 
+        //
+        $coords = [
+            "lat" => 55.160283,
+            "lon" => 61.400856,
+        ];
+
+        $city = app()->user_city;
+        if($city && $city->lat && $city->lon)
+        {
+            $coords = [
+                "lat" => $city->lat,
+                "lon" => $city->lon,
+            ];
+        }
+        if($current_delivery->slug == "pickup")
+        {
+            $coords = [
+                "lat" => $current_delivery->default_point->lat,
+                "lon" => $current_delivery->default_point->lon,
+            ];
+        }
+
         return view('sample.main.pages.cart.index', compact(
             "breadcrumbs",
             "title",
@@ -108,7 +131,8 @@ class CartController extends Controller
             "delivery_methods",
             "delivery_methods_array",
             "payments",
-            "current_delivery"
+            "current_delivery",
+            "coords"
         ));
     }
 
@@ -125,5 +149,17 @@ class CartController extends Controller
     public function clear()
     {
         (new CartService)->clear();
+    }
+
+    public function update(UpdateRequest $request)
+    {
+        $data = $request->validated();
+        // dump($data);
+
+        $cart = (new CartService)->getOnlyCart();
+        //
+        unset($data["products"]);
+        $cart->fill($data);
+        $cart->save();
     }
 }

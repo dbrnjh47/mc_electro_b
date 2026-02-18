@@ -1,12 +1,8 @@
 // https://yandex.ru/dev/jsapi-v2-1/doc/ru/v2-1/dg/concepts/geocoding/searchControl
 
 let cart_map = $("#cart_map");
-let customerLocation = {
-    lat: 55.160283,
-    lon: 61.400856
-};
-let myPlacemark, myMapClusterer;
-window.myMap = null;
+let cartPlacemark, cartMapClusterer;
+window.cartMap = null;
 
 function initMap() {
     try {
@@ -24,51 +20,55 @@ initMap();
 
 function init() {
     cart_map.html('');
-    var mySearchControl = new ymaps.control.SearchControl({
-        options: {
-            // Пусть элемент управления будет в виде поисковой строки.
-            size: 'large',
-            // Включим возможность искать не только топонимы, но и организации.
-            provider: 'yandex#map',
-            // Отключить создание метки
-            noPlacemark: true,
-            // noPopup: true,
-            // noSuggestPanel: true
-        }
-    });
-
     // Создаем карту
-    window.myMap = new ymaps.Map("cart_map", {
-        center: [customerLocation.lat, customerLocation.lon],
-        // Коэффициент масштабирования (чем больше, тем ближе)
+    window.cartMap = new ymaps.Map("cart_map", {
+        center: [window.customerLocation.lat, window.customerLocation.lon],
         zoom: 14,
-        // Дополнительные опции
-        controls: ['zoomControl', 'typeSelector'], // элементы управления
+        controls: ['zoomControl', 'typeSelector'],
     }, {
         // searchControlProvider: 'yandex#search',
     });
-    var myMapClusterer = new ymaps.Clusterer({
+
+    var cartMapClusterer = new ymaps.Clusterer({
         clusterBalloonContentLayout: "cluster#balloonAccordion",
         preset: "islands#redClusterIcons"
     });
 
-    myMapClusterer.options.set({
+    cartMapClusterer.options.set({
         gridSize: 50
     });
-    // window.myMap.controls.add(mySearchControl);
-    createOrUpdatePlacemark([customerLocation.lat, customerLocation.lon]);
+
+    window.createOrUpdateCartPlacemark("");
 }
 
-function createOrUpdatePlacemark(coords) {
+window.setCenterCartMap = function(zoom = 16)
+{
+    window.cartMap.setCenter(
+        [
+            window.customerLocation.lat,
+            window.customerLocation.lon
+        ],
+        zoom
+    );
+}
+
+window.createOrUpdateCartPlacemark = function(text) {
     // Если метка уже создана – просто передвигаем ее.
-    if (myPlacemark) {
-        myPlacemark.geometry.setCoordinates(coords);
+    let coords = [
+        window.customerLocation.lat,
+        window.customerLocation.lon
+    ];
+
+    if (cartPlacemark) {
+        cartPlacemark.geometry.setCoordinates(coords);
     }
     // Если нет – создаем.
     else {
-        myPlacemark = createPlacemark(coords);
-        window.myMap.geoObjects.add(myPlacemark);
+        cartPlacemark = createPlacemark(coords);
+        window.cartMap.geoObjects.add(cartPlacemark);
     }
+
+    cartPlacemark.properties.set('iconCaption', text);
 }
 
 function createPlacemark(coords) {
@@ -79,3 +79,20 @@ function createPlacemark(coords) {
         draggable: false
     });
 }
+
+//
+
+
+// var mySearchControl = new ymaps.control.SearchControl({
+//     options: {
+//         // Пусть элемент управления будет в виде поисковой строки.
+//         size: 'large',
+//         // Включим возможность искать не только топонимы, но и организации.
+//         provider: 'yandex#map',
+//         // Отключить создание метки
+//         noPlacemark: true,
+//         // noPopup: true,
+//         // noSuggestPanel: true
+//     }
+// });
+// window.cartMap.controls.add(mySearchControl);

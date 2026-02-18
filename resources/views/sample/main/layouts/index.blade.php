@@ -12,6 +12,7 @@
 
 <body>
     <div class="main_wrapper">
+        @include('sample.main.layouts.components.modal_loding')
         @yield('header')
 
         <section id="feedback_modal"></section>

@@ -11,6 +11,9 @@ class CourierAddInfo
     {
         $delivery_method->courier = CartCourier::select("city", "city_id", "street", "house", "apartment")
             ->where("cart_id", $cart->id)->first();
-        $cart->address = $delivery_method->courier->getFullAddress();
+
+        if ($delivery_method->courier) {
+            $cart->address = $delivery_method->courier->getFullAddress();
+        }
     }
 }

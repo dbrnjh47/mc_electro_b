@@ -79,7 +79,7 @@
                         </div> --}}
 
                         <div class="cart_block_product_list__info_avails">
-                            @if ($product->point_count > $product->pivot->count)
+                            @if ($product->point_count >= $product->pivot->count)
                                 <p class="green">Полное наличие</p>
                             @elseif ($product->point_count)
                                 <p class="orange">Частичное наличие ({{ $product->point_count }} из {{ $product->pivot->count }})</p>

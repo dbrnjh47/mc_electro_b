@@ -41,8 +41,14 @@ Route::prefix('cart')->group(function () {
     Route::post('/', [CartController::class, 'add'])->name('cart.add');
     Route::delete('/{product_id?}', [CartController::class, 'delete'])->name('cart.delete');
 
-    Route::prefix('delivery_method')->group(function () {
-        Route::get('/modal/{delivery_method_id?}', [DeliveryMethodController::class, 'showModal'])->name('cart.delivery_method.modal');
+    //
+    Route::post('/update', [CartController::class, 'update'])->name('cart.update');
+    Route::prefix('delivery_method/modal')->group(function () {
+        Route::prefix('point')->group(function () {
+            Route::get('/', [DeliveryMethodController::class, 'getPoints'])->name('cart.delivery_method.modal.points');
+        });
+
+        Route::get('/{delivery_method_id?}', [DeliveryMethodController::class, 'showModal'])->name('cart.delivery_method.modal');
     });
 });
 //
