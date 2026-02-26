@@ -29,10 +29,10 @@
                             <button class="btn">Изменить точку</button>
                         @break
                         @case('courier')
-                            <h4>Выбранный адресс</h4>
+                            <h4>Выбранный адрес</h4>
                             <p>{{ $cart->address }}</p>
                             <span></span>
-                            <button class="btn">Изменить адресс</button>
+                            <button class="btn">Изменить адрес</button>
                         @break
                     @endswitch
                 @else

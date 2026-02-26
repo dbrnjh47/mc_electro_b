@@ -39,21 +39,40 @@ window.validationForm = function (msg, wrapper, button = null)
     }
 
     //
-    var errors = msg.responseJSON;
-            errors = errors["errors"];
-            console.log(errors);
+    if (msg && msg.responseJSON && msg.responseJSON.errors) {
+        var errors = msg.responseJSON.errors;
+        console.log('Ошибки валидации:', errors);
 
-    //
+        // Обрабатываем каждую ошибку
+        $.each(errors, function(key, messages) {
+            // Находим все поля с этим именем
+            var $fields = wrapper.find('[name="' + key + '"], [name="' + key + '[]"], [name$="[' + key + ']"]');
 
-    for (var key in errors) {
-        for (var error in errors[key]) {
-            wrapper.find('input[name="' + key + '"], select[name="' + key + '"]')
-                .closest('.invalid_feedback_wrapper').addClass('is_invalid');
-            wrapper.find('input[name="' + key + '"], select[name="' + key + '"]')
-                .closest('.invalid_feedback_wrapper').append(`
-                        <div class="invalid_feedback">` + errors[key][error] + `</div>
-                    `);
-        }
+            if ($fields.length) {
+                $fields.each(function() {
+                    var $field = $(this);
+                    var $wrapper = $field.closest('.invalid_feedback_wrapper');
+
+                    if ($wrapper.length) {
+                        $wrapper.addClass('is_invalid');
+
+                        // Добавляем все сообщения об ошибках для этого поля
+                        messages.forEach(function(errorMessage) {
+                            $wrapper.append(`
+                                <div class="invalid_feedback">${errorMessage}</div>
+                            `);
+                        });
+                    }
+                });
+            } else {
+                // Если поле не найдено, показываем общую ошибку
+                // showGeneralError(key + ': ' + messages.join(', '));
+                miniAlert("Неизвестная ошибка", "error");
+            }
+        });
+    } else {
+        // Обработка невалидационных ошибок
+        miniAlert("Серверная ошибка", "error");
     }
 }
 

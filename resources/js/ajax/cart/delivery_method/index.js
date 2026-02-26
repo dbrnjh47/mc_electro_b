@@ -13,6 +13,9 @@ window.getDeliveryModal = function (delivery_method_id) {
                 case "pickup":
                     window.pickupSetEvent();
                     break;
+                case "courier":
+                    window.courierSetEvent();
+                    break;
             }
         },
         error: function (msg) {

@@ -1,5 +1,6 @@
 import "/resources/js/ajax/cart/delivery_method/index.js";
 import "/resources/js/ajax/cart/delivery_method/point.js";
+import "/resources/js/ajax/cart/delivery_method/courier.js";
 
 window.delivery_select = $('#cart_shipping_method');
 window.delivery_info = $('#shipping_method_info');

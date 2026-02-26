@@ -114,7 +114,8 @@ class CartController extends Controller
                 "lon" => $city->lon,
             ];
         }
-        if($current_delivery->slug == "pickup")
+
+        if($current_delivery && $current_delivery->slug == "pickup")
         {
             $coords = [
                 "lat" => $current_delivery->default_point->lat,

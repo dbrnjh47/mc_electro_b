@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\RestoreController;
 use App\Http\Controllers\Auth\UpdatePasswordController;
 use App\Http\Controllers\Cart\CartController;
+use App\Http\Controllers\Cart\DeliveryMethod\CourierController;
 use App\Http\Controllers\Cart\DeliveryMethodController;
 use App\Http\Controllers\Category\IndexController as CategoryController;
 use App\Http\Controllers\Category\ProductController;
@@ -43,6 +44,11 @@ Route::prefix('cart')->group(function () {
 
     //
     Route::post('/update', [CartController::class, 'update'])->name('cart.update');
+
+    Route::prefix('courier')->group(function () {
+        Route::post('/', [CourierController::class, 'set'])->name('cart.delivery_method.courier.set');
+    });
+
     Route::prefix('delivery_method/modal')->group(function () {
         Route::prefix('point')->group(function () {
             Route::get('/', [DeliveryMethodController::class, 'getPoints'])->name('cart.delivery_method.modal.points');

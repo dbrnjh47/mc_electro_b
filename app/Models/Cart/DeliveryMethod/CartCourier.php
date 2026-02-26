@@ -9,7 +9,7 @@ class CartCourier extends Model
 {
     /** @use HasFactory<\Database\Factories\Order\DeliveryMethod\DeliveryMethodCourierFactory> */
     use HasFactory;
-
+    protected $guarded = false;
     public function getFullAddress()
     {
         $full = "г. {$this->city}, {$this->street} {$this->house}";

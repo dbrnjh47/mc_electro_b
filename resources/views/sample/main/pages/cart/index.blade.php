@@ -10,6 +10,7 @@
         window.routes["cart.delivery_method.modal"] = "{{ route('cart.delivery_method.modal') }}";
         window.routes["cart.delivery_method.modal.points"] = "{{ route('cart.delivery_method.modal.points') }}";
         window.routes["cart.update"] = "{{ route('cart.update') }}";
+        window.routes["cart.delivery_method.courier.set"] = "{{ route('cart.delivery_method.courier.set') }}";
         window.customerLocation = @json($coords);
     </script>
     <x-sample.main.layout.header></x-sample.main.layout.header>
