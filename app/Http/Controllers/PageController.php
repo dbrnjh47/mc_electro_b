@@ -13,6 +13,8 @@ use App\Models\Category\Category;
 use App\Models\Company\Company;
 use App\Models\Product\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 class PageController extends Controller
 {
     public function index(Request $request)
@@ -30,16 +32,18 @@ class PageController extends Controller
             ],
         ]);
 
-        $categories = Category::select(["id", "name", "slug", "category_parent_id","preview"])
-            ->standard($categoryStandard)
-            ->whereNull("category_parent_id")
-            ->with(['child_categories' => function ($q) use ($categoryStandard){
-                $q->select(["id", "name", "slug", "category_parent_id"])
-                    ->standard($categoryStandard);
-            }])
-            // ->inRandomOrder()
-            ->limit(4)
-            ->get();
+        $categories = Cache::remember('index.companies', Carbon::now()->addDay(), function () use ($categoryStandard) {
+            return Category::select(["id", "name", "slug", "category_parent_id", "preview"])
+                ->standard($categoryStandard)
+                ->whereNull("category_parent_id")
+                ->with(['child_categories' => function ($q) use ($categoryStandard) {
+                    $q->select(["id", "name", "slug", "category_parent_id"])
+                        ->standard($categoryStandard);
+                }])
+                ->inRandomOrder()
+                ->limit(4)
+                ->get();
+        });
 
         //
 
@@ -58,7 +62,7 @@ class PageController extends Controller
 
         $products = Product::select(['id', 'mrp', 'slug', 'step', 'name', 'uuid'])
             ->standard($productStandard)
-            ->inRandomOrder()
+            // ->inRandomOrder()
             ->limit(8)
             ->get();
 

@@ -9,6 +9,8 @@ use App\Http\Standards\CategoryStandard;
 use App\Models\Category\Category;
 use App\Models\Category\CategoryPath;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class IndexController extends Controller
 {
@@ -17,14 +19,12 @@ class IndexController extends Controller
         $breadcrumbs = (new BreadcrumbService);
         $breadcrumbs->add("Каталог", route("categories"));
 
-        if($path)
-        {
+        if ($path) {
             $category_ids = explode(',', $path->category_ids);
             $categories = Category::select(["id", "name", "slug"])->whereIn("id", $category_ids)->get()->keyBy('id');
 
             $slugs = [];
-            foreach($category_ids as $category_id)
-            {
+            foreach ($category_ids as $category_id) {
                 $slugs[] = $categories[$category_id]->slug;
                 $breadcrumbs->add(
                     $categories[$category_id]->name,
@@ -45,18 +45,20 @@ class IndexController extends Controller
             ],
         ]);
 
-        $categories = Category::select(["id", "name", "slug", "category_parent_id"])
-            ->standard($categoryStandard)
-            ->whereNull("category_parent_id")
-            ->with(['child_categories' => function ($q) use ($categoryStandard){
-                $q->select(["id", "name", "slug", "category_parent_id"])
-                    ->standard($categoryStandard);
-            }])
-            ->get();
+        $categories = Cache::remember('categories.list', Carbon::now()->addDays(7), function () use ($categoryStandard) {
+            return Category::select(["id", "name", "slug", "category_parent_id"])
+                ->standard($categoryStandard)
+                ->whereNull("category_parent_id")
+                ->with(['child_categories' => function ($q) use ($categoryStandard) {
+                    $q->select(["id", "name", "slug", "category_parent_id"])
+                        ->standard($categoryStandard);
+                }])
+                ->get();
+        });
 
         return $categories;
     }
-    public function all()
+    public function all(Request $request)
     {
         $categoryStandard = app()->make(CategoryStandard::class, [
             'params' => [
@@ -66,15 +68,17 @@ class IndexController extends Controller
             ],
         ]);
 
-        $categories = Category::select(["id", "name", "slug", "category_parent_id","preview"])
-            ->standard($categoryStandard)
-            ->whereNull("category_parent_id")
-            ->with(['child_categories' => function ($q) use ($categoryStandard){
-                $q->select(["id", "name", "slug", "category_parent_id"])
-                    ->standard($categoryStandard);
-            }])
-            ->paginate(9);
-
+        $page = (isset($request->page) ? (int)$request->page : 1);
+        $categories = Cache::remember('categories.all.' . $page, Carbon::now()->addDays(7), function () use ($categoryStandard) {
+            return Category::select(["id", "name", "slug", "category_parent_id", "preview"])
+                ->standard($categoryStandard)
+                ->whereNull("category_parent_id")
+                ->with(['child_categories' => function ($q) use ($categoryStandard) {
+                    $q->select(["id", "name", "slug", "category_parent_id"])
+                        ->standard($categoryStandard);
+                }])
+                ->paginate(9);
+        });
         //
 
         $breadcrumbs = self::breadcrumb();
@@ -111,7 +115,7 @@ class IndexController extends Controller
 
         $categories = Category::standard($categoryStandard)
             ->where("category_parent_id", $category->id)
-            ->with(['child_categories' => function ($q) use ($categoryStandard){
+            ->with(['child_categories' => function ($q) use ($categoryStandard) {
                 $q->select(["id", "name", "slug", "category_parent_id"])
                     ->standard($categoryStandard);
             }])
@@ -143,8 +147,8 @@ class IndexController extends Controller
         $result = (new ProductController)->list($request);
 
         // if (isset($request->filters) || isset($request->rang_filters)) {
-            $properties = (new PropertyController($request, is_short: 1))->process();
-            $result["properties"] = $properties;
+        $properties = (new PropertyController($request, is_short: 1))->process();
+        $result["properties"] = $properties;
         // }
 
         return $result;

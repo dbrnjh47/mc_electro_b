@@ -116,7 +116,7 @@ class ProductImportService extends MKElectroImportService
 
             // dd($products);
 
-
+            unset($products);
             $this->offset += $this->limit;
             // return;
         }

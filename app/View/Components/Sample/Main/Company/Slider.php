@@ -6,6 +6,8 @@ use App\Models\Company\Company;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class Slider extends Component
 {
@@ -14,14 +16,16 @@ class Slider extends Component
      */
     public function __construct(public $companies = null)
     {
-        if(!$this->companies)
-        {
+        if (!$this->companies) {
             $this->companies = Company::select(['id', 'preview', 'name', 'slug'])
                 ->where('is_on', 1)
                 ->whereNotNull("preview")
                 ->inRandomOrder()
                 ->limit(15)
                 ->get();
+            // Cache::remember('company.slider.random', Carbon::now()->addDay(), function () {
+            //     return
+            // });
         }
     }
 

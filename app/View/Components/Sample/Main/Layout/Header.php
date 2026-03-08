@@ -10,6 +10,8 @@ use App\Models\Product\Product;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class Header extends Component
 {
@@ -27,14 +29,15 @@ class Header extends Component
      */
     public function render(): View|Closure|string
     {
-        if($this->start)
-        {
+        if ($this->start) {
             (new Controller)->__construct();
         }
-        $search_strings = Product::inRandomOrder()
-            ->limit(5)
-            ->pluck('name')
-            ->toArray();
+        $search_strings = Cache::remember('header.search.strings', Carbon::now()->addDays(1), function () {
+            return Product::inRandomOrder()
+                ->limit(5)
+                ->pluck('name')
+                ->toArray();
+        });
         //
         // $currencies = (new CurrencyModelService)->all();
         $wishlist_count = (new WishListService)->count();

@@ -18,6 +18,8 @@ services:
       - node
     volumes:
       - ./:/var/www/${APP_DIR}
+    mem_limit: 700m
+    mem_reservation: 400m
     networks:
       - app-network
 
@@ -53,6 +55,8 @@ services:
       - ./tmp/db:/var/lib/mysql/
       - ./.docker/mysql/my.cnf:/etc/mysql/my.cnf
       - ./.docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    mem_limit: 512m
+    mem_reservation: 256m
     networks:
       - app-network
 

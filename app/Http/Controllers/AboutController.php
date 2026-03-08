@@ -7,6 +7,8 @@ use App\Http\Services\User\CartService;
 use App\Http\Services\User\WishListService;
 use App\Http\Standards\ProductStandard;
 use App\Models\Product\Product;
+use Illuminate\Support\Facades\Cache;
+use Carbon\Carbon;
 
 class AboutController extends Controller
 {
@@ -28,11 +30,14 @@ class AboutController extends Controller
             ],
         ]);
 
-        $products = Product::select(['id', 'mrp', 'slug', 'step', 'name', 'uuid'])
-            ->standard($productStandard)
-            ->inRandomOrder()
-            ->limit(6)
-            ->get();
+
+        $products = Cache::remember('about.products.random', Carbon::now()->addDays(7), function () use ($productStandard) {
+            return Product::select(['id', 'mrp', 'slug', 'step', 'name', 'uuid'])
+                ->standard($productStandard)
+                ->inRandomOrder()
+                ->limit(6)
+                ->get();
+        });
         //
 
         $title = "О нас";
