@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductPropertyImportService extends MKElectroImportService
 {
-    public $limit = 100;
+    public $limit = 500;
     public $offset = 0;
     public function start()
     {
